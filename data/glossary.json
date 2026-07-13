@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "description": "คลังศัพท์กลาง (Glossary) — ทุกศัพท์เทคนิคที่ปรากฏในตารางต้องผ่านกติกา 3 ชั้นนี้ก่อน",
+    "schema_version": "1.0.0",
+    "last_updated": "2026-07-13",
+    "rules": {
+      "1_official_term": "มีศัพท์บัญญัติทางการ (ราชบัณฑิตยสภา / สตท.-IIA Thailand / กรมบัญชีกลาง / ก.ล.ต.) → ใช้คำนั้น",
+      "2_transliterate": "ไม่มีศัพท์บัญญัติ → ทับศัพท์ + วงเล็บภาษาอังกฤษเมื่อปรากฏครั้งแรกในหน้า",
+      "3_established_loanword": "คำที่วงการไทยใช้ทับศัพท์เป็นมาตรฐานแล้ว (SCADA, firewall) → คงทับศัพท์"
+    },
+    "note": "ทุก entry ต้องมี term_source (ใครบัญญัติ) — entry ที่ยังไม่ยืนยันที่มา = UNVERIFIED มี SLA เหมือน claim อื่น"
+  },
+  "terms": [
+    {"en": "internal control", "th": "การควบคุมภายใน", "rule": "1", "term_source": "ใช้ทางการทั่วราชการไทย (หลักเกณฑ์ กค. / สตง.)", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "open_question": "ยืนยันจากเอกสารหลักเกณฑ์ กค. ฉบับจริง", "sla_deadline": "2026-09-11"}},
+    {"en": "internal audit", "th": "การตรวจสอบภายใน", "rule": "1", "term_source": "หลักเกณฑ์ กค. / สตท.", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "risk management", "th": "การบริหารความเสี่ยง", "rule": "1", "term_source": "หลักเกณฑ์ กค. ว่าด้วยการบริหารจัดการความเสี่ยงฯ 2562", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "risk appetite", "th": "ระดับความเสี่ยงที่ยอมรับได้ (Risk Appetite)", "rule": "2", "term_source": "ยังไม่พบศัพท์บัญญัติเดียวที่ยุติ — ใช้คำแปล+วงเล็บ", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "governance", "th": "การกำกับดูแลกิจการ", "rule": "1", "term_source": "SOE CG Code (สคร.) / CG Code (ก.ล.ต.)", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "compliance", "th": "การปฏิบัติตามกฎเกณฑ์ (Compliance)", "rule": "2", "term_source": "ใช้แพร่หลายคู่วงเล็บ", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "audit evidence", "th": "หลักฐานการตรวจสอบ", "rule": "1", "term_source": "มาตรฐาน สตง. / สตท.", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "walkthrough", "th": "การทดสอบแบบติดตามกระบวนการ (Walkthrough)", "rule": "2", "term_source": "-", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "segregation of duties", "th": "การแบ่งแยกหน้าที่", "rule": "1", "term_source": "ใช้ทางการ (หลักเกณฑ์ กค.)", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "SCADA", "th": "SCADA", "rule": "3", "term_source": "ทับศัพท์มาตรฐานอุตสาหกรรมไฟฟ้า", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13", "evidence": {"excerpt": "ใช้ทับศัพท์ในเอกสาร กฟผ./กฟภ. ทั่วไปและใน NIST SP 800-82 (OT)"}}},
+    {"en": "whistleblower", "th": "ผู้แจ้งเบาะแส (Whistleblower)", "rule": "2", "term_source": "-", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
+    {"en": "conflict of interest", "th": "ความขัดแย้งทางผลประโยชน์", "rule": "1", "term_source": "ป.ป.ช. (การขัดกันแห่งผลประโยชน์ ใช้ในบริบทกฎหมาย ป.ป.ช.)", "notes": "บริบทกฎหมาย ป.ป.ช. ใช้ 'การขัดกันแห่งผลประโยชน์' — เลือกตามบริบท", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}}
+  ]
+}

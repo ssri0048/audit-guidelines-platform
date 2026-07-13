@@ -82,6 +82,14 @@
 | EX-TH-ADOPTION | ไม่ชัดว่าไทยรับมาตรฐานนี้ไหม | ตรวจประกาศหน่วยกำกับ/มอก./สมาชิกภาพ | UNRESOLVED + SLA | เจอหลักฐาน → VERIFIED (หรือ PINNED) |
 | EX-WRONG-TOPIC | เลขเอกสารจริงแต่คนละเรื่อง (เคส GOV 9140) | หาเอกสารที่ตรงเรื่องแทน | แก้ citation | — |
 
+## ขั้น 7 — Exemplar Grounding + หลายภาษา + Glossary (Provenance & Coverage)
+
+1. **ก่อน gen procedures**: โหลด exemplars ของ domain จาก `data/exemplars/` ≥3 ชิ้น (ภาษาไหนก็ได้ — SAI/หน่วยตรวจรัฐ/องค์กรวิชาชีพทั่วโลก ดูเป้าหมายใน source_universe.json) — ไม่มีพอ → เก็บ exemplar ก่อน หรือ label `PROFESSIONAL_SYNTHESIS` พร้อมเหตุผล
+2. **ทุก procedure ติด** `derivation` + `exemplar_refs[]` (ถ้า grounded)
+3. **หลายภาษา**: ต้นฉบับอยู่คู่คำแปลเสมอ (excerpt_original + excerpt_th) — แปลผ่านกติกา `data/glossary.json` 3 ชั้น (ศัพท์บัญญัติ → แปล+วงเล็บ → ทับศัพท์มาตรฐาน); เจอศัพท์ใหม่ที่ไม่อยู่ใน glossary → เพิ่ม entry (UNVERIFIED+SLA) มากับ PR เดียวกัน
+4. **org_applicability**: ทุก topic/risk ประกาศป้ายชัด (ไม่มีป้าย = UNIVERSAL ต้องตั้งใจเลือก ไม่ใช่ลืม); กฎหมายที่ scope แคบใส่ `org_scope` ราย ref; matching = Match ANY
+5. **Source Universe**: แตะ domain ไหน → อัพเดท coverage ของ publishers ที่เกี่ยวใน `data/source_universe.json` ไปพร้อมกัน (harvest คู่ขนาน ไม่เปิดรอบแยก)
+
 ## กติกา Boy Scout (บังคับ)
 ทุก batch re-verify: **ปิดธงเก่าจาก Verification Queue อย่างน้อย 2 รายการ** ก่อนจึงเปิดธงใหม่ได้ — ธงใหม่ทุกอันต้องมี exception_code + (ถ้า UNRESOLVED) open_question + sla_deadline
 
