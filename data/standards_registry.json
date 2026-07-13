@@ -295,6 +295,62 @@
           "notes": "พลังงาน = CII; ประกาศลูกของ สกมช. ให้ตรวจเพิ่มรายฉบับที่ ncsa.or.th/standards/laws"
         }
       ]
+    },
+    {
+      "family_id": "iso-55000",
+      "display": "ISO 55000 series (Asset Management)",
+      "match": "ISO\\s*5500[01]",
+      "editions": [
+        {
+          "version": "2014",
+          "status": "WITHDRAWN",
+          "superseded_by": "2024",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/83053.html",
+          "evidence_excerpt": "Life cycle → Previously: Withdrawn — ISO 55000:2014"
+        },
+        {
+          "version": "2024",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/83053.html",
+          "evidence_excerpt": "Published (Edition 2, 2024) · Stage 60.60 · Publication 2024-07"
+        }
+      ]
+    },
+    {
+      "family_id": "pas-55",
+      "display": "PAS 55 (BSI, ก่อน ISO 55000)",
+      "match": "PAS\\s*55",
+      "editions": [
+        {
+          "version": "2008",
+          "status": "WITHDRAWN",
+          "superseded_by": "ISO 55000 series",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/83053.html",
+          "evidence_excerpt": "",
+          "notes": "PAS 55 เป็น spec ของ BSI ที่ถูกแทนที่โดยชุด ISO 55000 ตั้งแต่ 2014 — ต้อง verify จาก bsigroup"
+        }
+      ]
+    },
+    {
+      "family_id": "erc-service-quality",
+      "display": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ.",
+      "match": "กกพ|erc.{0,20}คุณภาพ|เกณฑ์มาตรฐานคุณภาพการให้บริการ",
+      "editions": [
+        {
+          "version": "2565",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.erc.or.th/th/service-quality-standards",
+          "evidence_excerpt": "หน้า official สำนักงาน กกพ. — เกณฑ์ พ.ศ. 2565 ประเภทใบอนุญาตระบบส่งไฟฟ้า"
+        }
+      ]
     }
   ]
 }
