@@ -1,0 +1,96 @@
+name: research-pipeline
+# Step 5: ร่าง research อัตโนมัติ — ผลลัพธ์เป็น "draft PR" เสมอ มนุษย์ merge เท่านั้น
+# ทริกเกอร์ (จงใจให้ต้องมีมือมนุษย์กด):
+#   1) admin ติด label 'research-request' ให้ issue ที่ขอหัวข้อใหม่
+#   2) หรือสั่งมือผ่าน workflow_dispatch พร้อมพิมพ์หัวข้อ
+# ปิดตาย: ไม่มี ANTHROPIC_API_KEY ใน Secrets → job จบเขียวพร้อมคำแนะนำ (fail-closed แบบสุภาพ)
+# ความปลอดภัย: draft = L3/DRAFT เสมอ, อ้างได้เฉพาะมาตรฐานที่มีทะเบียน (ratchet),
+#              branch protection บังคับให้ทุกอย่างผ่าน CI + human merge อยู่แล้ว
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'หัวข้อตรวจสอบที่ต้องการร่าง (ภาษาไทย)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  draft:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'research-request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Resolve topic
+        id: topic
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let topic = '';
+            if (context.eventName === 'workflow_dispatch') {
+              topic = context.payload.inputs.topic;
+            } else {
+              topic = (context.payload.issue.title || '').replace(/\[.*?\]/g, '').trim();
+            }
+            core.setOutput('topic', topic);
+            core.setOutput('issue', context.payload.issue ? context.payload.issue.number : '');
+
+      - name: Run research draft (Reading Manifest → Draft)
+        id: run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/research_draft.js "${{ steps.topic.outputs.topic }}" /tmp/research_out | tee /tmp/run.log
+          if [ -f /tmp/research_out/draft_topic.json ]; then echo "has_draft=true" >> "$GITHUB_OUTPUT"; else echo "has_draft=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Open draft PR
+        if: steps.run.outputs.has_draft == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCH="draft/$(date +%Y%m%d-%H%M%S)"
+          git config user.name "research-pipeline[bot]"
+          git config user.email "actions@github.com"
+          git checkout -b "$BRANCH"
+          mkdir -p data/drafts
+          cp /tmp/research_out/draft_topic.json "data/drafts/draft_$(date +%Y%m%d-%H%M%S).json"
+          cp /tmp/research_out/READING_MANIFEST.md "data/drafts/"
+          git add data/drafts
+          git commit -m "draft(research-pipeline): ร่างหัวข้อ '${{ steps.topic.outputs.topic }}' (L3/DRAFT — รอ verification)"
+          git push -u origin "$BRANCH"
+          cp /tmp/research_out/READING_MANIFEST.md /tmp/pr_body.md
+          {
+            echo ""
+            echo "***"
+            echo "⚠️ **นี่คือ DRAFT (L3) จาก pipeline** — ยังไม่ใช่ความรู้ที่ verify แล้ว"
+            echo "ขั้นต่อไป: ทำ verification ตาม deep-research-protocol (อ่านแหล่งจริง + excerpt) ใน Cowork แล้วยกเป็น L1 ก่อนเข้า knowledge_store"
+            echo "**ห้าม merge PR นี้เข้า store โดยตรง**"
+          } >> /tmp/pr_body.md
+          gh pr create --title "🤖 Draft: ${{ steps.topic.outputs.topic }}" \
+            --body-file /tmp/pr_body.md --base main --head "$BRANCH"
+
+      - name: Comment result on issue
+        if: steps.topic.outputs.issue != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const log = fs.readFileSync('/tmp/run.log', 'utf8').slice(-1500);
+            let manifest = '';
+            try { manifest = fs.readFileSync('/tmp/research_out/READING_MANIFEST.md', 'utf8').slice(0, 4000); } catch (e) {}
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: Number('${{ steps.topic.outputs.issue }}'),
+              body: `🤖 research-pipeline ทำงานแล้ว\n\n\`\`\`\n${log}\n\`\`\`\n\n${manifest}`
+            });
