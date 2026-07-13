@@ -1,5 +1,8 @@
 # Intelligent AI Audit Guidelines Platform (v3)
 
+> **สถานะ: 🟢 GO-LIVE (2026-07-14)** — 16 หัวข้อ / 96 ความเสี่ยง / 103 วิธีการตรวจ ทุกรายการ L1 APPROVED
+> ทะเบียนมาตรฐาน 70+ families ครอบ 100% ของการอ้างอิง | คู่มือ: [docs/USER_MANUAL_TH.md](docs/USER_MANUAL_TH.md)
+
 ระบบคลังความรู้แนวทางการตรวจสอบภายในสำหรับองค์กรการไฟฟ้า — ภาษาไทย
 โครงสร้าง: **หนึ่งคลัง สองฝั่ง** — อ่านเสรี / เขียนผ่านการอนุมัติ (Pull Request) เท่านั้น
 
@@ -13,7 +16,7 @@
 
 | ที่ | คืออะไร |
 |---|---|
-| `app/index.html` | เว็บแอป (⚠️ ยังเป็นเวอร์ชันเดิม — จะ rewire ใน Step 4) |
+| `app/index.html` | เว็บแอป read-only (ค้นหาแยกประเภทองค์กร + ป้ายที่มาความรู้ + ชิปสถานะมาตรฐาน) |
 | `data/knowledge_store.json` | **คลังความรู้ canonical ไฟล์เดียว** — แก้ผ่าน PR เท่านั้น |
 | `data/knowledge_staging.json` | คิวความรู้รอตรวจ/อนุมัติ |
 | `data/research_requests/` | คำขอ research จากผู้ใช้ |
