@@ -12,9 +12,11 @@
       "WITHDRAWN": "ถูกยกเลิกแล้ว — ห้ามอ้างเป็นปัจจุบัน (ดู superseded_by)",
       "AMENDED": "ฉบับหลักยังปัจจุบัน แต่มีเอกสารแก้ไขเพิ่มเติมที่ต้องอ้างคู่กัน (ISO Amd / ไทย ฉบับที่ n)",
       "PARTIAL_REPEAL": "บางมาตรา/บางข้อถูกยกเลิก — อ้างได้แต่ต้องตรวจรายมาตรา",
-      "PINNED_BY_THAI_LAW": "กฎหมาย/ประกาศไทยตรึงเวอร์ชันเฉพาะ — ในไทยยังบังคับแม้สากลจะเปลี่ยน"
+      "PINNED_BY_THAI_LAW": "กฎหมาย/ประกาศไทยตรึงเวอร์ชันเฉพาะ — ในไทยยังบังคับแม้สากลจะเปลี่ยน",
+      "RENUMBERED": "เนื้อหาคงเดิมแต่ถูกจัดเลข/หมวดใหม่โดยผู้ออก — อ้างได้พร้อมวงเล็บเลข/หมวดใหม่ (เช่น INTOSAI GOV → GUID)"
     },
-    "verified_meaning": "verified:true = Claude เปิดอ่านหน้า official จริงและบันทึก evidence แล้ว | verified:false = สถานะจากความรู้ทั่วไป ต้อง verify ก่อนเชื่อ 100%"
+    "verified_meaning": "verified:true = Claude เปิดอ่านหน้า official จริงและบันทึก evidence แล้ว | verified:false = สถานะจากความรู้ทั่วไป ต้อง verify ก่อนเชื่อ 100%",
+    "claim_sla_days": 60
   },
   "families": [
     {
@@ -57,9 +59,9 @@
         {
           "version": "2024",
           "status": "CURRENT",
-          "notes": "วันมีผลบังคับ (effective date ม.ค. 2025 ตามที่เข้าใจ) ยังไม่ได้อ่านยืนยันจากหน้า IIA — ให้ verify ตอน re-check รอบหน้า",
+          "notes": "ยืนยันวันมีผลแล้ว: effective 9 ม.ค. 2025 (IIA Press Room) — ธงเดิมปิด",
           "evidence_url": "https://www.theiia.org/globalassets/site/standards/globalinternalauditstandards_2024january9.pdf",
-          "evidence_excerpt": "เอกสารทางการ globalinternalauditstandards_2024january9.pdf — ยืนยันโครงสร้าง Domain/Standard จากสารบัญ (13.6, 14.1-14.6, 15.1-15.2)",
+          "evidence_excerpt": "เอกสารทางการ globalinternalauditstandards_2024january9.pdf — ยืนยันโครงสร้าง Domain/Standard จากสารบัญ (13.6, 14.1-14.6, 15.1-15.2) | effective date 9 Jan 2025 ยืนยันจาก IIA Press Room 2026-07-13",
           "verified": true,
           "last_verified": "2026-07-13"
         }
@@ -73,12 +75,13 @@
         {
           "version": "2017",
           "status": "WITHDRAWN",
-          "superseded_by": "GIAS 2024",
-          "notes": "เลข clause แบบ 4 หลัก (เช่น IIA Standard 2130, 2030) เป็นระบบเลขของ IPPF เดิม — เมื่ออ้างต้อง map ไปเลข GIAS ใหม่; วันสิ้นผลจริงต้อง verify จาก theiia.org",
-          "evidence_url": "https://www.theiia.org/en/standards/",
-          "evidence_excerpt": "",
-          "verified": false,
-          "last_verified": "2026-07-13"
+          "superseded_by": "GIAS 2024 (มีผล 9 ม.ค. 2025)",
+          "notes": "",
+          "evidence_url": "https://www.theiia.org/en/content/communications/press-releases/2025/january/the-iia-celebrates-the-effective-date-of-the-global-internal-audit-standards/",
+          "evidence_excerpt": "IIA Press Room: GIAS released 9 Jan 2024, effective 9 Jan 2025 — \"incorporate all the mandatory elements of the 2017 IPPF\" | เลข clause 4 หลัก (2130, 2030, 2400) ต้อง map ไปเลข GIAS ใหม่",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "exception_code": "EX-WITHDRAWN"
         }
       ]
     },
