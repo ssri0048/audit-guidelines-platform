@@ -1,0 +1,74 @@
+name: queue-watchdog
+# ตัวเฝ้าคิว: รายงาน Verification Queue + SLA เป็น issue อัตโนมัติ (ไม่ใช้ secret ใดๆ)
+# - รันทุกวันจันทร์ 02:00 UTC (~09:00 ไทย) + สั่งมือได้
+# - อัพเดท issue เดิมชื่อ "🏳️ Verification Queue" แทนการเปิดใหม่ซ้ำ
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run gates + capture queue
+        id: gates
+        run: |
+          set +e
+          node scripts/validate.js data/knowledge_store.json > /tmp/report.txt 2>&1
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat /tmp/report.txt
+      - name: Upsert queue issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const raw = fs.readFileSync('/tmp/report.txt', 'utf8');
+            const exitCode = '${{ steps.gates.outputs.exit_code }}';
+            const today = new Date().toISOString().slice(0, 10);
+            // ตัดเฉพาะส่วนคิว + errors
+            const qIdx = raw.indexOf('── VERIFICATION QUEUE');
+            const queuePart = qIdx >= 0 ? raw.slice(qIdx) : '(คิวว่าง)';
+            const eIdx = raw.indexOf('── ERRORS');
+            const errPart = eIdx >= 0 ? raw.slice(eIdx, raw.indexOf('──', eIdx + 5) > 0 ? raw.indexOf('── W', eIdx + 5) : undefined) : '';
+            const slaLines = raw.split('\n').filter(l => l.includes('[SLA]'));
+            const body = [
+              `**รายงานอัตโนมัติ ${today}** (queue-watchdog — ข้อมูลจาก scripts/validate.js บน main)`,
+              '',
+              exitCode === '0' ? '✅ เกตผ่าน (warnings = งานค้าง re-verify)' : '❌ เกตมี ERROR — ต้องแก้ก่อน merge งานใหม่',
+              '',
+              slaLines.length ? `## ⏰ เกิน SLA (${slaLines.length})\n\`\`\`\n${slaLines.join('\n')}\n\`\`\`` : '## ⏰ SLA\nยังไม่มีรายการเกินกำหนด',
+              '',
+              '## คิวทั้งหมด',
+              '```',
+              queuePart.slice(0, 6000),
+              '```',
+              '',
+              '_กติกา Boy Scout: batch ถัดไปปิดธงจากคิวนี้ ≥2 รายการ (skills/verification-resolver SKL021)_'
+            ].join('\n');
+            const title = '🏳️ Verification Queue — สถานะธงและ SLA';
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'verification-queue', per_page: 5
+            });
+            if (issues.length > 0) {
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issues[0].number, title, body
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['verification-queue']
+              });
+            }
