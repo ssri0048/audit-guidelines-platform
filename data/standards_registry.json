@@ -26,7 +26,10 @@
           "version": "2013",
           "status": "WITHDRAWN",
           "superseded_by": "2022",
-          "related_docs": ["Cor 1:2014 (Withdrawn)", "Cor 2:2015 (Withdrawn)"],
+          "related_docs": [
+            "Cor 1:2014 (Withdrawn)",
+            "Cor 2:2015 (Withdrawn)"
+          ],
           "evidence_url": "https://www.iso.org/standard/27001",
           "evidence_excerpt": "Life cycle → Previously: Withdrawn — ISO/IEC 27001:2013",
           "verified": true,
@@ -35,7 +38,9 @@
         {
           "version": "2022",
           "status": "AMENDED",
-          "amendments": ["Amd 1:2024 (Climate action changes)"],
+          "amendments": [
+            "Amd 1:2024 (Climate action changes)"
+          ],
           "notes": "Amendments provide additional content; not included in the text of the existing standard — ต้องอ้าง 2022 + Amd 1:2024 คู่กันจึงครบ",
           "evidence_url": "https://www.iso.org/standard/27001",
           "evidence_excerpt": "Published (Edition 3, 2022) · Stage 60.60 published 2022-10-25 · This standard has 1 amendment: ISO/IEC 27001:2022/Amd 1:2024",
@@ -168,18 +173,18 @@
           "version": "1.1",
           "status": "WITHDRAWN",
           "superseded_by": "2.0",
-          "notes": "CSF 2.0 ออก ก.พ. 2024 — ต้อง verify ประกาศ supersede จาก nist.gov",
-          "evidence_url": "https://www.nist.gov/cyberframework",
-          "evidence_excerpt": "",
-          "verified": false,
+          "notes": "",
+          "evidence_url": "https://www.nist.gov/cyberframework/csf-11-archive",
+          "evidence_excerpt": "เมนู \"CSF 1.1 Archive\" บน nist.gov/cyberframework — ฉบับ 1.1 ถูกจัดเป็น archive",
+          "verified": true,
           "last_verified": "2026-07-13"
         },
         {
           "version": "2.0",
           "status": "CURRENT",
           "evidence_url": "https://www.nist.gov/cyberframework",
-          "evidence_excerpt": "",
-          "verified": false,
+          "evidence_excerpt": "\"CSF 2.0 Resource Center\" + \"February 24, 2026: Celebrating Two Years of CSF 2.0\" (เผยแพร่ ก.พ. 2024)",
+          "verified": true,
           "last_verified": "2026-07-13"
         }
       ]
@@ -239,12 +244,55 @@
         {
           "version": "2560",
           "status": "AMENDED",
-          "amendments": ["(ฉบับที่ 2) พ.ศ. 2564"],
+          "amendments": [
+            "(ฉบับที่ 2) พ.ศ. 2564"
+          ],
           "notes": "ฉบับ 2560 เป็นฉบับหลัก ยังบังคับใช้ — แต่ถูกแก้ไขเพิ่มเติมโดย (ฉบับที่ 2) พ.ศ. 2564 ต้องอ่านสองฉบับประกอบกัน (แบบแผนเดียวกับ ISO Amendment)",
           "evidence_url": "https://www.gprocurement.go.th/wps/wcm/connect/30b2077c-5c96-459d-9f98-28a696819738/ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ+(ฉบับที่2)+พ.ศ.+2564.PDF?MOD=AJPERES",
           "evidence_excerpt": "เอกสาร (ฉบับที่ 2) พ.ศ. 2564 เผยแพร่บนระบบ e-GP กรมบัญชีกลาง — ยืนยันการมีอยู่เมื่อ 2026-07-13",
           "verified": true,
           "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "nist-sp-800-82",
+      "display": "NIST SP 800-82 (OT Security)",
+      "match": "SP\\s*800-82",
+      "editions": [
+        {
+          "version": "Rev.2",
+          "status": "WITHDRAWN",
+          "superseded_by": "Rev.3",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+          "evidence_excerpt": "\"Supersedes: SP 800-82 Rev. 2 (06/03/2015)\""
+        },
+        {
+          "version": "Rev.3",
+          "status": "TO_BE_REVISED",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+          "evidence_excerpt": "\"Date Published: September 2023\" | \"Related NIST Publications: SP 800-82 Rev. 4 (Draft)\" — ฉบับใหม่กำลังร่าง",
+          "notes": "ยังใช้ Rev.3 เป็นปัจจุบัน — ติดธงติดตาม Rev.4"
+        }
+      ]
+    },
+    {
+      "family_id": "th-cyber-act-2562",
+      "display": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+      "match": "ไซเบอร์.{0,15}2562|2562.{0,30}ไซเบอร์",
+      "editions": [
+        {
+          "version": "2562",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0020.PDF",
+          "evidence_excerpt": "ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก, 27 พ.ค. 2562",
+          "notes": "พลังงาน = CII; ประกาศลูกของ สกมช. ให้ตรวจเพิ่มรายฉบับที่ ncsa.or.th/standards/laws"
         }
       ]
     }
