@@ -650,25 +650,30 @@
       "name_en": "Cybersecurity for SCADA/OT Systems",
       "category": "Technology & Infrastructure",
       "category_th": "เทคโนโลยีและโครงสร้างพื้นฐาน",
-      "icon": "🔒",
-      "color": "#2C3E50",
+      "icon": "🛡️",
+      "color": "#8E44AD",
       "priority": "CRITICAL",
       "applicable_standards": [
         "NIST CSF 2.0",
+        "NIST SP 800-82 Rev.3",
         "IEC 62443",
         "IEC 62351",
         "NERC CIP",
-        "พรบ.คอมพิวเตอร์ พ.ศ.2560",
-        "พรบ.ความมั่นคงปลอดภัยไซเบอร์ พ.ศ.2562"
+        "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560"
       ],
       "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562 (ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก, 27 พ.ค. 2562) — พลังงานเป็นหนึ่งใน CII",
+        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม",
+        "ประกาศ/หลักเกณฑ์ของ สกมช. สำหรับหน่วยงาน CII"
+      ],
       "knowledge_id": "KN-T002",
-      "version": "1.0.0",
-      "confidence_score": 90,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:ce54ab53982a9fa8857a183112b60bb70e2ee5133e6699c514bfc2916e182638",
+      "version": "2.0.0",
+      "confidence_score": 88,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
       "approved_by": null,
       "changelog": [
         {
@@ -678,104 +683,246 @@
           "approved_by": "system"
         },
         {
-          "version": "1.0.0",
+          "version": "2.0.0",
           "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "change": "RE-VERIFIED จากแหล่ง official 4 แหล่ง (NIST CSF 2.0, NIST SP 800-82 Rev.3, ราชกิจจานุเบกษา พ.ร.บ.ไซเบอร์ 2562, สกมช.) — ขยาย 3→6 ความเสี่ยง เพิ่ม std_refs และ source_chain ตรวจย้อนได้",
+          "approved_by": "pending PR merge by human reviewer"
         }
       ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T14:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
         "T003",
-        "T004",
         "T012",
         "T016"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
-        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
-        "ประกาศ กสทช. ว่าด้วยมาตรการรักษาความปลอดภัยโครงข่าย"
-      ],
       "source_chain": [
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T002-01",
+          "source_type": "international_framework",
+          "publisher": "NIST",
+          "title": "Cybersecurity Framework 2.0",
+          "url": "https://www.nist.gov/cyberframework",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "หน้า official แสดง \"CSF 2.0 Resource Center\" เป็นฉบับปัจจุบัน (เอกสาร DOI 10.6028/NIST.CSWP.29) ส่วน CSF 1.1 ถูกย้ายเข้า \"CSF 1.1 Archive\" | \"February 24, 2026: Celebrating Two Years of CSF 2.0\""
         },
         {
-          "source_id": "SRC003",
-          "source_type": "pdf_standard",
-          "credibility_score": 93,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T002-02",
+          "source_type": "international_standard",
+          "publisher": "NIST",
+          "title": "SP 800-82 Rev. 3 — Guide to Operational Technology (OT) Security",
+          "url": "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "\"Date Published: September 2023 | Supersedes: SP 800-82 Rev. 2 (06/03/2015)\" | Abstract: \"identifies common threats and vulnerabilities to these systems, and provides recommended security countermeasures to mitigate the associated risks\" (ครอบคลุม SCADA/DCS/PLC; Sectors: energy) | หมายเหตุ: มี Rev. 4 (Draft) กำลังพัฒนา"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T002-03",
+          "source_type": "official_gazette",
+          "publisher": "ราชกิจจานุเบกษา",
+          "title": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0020.PDF",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 100,
+          "excerpt": "เล่ม 136 ตอนที่ 69 ก, 27 พฤษภาคม 2562 — ยืนยันการประกาศใช้และ URL ต้นฉบับ (ไฟล์ PDF ราชกิจจาฯ; พลังงานจัดเป็นโครงสร้างพื้นฐานสำคัญทางสารสนเทศตามกฎหมายนี้ — การอ้างมาตรารายข้อให้ตรวจกับตัวบทประกอบ)"
+        },
+        {
+          "source_id": "SRC-T002-04",
+          "source_type": "thai_government_agency",
+          "publisher": "สกมช. (NCSA)",
+          "title": "กฎหมายและมาตรฐาน — สำนักงานคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ",
+          "url": "https://www.ncsa.or.th/standards/laws",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "หน้ารวมกฎหมาย/ประกาศของหน่วยกำกับโดยตรงสำหรับหน่วยงาน CII (ยืนยันหน่วยงานและช่องทาง official — เนื้อหาประกาศรายฉบับให้เปิดตรวจประกอบตอนใช้งาน)"
         }
       ],
       "risks": [
         {
-          "id": "R004",
-          "name_th": "ความเสี่ยงการโจมตีระบบควบคุมโครงข่ายไฟฟ้า (SCADA)",
-          "name_en": "Cyberattack on Power Grid Control Systems (SCADA)",
+          "id": "R001",
+          "name_th": "ความเสี่ยงการโจมตีทางไซเบอร์ต่อระบบ SCADA/EMS จนกระทบการจ่ายไฟฟ้าวงกว้าง",
+          "name_en": "Cyber Attack on SCADA/EMS Causing Wide-Area Outage",
           "level": "CRITICAL",
           "likelihood": "ปานกลาง",
           "impact": "สูงมาก",
           "control_failures": [
             {
-              "id": "CF005",
-              "name_th": "ไม่มีการแบ่งส่วนเครือข่าย IT/OT (Network Segmentation)",
-              "name_en": "No IT/OT Network Segmentation",
+              "id": "CF001",
+              "name_th": "ไม่มีการประเมินความเสี่ยงไซเบอร์เฉพาะระบบ OT ที่ครอบคลุมภัยคุกคามปัจจุบัน",
+              "name_en": "No OT-specific cyber risk assessment",
               "audit_procedures": [
                 {
-                  "id": "AP006",
-                  "name_th": "ตรวจสอบสถาปัตยกรรมเครือข่ายและการแบ่งส่วน IT/OT",
-                  "name_en": "Review network architecture and IT/OT segmentation",
-                  "method": "Technical Inspection + Penetration Testing",
+                  "id": "AP001",
+                  "name_th": "สอบทานผลการประเมินความเสี่ยงไซเบอร์ระบบ OT ล่าสุด ว่าครอบคลุม asset สำคัญ (SCADA, EMS, RTU, substation) และ threat scenario ปัจจุบัน",
+                  "name_en": "Review latest OT cyber risk assessment coverage of critical assets and current threats",
+                  "method": "Document Review + Technical Interview",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 800-82 Rev.3",
+                      "clause": "OT Security Guide",
+                      "title": "Guide to Operational Technology (OT) Security"
+                    },
+                    {
+                      "std": "NIST CSF 2.0",
+                      "clause": "Framework",
+                      "title": "NIST Cybersecurity Framework 2.0"
+                    }
+                  ],
                   "evidence_types": [
-                    "แผนผังเครือข่าย (Network Diagram)",
-                    "รายงาน Firewall Rules",
-                    "บันทึก Network Traffic Log",
-                    "รายงาน Penetration Test",
-                    "ผล Vulnerability Assessment"
+                    "รายงานประเมินความเสี่ยงไซเบอร์ OT ฉบับล่าสุด",
+                    "ทะเบียน OT asset ทั้งหมดพร้อมระดับ criticality",
+                    "รายงาน threat intelligence ที่ใช้ประกอบ",
+                    "บันทึกการทบทวนโดยผู้บริหารด้านความมั่นคง"
                   ]
                 },
                 {
-                  "id": "AP007",
-                  "name_th": "ทดสอบประสิทธิภาพ Firewall และการควบคุมการเข้าถึงระหว่าง IT/OT",
-                  "name_en": "Test firewall effectiveness and IT/OT access controls",
-                  "method": "Configuration Review + Testing",
+                  "id": "AP002",
+                  "name_th": "ทดสอบว่ามีการซ้อมสถานการณ์โจมตี SCADA (tabletop/red team) และนำผลมาปรับปรุงการควบคุม",
+                  "name_en": "Verify SCADA attack simulation exercises and improvement follow-up",
+                  "method": "Re-performance + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 800-82 Rev.3",
+                      "clause": "OT Security Guide",
+                      "title": "Guide to Operational Technology (OT) Security"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
                   "evidence_types": [
-                    "Firewall Policy Configuration",
-                    "ACL (Access Control List)",
-                    "DMZ Architecture Documentation",
-                    "Test Results Log"
+                    "แผนและรายงานผลการซ้อม cyber incident ประจำปี",
+                    "รายการข้อบกพร่องที่พบและสถานะแก้ไข",
+                    "คำสั่งแต่งตั้งทีม CSIRT/SOC",
+                    "บันทึกการรายงานผลต่อคณะกรรมการ"
                   ]
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "ความเสี่ยงการแบ่งแยกเครือข่าย IT/OT ไม่เพียงพอ ทำให้ malware ลามจากระบบสำนักงานเข้าระบบควบคุม",
+          "name_en": "Insufficient IT/OT Network Segmentation",
+          "level": "CRITICAL",
+          "likelihood": "สูง",
+          "impact": "สูงมาก",
+          "control_failures": [
             {
-              "id": "CF006",
-              "name_th": "ไม่มีแผนการจัดการช่องโหว่และการอัปเดตระบบ SCADA",
-              "name_en": "No vulnerability management and patch plan for SCADA",
+              "id": "CF002",
+              "name_th": "สถาปัตยกรรมเครือข่ายไม่มี DMZ/firewall ระหว่างโซน IT กับ OT หรือมี rule ที่หละหลวม",
+              "name_en": "Missing or weak IT/OT boundary controls",
               "audit_procedures": [
                 {
-                  "id": "AP008",
-                  "name_th": "ตรวจสอบกระบวนการบริหารจัดการ Patch และ Vulnerability ของระบบ OT",
-                  "name_en": "Review OT system patch and vulnerability management process",
-                  "method": "Document Review + Technical Testing",
+                  "id": "AP003",
+                  "name_th": "สอบทานแผนผังเครือข่ายจริงเทียบสถาปัตยกรรมอ้างอิง (zone/conduit ตาม IEC 62443) และทดสอบ firewall rules ระหว่างโซน",
+                  "name_en": "Review actual network topology vs reference architecture; test inter-zone firewall rules",
+                  "method": "Technical Testing + Configuration Review",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "series",
+                      "title": "Industrial communication networks - IT security"
+                    },
+                    {
+                      "std": "NIST SP 800-82 Rev.3",
+                      "clause": "OT Security Guide",
+                      "title": "Guide to Operational Technology (OT) Security"
+                    }
+                  ],
                   "evidence_types": [
-                    "Patch Management Policy",
-                    "Vulnerability Scan Report",
-                    "Change Management Log",
-                    "Vendor Security Advisory Records",
-                    "System Inventory (Asset Register)"
+                    "แผนผังเครือข่าย IT/OT ฉบับปัจจุบัน",
+                    "Firewall ruleset export พร้อมเหตุผลรายกฎ",
+                    "ผลสแกน network path ระหว่างโซน",
+                    "รายงานทบทวน rule ประจำงวด"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงการเข้าถึงจากระยะไกลและบัญชีผู้ขาย (vendor remote access) ไม่ถูกควบคุม",
+          "name_en": "Uncontrolled Remote & Vendor Access to OT",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "บัญชี vendor/remote ไม่มี MFA, ไม่จำกัดเวลา, ไม่มีการบันทึก session",
+              "name_en": "Vendor accounts lack MFA, time-bound access and session logging",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "ตรวจทะเบียนบัญชีเข้าถึงระบบ OT ทั้งหมด แยกบัญชี vendor/remote ทดสอบว่ามี MFA, สิทธิ์ตามจำเป็น, วันหมดอายุ และ log ครบ",
+                  "name_en": "Test all OT access accounts for MFA, least privilege, expiry and logging",
+                  "method": "Access Review + Log Analysis",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 800-82 Rev.3",
+                      "clause": "OT Security Guide",
+                      "title": "Guide to Operational Technology (OT) Security"
+                    },
+                    {
+                      "std": "NIST CSF 2.0",
+                      "clause": "Framework",
+                      "title": "NIST Cybersecurity Framework 2.0"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนบัญชีผู้ใช้ระบบ OT ทุกระบบ",
+                    "การตั้งค่า MFA/VPN สำหรับ remote access",
+                    "สัญญา/ข้อตกลงความปลอดภัยกับ vendor",
+                    "Session log การเข้าถึงย้อนหลัง 6 เดือน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงอุปกรณ์ OT รุ่นเก่า (legacy) มีช่องโหว่ที่ patch ไม่ได้และไม่มีมาตรการชดเชย",
+          "name_en": "Unpatchable Legacy OT Vulnerabilities Without Compensating Controls",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มีกระบวนการจัดการช่องโหว่เฉพาะ OT (ประเมิน-จัดลำดับ-ชดเชย) แยกจาก IT",
+              "name_en": "No OT-specific vulnerability management process",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานกระบวนการจัดการช่องโหว่ OT: รอบการประเมิน เกณฑ์จัดลำดับ และมาตรการชดเชย (segmentation/monitoring) สำหรับอุปกรณ์ patch ไม่ได้",
+                  "name_en": "Review OT vulnerability management incl. compensating controls for unpatchable devices",
+                  "method": "Process Walkthrough + Sampling",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 800-82 Rev.3",
+                      "clause": "OT Security Guide",
+                      "title": "Guide to Operational Technology (OT) Security"
+                    },
+                    {
+                      "std": "IEC 62443",
+                      "clause": "series",
+                      "title": "Industrial communication networks - IT security"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบาย/ขั้นตอน vulnerability management ของ OT",
+                    "ผลสแกนช่องโหว่ล่าสุดพร้อมสถานะ",
+                    "ทะเบียนอุปกรณ์ legacy พร้อมมาตรการชดเชยรายตัว",
+                    "บันทึกอนุมัติยอมรับความเสี่ยง (risk acceptance)"
                   ]
                 }
               ]
@@ -784,28 +931,39 @@
         },
         {
           "id": "R005",
-          "name_th": "ความเสี่ยงการเข้าถึงระบบโดยไม่ได้รับอนุญาต",
-          "name_en": "Unauthorized Access to Critical Systems",
+          "name_th": "ความเสี่ยงไม่ปฏิบัติตาม พ.ร.บ.ไซเบอร์ 2562 ในฐานะหน่วยงานโครงสร้างพื้นฐานสำคัญ (CII) ด้านพลังงาน",
+          "name_en": "Non-compliance with Cybersecurity Act B.E. 2562 as Energy CII",
           "level": "HIGH",
           "likelihood": "ปานกลาง",
-          "impact": "สูง",
+          "impact": "สูงมาก",
           "control_failures": [
             {
-              "id": "CF007",
-              "name_th": "การจัดการสิทธิ์การเข้าถึง Privileged Account บกพร่อง",
-              "name_en": "Inadequate Privileged Access Management",
+              "id": "CF005",
+              "name_th": "ไม่ได้ดำเนินการตามหน้าที่หน่วยงาน CII เช่น ประเมินความเสี่ยง รายงานเหตุการณ์ต่อ สกมช. ภายในเวลาที่กำหนด",
+              "name_en": "CII obligations (risk assessment, incident reporting to NCSA) not fulfilled",
               "audit_procedures": [
                 {
-                  "id": "AP009",
-                  "name_th": "ตรวจสอบการจัดการ Privileged Account และ Multi-Factor Authentication",
-                  "name_en": "Review Privileged Account Management and MFA implementation",
-                  "method": "Access Review + Configuration Audit",
+                  "id": "AP006",
+                  "name_th": "ตรวจสอบการปฏิบัติตามหน้าที่หน่วยงาน CII: การจัดทำแผน/ประเมินความเสี่ยงตามรอบ การซ้อมรับมือ และช่องทาง+บันทึกการรายงานภัยคุกคามต่อ สกมช.",
+                  "name_en": "Verify CII obligations: periodic risk assessment, drills, and incident reporting records to NCSA",
+                  "method": "Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                      "clause": "หมวดหน้าที่หน่วยงาน CII",
+                      "title": "ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก"
+                    },
+                    {
+                      "std": "NIST CSF 2.0",
+                      "clause": "Framework",
+                      "title": "NIST Cybersecurity Framework 2.0"
+                    }
+                  ],
                   "evidence_types": [
-                    "Active Directory / LDAP User List",
-                    "Privileged Access Management (PAM) Report",
-                    "MFA Configuration Screenshot",
-                    "Access Review Report (รายงานทบทวนสิทธิ์รายไตรมาส)",
-                    "Remote Access Log"
+                    "หนังสือแจ้งการเป็นหน่วยงาน CII / ประกาศที่เกี่ยวข้อง",
+                    "รายงานประเมินความเสี่ยงตามรอบที่กฎหมายกำหนด",
+                    "บันทึกการรายงานเหตุการณ์ต่อ สกมช. พร้อม timestamp",
+                    "ผลตรวจ/ข้อสังเกตจากหน่วยกำกับ"
                   ]
                 }
               ]
@@ -814,35 +972,47 @@
         },
         {
           "id": "R006",
-          "name_th": "ความเสี่ยงความต่อเนื่องทางธุรกิจหลังเหตุการณ์ไซเบอร์",
-          "name_en": "Business Continuity Risk After Cyber Incident",
+          "name_th": "ความเสี่ยงแผนรับมือเหตุการณ์และแผนกู้คืนระบบ OT ไม่เคยถูกทดสอบในสภาพจริง",
+          "name_en": "Untested OT Incident Response and Recovery Plans",
           "level": "HIGH",
-          "likelihood": "ต่ำ",
+          "likelihood": "ปานกลาง",
           "impact": "สูงมาก",
           "control_failures": [
             {
-              "id": "CF008",
-              "name_th": "ขาดแผนรับมือเหตุการณ์ไซเบอร์ที่ครอบคลุมระบบ OT",
-              "name_en": "No comprehensive cyber incident response plan for OT",
+              "id": "CF006",
+              "name_th": "แผน IR/DR เขียนไว้แต่ไม่มีการซ้อมแบบครอบคลุมสถานการณ์ OT (เช่น กู้ SCADA จาก backup จริง)",
+              "name_en": "IR/DR plans exist but never exercised for OT scenarios",
               "audit_procedures": [
                 {
-                  "id": "AP010",
-                  "name_th": "ตรวจสอบและทดสอบแผน Incident Response และ Business Continuity Plan",
-                  "name_en": "Review and test Incident Response Plan and BCP",
-                  "method": "Document Review + Tabletop Exercise",
+                  "id": "AP007",
+                  "name_th": "สอบทานผลการซ้อมแผน IR/DR ของระบบ OT: ความถี่ ขอบเขต (รวม restore จาก backup จริง) เวลากู้คืนเทียบ RTO และการปรับแผนหลังซ้อม",
+                  "name_en": "Review OT IR/DR exercise results: frequency, real restore tests, RTO achievement",
+                  "method": "Document Review + Observation",
+                  "std_refs": [
+                    {
+                      "std": "NIST CSF 2.0",
+                      "clause": "Framework",
+                      "title": "NIST Cybersecurity Framework 2.0"
+                    },
+                    {
+                      "std": "NIST SP 800-82 Rev.3",
+                      "clause": "OT Security Guide",
+                      "title": "Guide to Operational Technology (OT) Security"
+                    }
+                  ],
                   "evidence_types": [
-                    "Cyber Incident Response Plan",
-                    "Business Continuity Plan (BCP)",
-                    "Disaster Recovery Plan (DRP)",
-                    "รายงานการซ้อมแผน (Tabletop Exercise Report)",
-                    "RTO/RPO Documentation"
+                    "แผน incident response / disaster recovery ฉบับปัจจุบัน",
+                    "รายงานผลการซ้อมพร้อมเวลากู้คืนจริง",
+                    "ผลทดสอบ restore backup ของ SCADA/EMS",
+                    "ทะเบียนการปรับปรุงแผนหลังการซ้อม"
                   ]
                 }
               ]
             }
           ]
         }
-      ]
+      ],
+      "hash_signature": "sha256:818945c6ef03b903842bef6be79a8469efc954f324e48164666d7b14fb8ac67d"
     },
     {
       "id": "T003",
