@@ -4,16 +4,7 @@
     "created": "2026-07-13",
     "last_updated": "2026-07-14",
     "rule": "no new citation without registry family (G5_COVERAGE_NEW = error)",
-    "count": 8
+    "count": 0
   },
-  "grandfathered": [
-    "IEC 60038",
-    "IEC 60300",
-    "IEC 62351",
-    "IEC 62443",
-    "ISO 9001:2015",
-    "ITIL v4",
-    "NERC CIP",
-    "NERC TPL"
-  ]
+  "grandfathered": []
 }
