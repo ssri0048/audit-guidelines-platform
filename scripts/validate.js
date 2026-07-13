@@ -36,6 +36,20 @@ const FLAGS_PATH = path.join(path.dirname(STORE), 'platform_flags.json');
 let FLAGS = {};
 try { FLAGS = JSON.parse(fs.readFileSync(FLAGS_PATH, 'utf8')).flags || {}; } catch (e) { FLAGS = {}; }
 
+// ── Coverage Baseline (ratchet) — รายชื่อ gap เดิมที่ grandfathered ──
+// กติกา: การอ้างอิงใหม่ที่ไม่มี family ในทะเบียน = ERROR (ต้องอ่านเข้าทะเบียนก่อน)
+//        รายการใน baseline = warning + คิว (กองเก่ามีแต่ลด — ห้ามเพิ่มเข้า baseline โดยไม่มีเหตุผลใน PR)
+// fail-strict: ไม่มีไฟล์ baseline = ทุก gap เป็น error
+const BASELINE_PATH = path.join(path.dirname(STORE), 'coverage_baseline.json');
+let BASELINE = new Set();
+try { BASELINE = new Set(JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8')).grandfathered || []); } catch (e) {}
+function famFor(str) {
+  for (const fam of REGISTRY.families) {
+    try { if (new RegExp(fam.match, 'i').test(str)) return fam; } catch (e) {}
+  }
+  return null;
+}
+
 // ── เกณฑ์นโยบาย (ตาม requirement ที่ user กำหนด) ──
 const POLICY = {
   MIN_RISKS_PER_TOPIC: 5,
@@ -236,11 +250,19 @@ for (const t of store.topics) {
         warnings.push(`[G5_UNVERIFIED] ${id}: "${std}" — รายการทะเบียนยังไม่ถูก verify จากหน้า official (เชื่อได้ระดับความรู้ทั่วไปเท่านั้น)`);
     }
 
-    // ── G5_COVERAGE: อ้างมาตรฐานที่ไม่มี family ในทะเบียน → ระบบต้องเห็นเอง ไม่ใช่รอคนบังเอิญเจอ ──
-    if (!matchedFam) {
-      if (!coverageGaps.has(std)) coverageGaps.set(std, []);
-      coverageGaps.get(std).push(id);
-    }
+  }
+
+  // ── G5_COVERAGE ขอบเขตเต็ม: applicable_standards + thai_law_refs + std_refs ทุกระดับ ──
+  // ระบบต้องเห็นทุกสตริงที่ถูกอ้าง ไม่ใช่รอคนบังเอิญเจอ
+  const cited = new Map();
+  for (const s of t.applicable_standards || []) cited.set(s, 'applicable_standards');
+  for (const s of t.thai_law_refs || []) cited.set(s, 'thai_law_refs');
+  for (const r of t.risks || []) for (const cf of r.control_failures || []) for (const ap of cf.audit_procedures || [])
+    for (const sr of ap.std_refs || []) { const s = typeof sr === 'string' ? sr : sr.std; if (s) cited.set(s, 'std_refs'); }
+  for (const [s, origin] of cited) {
+    if (famFor(s)) continue;
+    if (!coverageGaps.has(s)) coverageGaps.set(s, { ids: [], origin });
+    coverageGaps.get(s).ids.push(id);
   }
 
   // ── G6: THAILAND APPLICABILITY ──
@@ -263,11 +285,16 @@ const SLA_DAYS = 60;
 const queue = [];
 function ageDays(d) { return d ? Math.round((NOW_MS - Date.parse(d)) / 86400000) : null; }
 
-// แหล่งที่ 0: coverage gaps — มาตรฐานที่ความรู้อ้างแต่ทะเบียนไม่รู้จัก (เกต G5_COVERAGE)
-for (const [std, ids] of coverageGaps) {
-  warnings.push(`[G5_COVERAGE] "${std}" อ้างใน ${[...new Set(ids)].join(',')} แต่ไม่มี family ในทะเบียน — ต้อง research เข้าทะเบียน (หรือประกาศเป็น INTERNAL)`);
-  queue.push({ type: 'coverage', ref: `"${std.slice(0, 48)}" (อ้างใน ${[...new Set(ids)].join(',')})`, state: 'UNREGISTERED', age: null,
-    todo: 'research แหล่ง official → เพิ่ม family เข้า standards_registry' });
+// แหล่งที่ 0: coverage gaps — มาตรฐานที่ความรู้อ้างแต่ทะเบียนไม่รู้จัก (เกต G5_COVERAGE + ratchet)
+for (const [std, g] of coverageGaps) {
+  const ids = [...new Set(g.ids)].join(',');
+  if (BASELINE.has(std)) {
+    warnings.push(`[G5_COVERAGE] "${std}" (${g.origin}) อ้างใน ${ids} — grandfathered รอ research เข้าทะเบียน`);
+    queue.push({ type: 'coverage', ref: `"${std.slice(0, 48)}" (อ้างใน ${ids})`, state: 'UNREGISTERED', age: null,
+      todo: 'อ่านแหล่ง official → เพิ่ม family เข้า standards_registry → ลบออกจาก baseline' });
+  } else {
+    errors.push(`[G5_COVERAGE_NEW] "${std}" (${g.origin}) อ้างใน ${ids} — RATCHET: การอ้างอิงใหม่ต้องอ่านแหล่ง official เข้าทะเบียนก่อน (no new citation without registry family) — ห้ามแก้ด้วยการเพิ่มลง baseline เว้นแต่เป็นของเก่าตกสำรวจพร้อมเหตุผลใน PR`);
+  }
 }
 
 // แหล่งที่ 1: ทะเบียนมาตรฐาน (verified:false = UNVERIFIED, verified:true แก่เกิน = STALE)
