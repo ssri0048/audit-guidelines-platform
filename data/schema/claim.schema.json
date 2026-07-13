@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim.schema.json",
+  "title": "Claim Envelope — ซองสถานะมาตรฐานของทุกข้อกล่าวอ้างในระบบ",
+  "description": "ทุกหน่วยข้อมูล (topic, source, standard edition, translation, และชนิดใหม่ในอนาคต) ต้องมีสถานะ หลักฐาน อายุ และเส้นทางสู่จุดจบ — ไม่มีข้อมูลลอยไร้สถานะในระบบ",
+  "type": "object",
+  "required": ["state", "last_checked"],
+  "properties": {
+    "state": {
+      "enum": ["UNVERIFIED", "VERIFIED", "STALE", "UNRESOLVED", "SUPERSEDED", "RETIRED"],
+      "description": "UNVERIFIED=ยังไม่อ่านหลักฐาน | VERIFIED=อ่านหลักฐาน official แล้ว | STALE=verified แต่เกินอายุ ต้อง re-check | UNRESOLVED=หาคำตอบไม่ได้/กำกวม (ต้องมี open_question + sla) | SUPERSEDED=ถูกแทนที่ (จุดจบ) | RETIRED=ถอดออกจากการใช้ (จุดจบ)"
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "excerpt": { "type": "string", "description": "ข้อความจริงที่อ่านจากแหล่ง — พิสูจน์การอ่านไส้ใน" },
+        "read_at": { "type": "string" }
+      }
+    },
+    "last_checked": { "type": "string", "description": "วันที่ตรวจสถานะครั้งล่าสุด (ใช้คำนวณ STALE)" },
+    "stale_after_days": { "type": "number", "default": 183 },
+    "open_question": { "type": "string", "description": "บังคับเมื่อ state=UNRESOLVED: ยังตอบอะไรไม่ได้ + จะหาคำตอบจากไหน" },
+    "sla_deadline": { "type": "string", "description": "บังคับเมื่อ state=UNRESOLVED/UNVERIFIED: วันที่ต้องปิดภายใน (default: last_checked + 60 วัน)" },
+    "exception_code": { "type": "string", "description": "รหัสเหตุการณ์จาก Exception Catalog (เช่น EX-RENUMBERED, EX-SCANNED-PDF)" }
+  },
+  "$comment": "State machine: UNVERIFIED→VERIFIED→STALE→(re-check)→VERIFIED|SUPERSEDED|RETIRED; UNVERIFIED→UNRESOLVED(มี SLA)→VERIFIED|RETIRED. CI บังคับ: UNRESOLVED/UNVERIFIED เกิน SLA = block merge"
+}
