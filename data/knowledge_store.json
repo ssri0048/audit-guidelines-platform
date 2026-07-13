@@ -2332,44 +2332,280 @@
     {
       "id": "T007",
       "name_th": "การบริหารความเสี่ยงองค์กร (ERM)",
-      "name_en": "Enterprise Risk Management (ERM)",
-      "category": "Risk Management",
-      "category_th": "การบริหารความเสี่ยง",
+      "name_en": "Enterprise Risk Management",
+      "category": "Governance",
+      "category_th": "ธรรมาภิบาล",
       "icon": "🎯",
-      "color": "#E67E22",
+      "color": "#16A085",
       "priority": "HIGH",
       "applicable_standards": [
         "COSO ERM 2017",
         "ISO 31000:2018",
-        "INTOSAI GOV 9130",
-        "มาตรฐาน กพ./คสช.",
-        "แนวทาง สคร."
+        "IIA GIAS 2024",
+        "หลักเกณฑ์การบริหารความเสี่ยงของ สคร./กระทรวงการคลัง"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T007",
-      "version": "1.0.0",
-      "confidence_score": 86,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:0de9cf5a41fa648cff306691f1f48b79b8f99cfe5498ef73433645489b3ab936",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "หลักเกณฑ์กระทรวงการคลังว่าด้วยมาตรฐานและหลักเกณฑ์ปฏิบัติการบริหารจัดการความเสี่ยงสำหรับหน่วยงานของรัฐ พ.ศ. 2562",
+        "แนวทางประเมินผลรัฐวิสาหกิจ (สคร.) ด้านบริหารความเสี่ยง"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงกรอบ ERM ไม่ครอบคลุมความเสี่ยงสำคัญและ emerging risks (climate, AI, cyber)",
+          "name_en": "ERM Framework Missing Key & Emerging Risks",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "กระบวนการระบุความเสี่ยงทำปีละครั้งแบบ checklist ไม่มี horizon scanning",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทาน risk universe เทียบเหตุการณ์จริงที่เกิด (ในและนอกองค์กร) และตรวจว่ามีกระบวนการจับ emerging risks เข้าทะเบียนระหว่างปี",
+                  "name_en": "",
+                  "method": "Document Review + Benchmarking",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM 2017",
+                      "clause": "Integrating with Strategy and Performance",
+                      "title": "COSO ERM Framework"
+                    },
+                    {
+                      "std": "ISO 31000:2018",
+                      "clause": "Framework/Process",
+                      "title": "Risk Management Guidelines"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนความเสี่ยงองค์กรฉบับปัจจุบัน",
+                    "รายการเหตุการณ์ความเสียหายจริง 3 ปีเทียบทะเบียน",
+                    "บันทึกการทบทวนความเสี่ยงระหว่างปี",
+                    "ผล benchmark กับการไฟฟ้า/รัฐวิสาหกิจอื่น"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยง ERM ไม่เชื่อมกับกลยุทธ์และการตัดสินใจลงทุนสำคัญ",
+          "name_en": "ERM Disconnected from Strategy & Investment",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "การอนุมัติโครงการลงทุนไม่บังคับใช้ผลประเมินความเสี่ยงเป็นเงื่อนไข",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "สุ่มโครงการลงทุนสำคัญ ตรวจว่ามี risk assessment ก่อนอนุมัติ และความเสี่ยงกลยุทธ์ถูกรายงานถึงบอร์ดพร้อมทางเลือก",
+                  "name_en": "",
+                  "method": "Sampling + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM 2017",
+                      "clause": "Integrating with Strategy and Performance",
+                      "title": "COSO ERM Framework"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 9.4",
+                      "title": "Internal Audit Plan (risk-based)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารอนุมัติโครงการลงทุนพร้อม risk assessment",
+                    "วาระบอร์ดด้านความเสี่ยงกลยุทธ์",
+                    "แผนกลยุทธ์กับ risk profile ที่เชื่อมกัน",
+                    "บันทึกการตัดสินใจที่อ้างผลประเมินความเสี่ยง"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยง risk appetite ไม่ถูกกำหนดเป็นรูปธรรมหรือไม่ถูกใช้คุมการปฏิบัติจริง",
+          "name_en": "Risk Appetite Undefined or Unused",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่มี risk appetite statement ที่แปลงเป็น limit/threshold รายด้าน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "ตรวจ risk appetite statement และการแปลงเป็นเพดาน/ตัวชี้วัดรายด้าน พร้อมทดสอบกรณีเกินเพดานว่ามีการ escalate จริง",
+                  "name_en": "",
+                  "method": "Document Review + Case Testing",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM 2017",
+                      "clause": "Integrating with Strategy and Performance",
+                      "title": "COSO ERM Framework"
+                    },
+                    {
+                      "std": "ISO 31000:2018",
+                      "clause": "Framework/Process",
+                      "title": "Risk Management Guidelines"
+                    }
+                  ],
+                  "evidence_types": [
+                    "Risk appetite statement ที่บอร์ดอนุมัติ",
+                    "ตาราง limit/threshold รายประเภทความเสี่ยง",
+                    "รายงานกรณีเกินเพดานและการจัดการ",
+                    "บันทึกการทบทวน appetite ประจำปี"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงตัวชี้วัดความเสี่ยง (KRI) และรายงานความเสี่ยงไม่สะท้อนความจริง",
+          "name_en": "KRIs & Risk Reporting Not Reflecting Reality",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "KRI ถูกเลือกแบบวัดง่ายมากกว่าวัดตรง และรายงานสถานะเขียวเกินจริง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "ทดสอบ KRI สำคัญ: ที่มาข้อมูล การคำนวณ และเทียบสถานะที่รายงานกับข้อมูลดิบ/เหตุการณ์จริงย้อนหลัง",
+                  "name_en": "",
+                  "method": "Re-performance + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    },
+                    {
+                      "std": "COSO ERM 2017",
+                      "clause": "Integrating with Strategy and Performance",
+                      "title": "COSO ERM Framework"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นิยามและสูตร KRI ทุกตัว",
+                    "ข้อมูลดิบที่ใช้คำนวณงวดล่าสุด",
+                    "รายงานความเสี่ยงที่เสนอผู้บริหาร/บอร์ด",
+                    "เหตุการณ์จริงที่ขัดแย้งกับสถานะรายงาน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงเจ้าของความเสี่ยง (risk owner) ราย BU ไม่ชัดและวัฒนธรรมความเสี่ยงอ่อน",
+          "name_en": "Weak Risk Ownership & Culture",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ความเสี่ยงถูกมองเป็นงานของฝ่าย ERM ไม่ใช่ของหน่วยธุรกิจ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานการกำหนด risk owner รายความเสี่ยง สัมภาษณ์หน่วยงานว่ารู้และจัดการความเสี่ยงตัวเองจริง และดูการผูกผลงานกับ KPI",
+                  "name_en": "",
+                  "method": "Interview + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM 2017",
+                      "clause": "Integrating with Strategy and Performance",
+                      "title": "COSO ERM Framework"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนความเสี่ยงพร้อมชื่อ risk owner",
+                    "บันทึกสัมภาษณ์หน่วยงานตัวอย่าง",
+                    "KPI ผู้บริหารที่ผูกกับการบริหารความเสี่ยง",
+                    "ผลสำรวจวัฒนธรรมความเสี่ยง (ถ้ามี)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงแผนจัดการความเสี่ยง (mitigation) ไม่ถูกติดตามจนปิด",
+          "name_en": "Mitigation Actions Not Tracked to Closure",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีระบบติดตามแผนจัดการพร้อมกำหนดเสร็จและการ escalate เมื่อล่าช้า",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "วิเคราะห์ทะเบียนแผนจัดการความเสี่ยง: อัตราเสร็จตามกำหนด งานค้างข้ามปี และการรายงานความล่าช้าต่อคณะกรรมการบริหารความเสี่ยง",
+                  "name_en": "",
+                  "method": "Data Analytics + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO 31000:2018",
+                      "clause": "Framework/Process",
+                      "title": "Risk Management Guidelines"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 9.4",
+                      "title": "Internal Audit Plan (risk-based)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนแผนจัดการความเสี่ยงพร้อมสถานะ",
+                    "สถิติแผนล่าช้า/ค้างข้ามปี",
+                    "รายงานติดตามต่อคณะกรรมการ",
+                    "หลักฐานการปิดแผน (ผลลัพธ์จริง ไม่ใช่แค่ทำกิจกรรม)"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T007",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T20:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -2377,345 +2613,689 @@
         "T006",
         "T015"
       ],
-      "thai_law_refs": [
-        "แนวทางการบริหารความเสี่ยงของ สคร.",
-        "มาตรฐานการบริหารความเสี่ยงสำหรับรัฐวิสาหกิจ กพ.",
-        "ระเบียบ กพ. ว่าด้วยการบริหารจัดการความเสี่ยง"
-      ],
-      "source_chain": [
-        {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
-        },
-        {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
-        }
-      ],
-      "risks": [
-        {
-          "id": "R015",
-          "name_th": "ความเสี่ยงกรอบ ERM ไม่ครอบคลุมความเสี่ยงที่สำคัญ",
-          "name_en": "ERM Framework Incomplete Coverage of Key Risks",
-          "level": "MEDIUM",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF020",
-              "name_th": "กระบวนการระบุและประเมินความเสี่ยงไม่เป็นระบบ",
-              "name_en": "Non-systematic risk identification and assessment process",
-              "audit_procedures": [
-                {
-                  "id": "AP022",
-                  "name_th": "ทบทวนกรอบ ERM และกระบวนการบริหารความเสี่ยง",
-                  "name_en": "Review ERM framework and risk management process",
-                  "method": "Framework Assessment + Interview",
-                  "evidence_types": [
-                    "กรอบการบริหารความเสี่ยงองค์กร",
-                    "ทะเบียนความเสี่ยง (Risk Register)",
-                    "รายงานการประเมินความเสี่ยงรายปี",
-                    "Risk Heat Map",
-                    "รายงานการติดตามมาตรการจัดการความเสี่ยง"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R016",
-          "name_th": "ความเสี่ยงการบูรณาการ ERM กับกลยุทธ์องค์กรบกพร่อง",
-          "name_en": "Poor ERM-Strategy Integration",
-          "level": "MEDIUM",
-          "likelihood": "สูง",
-          "impact": "ปานกลาง",
-          "control_failures": [
-            {
-              "id": "CF021",
-              "name_th": "ขาดการเชื่อมโยงความเสี่ยงกับเป้าหมายเชิงกลยุทธ์",
-              "name_en": "Lack of risk-strategy alignment",
-              "audit_procedures": [
-                {
-                  "id": "AP023",
-                  "name_th": "ตรวจสอบการเชื่อมโยงระหว่างทะเบียนความเสี่ยงกับแผนยุทธศาสตร์",
-                  "name_en": "Review linkage between risk register and strategic plan",
-                  "method": "Document Review + Management Interview",
-                  "evidence_types": [
-                    "แผนยุทธศาสตร์องค์กร",
-                    "ทะเบียนความเสี่ยงที่มีการเชื่อมโยงกลยุทธ์",
-                    "รายงาน KRI (Key Risk Indicators)",
-                    "รายงานการประชุม Risk Committee"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "T008",
-      "name_th": "การปฏิบัติตามกฎหมายและข้อกำหนด",
-      "name_en": "Regulatory & Legal Compliance",
-      "category": "Compliance",
-      "category_th": "การปฏิบัติตามกฎระเบียบ",
-      "icon": "📜",
-      "color": "#2980B9",
-      "priority": "HIGH",
-      "applicable_standards": [
-        "IIA 2110",
-        "INTOSAI ISSAI 4000",
-        "พรบ.พลังงาน พ.ศ.2550",
-        "กฎระเบียบ กกพ.",
-        "พรบ.สิ่งแวดล้อม พ.ศ.2535"
-      ],
-      "thailand_applicable": true,
-      "knowledge_id": "KN-T008",
-      "version": "1.0.0",
-      "confidence_score": 88,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:9251971a78f7558d512d49caa053a50745144ce9a4cc39827d3f2945e21cb01a",
-      "approved_by": null,
       "changelog": [
         {
           "version": "1.0.0",
           "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
+          "change": "Initial migration",
           "approved_by": "system"
         },
         {
-          "version": "1.0.0",
+          "version": "2.0.0",
           "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "change": "RE-VERIFIED — 6 ความเสี่ยง + source_chain; T009 แก้กรอบตกรุ่น TCFD→IFRS S1/S2 (ISSB), T007 ยืนยัน COSO ERM 2017 จาก coso.org",
+          "approved_by": "pending PR merge"
         }
       ],
+      "source_chain": [
+        {
+          "source_id": "SRC-T007-01",
+          "source_type": "international_framework",
+          "publisher": "COSO",
+          "title": "Enterprise Risk Management — Integrating with Strategy and Performance (2017)",
+          "url": "https://www.coso.org/guidance-erm",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "\"commissioned and published in 2004 Enterprise Risk Management—Integrated Framework... The updated 2017 publication addresses the evolution of enterprise risk management\" + Compendium of Examples เป็น supplement | ยืนยัน: 2017 คือฉบับปัจจุบัน (2004 ถูกแทน)"
+        },
+        {
+          "source_id": "SRC-T007-02",
+          "source_type": "international_standard",
+          "publisher": "IIA",
+          "title": "GIAS 2024 — Standard 9.4 Internal Audit Plan",
+          "url": "https://www.theiia.org/globalassets/site/standards/globalinternalauditstandards_2024january9.pdf",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "Standard 9.4 กำหนดแผนตรวจสอบต้องอิง documented assessment ของ strategies/objectives/risks อย่างน้อยปีละครั้ง (ยืนยันจากเอกสารทางการ)"
+        }
+      ],
+      "hash_signature": "sha256:88a72daea61066db425554d575a3502b1adb6b9a38773e9d3293c044fb74276b"
+    },
+    {
+      "id": "T008",
+      "name_th": "การปฏิบัติตามกฎหมายและข้อกำหนด",
+      "name_en": "Legal & Regulatory Compliance",
+      "category": "Governance",
+      "category_th": "ธรรมาภิบาล",
+      "icon": "⚖️",
+      "color": "#7D3C98",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550",
+        "กฎ/ประกาศ กกพ.",
+        "INTOSAI ISSAI 4000",
+        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+        "กฎหมายสิ่งแวดล้อมที่เกี่ยวข้อง"
+      ],
+      "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550 และประกาศ กกพ. ที่เกี่ยวข้อง",
+        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        "พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 และที่แก้ไขเพิ่มเติม"
+      ],
+      "risks": [
+        {
+          "id": "R001",
+          "name_th": "ความเสี่ยงละเมิดเงื่อนไขใบอนุญาตประกอบกิจการพลังงานและประกาศ กกพ.",
+          "name_en": "License Condition & ERC Regulation Breach",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ไม่มีการ map เงื่อนไขใบอนุญาตรายข้อกับผู้รับผิดชอบและหลักฐานการปฏิบัติ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "จัดทำ/สอบทานตาราง license obligations รายข้อ เทียบหลักฐานการปฏิบัติจริงและรายงานที่ส่ง กกพ. ตามกำหนด",
+                  "name_en": "",
+                  "method": "Compliance Mapping + Testing",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550",
+                      "clause": "เงื่อนไขใบอนุญาต",
+                      "title": "Energy Industry Act"
+                    },
+                    {
+                      "std": "INTOSAI ISSAI 4000",
+                      "clause": "Compliance Audit",
+                      "title": "Compliance Audit Standard"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ใบอนุญาตทุกฉบับพร้อมเงื่อนไขแนบ",
+                    "ตาราง obligation-to-owner mapping",
+                    "หลักฐานการปฏิบัติรายข้อที่สุ่ม",
+                    "หนังสือโต้ตอบ/ข้อสังเกตจาก กกพ."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "ความเสี่ยง compliance universe ไม่ครบ — กฎหมายที่ใช้บังคับบางฉบับไม่มีใครดูแล",
+          "name_en": "Incomplete Compliance Universe",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "ไม่มีทะเบียนกฎหมาย/กฎเกณฑ์ทั้งหมดที่องค์กรต้องปฏิบัติ พร้อมเจ้าภาพรายฉบับ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "สอบทานทะเบียนกฎหมายขององค์กรเทียบกับกฎหมายที่บังคับใช้กับกิจการไฟฟ้า (พลังงาน แรงงาน สิ่งแวดล้อม ข้อมูล ความปลอดภัย) หา gap ที่ไม่มีเจ้าภาพ",
+                  "name_en": "",
+                  "method": "Gap Analysis",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI ISSAI 4000",
+                      "clause": "Compliance Audit",
+                      "title": "Compliance Audit Standard"
+                    },
+                    {
+                      "std": "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550",
+                      "clause": "เงื่อนไขใบอนุญาต",
+                      "title": "Energy Industry Act"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนกฎหมายฉบับปัจจุบันพร้อมเจ้าภาพ",
+                    "รายการกฎหมายอ้างอิงจากหน่วยกำกับ/สมาคม",
+                    "ผลเทียบ gap ที่พบ",
+                    "บันทึกอัพเดททะเบียนเมื่อกฎหมายใหม่ออก"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงไม่ปฏิบัติตามมาตรการ EIA และกฎหมายสิ่งแวดล้อมของโครงการ/โรงไฟฟ้า",
+          "name_en": "EIA & Environmental Non-compliance",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "มาตรการ EIA ไม่ถูกแปลงเป็นแผนปฏิบัติที่ติดตามได้รายมาตรการ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สุ่มโครงการที่มี EIA ตรวจการปฏิบัติตามมาตรการรายข้อ การรายงาน monitor ตามงวด และข้อร้องเรียนสิ่งแวดล้อมพร้อมการจัดการ",
+                  "name_en": "",
+                  "method": "Compliance Testing + Site Visit",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI ISSAI 4000",
+                      "clause": "Compliance Audit",
+                      "title": "Compliance Audit Standard"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน EIA และมาตรการแนบท้าย",
+                    "รายงาน monitoring ที่ส่งหน่วยงานอนุมัติ",
+                    "ทะเบียนข้อร้องเรียนสิ่งแวดล้อม",
+                    "ผลตรวจวัดคุณภาพสิ่งแวดล้อมจริง"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงละเมิด PDPA ในการจัดการข้อมูลผู้ใช้ไฟฟ้าจำนวนมาก",
+          "name_en": "PDPA Breach on Mass Customer Data",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มี ROPA ครบถ้วน/ฐานการประมวลผลไม่ชัด และข้อมูลรั่วไม่มีกระบวนการแจ้งตามเวลา",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "สอบทาน ROPA ครอบคลุมระบบที่มีข้อมูลลูกค้า ตรวจฐานทางกฎหมายรายกิจกรรม การจัดการสิทธิเจ้าของข้อมูล และซ้อมกระบวนการแจ้งเหตุรั่วไหล 72 ชม.",
+                  "name_en": "",
+                  "method": "Document Review + Walkthrough",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+                      "clause": "-",
+                      "title": "PDPA"
+                    },
+                    {
+                      "std": "INTOSAI ISSAI 4000",
+                      "clause": "Compliance Audit",
+                      "title": "Compliance Audit Standard"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ROPA ฉบับปัจจุบัน",
+                    "นโยบายความเป็นส่วนตัวและฐานการประมวลผล",
+                    "ทะเบียนคำขอใช้สิทธิและเวลาตอบสนอง",
+                    "ผลซ้อม/บันทึกเหตุการณ์ข้อมูลรั่วไหล"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงรายงานตามกฎหมายต่อหน่วยกำกับหลายแห่งล่าช้า/ขัดแย้งกัน",
+          "name_en": "Late or Inconsistent Statutory Reporting",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มีปฏิทินรวมการรายงานทุกหน่วยกำกับพร้อมระบบเตือน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจปฏิทินรายงานตามกฎหมายรวมทุกหน่วย (กกพ., สตง., กระทรวง, สกมช., สคช.) เทียบวันส่งจริงย้อนหลัง 1 ปี และกรณีถูกทักท้วง",
+                  "name_en": "",
+                  "method": "Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI ISSAI 4000",
+                      "clause": "Compliance Audit",
+                      "title": "Compliance Audit Standard"
+                    },
+                    {
+                      "std": "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550",
+                      "clause": "เงื่อนไขใบอนุญาต",
+                      "title": "Energy Industry Act"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ปฏิทินรายงานตามกฎหมายฉบับรวม",
+                    "หลักฐานวันส่งจริงรายรายการ",
+                    "หนังสือทักท้วง/เตือนจากหน่วยกำกับ",
+                    "ระบบเตือนและผู้รับผิดชอบ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงไม่รู้ทันการเปลี่ยนแปลงกฎหมาย (regulatory horizon scanning) จนปฏิบัติตามไม่ทันวันมีผล",
+          "name_en": "Missed Regulatory Changes",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีกระบวนการติดตามร่างกฎหมาย/ประกาศใหม่และประเมินผลกระทบล่วงหน้า",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานกระบวนการติดตามกฎหมายใหม่ (แหล่งที่ติดตาม รอบการทบทวน การประเมินผลกระทบ) และทดสอบด้วยกฎหมายที่เพิ่งมีผล ว่าองค์กรเตรียมทันหรือไม่",
+                  "name_en": "",
+                  "method": "Process Review + Case Testing",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI ISSAI 4000",
+                      "clause": "Compliance Audit",
+                      "title": "Compliance Audit Standard"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ขั้นตอน horizon scanning และผู้รับผิดชอบ",
+                    "บันทึกการประเมินผลกระทบกฎหมายใหม่",
+                    "แผนเตรียมปฏิบัติตามพร้อม timeline",
+                    "กรณีศึกษากฎหมายที่มีผลล่าสุด"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "knowledge_id": "KN-T008",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T20:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
         "T006",
         "T009"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.พลังงาน พ.ศ. 2550",
-        "ข้อกำหนดของ กกพ. ว่าด้วยใบอนุญาตประกอบกิจการพลังงาน",
-        "พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED — 6 ความเสี่ยง + source_chain; T009 แก้กรอบตกรุ่น TCFD→IFRS S1/S2 (ISSB), T007 ยืนยัน COSO ERM 2017 จาก coso.org",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T008-01",
+          "source_type": "thai_regulator",
+          "publisher": "สำนักงาน กกพ.",
+          "title": "กฎหมายและประกาศการกำกับกิจการพลังงาน",
+          "url": "https://www.erc.or.th/th/service-quality-standards",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "หน้า official กกพ. — อำนาจกำกับผู้รับใบอนุญาตตาม พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550 รวมมาตรฐานวิศวกรรม ความปลอดภัย และคุณภาพบริการตามเงื่อนไขใบอนุญาต"
         },
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T008-02",
+          "source_type": "international_standard",
+          "publisher": "INTOSAI",
+          "title": "ISSAI 4000 — Compliance Audit Standard",
+          "url": "https://www.issai.org/professional-pronouncements/",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 90,
+          "excerpt": "มาตรฐานการตรวจสอบการปฏิบัติตามกฎเกณฑ์ในทะเบียน IFPP (issai.org) — เนื้อหารายข้อให้เปิดตรวจประกอบ (สถานะเวอร์ชันติดธง UNVERIFIED ใน registry พร้อม SLA)"
         }
       ],
-      "risks": [
-        {
-          "id": "R017",
-          "name_th": "ความเสี่ยงการละเมิดกฎหมายพลังงานและกฎระเบียบ กกพ.",
-          "name_en": "Non-compliance with Energy Law and ERC Regulations",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF022",
-              "name_th": "ไม่มีระบบติดตามการเปลี่ยนแปลงกฎหมายและข้อกำหนด",
-              "name_en": "No system to monitor regulatory changes",
-              "audit_procedures": [
-                {
-                  "id": "AP024",
-                  "name_th": "ตรวจสอบระบบติดตามกฎหมายและการปฏิบัติตามข้อกำหนด กกพ.",
-                  "name_en": "Review regulatory monitoring system and ERC compliance",
-                  "method": "Compliance Testing + Document Review",
-                  "evidence_types": [
-                    "ทะเบียนกฎหมายที่เกี่ยวข้อง (Legal Register)",
-                    "รายงานการปฏิบัติตามข้อกำหนด กกพ.",
-                    "ใบอนุญาตประกอบกิจการพลังงาน",
-                    "รายงานการตรวจสอบจาก กกพ.",
-                    "บันทึกการฝึกอบรมกฎหมายพลังงาน"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R018",
-          "name_th": "ความเสี่ยงการไม่ปฏิบัติตามมาตรฐานสิ่งแวดล้อม",
-          "name_en": "Environmental Non-compliance Risk",
-          "level": "MEDIUM",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF023",
-              "name_th": "ขาดการติดตามและรายงานผลกระทบสิ่งแวดล้อมอย่างสม่ำเสมอ",
-              "name_en": "Lack of regular environmental impact monitoring and reporting",
-              "audit_procedures": [
-                {
-                  "id": "AP025",
-                  "name_th": "ตรวจสอบกระบวนการติดตามผลกระทบสิ่งแวดล้อมและรายงาน EIA",
-                  "name_en": "Review environmental impact monitoring and EIA reporting",
-                  "method": "Compliance Audit + Site Inspection",
-                  "evidence_types": [
-                    "รายงาน EIA (Environmental Impact Assessment)",
-                    "รายงานติดตามตรวจสอบผลกระทบสิ่งแวดล้อม",
-                    "ใบอนุญาตสิ่งแวดล้อม",
-                    "รายงานการตรวจสอบจากหน่วยงานด้านสิ่งแวดล้อม",
-                    "Carbon Footprint Report"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:ebdd82f5a370207ded7200b80604bcfaf39950354fd4880038f16c7e26d61fbc"
     },
     {
       "id": "T009",
       "name_th": "ความยั่งยืนและพลังงานสะอาด",
       "name_en": "Sustainability & Clean Energy",
-      "category": "ESG",
-      "category_th": "ESG",
+      "category": "Sustainability",
+      "category_th": "ความยั่งยืน",
       "icon": "🌱",
-      "color": "#16A085",
+      "color": "#229954",
       "priority": "MEDIUM",
       "applicable_standards": [
         "GRI Standards 2021",
-        "TCFD",
+        "IFRS S1/S2 (ISSB)",
+        "COSO ICSR 2023",
         "ISO 14001:2015",
-        "Thailand NDC",
-        "Thailand Green Taxonomy",
-        "SASB Electric Utilities"
+        "Thailand NDC / แผน PDP"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T009",
-      "version": "1.0.0",
-      "confidence_score": 82,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:69f8feddd08dcde148abfd9dcfc635280afdd76b94c30883770b6855fbeeca19",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "เป้าหมาย NDC ของไทยและแผนพลังงานชาติ/PDP",
+        "แนวปฏิบัติการเปิดเผยข้อมูลความยั่งยืนของหน่วยงานกำกับไทย (ก.ล.ต./ตลท. สำหรับบริบทรายงาน)",
+        "COSO ICSR ฉบับแปลไทย (เผยแพร่บน coso.org)"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงรายงานความยั่งยืน/ESG ไม่ถูกต้อง เข้าข่าย greenwashing",
+          "name_en": "Inaccurate ESG Reporting / Greenwashing",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ไม่มี internal control over sustainability reporting (ICSR) — ข้อมูล ESG ไม่ถูกตรวจแบบข้อมูลการเงิน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทานกระบวนการจัดทำรายงานความยั่งยืนตามกรอบ COSO ICSR: แหล่งข้อมูล การควบคุม การสอบทาน และทดสอบตัวเลขสำคัญย้อนถึงหลักฐาน",
+                  "name_en": "",
+                  "method": "Re-performance + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "COSO ICSR 2023",
+                      "clause": "Internal Control over Sustainability Reporting",
+                      "title": "มีฉบับแปลไทยบน coso.org"
+                    },
+                    {
+                      "std": "GRI Standards 2021",
+                      "clause": "Universal Standards",
+                      "title": "GRI Sustainability Reporting"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานความยั่งยืนฉบับล่าสุด",
+                    "mapping ตัวเลข ESG กับแหล่งข้อมูลและผู้ควบคุม",
+                    "หลักฐานการสอบทาน/assurance (ถ้ามี)",
+                    "กระดาษทำการทดสอบตัวเลขสำคัญ"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงอ้างอิงกรอบเปิดเผยข้อมูลที่ตกรุ่น (TCFD ถูกยุบ ต.ค. 2023 — โอนให้ ISSB/IFRS S2)",
+          "name_en": "Referencing Superseded Framework (TCFD→ISSB)",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "นโยบาย/รายงานยังอ้าง TCFD โดยไม่รู้ว่างานโอนไป IFRS S1/S2 แล้ว",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "ตรวจเอกสารนโยบายและรายงานที่อ้าง TCFD และประเมินแผนเปลี่ยนผ่านไปกรอบ IFRS S1/S2 (ซึ่งรวม TCFD recommendations แล้ว)",
+                  "name_en": "",
+                  "method": "Document Review",
+                  "std_refs": [
+                    {
+                      "std": "IFRS S1/S2 (ISSB)",
+                      "clause": "Climate-related Disclosures",
+                      "title": "รวม TCFD recommendations แล้ว"
+                    },
+                    {
+                      "std": "COSO ICSR 2023",
+                      "clause": "Internal Control over Sustainability Reporting",
+                      "title": "มีฉบับแปลไทยบน coso.org"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายการเอกสารที่อ้าง TCFD",
+                    "ประกาศ IFRS Foundation เรื่องรับโอนงาน TCFD",
+                    "แผน transition ไป ISSB standards",
+                    "เทียบ gap การเปิดเผยปัจจุบันกับ IFRS S2"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงข้อมูลก๊าซเรือนกระจก (Scope 1-2-3) ไม่มีระบบเก็บและทวนสอบที่เชื่อถือได้",
+          "name_en": "Unreliable GHG Data (Scope 1-3)",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "การเก็บข้อมูล carbon กระจายตาม spreadsheet ไม่มี methodology เดียวและไม่ถูก verify",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สอบทาน GHG inventory: ขอบเขต methodology emission factors ที่ใช้ และทดสอบคำนวณซ้ำ พร้อมตรวจการทวนสอบโดยหน่วยงานภายนอก (เช่น อบก.)",
+                  "name_en": "",
+                  "method": "Recalculation + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "GRI Standards 2021",
+                      "clause": "Universal Standards",
+                      "title": "GRI Sustainability Reporting"
+                    },
+                    {
+                      "std": "Thailand NDC / แผน PDP",
+                      "clause": "-",
+                      "title": "เป้าหมายลดก๊าซเรือนกระจกและแผนพลังงานชาติ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "GHG inventory พร้อม methodology",
+                    "ข้อมูลดิบการใช้เชื้อเพลิง/ไฟฟ้า",
+                    "emission factors และแหล่งอ้างอิง",
+                    "ใบรับรองการทวนสอบ (verification) ถ้ามี"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงแผนเปลี่ยนผ่านพลังงาน (energy transition) ไม่สอดคล้องเป้า NDC/แผน PDP และไม่มี milestone วัดได้",
+          "name_en": "Energy Transition Plan Misaligned with NDC/PDP",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "เป้า net zero เป็นคำประกาศ ไม่มีแผนลงทุน/milestone ที่ตรวจสอบได้",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "เทียบแผน transition ขององค์กรกับเป้า NDC และแผน PDP: สัดส่วนพลังงานหมุนเวียน แผนปลดโรงไฟฟ้าฟอสซิล และงบลงทุนจริงเทียบแผน",
+                  "name_en": "",
+                  "method": "Benchmarking + Analytics",
+                  "std_refs": [
+                    {
+                      "std": "Thailand NDC / แผน PDP",
+                      "clause": "-",
+                      "title": "เป้าหมายลดก๊าซเรือนกระจกและแผนพลังงานชาติ"
+                    },
+                    {
+                      "std": "IFRS S1/S2 (ISSB)",
+                      "clause": "Climate-related Disclosures",
+                      "title": "รวม TCFD recommendations แล้ว"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผน energy transition พร้อม milestones",
+                    "แผนลงทุน 5 ปีด้านพลังงานสะอาด",
+                    "ผลดำเนินการจริงเทียบเป้ารายปี",
+                    "เอกสารอ้างอิง NDC/PDP ฉบับปัจจุบัน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยง climate risks (กายภาพ/transition) ไม่ถูกประเมินเข้าระบบ ERM และแผนสินทรัพย์",
+          "name_en": "Climate Risks Not Integrated into ERM & Asset Planning",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มี climate scenario analysis สำหรับโครงสร้างพื้นฐานไฟฟ้า",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจว่ามีการทำ climate scenario analysis (physical: น้ำท่วม/ความร้อน, transition: carbon price) และผลถูกใช้ในทะเบียนความเสี่ยง/แผนลงทุนสินทรัพย์",
+                  "name_en": "",
+                  "method": "Document Review + Interview",
+                  "std_refs": [
+                    {
+                      "std": "IFRS S1/S2 (ISSB)",
+                      "clause": "Climate-related Disclosures",
+                      "title": "รวม TCFD recommendations แล้ว"
+                    },
+                    {
+                      "std": "COSO ERM 2017",
+                      "clause": "Integrating with Strategy and Performance",
+                      "title": "COSO ERM Framework"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผล climate scenario analysis",
+                    "ทะเบียนความเสี่ยงที่รวม climate risks",
+                    "แผนปรับตัวของสินทรัพย์ในพื้นที่เสี่ยง",
+                    "วาระบอร์ด/คณะกรรมการความยั่งยืน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงห่วงโซ่อุปทานไม่ยั่งยืน (คู่ค้าละเมิดสิ่งแวดล้อม/แรงงาน) กระทบชื่อเสียงองค์กร",
+          "name_en": "Unsustainable Supply Chain",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีเกณฑ์ ESG ในการคัดเลือก/ประเมินคู่ค้า และไม่มีการตรวจคู่ค้าเสี่ยงสูง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานเกณฑ์ ESG ในกระบวนการจัดซื้อ การประเมินคู่ค้ารายปี และผลตรวจคู่ค้ากลุ่มเสี่ยงสูง (เหมือง เชื้อเพลิง งานก่อสร้าง)",
+                  "name_en": "",
+                  "method": "Document Review + Sampling",
+                  "std_refs": [
+                    {
+                      "std": "GRI Standards 2021",
+                      "clause": "Universal Standards",
+                      "title": "GRI Sustainability Reporting"
+                    },
+                    {
+                      "std": "COSO ICSR 2023",
+                      "clause": "Internal Control over Sustainability Reporting",
+                      "title": "มีฉบับแปลไทยบน coso.org"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เกณฑ์ ESG ในเอกสารจัดซื้อ/สัญญา",
+                    "ผลประเมินคู่ค้าประจำปี",
+                    "รายงานตรวจคู่ค้าเสี่ยงสูง",
+                    "ทะเบียนข้อร้องเรียนเกี่ยวกับคู่ค้า"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T009",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T20:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
         "T008",
         "T016"
       ],
-      "thai_law_refs": [
-        "นโยบาย Thailand NDC ว่าด้วยการลดการปล่อยก๊าซเรือนกระจก",
-        "Thailand Green Taxonomy ของ สนง.คณะกรรมการกำกับหลักทรัพย์",
-        "แผน PDP 2024 ด้านพลังงานหมุนเวียน"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED — 6 ความเสี่ยง + source_chain; T009 แก้กรอบตกรุ่น TCFD→IFRS S1/S2 (ISSB), T007 ยืนยัน COSO ERM 2017 จาก coso.org",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T009-01",
+          "source_type": "international_framework",
+          "publisher": "IFRS Foundation",
+          "title": "ISSB and TCFD — transfer of TCFD monitoring responsibilities",
+          "url": "https://www.ifrs.org/news-and-events/news/2023/07/foundation-welcomes-tcfd-responsibilities-from-2024/",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "\"IFRS Foundation welcomes culmination of TCFD work and transfer of TCFD monitoring responsibilities to ISSB from 2024\" — TCFD ยุบ ต.ค. 2023; บริษัทที่ใช้ IFRS S1+S2 ถือว่า meet TCFD recommendations (รวมเข้าไปแล้ว)"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T009-02",
+          "source_type": "international_framework",
+          "publisher": "COSO",
+          "title": "ICSR — Internal Control over Sustainability Reporting (2023) + ฉบับแปลไทย",
+          "url": "https://www.coso.org/guidance-on-ic",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "\"In 2023 COSO issued supplemental guidance for organizations to achieve effective internal control over sustainability reporting (ICSR)\" — หน้า official มีรายการ \"(THAI) COSO ICSR\" ฉบับแปลไทยให้ดาวน์โหลด = หลักฐาน Thailand applicability ตรง"
         }
       ],
-      "risks": [
-        {
-          "id": "R019",
-          "name_th": "ความเสี่ยงการรายงาน ESG/ความยั่งยืนไม่ถูกต้อง",
-          "name_en": "Inaccurate ESG/Sustainability Reporting Risk",
-          "level": "MEDIUM",
-          "likelihood": "ปานกลาง",
-          "impact": "ปานกลาง",
-          "control_failures": [
-            {
-              "id": "CF024",
-              "name_th": "ขาดระบบรวบรวมและตรวจสอบข้อมูล ESG",
-              "name_en": "No ESG data collection and verification system",
-              "audit_procedures": [
-                {
-                  "id": "AP026",
-                  "name_th": "ตรวจสอบความน่าเชื่อถือของข้อมูลในรายงาน ESG",
-                  "name_en": "Verify reliability of ESG report data",
-                  "method": "Data Verification + Process Review",
-                  "evidence_types": [
-                    "รายงานความยั่งยืน (Sustainability Report)",
-                    "ข้อมูลการปล่อยก๊าซเรือนกระจก (GHG Inventory)",
-                    "รายงาน Carbon Offset",
-                    "รายงานการใช้พลังงานทดแทน",
-                    "Third-party Assurance Report"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R020",
-          "name_th": "ความเสี่ยงการเปลี่ยนผ่านพลังงาน (Energy Transition)",
-          "name_en": "Energy Transition Risk",
-          "level": "HIGH",
-          "likelihood": "สูง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF025",
-              "name_th": "ขาดแผนรองรับพลังงานหมุนเวียนในโครงข่ายไฟฟ้า",
-              "name_en": "No plan for renewable energy grid integration",
-              "audit_procedures": [
-                {
-                  "id": "AP027",
-                  "name_th": "ทบทวนแผนรองรับพลังงานหมุนเวียนและความพร้อมโครงข่ายไฟฟ้า",
-                  "name_en": "Review renewable energy integration plan and grid readiness",
-                  "method": "Strategic Plan Review + Technical Assessment",
-                  "evidence_types": [
-                    "แผนพัฒนากำลังผลิตไฟฟ้า (PDP)",
-                    "Smart Grid Roadmap",
-                    "รายงานความพร้อมรับ RE (Renewable Energy Readiness)",
-                    "แผน Grid Modernization",
-                    "รายงาน AEMO / Regional Energy Plan"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:88b8ff43610d0eee18b89a4368c97b848b23bd0f0a51f537d29dabfbcc183d2e"
     },
     {
       "id": "T010",
