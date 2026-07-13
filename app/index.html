@@ -108,6 +108,7 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .st-red{border-color:var(--crit-bd);background:var(--crit-bg);color:var(--crit)}
 .st-gray{border-color:var(--border);background:var(--border-light);color:var(--text-muted)}
 .st-blue{border-color:#C4D7F5;background:#E8F0FE;color:#1B4C9C}
+.st-int{border-color:#D8CCE8;background:#F6F1FB;color:#5B3E80;border-style:dashed}
 
 /* provenance */
 .prov{background:#FBFCFE;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-top:6px}
@@ -260,16 +261,18 @@ const DERIV={
  PROFESSIONAL_SYNTHESIS:{c:'d-syn',i:'⚗️',t:'สังเคราะห์เชิงวิชาชีพ',tip:'สังเคราะห์จากหลักวิชาชีพตรวจสอบภายใน โดยยึดมาตรฐานที่ verify เวอร์ชันแล้ว'}};
 const LAYER_TIP={'L0':'ยืนยันโดยมนุษย์ครบ','L1':'ผ่าน verify จากแหล่งทางการ + quality gates + merge โดยมนุษย์','L2':'ความรู้ภายใน','L3':'ยังไม่ผ่านการตรวจ'};
 
-let TOPICS=[],REGISTRY=null,activeOrg=null,qText='';
+let TOPICS=[],REGISTRY=null,FLAGS={},activeOrg=null,qText='';
+/* platform flags: fail-closed — โหลดไม่ได้ = ทุก flag ปิด */
 
 /* ============ LOAD ============ */
 async function boot(){
   try{
-    const [ks,reg]=await Promise.all([
+    const [ks,reg,fl]=await Promise.all([
       fetch('../data/knowledge_store.json').then(r=>{if(!r.ok)throw 0;return r.json()}),
-      fetch('../data/standards_registry.json').then(r=>r.ok?r.json():null).catch(()=>null)
+      fetch('../data/standards_registry.json').then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('../data/platform_flags.json').then(r=>r.ok?r.json():null).catch(()=>null)
     ]);
-    TOPICS=ks.topics||[];REGISTRY=reg;
+    TOPICS=ks.topics||[];REGISTRY=reg;FLAGS=(fl&&fl.flags)||{};
     document.getElementById('chip-updated').textContent='อัพเดท '+(ks.metadata&&ks.metadata.last_updated||'—');
     stats();buildOrgChips();render();
     document.getElementById('loading').style.display='none';
@@ -369,7 +372,11 @@ function stdStatus(std){
 }
 function stdChip(std){
   const m=stdStatus(std);
-  if(!m)return '<span class="stdchip st-gray" title="ยังไม่อยู่ในทะเบียนติดตามเวอร์ชัน">'+esc(std)+'</span>';
+  if(!m)return '<span class="stdchip st-gray" title="ยังไม่อยู่ในทะเบียนติดตามเวอร์ชัน — อยู่ในคิว research (G5_COVERAGE)">'+esc(std)+'</span>';
+  if(m.family.visibility==='INTERNAL'){
+    const on=FLAGS.internal_doc_enabled===true;
+    return '<span class="stdchip st-int" title="ตัวเลือกที่จงใจพักไว้ ไม่ใช่งานค้าง verify — เอกสารภายในตรวจทานสาธารณะไม่ได้ ใช้เป็นบริบทเท่านั้น และไม่นับเป็นแหล่งหลักฐาน L1">🏢 '+esc(std)+' <small>'+(on?'ภายใน · เปิดใช้แล้ว':'รอเชื่อมต่อฐานข้อมูลองค์กร')+'</small></span>';
+  }
   const {ed}=m;const v=ed.verified;
   const map={CURRENT:['st-current','✓ ปัจจุบัน'],CONFIRMED:['st-current','✓ ปัจจุบัน (ยืนยันรอบทบทวน)'],TO_BE_REVISED:['st-amber','⏳ กำลังจะมีฉบับใหม่'],TRANSITION:['st-amber','🔄 ช่วงเปลี่ยนผ่าน'],AMENDED:['st-blue','✎ มีฉบับแก้ไขเพิ่มเติม'],PARTIAL_REPEAL:['st-amber','⚠ ยกเลิกบางส่วน'],WITHDRAWN:['st-red','✗ ถูกยกเลิก'+(ed.superseded_by?' → ใช้ '+ed.superseded_by:'')],PINNED_BY_THAI_LAW:['st-blue','📌 ไทยตรึงเวอร์ชันตามกฎหมาย'],RENUMBERED:['st-amber','↻ เปลี่ยนระบบเลข']};
   const [cls,lbl]=map[ed.status]||['st-gray',ed.status];

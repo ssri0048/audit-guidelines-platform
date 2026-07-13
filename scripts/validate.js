@@ -30,6 +30,12 @@ try {
 const STALE_DAYS = REGISTRY.metadata.staleness_threshold_days || 183;
 const NOW_MS = Date.now();
 
+// ── Platform Flags — ขีดความสามารถของแพลตฟอร์ม (คนละแกนกับสถานะมาตรฐาน) ──
+// fail-closed: อ่านไฟล์ไม่ได้/ไม่มีไฟล์ = ทุก flag ปิด (พลาดแล้วปลอดภัย)
+const FLAGS_PATH = path.join(path.dirname(STORE), 'platform_flags.json');
+let FLAGS = {};
+try { FLAGS = JSON.parse(fs.readFileSync(FLAGS_PATH, 'utf8')).flags || {}; } catch (e) { FLAGS = {}; }
+
 // ── เกณฑ์นโยบาย (ตาม requirement ที่ user กำหนด) ──
 const POLICY = {
   MIN_RISKS_PER_TOPIC: 5,
@@ -88,6 +94,7 @@ if (!store.metadata || !Array.isArray(store.topics)) {
 
 const seenIds = new Set();
 const seenNames = new Set();
+const coverageGaps = new Map(); // std string → [topic ids] ที่อ้างแต่ไม่มี family ในทะเบียน
 
 for (const t of store.topics) {
   const id = t.id || '(no-id)';
@@ -129,9 +136,21 @@ for (const t of store.topics) {
   if (seenNames.has(nameKey)) hard(id, 'G2_DEDUP', 'name_th ซ้ำ');
   seenNames.add(nameKey);
 
+  // ── G8: INTERNAL_DOC LOCK — ตัวเลือกตั้งไว้รอ ห้ามใช้จริงจนกว่า flag เปิดผ่าน PR ──
+  const internalSrcs = (t.source_chain || []).filter(s => s.source_type === 'internal_doc');
+  if (internalSrcs.length > 0 && FLAGS.internal_doc_enabled !== true)
+    hard(id, 'G8_INTERNAL_LOCKED', `ใช้ source_type "internal_doc" ${internalSrcs.length} รายการ แต่ internal_doc_enabled=false — การเปิดใช้ต้องแก้ platform_flags.json ผ่าน PR (human approval) ก่อน`);
+  if (internalSrcs.length > 0 && FLAGS.internal_doc_enabled === true) {
+    for (const s of internalSrcs) {
+      if (!s.owner_org || !s.doc_id) hard(id, 'G8_INTERNAL_SCHEMA', `internal_doc ต้องมี owner_org + doc_id (${s.source_id || '?'})`);
+      if (s.excerpt) hard(id, 'G8_INTERNAL_PRIVACY', `internal_doc "${s.source_id || '?'}" มี excerpt — ห้ามใส่ข้อความจากเอกสารภายในลง repo สาธารณะ (ใช้ doc_id+checksum อ้างแทน)`);
+    }
+  }
+
   // ── G3: AUTHORITY + CONSENSUS (HARD สำหรับ L0/L1) ──
+  // กติกาถาวร: internal_doc ไม่นับเป็นแหล่ง credibility/consensus ของ L1 — ตรวจทานสาธารณะไม่ได้ ให้เป็นบริบทเสริมเท่านั้น
   if (['L0', 'L1'].includes(t.knowledge_layer)) {
-    const chain = t.source_chain || [];
+    const chain = (t.source_chain || []).filter(s => s.source_type !== 'internal_doc');
     const strong = chain.filter(s => (s.credibility_score || 0) >= POLICY.MIN_SOURCE_CREDIBILITY_L1);
     if (strong.length === 0) hard(id, 'G3_AUTHORITY', `L0/L1 ต้องมี source credibility ≥${POLICY.MIN_SOURCE_CREDIBILITY_L1} อย่างน้อย 1`);
     if (chain.length < POLICY.MIN_SOURCES_L1) hard(id, 'G3_CONSENSUS', `L1 ต้องมี ≥${POLICY.MIN_SOURCES_L1} แหล่งอิสระ (มี ${chain.length})`);
@@ -151,10 +170,18 @@ for (const t of store.topics) {
   // ── G5: STANDARDS LIFECYCLE REGISTRY ──
   const allStdText = (t.applicable_standards || []).join(' | ');
   for (const std of t.applicable_standards || []) {
+    let matchedFam = false;
     for (const fam of REGISTRY.families) {
       let famRe;
       try { famRe = new RegExp(fam.match, 'i'); } catch (e) { continue; }
       if (!famRe.test(std)) continue;
+      matchedFam = true;
+
+      // INTERNAL visibility: ตัวเลือกที่จงใจพักไว้ — ไม่ประเมิน lifecycle, การใช้เป็นหลักฐานคุมโดย G8
+      if (fam.visibility === 'INTERNAL') {
+        warnings.push(`[G5_INTERNAL] ${id}: "${std}" — มาตรฐานภายในองค์กร (พักไว้รอเชื่อมต่อฐานข้อมูล; internal_doc_enabled=${FLAGS.internal_doc_enabled === true})`);
+        continue;
+      }
 
       // หา edition ที่เวอร์ชันปรากฏใน string ที่อ้าง
       let ed = (fam.editions || []).find(e => std.includes(e.version));
@@ -208,6 +235,12 @@ for (const t of store.topics) {
       if (ed.verified === false)
         warnings.push(`[G5_UNVERIFIED] ${id}: "${std}" — รายการทะเบียนยังไม่ถูก verify จากหน้า official (เชื่อได้ระดับความรู้ทั่วไปเท่านั้น)`);
     }
+
+    // ── G5_COVERAGE: อ้างมาตรฐานที่ไม่มี family ในทะเบียน → ระบบต้องเห็นเอง ไม่ใช่รอคนบังเอิญเจอ ──
+    if (!matchedFam) {
+      if (!coverageGaps.has(std)) coverageGaps.set(std, []);
+      coverageGaps.get(std).push(id);
+    }
   }
 
   // ── G6: THAILAND APPLICABILITY ──
@@ -230,8 +263,20 @@ const SLA_DAYS = 60;
 const queue = [];
 function ageDays(d) { return d ? Math.round((NOW_MS - Date.parse(d)) / 86400000) : null; }
 
+// แหล่งที่ 0: coverage gaps — มาตรฐานที่ความรู้อ้างแต่ทะเบียนไม่รู้จัก (เกต G5_COVERAGE)
+for (const [std, ids] of coverageGaps) {
+  warnings.push(`[G5_COVERAGE] "${std}" อ้างใน ${[...new Set(ids)].join(',')} แต่ไม่มี family ในทะเบียน — ต้อง research เข้าทะเบียน (หรือประกาศเป็น INTERNAL)`);
+  queue.push({ type: 'coverage', ref: `"${std.slice(0, 48)}" (อ้างใน ${[...new Set(ids)].join(',')})`, state: 'UNREGISTERED', age: null,
+    todo: 'research แหล่ง official → เพิ่ม family เข้า standards_registry' });
+}
+
 // แหล่งที่ 1: ทะเบียนมาตรฐาน (verified:false = UNVERIFIED, verified:true แก่เกิน = STALE)
 for (const fam of REGISTRY.families) {
+  if (fam.visibility === 'INTERNAL') {
+    queue.push({ type: 'parked', ref: fam.display, state: 'PARKED', age: null,
+      todo: 'รอเปิดใช้ internal_doc_enabled + ตัดสินใจ private-repo split (ไม่มี SLA — พักโดยเจตนา)' });
+    continue;
+  }
   for (const ed of fam.editions || []) {
     const age = ageDays(ed.last_verified);
     if (ed.verified === false) {

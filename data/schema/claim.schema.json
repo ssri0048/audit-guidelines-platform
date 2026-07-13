@@ -22,7 +22,19 @@
     "stale_after_days": { "type": "number", "default": 183 },
     "open_question": { "type": "string", "description": "บังคับเมื่อ state=UNRESOLVED: ยังตอบอะไรไม่ได้ + จะหาคำตอบจากไหน" },
     "sla_deadline": { "type": "string", "description": "บังคับเมื่อ state=UNRESOLVED/UNVERIFIED: วันที่ต้องปิดภายใน (default: last_checked + 60 วัน)" },
-    "exception_code": { "type": "string", "description": "รหัสเหตุการณ์จาก Exception Catalog (เช่น EX-RENUMBERED, EX-SCANNED-PDF)" }
+    "exception_code": { "type": "string", "description": "รหัสเหตุการณ์จาก Exception Catalog (เช่น EX-RENUMBERED, EX-SCANNED-PDF)" },
+    "internal_doc": {
+      "type": "object",
+      "description": "INTERNAL_DOC — หลักฐานจากเอกสารภายในองค์กร (ตั้งไว้รอ: ใช้ได้ต่อเมื่อ platform_flags.internal_doc_enabled=true ซึ่งเปิดได้ทาง PR เท่านั้น) กติกาถาวร: (1) ไม่นับเป็นแหล่ง credibility/consensus ของ L1 (2) ห้ามใส่ excerpt จากเอกสารภายในลง repo สาธารณะ — อ้างด้วย doc_id+checksum แทน (3) ความรู้ที่ยืนบนเอกสารภายในลงจอดที่ knowledge_layer L2",
+      "required": ["owner_org", "doc_id"],
+      "properties": {
+        "owner_org": { "type": "string", "description": "หน่วยงานเจ้าของเอกสาร เช่น EGAT/MEA/PEA — ต้องระบุเสมอ" },
+        "doc_id": { "type": "string", "description": "รหัสเอกสารในระบบจัดเก็บขององค์กร (ตัวชี้แทน URL สาธารณะ)" },
+        "doc_revision": { "type": "string", "description": "ฉบับ/ครั้งที่แก้ไขของเอกสารภายใน — ใช้กับ lifecycle เดียวกับมาตรฐานสาธารณะ" },
+        "checksum": { "type": "string", "description": "sha256 ของไฟล์เอกสาร — พิสูจน์ความคงสภาพโดยไม่เปิดเผยเนื้อหา" },
+        "connector": { "type": ["string", "null"], "description": "ตัวเชื่อมที่ดึงเอกสาร (null = อัพโหลดมือ; อนาคต = MCP/DMS connector id)" }
+      }
+    }
   },
-  "$comment": "State machine: UNVERIFIED→VERIFIED→STALE→(re-check)→VERIFIED|SUPERSEDED|RETIRED; UNVERIFIED→UNRESOLVED(มี SLA)→VERIFIED|RETIRED. CI บังคับ: UNRESOLVED/UNVERIFIED เกิน SLA = block merge"
+  "$comment": "State machine: UNVERIFIED→VERIFIED→STALE→(re-check)→VERIFIED|SUPERSEDED|RETIRED; UNVERIFIED→UNRESOLVED(มี SLA)→VERIFIED|RETIRED. CI บังคับ: UNRESOLVED/UNVERIFIED เกิน SLA = block merge. INTERNAL_DOC: fail-closed ผ่าน platform_flags.json — ดู docs/INTERNAL_KNOWLEDGE_PATH.md"
 }
