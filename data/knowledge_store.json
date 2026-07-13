@@ -149,18 +149,24 @@
       "color": "#E74C3C",
       "priority": "CRITICAL",
       "applicable_standards": [
-        "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
-        "INTOSAI GOV 9140",
-        "IIA Standard 2130"
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2564",
+        "INTOSAI GUID 5280",
+        "IIA GIAS 2024",
+        "ข้อตกลงคุณธรรม (Integrity Pact) ตามมติ ครม. 3 ก.พ. 2558"
       ],
       "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 (ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก, 24 ก.พ. 2560)",
+        "ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2564",
+        "กฎกระทรวงกำหนดวงเงินการจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจง พ.ศ. 2560"
+      ],
       "knowledge_id": "KN-T001",
-      "version": "1.0.0",
-      "confidence_score": 92,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:2990a00aa5a841311d77dbc753cae4d5cf5ff3ebfdb7ff3e39bd6dfc1a3de3dd",
+      "version": "2.0.0",
+      "confidence_score": 90,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
       "approved_by": null,
       "changelog": [
         {
@@ -170,14 +176,14 @@
           "approved_by": "system"
         },
         {
-          "version": "1.0.0",
+          "version": "2.0.0",
           "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "change": "RE-VERIFIED จากแหล่ง official จริง 4 แหล่ง (INTOSAI GUID 5280, ป.ป.ช., IIA GIAS 2024, ราชกิจจานุเบกษา) — ขยายจาก 3 เป็น 6 ความเสี่ยง, เพิ่ม std_refs ระดับ procedure, เพิ่ม source_chain พร้อม URL+excerpt ตรวจย้อนได้ทุกแหล่ง",
+          "approved_by": "pending PR merge by human reviewer"
         }
       ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T12:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -185,80 +191,149 @@
         "T006",
         "T014"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
-        "ระเบียบกระทรวงการคลัง ว่าด้วยการจัดซื้อจัดจ้าง พ.ศ. 2560",
-        "ประกาศ สตง. ว่าด้วยการตรวจสอบการจัดซื้อจัดจ้าง"
-      ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T001-01",
+          "source_type": "international_standard",
+          "publisher": "INTOSAI",
+          "title": "GUID 5280 — Guidance for Audits of Public Procurement",
+          "url": "https://www.issai.org/wp-content/uploads/2023/02/Guid-5280-Guidance-for-audits-of-public-procurement.pdf",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "para 31: \"public procurement is one of the public activities most prone to misappropriation, fraud and corruption. Estimates indicate that corruption in public procurement may involve additional costs of 10 to 25%\" | para 32 main risk factors: \"Major conflict of interests or collusion; ... Lack of open competition and repeated use of single tendering; Very generic contract terms and regulatory gaps\""
         },
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T001-02",
+          "source_type": "thai_government_agency",
+          "publisher": "สำนักงาน ป.ป.ช.",
+          "title": "บทความ: จัดซื้อจัดจ้าง รากฐานของการทุจริต (10 ก.ค. 2566)",
+          "url": "https://www.nacc.go.th/categorydetail/20180831184638361/20230720171634",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "\"กระบวนการจัดซื้อจัดจ้าง...เป็นกระบวนการที่ก่อให้เกิดการคอร์รัปชันได้ทุกขั้นตอน...สิ่งที่เอกชนต่างรู้กันดี ก็คือ เรื่องของ เงินทอน และ การล็อกสเปค บางครั้งที่การเขียนเนื้อหา TOR ได้เอื้อประโยชน์แก่บริษัทใดบริษัทหนึ่งอย่างเป็นที่รู้กัน\" และ \"กระบวนการตรวจงานรับงานจะเข้มงวดยืดหยุ่นแค่ไหนก็ขึ้นอยู่กับดุลยพินิจของคณะกรรมการ\""
+        },
+        {
+          "source_id": "SRC-T001-03",
+          "source_type": "international_standard",
+          "publisher": "The Institute of Internal Auditors",
+          "title": "Global Internal Audit Standards (GIAS) 2024",
+          "url": "https://www.theiia.org/globalassets/site/standards/globalinternalauditstandards_2024january9.pdf",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "ยืนยันจากสารบัญเอกสารทางการ: Standard 13.6 Work Program (p.103), Standard 14.1 Gathering Information for Analyses and Evaluation (p.104), Standard 14.3 Evaluation of Findings (p.107), Standard 14.5 Engagement Conclusions (p.110)"
+        },
+        {
+          "source_id": "SRC-T001-04",
+          "source_type": "official_gazette",
+          "publisher": "ราชกิจจานุเบกษา",
+          "title": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2560/A/024/13.PDF",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 100,
+          "excerpt": "เล่ม 134 ตอนที่ 24 ก, 24 กุมภาพันธ์ 2560 — ยืนยันการประกาศใช้และ URL ต้นฉบับ (ไฟล์สแกน: การอ้าง มาตรารายข้อ ให้ตรวจกับตัวบทประกอบ)"
+        },
+        {
+          "source_id": "SRC-T001-05",
+          "source_type": "thai_government_agency",
+          "publisher": "กรมบัญชีกลาง (e-GP)",
+          "title": "ระเบียบกระทรวงการคลังฯ (ฉบับที่ 2) พ.ศ. 2564",
+          "url": "https://www.gprocurement.go.th/wps/wcm/connect/30b2077c-5c96-459d-9f98-28a696819738/%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%9A%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%97%E0%B8%A3%E0%B8%A7%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%9E%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B8%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%90+(%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%97%E0%B8%B5%E0%B9%882)+%E0%B8%9E.%E0%B8%A8.+2564.PDF?MOD=AJPERES",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "เอกสารฉบับแก้ไขเพิ่มเติมเผยแพร่บนระบบ e-GP กรมบัญชีกลาง — ต้องอ่านคู่ฉบับหลัก พ.ศ. 2560"
         }
       ],
       "risks": [
         {
           "id": "R001",
-          "name_th": "ความเสี่ยงทุจริตในกระบวนการจัดซื้อ",
-          "name_en": "Procurement Fraud Risk",
-          "level": "HIGH",
+          "name_th": "ความเสี่ยงการสมยอมราคา (ฮั้วประมูล) และการทุจริตในกระบวนการแข่งขัน",
+          "name_en": "Bid Rigging / Collusion Risk",
+          "level": "CRITICAL",
           "likelihood": "สูง",
           "impact": "สูงมาก",
           "control_failures": [
             {
               "id": "CF001",
-              "name_th": "ขาดการแบ่งแยกหน้าที่ในกระบวนการจัดซื้อ",
-              "name_en": "Lack of Segregation of Duties in Procurement",
+              "name_th": "ไม่มีกลไกตรวจจับความสัมพันธ์ระหว่างผู้เสนอราคา (common ownership, ราคาใกล้เคียงผิดปกติ, ผลัดกันชนะ)",
+              "name_en": "No collusion detection mechanism",
               "audit_procedures": [
                 {
                   "id": "AP001",
-                  "name_th": "ตรวจสอบโครงสร้างคณะกรรมการจัดซื้อและอำนาจอนุมัติ",
-                  "name_en": "Review procurement committee structure and approval authority",
-                  "method": "Document Review + Interview",
+                  "name_th": "วิเคราะห์ข้อมูลการเสนอราคาย้อนหลัง 3 ปี หา pattern ผลัดกันชนะ ราคาต่างกันน้อยผิดปกติ และความเชื่อมโยงกรรมการ/ผู้ถือหุ้นระหว่างผู้เสนอราคา",
+                  "name_en": "Analyze 3-year bidding data for rotation patterns and bidder interconnections",
+                  "method": "Data Analytics (e-GP) + Corporate Registry Review",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI GUID 5280",
+                      "clause": "para 32-33",
+                      "title": "Corruption and Fraud Risks in Public Procurement"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
                   "evidence_types": [
-                    "คำสั่งแต่งตั้งคณะกรรมการจัดซื้อ",
-                    "แผนภูมิอำนาจอนุมัติ",
-                    "รายงานการประชุมคณะกรรมการ",
-                    "ระเบียบการจัดซื้อจัดจ้างภายใน"
+                    "ข้อมูลประกวดราคาจากระบบ e-GP ย้อนหลัง 3 ปี",
+                    "หนังสือรับรองนิติบุคคลและบัญชีผู้ถือหุ้น (บอจ.5) ของผู้เสนอราคา",
+                    "ตารางเปรียบเทียบราคาเสนอทุกราย",
+                    "ทะเบียนสัญญาและผลการคัดเลือก"
                   ]
                 },
                 {
                   "id": "AP002",
-                  "name_th": "วิเคราะห์รูปแบบการจัดซื้อซ้ำซ้อนกับผู้ขายรายเดิม",
-                  "name_en": "Analyze repetitive procurement patterns with same vendors",
-                  "method": "Data Analytics",
+                  "name_th": "สอบทานว่าโครงการที่มีผู้เสนอราคารายเดียวหรือแข่งขันต่ำ มีการทบทวนสาเหตุและขออนุมัติตามขั้นตอนหรือไม่",
+                  "name_en": "Review single-bid / low-competition procurements for cause analysis and approvals",
+                  "method": "Document Review + Interview",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI GUID 5280",
+                      "clause": "para 32-33",
+                      "title": "Corruption and Fraud Risks in Public Procurement"
+                    },
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    }
+                  ],
                   "evidence_types": [
-                    "ทะเบียนสัญญา 3 ปีย้อนหลัง",
-                    "รายงานผู้ขายที่ได้รับการคัดเลือก",
-                    "ข้อมูลระบบ e-GP",
-                    "บันทึกการเสนอราคา"
+                    "รายงานผลการพิจารณาการจัดซื้อจัดจ้าง",
+                    "บันทึกขออนุมัติใช้วิธีเฉพาะเจาะจง/คัดเลือก",
+                    "หลักฐานการเผยแพร่ประกาศเชิญชวน",
+                    "รายงานการประชุมคณะกรรมการพิจารณาผล"
                   ]
                 }
               ]
             },
             {
               "id": "CF002",
-              "name_th": "TOR/คุณสมบัติถูกกำหนดเพื่อเอื้อประโยชน์ผู้ขายรายใดรายหนึ่ง",
-              "name_en": "TOR specifications tailored to benefit specific vendor",
+              "name_th": "การเผยแพร่ประกาศและระยะเวลาเชิญชวนไม่เพียงพอต่อการแข่งขันจริง",
+              "name_en": "Inadequate publication limiting real competition",
               "audit_procedures": [
                 {
                   "id": "AP003",
-                  "name_th": "เปรียบเทียบ TOR กับมาตรฐานสากลและราคาตลาด",
-                  "name_en": "Compare TOR against international standards and market pricing",
-                  "method": "Benchmarking + Technical Review",
+                  "name_th": "ตรวจสอบระยะเวลาเผยแพร่ประกาศเทียบเกณฑ์ และช่องทางที่ผู้ประกอบการเข้าถึงได้จริง",
+                  "name_en": "Verify publication periods against requirements and actual accessibility",
+                  "method": "Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 13.6",
+                      "title": "Work Program"
+                    }
+                  ],
                   "evidence_types": [
-                    "เอกสาร TOR ฉบับสมบูรณ์",
-                    "ราคากลาง / ราคาอ้างอิง",
-                    "เอกสารเสนอราคาของผู้เข้าร่วม",
-                    "รายงานผลการพิจารณาคุณสมบัติ"
+                    "ประกาศเชิญชวนพร้อมวันที่เผยแพร่ในระบบ e-GP",
+                    "หลักฐาน log การเผยแพร่บนเว็บไซต์หน่วยงาน",
+                    "เกณฑ์ระยะเวลาตามระเบียบกระทรวงการคลัง พ.ศ. 2560",
+                    "สถิติจำนวนผู้ดาวน์โหลด/ซื้อเอกสาร"
                   ]
                 }
               ]
@@ -267,27 +342,63 @@
         },
         {
           "id": "R002",
-          "name_th": "ความเสี่ยงการบริหารสัญญาที่ไม่มีประสิทธิภาพ",
-          "name_en": "Ineffective Contract Management Risk",
-          "level": "MEDIUM",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
+          "name_th": "ความเสี่ยงการกำหนด TOR/คุณลักษณะเฉพาะเอื้อประโยชน์ผู้ขายรายใดรายหนึ่ง (ล็อกสเปค)",
+          "name_en": "Specification Rigging (TOR Tailoring) Risk",
+          "level": "CRITICAL",
+          "likelihood": "สูง",
+          "impact": "สูงมาก",
           "control_failures": [
             {
               "id": "CF003",
-              "name_th": "ไม่มีระบบติดตามสัญญาและการส่งมอบงาน",
-              "name_en": "No contract and delivery monitoring system",
+              "name_th": "ไม่มีการสอบทาน TOR โดยผู้ไม่มีส่วนได้เสีย ก่อนประกาศ",
+              "name_en": "No independent TOR review before publication",
               "audit_procedures": [
                 {
                   "id": "AP004",
-                  "name_th": "ตรวจสอบระบบบริหารสัญญาและประสิทธิภาพการส่งมอบ",
-                  "name_en": "Review contract management system and delivery performance",
-                  "method": "System Review + File Inspection",
+                  "name_th": "เปรียบเทียบคุณลักษณะใน TOR กับมาตรฐานสินค้าในตลาด ว่ามีสเปคที่ผู้ผลิต/ผู้ขายรายเดียวตอบสนองได้หรือไม่",
+                  "name_en": "Benchmark TOR specs against market to detect single-vendor specs",
+                  "method": "Benchmarking + Technical Review",
+                  "std_refs": [
+                    {
+                      "std": "บทความสำนักงาน ป.ป.ช. 10/07/2566",
+                      "clause": "-",
+                      "title": "จัดซื้อจัดจ้าง รากฐานของการทุจริต"
+                    },
+                    {
+                      "std": "INTOSAI GUID 5280",
+                      "clause": "para 32-33",
+                      "title": "Corruption and Fraud Risks in Public Procurement"
+                    }
+                  ],
                   "evidence_types": [
-                    "ทะเบียนสัญญาปัจจุบัน",
-                    "รายงานสถานะการส่งมอบ",
-                    "บันทึกการตรวจรับงาน",
-                    "หลักฐานการปรับค่าปรับ (ถ้ามี)"
+                    "เอกสาร TOR ฉบับประกาศ",
+                    "แคตตาล็อก/สเปคสินค้าของผู้ผลิตในตลาดอย่างน้อย 3 ราย",
+                    "ข้อร้องเรียน/ข้อวิจารณ์ร่าง TOR จากการรับฟังความคิดเห็น",
+                    "คำสั่งแต่งตั้งคณะกรรมการจัดทำ TOR และประวัติผู้เกี่ยวข้อง"
+                  ]
+                },
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานกระบวนการรับฟังความคิดเห็นร่าง TOR และการตอบข้อวิจารณ์ ว่าดำเนินการจริงและแก้ไขตามเหตุผล",
+                  "name_en": "Review public hearing of draft TOR and responses to criticisms",
+                  "method": "Document Review",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.3",
+                      "title": "Evaluation of Findings"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ประกาศรับฟังความคิดเห็นร่าง TOR ใน e-GP",
+                    "ข้อวิจารณ์ที่ได้รับและบันทึกการพิจารณาตอบ",
+                    "ร่าง TOR ก่อน-หลังแก้ไข (เปรียบเทียบ)",
+                    "บันทึกอนุมัติ TOR ฉบับสุดท้าย"
                   ]
                 }
               ]
@@ -296,34 +407,242 @@
         },
         {
           "id": "R003",
-          "name_th": "ความเสี่ยงการจัดซื้อไม่เป็นไปตามกฎหมาย",
-          "name_en": "Non-compliance with Procurement Law",
+          "name_th": "ความเสี่ยงการแบ่งซื้อแบ่งจ้างเพื่อหลีกเลี่ยงวิธีการแข่งขันหรืออำนาจอนุมัติ",
+          "name_en": "Order Splitting to Avoid Competitive Methods",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ระบบไม่มีการตรวจจับการจัดซื้อรายการใกล้เคียงกันหลายครั้งในช่วงเวลาสั้นจากผู้ขายเดิม",
+              "name_en": "No detection of repeated similar purchases within short periods",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "วิเคราะห์รายการจัดซื้อทั้งปี จัดกลุ่มพัสดุประเภทเดียวกัน หาการแบ่งวงเงินต่ำกว่าเกณฑ์วิธีเฉพาะเจาะจงซ้ำๆ",
+                  "name_en": "Analyze annual purchases for repeated below-threshold splitting of same-category items",
+                  "method": "Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนจัดซื้อจัดจ้างทั้งปีงบประมาณ",
+                    "เกณฑ์วงเงินตามกฎกระทรวง (วิธีเฉพาะเจาะจง)",
+                    "รายงานจัดกลุ่มพัสดุประเภทเดียวกัน-ผู้ขายเดียวกัน",
+                    "แผนจัดซื้อจัดจ้างประจำปีที่ประกาศ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงราคากลางสูงเกินจริงหรือไม่มีที่มาที่ตรวจสอบได้",
+          "name_en": "Inflated or Unsupported Reference Price",
           "level": "HIGH",
           "likelihood": "ปานกลาง",
           "impact": "สูงมาก",
           "control_failures": [
             {
-              "id": "CF004",
-              "name_th": "ไม่ปฏิบัติตาม พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
-              "name_en": "Non-compliance with Government Procurement Act B.E. 2560",
+              "id": "CF005",
+              "name_th": "การกำหนดราคากลางไม่อ้างอิงแหล่งราคาที่หลากหลายและเป็นปัจจุบัน",
+              "name_en": "Reference price not based on multiple current sources",
               "audit_procedures": [
                 {
-                  "id": "AP005",
-                  "name_th": "ตรวจสอบกระบวนการจัดซื้อตาม พรบ. และระเบียบที่เกี่ยวข้อง",
-                  "name_en": "Audit procurement process against the Act and related regulations",
-                  "method": "Compliance Testing",
+                  "id": "AP007",
+                  "name_th": "สอบทานที่มาราคากลาง: แหล่งอ้างอิง จำนวนแหล่ง วันที่สืบราคา และเปรียบเทียบกับราคาซื้อจริงในตลาด/หน่วยงานอื่น",
+                  "name_en": "Verify reference price sources, dates, and benchmark against market/peer prices",
+                  "method": "Recalculation + Benchmarking",
+                  "std_refs": [
+                    {
+                      "std": "บทความสำนักงาน ป.ป.ช. 10/07/2566",
+                      "clause": "-",
+                      "title": "จัดซื้อจัดจ้าง รากฐานของการทุจริต"
+                    },
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    }
+                  ],
                   "evidence_types": [
-                    "เอกสารการประกวดราคา",
-                    "ประกาศเชิญชวนบนเว็บไซต์ราชการ",
-                    "รายงานการตรวจสอบของ สตง.",
-                    "ผลการตรวจสอบ e-GP"
+                    "ตารางแสดงที่มาราคากลางพร้อมเอกสารสืบราคา",
+                    "ใบเสนอราคาที่ใช้อ้างอิง (≥3 ราย)",
+                    "ราคาจัดซื้อรายการเดียวกันของหน่วยงานอื่นจาก e-GP",
+                    "ประกาศเกณฑ์ราคากลางของกรมบัญชีกลาง"
+                  ]
+                },
+                {
+                  "id": "AP008",
+                  "name_th": "ทดสอบส่วนต่างราคาชนะประมูลกับราคากลาง หากต่ำ/สูงผิดปกติให้ขยายผลหาสาเหตุ",
+                  "name_en": "Test variance between winning bid and reference price; investigate anomalies",
+                  "method": "Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI GUID 5280",
+                      "clause": "para 32-33",
+                      "title": "Corruption and Fraud Risks in Public Procurement"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.3",
+                      "title": "Evaluation of Findings"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สถิติส่วนต่างราคาชนะ-ราคากลางทุกโครงการในปี",
+                    "เกณฑ์ threshold ความผิดปกติที่หน่วยงานกำหนด",
+                    "รายงานเหตุผลกรณีส่วนต่างผิดปกติ",
+                    "เอกสารการต่อรองราคา"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงการบริหารสัญญาและการตรวจรับพัสดุบกพร่อง (งานล่าช้า แก้สัญญาเอื้อประโยชน์ ตรวจรับไม่ตรงจริง)",
+          "name_en": "Contract Management & Acceptance Deficiencies",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "การตรวจรับขึ้นกับดุลยพินิจกรรมการโดยไม่มีเกณฑ์เชิงวัตถุประสงค์และหลักฐานภาพถ่าย/การทดสอบ",
+              "name_en": "Acceptance relies on subjective judgment without objective criteria",
+              "audit_procedures": [
+                {
+                  "id": "AP009",
+                  "name_th": "สุ่มตรวจโครงการแล้วเสร็จ เปรียบเทียบงานส่งมอบจริงกับข้อกำหนดในสัญญา รวมถึงลงพื้นที่ตรวจสภาพจริง",
+                  "name_en": "Sample completed projects; compare deliverables to contract terms with site inspection",
+                  "method": "Physical Inspection + Re-performance",
+                  "std_refs": [
+                    {
+                      "std": "INTOSAI GUID 5280",
+                      "clause": "para 32-33",
+                      "title": "Corruption and Fraud Risks in Public Procurement"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สัญญาและเอกสารแนบ (แบบรูป/สเปค)",
+                    "รายงานการตรวจรับพร้อมภาพถ่าย",
+                    "ผลทดสอบ/commissioning (ถ้ามี)",
+                    "บันทึกการลงพื้นที่ตรวจสภาพจริงของผู้ตรวจสอบ"
+                  ]
+                },
+                {
+                  "id": "AP010",
+                  "name_th": "สอบทานการแก้ไขสัญญา/ขยายเวลา/งด-ลดค่าปรับ ว่ามีเหตุผล อำนาจอนุมัติ และไม่เป็นการเอื้อประโยชน์คู่สัญญา",
+                  "name_en": "Review contract amendments, extensions and penalty waivers for justification and authority",
+                  "method": "Document Review + Interview",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.3",
+                      "title": "Evaluation of Findings"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกขอแก้ไขสัญญา/ขยายเวลา พร้อมเหตุผล",
+                    "ความเห็นคณะกรรมการตรวจรับและเจ้าหน้าที่พัสดุ",
+                    "การคำนวณค่าปรับและหลักฐานการงด-ลด",
+                    "สัญญาแก้ไขเพิ่มเติมทุกฉบับ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงผลประโยชน์ทับซ้อนของเจ้าหน้าที่และกรรมการที่เกี่ยวข้องกับการจัดซื้อ",
+          "name_en": "Conflict of Interest of Procurement Officials",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF007",
+              "name_th": "ไม่มีระบบให้กรรมการ/เจ้าหน้าที่เปิดเผยความสัมพันธ์กับผู้เสนอราคาก่อนปฏิบัติหน้าที่",
+              "name_en": "No COI declaration system before duty assignment",
+              "audit_procedures": [
+                {
+                  "id": "AP011",
+                  "name_th": "ตรวจสอบแบบเปิดเผยผลประโยชน์ทับซ้อน (COI declaration) ของกรรมการทุกชุด และสอบทานความสัมพันธ์กับผู้ชนะผ่านทะเบียนนิติบุคคล",
+                  "name_en": "Verify COI declarations of all committees and cross-check relationships with winners",
+                  "method": "Document Review + Corporate Registry Cross-check",
+                  "std_refs": [
+                    {
+                      "std": "บทความสำนักงาน ป.ป.ช. 10/07/2566",
+                      "clause": "-",
+                      "title": "จัดซื้อจัดจ้าง รากฐานของการทุจริต"
+                    },
+                    {
+                      "std": "INTOSAI GUID 5280",
+                      "clause": "para 32-33",
+                      "title": "Corruption and Fraud Risks in Public Procurement"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แบบเปิดเผยความขัดแย้งทางผลประโยชน์ของกรรมการ",
+                    "คำสั่งแต่งตั้งคณะกรรมการทุกชุด",
+                    "ข้อมูลกรรมการ/ผู้ถือหุ้นผู้ชนะจาก DBD",
+                    "นโยบาย/ประกาศ COI ของหน่วยงาน"
+                  ]
+                },
+                {
+                  "id": "AP012",
+                  "name_th": "สอบทานการหมุนเวียนหน้าที่ (rotation) ของเจ้าหน้าที่พัสดุและการแบ่งแยกหน้าที่ ผู้กำหนดสเปค-ผู้พิจารณา-ผู้ตรวจรับ ไม่เป็นคนเดียวกัน",
+                  "name_en": "Review duty rotation and segregation among spec-writer, evaluator and acceptance roles",
+                  "method": "Walkthrough + Organization Review",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 13.6",
+                      "title": "Work Program"
+                    },
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผังการมอบหมายงานพัสดุ",
+                    "คำสั่งแต่งตั้งย้อนหลัง 3 ปี (วิเคราะห์รายชื่อซ้ำ)",
+                    "นโยบายหมุนเวียนตำแหน่งเสี่ยง",
+                    "ผลประเมินการควบคุมภายใน (ปค.) ด้านพัสดุ"
                   ]
                 }
               ]
             }
           ]
         }
-      ]
+      ],
+      "hash_signature": "sha256:33a9e4a84ab35dc64e3c26e07e9ad38c541452bc582ff27477538bb6b6a29ab5"
     },
     {
       "id": "T002",
