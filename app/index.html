@@ -153,6 +153,58 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .d-syn{background:#FBF0E4;color:#A05A16;border:1px solid #F0D5B8}
 .stdref{font-size:10.5px;color:var(--text-muted);background:var(--border-light);border-radius:8px;padding:1px 7px;display:inline-block;margin:1px 2px 1px 0}
 
+/* ===== RISK MULTI-SELECT CARDS ===== */
+.rsel-wrap{margin-top:14px}
+.rsel-title{font-size:12.5px;font-weight:700;color:var(--text-muted);margin-bottom:8px}
+.rsel-row{display:flex;gap:8px;flex-wrap:wrap}
+.rsel{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;cursor:pointer;transition:all var(--transition);display:flex;align-items:center;gap:8px;max-width:340px}
+.rsel:hover{border-color:var(--navy-light)}
+.rsel.on{border-color:var(--navy);background:#F3F7FF;box-shadow:var(--shadow-sm)}
+.rsel .rlv{flex-shrink:0;font-size:10px;font-weight:800;padding:2px 8px;border-radius:8px}
+.rsel span.nm{font-size:12px;font-weight:600;line-height:1.35}
+.rsel .tick{color:var(--navy);font-weight:800;font-size:13px;opacity:0;flex-shrink:0}
+.rsel.on .tick{opacity:1}
+
+/* ===== GUIDE TABLE (ตามเลย์เอาต์ที่กำหนด) ===== */
+.gt-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+.gt-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 20px 12px;flex-wrap:wrap}
+.gt-toolbar h3{font-size:16px;font-weight:800;color:var(--text)}
+.gt-sub{font-size:12px;color:var(--text-muted);margin-top:4px}
+.gt-btns{display:flex;gap:9px;flex-shrink:0}
+.gt-btn{font-family:inherit;font-size:13px;font-weight:700;padding:9px 18px;border-radius:9px;cursor:pointer;transition:all var(--transition);display:inline-flex;align-items:center;gap:6px}
+.gtb-print{background:#fff;border:1.5px solid var(--border);color:var(--text)}
+.gtb-print:hover{border-color:var(--navy-light)}
+.gtb-csv{background:var(--navy-deep);border:1.5px solid var(--navy-deep);color:#fff}
+.gtb-csv:hover{background:var(--navy)}
+.gtable{width:100%;border-collapse:collapse;font-size:13.5px}
+.gtable thead th{background:#14355F;color:#fff;font-weight:700;padding:12px 14px;text-align:left;font-size:13px;letter-spacing:.2px}
+.gtable td{padding:14px;vertical-align:top;border-bottom:1px solid var(--border-light)}
+.gtable tr.grp-a td{background:#F7F9FC}
+.gtable tr.grp-b td{background:#fff}
+.gt-num{color:var(--text-muted);font-size:13px;width:36px;text-align:center}
+.gt-risk{width:19%}
+.gt-risk .rlv{display:inline-block;font-size:11px;font-weight:800;padding:3px 12px;border-radius:8px;margin-bottom:8px}
+.rlv-HIGH{background:#FEF0E7;color:#C0550A;border:1.5px solid #F0B27A}
+.rlv-MEDIUM{background:#FEF9E7;color:#B7770D;border:1.5px solid #F5D76E}
+.rlv-LOW{background:#EAFAF1;color:#1A7A40;border:1.5px solid #A8E6C2}
+.gt-risk .rnm{font-weight:700;line-height:1.45}
+.gt-cf{width:19%;line-height:1.5}
+.gt-proc{width:20%;font-weight:700;color:#1B4C9C;line-height:1.45}
+.gt-method{width:13%}
+.gt-method .mchip{display:inline-block;background:#F4F6FA;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text);line-height:1.4}
+.gt-method .dmini{cursor:help;font-size:13px;margin-left:5px}
+.gt-ev ul{margin:0;padding:0;list-style:none}
+.gt-ev li{padding-left:16px;position:relative;margin:3px 0;line-height:1.45}
+.gt-ev li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%;background:#D4B106}
+
+/* ===== PRINT ===== */
+@media print{
+  .header,.search-wrap,.back-btn,.rsel-wrap,.gt-btns,.footer,.legend,.hidden-note,.prov,.dsec{display:none!important}
+  body{background:#fff}
+  .dhead,.gt-card{box-shadow:none;border:1px solid #ccc}
+  .gtable thead th{background:#14355F!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
 /* legend + footer */
 .legend{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 15px;margin-top:16px;font-size:12px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .hidden-note{margin-top:10px;font-size:12.5px;color:var(--text-muted);background:var(--border-light);border-radius:var(--radius-sm);padding:9px 13px;cursor:pointer;border:1px dashed var(--border)}
@@ -173,11 +225,13 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
   .stat:nth-child(4),.stat:nth-child(5){border-top:1px solid rgba(255,255,255,.07)}
   .search-row{flex-direction:column}
   .search-input{width:100%}
-  .ptable{font-size:11.5px}
-  .ptable thead{display:none}
-  .ptable td{display:block;border:none;padding:5px 8px}
-  .ptable tr{display:block;border:1px solid var(--border);border-radius:8px;margin-bottom:9px;padding:6px;background:#fff}
-  .ptable td::before{content:attr(data-l);font-weight:700;font-size:10px;color:var(--text-muted);display:block}
+  .gtable{font-size:12px}
+  .gtable thead{display:none}
+  .gtable td{display:block;border:none;padding:5px 10px;width:auto!important}
+  .gtable tr{display:block;border:1px solid var(--border);border-radius:8px;margin:8px;padding:6px;background:#fff}
+  .gtable td::before{content:attr(data-l);font-weight:700;font-size:10px;color:var(--text-muted);display:block}
+  .gtable .gt-num{display:none}
+  .gt-toolbar{flex-direction:column}
 }
 </style>
 </head>
@@ -384,20 +438,32 @@ function stdChip(std){
   return '<span class="stdchip '+cls+'" title="'+esc((ed.evidence_excerpt||'')+vt)+'">'+esc(std)+' <small>'+lbl+(v?'':' ◌')+'</small></span>';
 }
 
-/* ============ DETAIL ============ */
+/* ============ DETAIL — ตารางแนวทางการตรวจ ============ */
+let CUR_TOPIC=null, SEL_RISKS=new Set();
+const LV_TH={HIGH:'สูง',MEDIUM:'ปานกลาง',LOW:'ต่ำ'};
+
 function openTopic(id){
   const t=TOPICS.find(x=>x.id===id);if(!t)return;
+  CUR_TOPIC=t;
+  const vis=visRisks(t);
+  SEL_RISKS=new Set(vis.map(r=>r.id)); // ค่าเริ่มต้น: เลือกทุกความเสี่ยง
+  renderDetail();
+  showDetail();window.scrollTo({top:0,behavior:'smooth'});
+}
+function visRisks(t){
+  return [...(t.risks||[]).filter(r=>orgMatch(riskOrg(t,r)))].sort((a,b)=>(isUni(riskOrg(t,b))-isUni(riskOrg(t,a))));
+}
+function renderDetail(){
+  const t=CUR_TOPIC;if(!t)return;
   const dv=document.getElementById('detail-view');
   const tOrg=t.org_applicability||['UNIVERSAL'];
-  const risks=(t.risks||[]);
-  const vis=risks.filter(r=>orgMatch(riskOrg(t,r)));
-  const hid=risks.filter(r=>!orgMatch(riskOrg(t,r)));
-  const sortR=[...vis].sort((a,b)=>(isUni(riskOrg(t,b))-isUni(riskOrg(t,a))));
+  const vis=visRisks(t);
+  const hid=(t.risks||[]).filter(r=>!orgMatch(riskOrg(t,r)));
   dv.innerHTML='<button class="back-btn" onclick="showList()">← กลับหน้ารวม</button>'
    +'<div class="dhead"><div class="dhead-top"><div class="tcard-ico" style="width:46px;height:46px;font-size:23px;background:'+(t.color||'#1B3A6B')+'22">'+(t.icon||'📌')+'</div>'
    +'<div><h2>'+esc(t.name_th)+'</h2><div class="dhead-en">'+esc(t.name_en||'')+'</div></div></div>'
    +'<div class="dmeta"><span class="badge b-layer" title="'+(LAYER_TIP[t.knowledge_layer]||'')+'">'+(t.knowledge_layer||'?')+' · v'+(t.version||'?')+'</span>'
-   +(t.approval_status==='PENDING_REVIEW'?'<span class="badge b-pending">รอยืนยันขั้นสุดท้าย (ผ่าน gates + merge แล้ว)</span>':'<span class="badge b-approved">อนุมัติแล้ว</span>')
+   +(t.approval_status==='APPROVED'?'<span class="badge b-approved">อนุมัติแล้ว</span>':'<span class="badge b-pending">รอยืนยันขั้นสุดท้าย</span>')
    +(isUni(tOrg)?'<span class="badge b-uni">ใช้ได้ทุกองค์กร</span>':tOrg.map(x=>'<span class="badge b-org">'+orgTh(x)+'</span>').join(''))
    +'<span class="badge b-cat">อัพเดท '+esc((t.updated_at||'').slice(0,10))+'</span>'
    +'<span class="badge b-cat" title="'+esc(t.hash_signature||'')+'">hash '+esc((t.hash_signature||'').slice(7,17))+'…</span></div>'
@@ -408,32 +474,100 @@ function openTopic(id){
      +(s.excerpt?'<div class="prov-x">“'+esc(s.excerpt)+'”</div>':'')
      +'<div class="prov-m">ความน่าเชื่อถือ '+ (s.credibility_score||'—')+'/100 · เก็บเมื่อ '+esc(s.retrieved_at||'')+'</div></div>').join('')
    +'</div></div></div>'
-   +sortR.map((r,i)=>riskCard(t,r,i)).join('')
+   // การ์ดความเสี่ยงแบบเลือกได้หลายตัว
+   +'<div class="rsel-wrap"><div class="rsel-title">☑️ เลือกความเสี่ยงที่ต้องการ (กดเพื่อเลือก/เอาออก — ตารางด้านล่างกรองตาม)</div><div class="rsel-row">'
+   +vis.map(r=>{
+     const on=SEL_RISKS.has(r.id);
+     return '<div class="rsel'+(on?' on':'')+'" onclick="toggleRisk(\''+r.id+'\')">'
+      +'<span class="rlv rlv-'+(r.level||'MEDIUM')+'">'+(LV_TH[r.level]||r.level||'?')+'</span>'
+      +'<span class="nm">'+esc(r.name_th)+'</span><span class="tick">✓</span></div>';
+   }).join('')+'</div></div>'
+   +buildGuideTable(t,vis)
    +(hid.length?'<div class="hidden-note" onclick="clearOrgAndReopen(\''+t.id+'\')">👁 มีอีก '+hid.length+' ความเสี่ยงที่ผูกกับองค์กรประเภทอื่น — กดเพื่อแสดงทั้งหมด</div>':'');
-  showDetail();window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleRisk(rid){
+  if(SEL_RISKS.has(rid)){if(SEL_RISKS.size>1)SEL_RISKS.delete(rid)}else{SEL_RISKS.add(rid)}
+  renderDetail();
 }
 function clearOrgAndReopen(id){activeOrg=null;syncChips();render();openTopic(id)}
-function riskCard(t,r,i){
-  const tags=riskOrg(t,r);
-  const orgB=isUni(tags)?'<span class="badge b-uni">ทุกองค์กร</span>':tags.map(x=>'<span class="badge b-org">เฉพาะ'+orgTh(x)+'</span>').join('');
-  const cfs=r.control_failures||[];
-  return '<div class="risk-card" id="rk-'+t.id+'-'+i+'"><div class="risk-head" onclick="this.parentElement.classList.toggle(\'open\')">'
-   +'<div class="risk-lv lv-'+(r.level||'MEDIUM')+'">'+(r.level||'?')+'</div>'
-   +'<div class="risk-tt"><h4>'+esc(r.name_th)+'</h4><div class="risk-sub"><span>โอกาส: '+esc(r.likelihood||'—')+' · ผลกระทบ: '+esc(r.impact||'—')+'</span>'+orgB+'</div></div>'
-   +'<div class="risk-arrow">▶</div></div><div class="risk-body">'
-   +cfs.map(cf=>'<div class="cf-box"><b>จุดที่การควบคุมมักล้มเหลว:</b> '+esc(cf.name_th)+'</div>'
-     +'<table class="ptable"><thead><tr><th style="width:34%">วิธีการตรวจสอบ</th><th style="width:14%">เทคนิค</th><th style="width:26%">หลักฐานที่ต้องได้</th><th>อ้างอิงมาตรฐาน · ที่มา</th></tr></thead><tbody>'
-     +(cf.audit_procedures||[]).map(ap=>{
-        const d=DERIV[ap.derivation]||DERIV.PROFESSIONAL_SYNTHESIS;
-        return '<tr><td data-l="วิธีการตรวจสอบ">'+esc(ap.name_th)+'</td>'
-         +'<td data-l="เทคนิค"><span class="pt-method">'+esc(ap.method||'')+'</span></td>'
-         +'<td data-l="หลักฐาน"><ul class="pt-ev">'+(ap.evidence_types||[]).map(e=>'<li>'+esc(e)+'</li>').join('')+'</ul></td>'
-         +'<td data-l="อ้างอิง">'+(ap.std_refs||[]).map(sr=>'<span class="stdref" title="'+esc((sr.clause||'')+' '+(sr.title||''))+'">'+esc(sr.std||sr)+'</span>').join('')
-         +'<br><span class="deriv '+d.c+'" title="'+d.tip+'">'+d.i+' '+d.t+'</span>'
-         +(ap.exemplar_refs?' <span class="stdref" title="อ้างอิงคลังตัวอย่าง">'+ap.exemplar_refs.map(esc).join(', ')+'</span>':'')
-         +'</td></tr>';
-     }).join('')+'</tbody></table>').join('')
-   +'</div></div>';
+
+/* แตกข้อมูลเป็นแถว: 1 แถว = 1 procedure | risk cell + cf cell ใช้ rowspan */
+function tableRows(t){
+  const rows=[];
+  visRisks(t).filter(r=>SEL_RISKS.has(r.id)).forEach(r=>{
+    const cfs=(r.control_failures||[]);
+    const riskSpan=cfs.reduce((n,cf)=>n+Math.max(1,(cf.audit_procedures||[]).length),0);
+    let firstOfRisk=true;
+    cfs.forEach(cf=>{
+      const aps=(cf.audit_procedures||[]).length?cf.audit_procedures:[null];
+      aps.forEach((ap,ai)=>{
+        rows.push({r,cf,ap,riskSpan:firstOfRisk?riskSpan:0,cfSpan:ai===0?aps.length:0});
+        firstOfRisk=false;
+      });
+    });
+  });
+  return rows;
+}
+function buildGuideTable(t,vis){
+  const rows=tableRows(t);
+  const topStds=(t.applicable_standards||[]).slice(0,2).join(' · ');
+  let grpClass='grp-a',lastRisk=null,num=0;
+  const body=rows.map(row=>{
+    if(row.r!==lastRisk){grpClass=grpClass==='grp-a'?'grp-b':'grp-a';lastRisk=row.r}
+    num++;
+    const d=row.ap?(DERIV[row.ap.derivation]||DERIV.PROFESSIONAL_SYNTHESIS):null;
+    let h='<tr class="'+grpClass+'">';
+    h+='<td class="gt-num" data-l="#">'+num+'</td>';
+    if(row.riskSpan>0){
+      const tags=riskOrg(t,row.r);
+      h+='<td class="gt-risk" rowspan="'+row.riskSpan+'" data-l="ความเสี่ยง"><span class="rlv rlv-'+(row.r.level||'MEDIUM')+'">'+(LV_TH[row.r.level]||row.r.level||'?')+'</span><div class="rnm">'+esc(row.r.name_th)+'</div>'
+        +(isUni(tags)?'':'<div style="margin-top:6px"><span class="badge b-org">เฉพาะ'+tags.map(orgTh).map(esc).join('/')+'</span></div>')+'</td>';
+    }
+    if(row.cfSpan>0){
+      h+='<td class="gt-cf" rowspan="'+row.cfSpan+'" data-l="ความบกพร่องการควบคุม">'+esc(row.cf.name_th)+'</td>';
+    }
+    if(row.ap){
+      const stds=(row.ap.std_refs||[]).map(sr=>typeof sr==='string'?sr:sr.std);
+      h+='<td class="gt-proc" data-l="ขั้นตอนการตรวจสอบ">'+esc(row.ap.name_th)+'</td>';
+      h+='<td class="gt-method" data-l="วิธีการ"><span class="mchip">'+esc(row.ap.method||'—')+'</span>'
+        +'<span class="dmini" title="ที่มา: '+d.t+' — '+d.tip+(stds.length?' | อ้างอิง: '+esc(stds.join(', ')):'')+'">'+d.i+'</span></td>';
+      h+='<td class="gt-ev" data-l="หลักฐานที่ต้องการ"><ul>'+(row.ap.evidence_types||[]).map(e=>'<li>'+esc(e)+'</li>').join('')+'</ul></td>';
+    }else{
+      h+='<td class="gt-proc">—</td><td class="gt-method">—</td><td class="gt-ev">—</td>';
+    }
+    return h+'</tr>';
+  }).join('');
+  return '<div class="gt-card"><div class="gt-toolbar"><div>'
+    +'<h3>📊 ตารางแนวทางการตรวจสอบ — Topic → Risk → Control Failure → Procedure → Evidence</h3>'
+    +'<div class="gt-sub">แสดง '+rows.filter(x=>x.ap).length+' ขั้นตอน จาก '+SEL_RISKS.size+' ความเสี่ยงที่เลือก | มาตรฐาน: '+esc(topStds)+' | 🛡️ ฐานความรู้ verify แล้ว (L1)</div></div>'
+    +'<div class="gt-btns"><button class="gt-btn gtb-print" onclick="window.print()">🖨 พิมพ์</button>'
+    +'<button class="gt-btn gtb-csv" onclick="exportCSV()">⬇ ส่งออก CSV</button></div></div>'
+    +'<div style="overflow-x:auto"><table class="gtable"><thead><tr>'
+    +'<th style="width:36px">#</th><th>ความเสี่ยง (Risk)</th><th>ความบกพร่องการควบคุม (Control Failure)</th><th>ขั้นตอนการตรวจสอบ (Audit Procedure)</th><th>วิธีการ (Method)</th><th>หลักฐานที่ต้องการ (Evidence Type)</th>'
+    +'</tr></thead><tbody>'+body+'</tbody></table></div></div>';
+}
+
+/* CSV: UTF-8 BOM + CRLF (เปิดใน Excel ภาษาไทยไม่เพี้ยน) + คอลัมน์ความเชื่อถือครบ */
+function csvCell(s){s=String(s==null?'':s);return '"'+s.replace(/"/g,'""')+'"'}
+function exportCSV(){
+  const t=CUR_TOPIC;if(!t)return;
+  const head=['หัวข้อ','ความเสี่ยง','ระดับ','ความบกพร่องการควบคุม','ขั้นตอนการตรวจสอบ','วิธีการ','หลักฐานที่ต้องการ','มาตรฐานอ้างอิง','สถานะเวอร์ชันมาตรฐาน','ที่มาความรู้','ประเภทองค์กร'];
+  const lines=[head.map(csvCell).join(',')];
+  tableRows(t).forEach(row=>{
+    if(!row.ap)return;
+    const d=DERIV[row.ap.derivation]||DERIV.PROFESSIONAL_SYNTHESIS;
+    const stds=(row.ap.std_refs||[]).map(sr=>typeof sr==='string'?sr:sr.std);
+    const stStatus=stds.map(s=>{const m=stdStatus(s);return m?(s+' ['+m.ed.status+(m.ed.verified?'/verified':'/ยังไม่ verify')+']'):(s+' [ไม่มีทะเบียน]')}).join(' | ');
+    const tags=riskOrg(t,row.r);
+    lines.push([t.name_th,row.r.name_th,LV_TH[row.r.level]||row.r.level||'',row.cf.name_th,row.ap.name_th,row.ap.method||'',
+      (row.ap.evidence_types||[]).join(' | '),stds.join(' | '),stStatus,d.i+' '+d.t,
+      isUni(tags)?'ทุกองค์กร':tags.map(orgTh).join('/')].map(csvCell).join(','));
+  });
+  const blob=new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='audit-guideline_'+t.id+'_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();URL.revokeObjectURL(a.href);
 }
 function showList(){document.getElementById('list-view').style.display='block';document.getElementById('detail-view').style.display='none'}
 function showDetail(){document.getElementById('list-view').style.display='none';document.getElementById('detail-view').style.display='block'}
