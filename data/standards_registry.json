@@ -88,16 +88,16 @@
     {
       "family_id": "coso-ic",
       "display": "COSO Internal Control — Integrated Framework",
-      "match": "COSO(?!\\s*ERM)",
+      "match": "COSO(?!\\s*(ERM|ICSR))",
       "coexists_with": "coso-erm",
       "editions": [
         {
           "version": "2013",
           "status": "CURRENT",
-          "notes": "ใช้คู่กับ COSO ERM 2017 ได้ — คนละขอบเขต (Internal Control vs Enterprise Risk Management) ไม่มีใครแทนที่ใคร; ต้อง verify จาก coso.org",
+          "notes": "ใช้คู่ COSO ERM 2017 ได้ (เมนู Guidance แยกสองชุด) | supplement: ICSR 2023, GenAI 2026",
           "evidence_url": "https://www.coso.org/guidance-on-ic",
-          "evidence_excerpt": "",
-          "verified": false,
+          "evidence_excerpt": "\"originally issued in 1992 and refreshed in 2013 (ICIF-2013)... On December 15, 2014 this framework [1992] was superseded by the 2013 Internal Control—Integrated Framework\" + 2023 ออก ICSR supplement (มีฉบับแปลไทย)",
+          "verified": true,
           "last_verified": "2026-07-13"
         }
       ]
@@ -111,10 +111,10 @@
         {
           "version": "2017",
           "status": "CURRENT",
-          "notes": "ต้อง verify จาก coso.org",
+          "notes": "",
           "evidence_url": "https://www.coso.org/guidance-erm",
-          "evidence_excerpt": "",
-          "verified": false,
+          "evidence_excerpt": "\"published in 2004... The updated 2017 publication addresses the evolution of enterprise risk management\" — 2017 = ฉบับปัจจุบัน, มี Compendium of Examples เป็น supplement",
+          "verified": true,
           "last_verified": "2026-07-13"
         }
       ]
@@ -127,11 +127,14 @@
         {
           "version": "2018",
           "status": "CURRENT",
-          "notes": "คาดว่าอยู่ stage confirmed — ต้องเปิด iso.org/standard/65694 ตรวจ stage code",
+          "notes": "คาด CONFIRMED (stage 90.93) — ห้ามถือเป็น verified จนกว่าอ่านหน้า lifecycle ได้",
           "evidence_url": "https://www.iso.org/standard/65694.html",
           "evidence_excerpt": "",
           "verified": false,
-          "last_verified": "2026-07-13"
+          "last_verified": "2026-07-13",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "iso.org/standard/65694 เปิดไม่สำเร็จทั้ง fetch และ browser (หน้า JS ค้าง) — ต้องลองใหม่/ใช้ OBP เพื่ออ่าน stage code ยืนยันว่า 2018 ยัง confirmed",
+          "sla_deadline": "2026-09-11"
         }
       ]
     },
@@ -455,6 +458,107 @@
           "evidence_url": "https://www.issai.org",
           "evidence_excerpt": "",
           "notes": "ตระกูล GOV ถูกจัดโครงสร้างใหม่เข้า IFPP — ต้อง verify เลขเอกสารปัจจุบันก่อนอ้าง"
+        }
+      ]
+    },
+    {
+      "family_id": "tcfd",
+      "display": "TCFD (Task Force on Climate-related Financial Disclosures)",
+      "match": "TCFD",
+      "editions": [
+        {
+          "version": "2017-2023",
+          "status": "WITHDRAWN",
+          "superseded_by": "IFRS S1/S2 (ISSB)",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.ifrs.org/news-and-events/news/2023/07/foundation-welcomes-tcfd-responsibilities-from-2024/",
+          "evidence_excerpt": "IFRS Foundation: TCFD work culminated, monitoring transferred to ISSB from 2024; TCFD disbanded Oct 2023; IFRS S1+S2 incorporate TCFD recommendations",
+          "exception_code": "EX-WITHDRAWN"
+        }
+      ]
+    },
+    {
+      "family_id": "ifrs-issb",
+      "display": "IFRS S1/S2 (ISSB Sustainability Standards)",
+      "match": "IFRS\\s*S[12]|ISSB",
+      "editions": [
+        {
+          "version": "2023",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.ifrs.org/sustainability/tcfd/",
+          "evidence_excerpt": "หน้า official IFRS — ISSB standards เป็น global baseline รวม TCFD recommendations"
+        }
+      ]
+    },
+    {
+      "family_id": "issai-4000",
+      "display": "INTOSAI ISSAI 4000 (Compliance Audit)",
+      "match": "ISSAI\\s*4000",
+      "editions": [
+        {
+          "version": "current",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.issai.org/professional-pronouncements/",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ยืนยันเวอร์ชัน/ปีของ ISSAI 4000 ฉบับปัจจุบันจากทะเบียน issai.org",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "gri",
+      "display": "GRI Standards",
+      "match": "GRI\\s*Standards|GRI\\s*20",
+      "editions": [
+        {
+          "version": "2021",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.globalreporting.org/standards/",
+          "evidence_excerpt": "",
+          "exception_code": "EX-TH-ADOPTION",
+          "open_question": "ยืนยัน Universal Standards 2021 ยังเป็นชุดปัจจุบัน + ไทยใช้ในบริบทไหน (ตลท./ก.ล.ต.)",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-14001",
+      "display": "ISO 14001 (EMS)",
+      "match": "ISO\\s*14001",
+      "editions": [
+        {
+          "version": "2015",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/60857.html",
+          "evidence_excerpt": "",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "ตรวจ lifecycle บน iso.org — คาดมี Amd 1:2024 (climate action) แบบเดียวกับ 27001",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "coso-icsr",
+      "display": "COSO ICSR (IC over Sustainability Reporting)",
+      "match": "COSO\\s*ICSR|ICSR",
+      "editions": [
+        {
+          "version": "2023",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.coso.org/guidance-on-ic",
+          "evidence_excerpt": "\"In 2023 COSO issued supplemental guidance... internal control over sustainability reporting (ICSR)\" — supplement ของ ICIF-2013, มีฉบับแปลไทยบนหน้าเดียวกัน"
         }
       ]
     }
