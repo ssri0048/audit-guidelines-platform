@@ -599,13 +599,16 @@
         "audit programs (member)"
       ],
       "official_register": "https://www.isaca.org",
-      "coverage": "NOT_YET",
+      "coverage": "PARTIAL",
       "inclusion_rationale": "IT audit standard setter — IIA TR map ไป COBIT เอง",
       "_claim": {
-        "state": "UNVERIFIED",
+        "state": "VERIFIED",
         "last_checked": "2026-07-13",
-        "open_question": "เก็บ ITAF ฉบับปัจจุบัน + ของฟรี",
-        "sla_deadline": "2026-09-11"
+        "evidence": {
+          "url": "https://www.isaca.org/resources/cobit",
+          "excerpt": "อ่านหน้า COBIT ทั้งหน้า: 2019 current, ITAF 5th ed, audit programs ใน store",
+          "read_at": "2026-07-13"
+        }
       }
     },
     {
@@ -664,6 +667,25 @@
         "state": "UNVERIFIED",
         "last_checked": "2026-07-13",
         "open_question": "ตรวจ มาตรฐานบัญชีภาครัฐไทยอิง IPSAS ฉบับไหน",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-ocpb",
+      "name": "สคบ. (สำนักงานคณะกรรมการคุ้มครองผู้บริโภค)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "พ.ร.บ.คุ้มครองผู้บริโภค + ประกาศ"
+      ],
+      "official_register": "https://www.ocpb.go.th",
+      "coverage": "NOT_YET",
+      "inclusion_rationale": "กำกับเรื่องร้องเรียนผู้บริโภค — เกี่ยว T011 ตรง",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บประกาศ สคบ. ที่เกี่ยวบริการสาธารณูปโภค",
         "sla_deadline": "2026-09-11"
       }
     }

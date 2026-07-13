@@ -3300,223 +3300,685 @@
     {
       "id": "T010",
       "name_th": "การบริหารทรัพยากรบุคคลและวัฒนธรรมองค์กร",
-      "name_en": "Human Resource Management & Organizational Culture",
-      "category": "People",
-      "category_th": "บุคคล",
+      "name_en": "Human Resources & Organizational Culture",
+      "category": "People & Culture",
+      "category_th": "บุคลากรและวัฒนธรรม",
       "icon": "👥",
-      "color": "#C0392B",
+      "color": "#2980B9",
       "priority": "MEDIUM",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
       "applicable_standards": [
-        "IIA 2030",
+        "IIA GIAS 2024",
         "ISO 30414:2018",
-        "พรบ.แรงงานสัมพันธ์ พ.ศ.2518",
-        "พรบ.คุ้มครองแรงงาน พ.ศ.2541",
-        "มาตรฐาน กพ."
+        "พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ พ.ศ. 2543",
+        "พ.ร.บ.คุ้มครองแรงงาน พ.ศ. 2541 (เอกชน)",
+        "กฎกระทรวงความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T010",
-      "version": "1.0.0",
-      "confidence_score": 84,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:33f6a21f7b7b86675a144439ab9429a4095e3e684c0cc5e0dc4f4740b4cf236c",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ พ.ศ. 2543 และที่แก้ไขเพิ่มเติม (SOE — ยกเลิก พ.ร.บ.พนักงานรัฐวิสาหกิจสัมพันธ์ 2534)",
+        "พ.ร.บ.คุ้มครองแรงงาน พ.ศ. 2541 และที่แก้ไขเพิ่มเติม (เอกชน)",
+        "มาตรฐานกำหนดตำแหน่ง/หลักเกณฑ์ กพ. (ราชการ)"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงสูญเสียบุคลากรเชี่ยวชาญเฉพาะทางระบบไฟฟ้า (วิศวกรระบบส่ง/ผู้ควบคุม SCADA) โดยไม่มีแผนสืบทอด",
+          "name_en": "Critical Skill Loss Without Succession",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ไม่มี succession plan และการถ่ายทอดองค์ความรู้สำหรับตำแหน่งวิกฤต",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทานทะเบียนตำแหน่งวิกฤต แผนสืบทอดรายตำแหน่ง อัตราลาออก/เกษียณ 5 ปีข้างหน้า และหลักฐานการถ่ายทอดความรู้ (job shadowing, คู่มือ)",
+                  "name_en": "",
+                  "method": "Document Review + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนตำแหน่งวิกฤตพร้อมเกณฑ์",
+                    "แผนสืบทอดและผู้สืบทอดรายตำแหน่ง",
+                    "สถิติเกษียณ/ลาออก 3 ปี + forecast 5 ปี",
+                    "หลักฐานกิจกรรมถ่ายทอดองค์ความรู้"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงข้อพิพาทแรงงานและการไม่ปฏิบัติตาม พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ 2543 (ข้อตกลงสภาพการจ้าง สหภาพ)",
+          "name_en": "SOE Labour Relations Non-compliance",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "การเปลี่ยนสภาพการจ้าง/สวัสดิการไม่ผ่านกระบวนการตามกฎหมาย",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "ตรวจการเปลี่ยนแปลงสภาพการจ้างว่าผ่านคณะกรรมการกิจการสัมพันธ์/ข้อตกลงตามกฎหมาย และทะเบียนข้อพิพาทพร้อมการระงับ",
+                  "name_en": "",
+                  "method": "Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ พ.ศ. 2543",
+                      "clause": "หมวดข้อตกลงสภาพการจ้าง/สหภาพ",
+                      "title": "SOE Labour Relations Act",
+                      "org_scope": [
+                        "SOE"
+                      ]
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อตกลงเกี่ยวกับสภาพการจ้างฉบับปัจจุบัน",
+                    "รายงานประชุมคณะกรรมการกิจการสัมพันธ์",
+                    "ทะเบียนข้อพิพาทแรงงานและผลการระงับ",
+                    "หนังสือหารือกรมสวัสดิการฯ (ถ้ามี)"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "SOE"
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงการสรรหา/เลื่อนตำแหน่งไม่โปร่งใส เอื้อพวกพ้อง",
+          "name_en": "Non-transparent Recruitment & Promotion",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "เกณฑ์คัดเลือกไม่เปิดเผย/กรรมการมีส่วนได้เสียไม่ถอนตัว",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สุ่มตรวจกระบวนการสรรหา: ประกาศเกณฑ์ คะแนน กรรมการ COI declaration และผลคะแนนเทียบผู้ได้รับเลือก",
+                  "name_en": "",
+                  "method": "Sampling + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ประกาศรับสมัครและเกณฑ์คัดเลือก",
+                    "กระดาษคะแนนกรรมการรายคน",
+                    "แบบเปิดเผยส่วนได้เสียของกรรมการ",
+                    "ข้อร้องเรียนการสรรหาและการจัดการ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงค่าตอบแทน/สวัสดิการไม่เป็นไปตามกรอบที่ผู้กำกับกำหนด",
+          "name_en": "Compensation Outside Regulatory Framework",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "การอนุมัติสวัสดิการใหม่ไม่ผ่านความเห็นชอบตามอำนาจ (SOE: กรอบกระทรวงการคลัง/สคร.)",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "ตรวจรายการสวัสดิการ/ค่าตอบแทนพิเศษเทียบมติที่อนุมัติและกรอบผู้กำกับ พร้อมคำนวณภาระผูกพันระยะยาว",
+                  "name_en": "",
+                  "method": "Compliance Testing + Recalculation",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนสวัสดิการทั้งหมดพร้อมฐานอนุมัติ",
+                    "มติบอร์ด/หนังสือเห็นชอบจากผู้กำกับ",
+                    "การคำนวณภาระผูกพัน (actuarial ถ้ามี)",
+                    "ผลตรวจ สตง. ปีก่อนประเด็นสวัสดิการ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "SOE",
+            "GOV"
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงความปลอดภัยบุคลากรปฏิบัติงานไฟฟ้าภาคสนาม",
+          "name_en": "Field Workforce Electrical Safety",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "การอบรม/อุปกรณ์/การกำกับหน้างานไม่ครบตามกฎกระทรวง 2558",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจทะเบียนอบรมความปลอดภัยไฟฟ้าของผู้ปฏิบัติงานจริง สุ่มสังเกตหน้างาน และวิเคราะห์อุบัติเหตุเทียบมาตรการ",
+                  "name_en": "",
+                  "method": "Compliance Testing + Observation",
+                  "std_refs": [
+                    {
+                      "std": "กฎกระทรวงความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558",
+                      "clause": "-",
+                      "title": "Electrical Work Safety"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนอบรมตามกฎกระทรวง 2558",
+                    "บันทึกตรวจ PPE/อุปกรณ์",
+                    "สถิติอุบัติเหตุและการสอบสวน",
+                    "แผนความปลอดภัยประจำปี"
+                  ],
+                  "derivation": "READ_SOURCE",
+                  "exemplar_refs": [
+                    "EXM-PROC-TH-001"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงขีดความสามารถบุคลากรไม่ทันการเปลี่ยนผ่าน (smart grid, AI, พลังงานหมุนเวียน)",
+          "name_en": "Workforce Capability Gap for Transition",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มี skill gap analysis เชื่อมแผนกลยุทธ์/เทคโนโลยี",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทาน skill gap analysis เทียบแผนเทคโนโลยี 5 ปี แผน reskill/upskill และผลการพัฒนาจริงเทียบเป้า",
+                  "name_en": "",
+                  "method": "Document Review + Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 9.4",
+                      "title": "Internal Audit Plan"
+                    }
+                  ],
+                  "evidence_types": [
+                    "Skill inventory และ gap analysis",
+                    "แผนพัฒนาบุคลากรเชื่อมแผนกลยุทธ์",
+                    "งบและผลการฝึกอบรมจริง",
+                    "ตัวชี้วัดความพร้อมบุคลากรรายด้าน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T010",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T23:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
         "T006",
         "T008"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.คุ้มครองแรงงาน พ.ศ. 2541",
-        "พ.ร.บ.แรงงานสัมพันธ์ พ.ศ. 2518",
-        "ระเบียบ กพ. ว่าด้วยการบริหารทรัพยากรบุคคล",
-        "พ.ร.บ.ระเบียบข้าราชการพลเรือนรัฐวิสาหกิจ"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED บนมาตรฐานใหม่เต็มระบบ: org_applicability + derivation + exemplar_refs | T010 แก้ org-scope กฎหมายแรงงาน (2518 เอกชน → 2543 SOE) | T012 อัพเดท AI RMF สถานะ being revised + CI profile กำลังมา",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T010-01",
+          "source_type": "thai_law",
+          "publisher": "ราชกิจจานุเบกษา (สำเนาบน กฟภ.)",
+          "title": "พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ พ.ศ. 2543",
+          "url": "https://www.pea.co.th/sites/default/files/documents/พรบ.%20กฎระเบียบข้อบังคับ/ด้านทรัพยากรบุคคล/พรบ%20แรงงานรัฐวิสาหกิจสัมพันธ์%20พ.ศ.%202543.pdf",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "ประกาศ 7 เม.ย. 2543 — ยกเลิก พ.ร.บ.พนักงานรัฐวิสาหกิจสัมพันธ์ พ.ศ. 2534; บังคับรัฐวิสาหกิจทุกแห่งเว้นที่กำหนดใน พ.ร.ฎ. | หมายเหตุ org-scope: ความรู้เดิมอ้าง พ.ร.บ.แรงงานสัมพันธ์ 2518 ซึ่งใช้กับเอกชน — แก้แล้ว",
+          "org_scope": [
+            "SOE"
+          ]
         },
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T010-02",
+          "source_type": "official_gazette",
+          "publisher": "ราชกิจจานุเบกษา",
+          "title": "กฎกระทรวงความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2558/A/007/1.PDF",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 98,
+          "excerpt": "เล่ม 132 ตอนที่ 7 ก (ยืนยันไว้แล้วใน T004) — ผูกความปลอดภัยบุคลากรภาคสนาม"
         }
       ],
-      "risks": [
-        {
-          "id": "R021",
-          "name_th": "ความเสี่ยงการสูญเสียบุคลากรที่มีความเชี่ยวชาญด้านระบบไฟฟ้า",
-          "name_en": "Loss of Critical Power System Expertise",
-          "level": "HIGH",
-          "likelihood": "สูง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF026",
-              "name_th": "ขาดแผนสืบทอดตำแหน่งและการถ่ายทอดความรู้",
-              "name_en": "No succession plan and knowledge transfer plan",
-              "audit_procedures": [
-                {
-                  "id": "AP028",
-                  "name_th": "ตรวจสอบแผนสืบทอดตำแหน่งและการจัดการความรู้สำคัญ",
-                  "name_en": "Review succession planning and critical knowledge management",
-                  "method": "Document Review + Interview",
-                  "evidence_types": [
-                    "แผนสืบทอดตำแหน่ง (Succession Plan)",
-                    "แผนพัฒนาบุคลากร (IDP)",
-                    "ทะเบียนผู้เชี่ยวชาญด้านระบบไฟฟ้า",
-                    "ระบบบริหารจัดการความรู้ (KM System)",
-                    "รายงานอัตราการลาออก (Turnover Rate)"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R022",
-          "name_th": "ความเสี่ยงการฝึกอบรมและพัฒนาไม่ตรงความต้องการ",
-          "name_en": "Misaligned Training & Development",
-          "level": "MEDIUM",
-          "likelihood": "ปานกลาง",
-          "impact": "ปานกลาง",
-          "control_failures": [
-            {
-              "id": "CF027",
-              "name_th": "ขาดการวิเคราะห์ความต้องการฝึกอบรม (TNA) อย่างเป็นระบบ",
-              "name_en": "No systematic Training Needs Analysis (TNA)",
-              "audit_procedures": [
-                {
-                  "id": "AP029",
-                  "name_th": "ตรวจสอบกระบวนการวิเคราะห์ความต้องการและผลการฝึกอบรม",
-                  "name_en": "Review training needs analysis process and outcomes",
-                  "method": "Document Review + Effectiveness Assessment",
-                  "evidence_types": [
-                    "รายงาน Training Needs Analysis",
-                    "แผนการฝึกอบรมประจำปี",
-                    "บันทึกชั่วโมงฝึกอบรมต่อคน",
-                    "รายงานประเมินผลการฝึกอบรม (Kirkpatrick Level 1-4)",
-                    "งบประมาณฝึกอบรมเทียบกับผลลัพธ์"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:9f244431e983a6b2995befae3ecbb2dd219c49d71de3cc2d369d62bd73544a50"
     },
     {
       "id": "T011",
       "name_th": "การบริการลูกค้าและการจัดการรายได้",
       "name_en": "Customer Service & Revenue Management",
-      "category": "Revenue",
-      "category_th": "การจัดการรายได้",
-      "icon": "👤",
-      "color": "#3498DB",
+      "category": "Operations",
+      "category_th": "ปฏิบัติการ",
+      "icon": "🧾",
+      "color": "#D35400",
       "priority": "HIGH",
+      "org_applicability": [
+        "SOE",
+        "PRIVATE"
+      ],
       "applicable_standards": [
-        "IIA 2100",
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+        "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522 และที่แก้ไขเพิ่มเติม (ฉบับที่ 4) พ.ศ. 2562",
+        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
         "ISO 9001:2015",
-        "กฎ กกพ. ว่าด้วยการให้บริการ",
-        "พรบ.คุ้มครองผู้บริโภค พ.ศ.2522"
+        "IIA GIAS 2024"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T011",
-      "version": "1.0.0",
-      "confidence_score": 83,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:d7555744ea85070167fa6a33652ca45197171aa68803a0b6ae4b7eacb9b5cca0",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการของ กกพ. พ.ศ. 2565",
+        "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522 + (ฉบับที่ 4) พ.ศ. 2562 (สคบ.)",
+        "PDPA พ.ศ. 2562"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงรายได้รั่วไหลจากวงจรมิเตอร์-อ่านหน่วย-ออกบิล-เก็บเงิน (billing cycle)",
+          "name_en": "Revenue Leakage Across Billing Cycle",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ไม่มีการกระทบยอดหน่วยขายกับบิลและเงินรับรายงวด + มิเตอร์ค้างอ่าน/ประมาณการนาน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "กระทบยอดหน่วยจำหน่าย→บิล→เงินรับ รายเดือน วิเคราะห์บิลประมาณการค้างนาน มิเตอร์ไม่หมุน และหนี้ค้างรายกลุ่มลูกค้า",
+                  "name_en": "",
+                  "method": "Reconciliation + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อมูลหน่วยจำหน่ายจากระบบมิเตอร์",
+                    "ทะเบียนบิลและเงินรับรายงวด",
+                    "รายงานบิลประมาณการ/มิเตอร์ผิดปกติ",
+                    "อายุหนี้ค้างชำระรายกลุ่ม"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงคุณภาพบริการไม่ผ่านเกณฑ์ กกพ. (เวลาต่อไฟ แก้ไฟขัดข้อง ตอบเรื่องร้องเรียน)",
+          "name_en": "Service Quality Below ERC Standards",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "ไม่มีระบบวัดตัวชี้วัดบริการรายเกณฑ์และการชดเชยเมื่อผิดเกณฑ์",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "ทดสอบตัวชี้วัดบริการจริงเทียบเกณฑ์ กกพ. รายข้อ (จากข้อมูลดิบ) และตรวจการจ่ายชดเชยลูกค้ากรณีผิดเกณฑ์",
+                  "name_en": "",
+                  "method": "Re-performance + Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "-",
+                      "title": "Service Quality Standards"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อมูลดิบเวลาให้บริการรายรายการ",
+                    "เกณฑ์ กกพ. ฉบับปัจจุบันรายตัวชี้วัด",
+                    "รายงานที่ส่ง กกพ.",
+                    "ทะเบียนการจ่ายชดเชยลูกค้า"
+                  ],
+                  "derivation": "READ_SOURCE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงการจัดการเรื่องร้องเรียนผู้บริโภคไม่เป็นไปตามกฎหมาย (สคบ.)",
+          "name_en": "Consumer Complaint Mishandling",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่มี SLA ภายใน/การติดตามเรื่องร้องเรียนถึงการปิด",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "วิเคราะห์ทะเบียนเรื่องร้องเรียน: เวลาปิดเทียบ SLA, เรื่องซ้ำ, เรื่องส่งต่อ สคบ./กกพ. และการแก้เชิงระบบจาก root cause",
+                  "name_en": "",
+                  "method": "Data Analytics + Case Review",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522 และที่แก้ไขเพิ่มเติม (ฉบับที่ 4) พ.ศ. 2562",
+                      "clause": "-",
+                      "title": "Consumer Protection Act"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนเรื่องร้องเรียนทุกช่องทาง",
+                    "SLA และผลปิดจริง",
+                    "เรื่องที่ยกระดับสู่ สคบ./กกพ.",
+                    "รายงาน root cause และการแก้เชิงระบบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงข้อมูลลูกค้ารั่วไหล/ใช้ผิดวัตถุประสงค์ (ฐานลูกค้าหลายล้านราย)",
+          "name_en": "Customer Data Breach or Misuse",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "สิทธิ์เข้าถึงข้อมูลลูกค้ากว้างเกินจำเป็น + ไม่มี log การเข้าถึง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "ตรวจสิทธิ์เข้าถึงระบบข้อมูลลูกค้า (least privilege) ทดสอบ log การเข้าถึงผิดปกติ และการแชร์ข้อมูลกับบุคคลที่สามว่ามีฐาน PDPA",
+                  "name_en": "",
+                  "method": "Access Review + Log Analysis",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+                      "clause": "-",
+                      "title": "PDPA"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนสิทธิ์ผู้ใช้ระบบลูกค้า",
+                    "Log การเข้าถึง/export ข้อมูล",
+                    "สัญญาแชร์ข้อมูลกับบุคคลที่สาม",
+                    "ROPA ส่วนข้อมูลลูกค้า"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงความถูกต้องของบิลจากมิเตอร์อัจฉริยะ/TOU และโครงสร้างค่าไฟที่ซับซ้อนขึ้น",
+          "name_en": "Smart Meter & Complex Tariff Billing Errors",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "การเปลี่ยนโครงสร้างอัตรา (TOU, solar net billing) ไม่ถูกทดสอบครบก่อนใช้จริง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ทดสอบคำนวณบิลซ้ำรายอัตรา (TOU/ปกติ/solar) เทียบประกาศอัตราของ กกพ. และตรวจ regression test ก่อน deploy อัตราใหม่",
+                  "name_en": "",
+                  "method": "Recalculation + IT Testing Review",
+                  "std_refs": [
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "-",
+                      "title": "Service Quality Standards"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ประกาศโครงสร้างอัตราค่าไฟปัจจุบัน",
+                    "ตัวอย่างบิลรายประเภทและการคำนวณซ้ำ",
+                    "เอกสารทดสอบระบบก่อนใช้อัตราใหม่",
+                    "ทะเบียนบิลผิดพลาดและการแก้ไข"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงช่องทางบริการดิจิทัลล่ม/ไม่พร้อมใช้ กระทบลูกค้าวงกว้าง",
+          "name_en": "Digital Channel Unavailability",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มี SLA ความพร้อมใช้และแผนรองรับช่วง peak (รอบบิล/ไฟดับวงกว้าง)",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทาน availability ช่องทางดิจิทัลเทียบ SLA, capacity plan ช่วง peak และ fallback เมื่อระบบล่ม",
+                  "name_en": "",
+                  "method": "Document Review + Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน uptime รายเดือน",
+                    "SLA และสถิติ incident",
+                    "แผนรองรับ peak load",
+                    "ช่องทางสำรองและการสื่อสารลูกค้า"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T011",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T23:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
         "T004",
         "T012"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522",
-        "กฎ กกพ. ว่าด้วยการให้บริการไฟฟ้าและการคำนวณค่าไฟฟ้า",
-        "มาตรฐานการให้บริการของ กฟน./กฟภ."
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED บนมาตรฐานใหม่เต็มระบบ: org_applicability + derivation + exemplar_refs | T010 แก้ org-scope กฎหมายแรงงาน (2518 เอกชน → 2543 SOE) | T012 อัพเดท AI RMF สถานะ being revised + CI profile กำลังมา",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T011-01",
+          "source_type": "thai_regulator",
+          "publisher": "สำนักงาน กกพ.",
+          "title": "มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า",
+          "url": "https://www.erc.or.th/th/service-quality-standards",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "หน้า official + เกณฑ์ พ.ศ. 2565 — ตัวชี้วัดคุณภาพบริการที่ผูกการชดเชยลูกค้า (อ่านหน้าแล้ว; เกณฑ์รายข้อเปิดตรวจประกอบ)"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T011-02",
+          "source_type": "thai_law",
+          "publisher": "สคบ./ราชกิจจานุเบกษา",
+          "title": "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522 และที่แก้ไขเพิ่มเติม (ฉบับที่ 4) พ.ศ. 2562",
+          "url": "https://www.ocpb.go.th",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 90,
+          "excerpt": "ฉบับหลัก 2522 + แก้ไขเพิ่มเติมฉบับที่ 4 พ.ศ. 2562 (pattern AMENDED — ตัวบทรายมาตราติดธงตรวจกับกฤษฎีกา)"
         }
+      ],
+      "hash_signature": "sha256:af5f92bdb9b93a9bdc46ae5d4e359e6a258d415d9645ba4713b285fe62c446e5"
+    },
+    {
+      "id": "T012",
+      "name_th": "การกำกับดูแลด้านเทคโนโลยีสารสนเทศ",
+      "name_en": "IT Governance",
+      "category": "Technology & Infrastructure",
+      "category_th": "เทคโนโลยีและโครงสร้างพื้นฐาน",
+      "icon": "🖥️",
+      "color": "#5B2C6F",
+      "priority": "HIGH",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
+      "applicable_standards": [
+        "COBIT 2019",
+        "ISO/IEC 27001:2022 + Amd 1:2024",
+        "IIA Cybersecurity Topical Requirement",
+        "ITIL v4",
+        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        "NIST AI RMF 1.0"
+      ],
+      "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม",
+        "PDPA พ.ศ. 2562",
+        "แนวปฏิบัติ/ประกาศ สกมช. สำหรับหน่วยงาน CII (ส่วน IT)"
       ],
       "risks": [
         {
-          "id": "R023",
-          "name_th": "ความเสี่ยงการสูญเสียรายได้จากการเรียกเก็บค่าไฟฟ้า",
-          "name_en": "Revenue Loss from Electricity Billing",
+          "id": "R001",
+          "name_th": "ความเสี่ยงการลงทุน IT ไม่เชื่อมยุทธศาสตร์และไม่มีกลไก governance ระดับบอร์ด (EDM)",
+          "name_en": "IT Investment Disconnected from Strategy",
           "level": "HIGH",
           "likelihood": "ปานกลาง",
           "impact": "สูง",
           "control_failures": [
             {
-              "id": "CF028",
-              "name_th": "ระบบมิเตอร์และการอ่านค่าไม่แม่นยำ",
-              "name_en": "Inaccurate metering and meter reading system",
+              "id": "CF001",
+              "name_th": "ไม่มี IT steering committee ที่มีอำนาจจริง/ benefit realization ไม่ถูกติดตาม",
+              "name_en": "",
               "audit_procedures": [
                 {
-                  "id": "AP030",
-                  "name_th": "ตรวจสอบความแม่นยำของมิเตอร์และกระบวนการอ่านค่า",
-                  "name_en": "Review meter accuracy and reading process",
-                  "method": "Physical Inspection + Data Analytics",
+                  "id": "AP001",
+                  "name_th": "สอบทานโครงสร้าง IT governance เทียบ COBIT 2019 EDM objectives: กรรมการกำกับ IT, การอนุมัติ portfolio, และการติดตาม benefit หลังส่งมอบ",
+                  "name_en": "",
+                  "method": "Document Review + Benchmarking",
+                  "std_refs": [
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "Governance/Management Objectives",
+                      "title": "EGIT Framework (ISACA)"
+                    }
+                  ],
                   "evidence_types": [
-                    "รายงานการสอบเทียบมิเตอร์ (Meter Calibration Report)",
-                    "บันทึกการอ่านค่ามิเตอร์ (Meter Reading Records)",
-                    "รายงาน Non-Technical Losses",
-                    "ผลการตรวจสอบมิเตอร์ AMI",
-                    "รายงานการร้องเรียนจากลูกค้า"
+                    "กฎบัตร/รายงานประชุมคณะกรรมการ IT",
+                    "IT strategic plan เชื่อมแผนองค์กร",
+                    "ทะเบียนโครงการ IT พร้อมสถานะ benefit",
+                    "ผลประเมิน IT governance ล่าสุด"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-INTL-002"
                   ]
                 }
               ]
@@ -3524,78 +3986,221 @@
           ]
         },
         {
-          "id": "R024",
-          "name_th": "ความเสี่ยงการให้บริการลูกค้าไม่เป็นไปตามมาตรฐาน",
-          "name_en": "Customer Service Below Standard Risk",
-          "level": "MEDIUM",
+          "id": "R002",
+          "name_th": "ความเสี่ยงโครงการ IT ขนาดใหญ่ล่าช้า/งบบาน/ไม่ได้ของตามสเปค",
+          "name_en": "Large IT Project Failure",
+          "level": "HIGH",
           "likelihood": "สูง",
-          "impact": "ปานกลาง",
+          "impact": "สูง",
           "control_failures": [
             {
-              "id": "CF029",
-              "name_th": "ขาดระบบติดตามและวัดผลคุณภาพการให้บริการ",
-              "name_en": "No system to monitor and measure service quality",
+              "id": "CF002",
+              "name_th": "ไม่มี stage gate อิสระและการรายงานสถานะจริงต่อผู้บริหาร",
+              "name_en": "",
               "audit_procedures": [
                 {
-                  "id": "AP031",
-                  "name_th": "ตรวจสอบระบบวัดผลคุณภาพการให้บริการและการตอบสนองต่อข้อร้องเรียน",
-                  "name_en": "Review service quality measurement and complaint response system",
-                  "method": "Process Review + Customer Survey",
+                  "id": "AP002",
+                  "name_th": "สุ่มโครงการ IT ใหญ่ ตรวจ baseline งบ/เวลา/scope เทียบจริง, การผ่าน stage gate, และความเป็นอิสระของผู้รายงานสถานะ",
+                  "name_en": "",
+                  "method": "Project Review + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "Governance/Management Objectives",
+                      "title": "EGIT Framework (ISACA)"
+                    }
+                  ],
                   "evidence_types": [
-                    "รายงาน Customer Satisfaction Score (CSAT)",
-                    "สถิติการร้องเรียนและการแก้ไข",
-                    "SLA (Service Level Agreement) Report",
-                    "บันทึก Call Center Performance",
-                    "รายงาน Net Promoter Score (NPS)"
+                    "charter และ baseline โครงการ",
+                    "รายงานสถานะรายงวดเทียบจริง",
+                    "บันทึก stage gate/steering approvals",
+                    "ทะเบียน change requests และผลกระทบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงพึ่งพา vendor/cloud รายใหญ่โดยไม่มีทางออก (lock-in) และไม่ตรวจ vendor",
+          "name_en": "Cloud/Vendor Lock-in & Oversight Gap",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "สัญญา cloud ไม่มี exit clause/สิทธิ์ตรวจสอบ และไม่เคยประเมินความเสี่ยง third-party",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สอบทานสัญญา cloud/vendor สำคัญ: exit/portability, right to audit, SLA, ที่ตั้งข้อมูล (PDPA) และผลประเมินความเสี่ยงรายปี",
+                  "name_en": "",
+                  "method": "Contract Review + Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "IIA Cybersecurity Topical Requirement (มีผล 6 ก.พ. 2026)",
+                      "clause": "governance/risk/control",
+                      "title": "Mandatory IPPF Topical Requirement"
+                    },
+                    {
+                      "std": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+                      "clause": "-",
+                      "title": "PDPA"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สัญญาผู้ให้บริการสำคัญ",
+                    "ผลประเมินความเสี่ยง third-party",
+                    "รายงาน SLA จริงของ vendor",
+                    "แผน exit/contingency รายบริการ"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-INTL-002"
                   ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "T012",
-      "name_th": "การกำกับดูแลด้านเทคโนโลยีสารสนเทศ",
-      "name_en": "IT Governance & System Development",
-      "category": "Technology",
-      "category_th": "เทคโนโลยี",
-      "icon": "💻",
-      "color": "#9B59B6",
-      "priority": "HIGH",
-      "applicable_standards": [
-        "COBIT 2019",
-        "ISO/IEC 27001:2022",
-        "ITIL v4",
-        "พรบ.คอมพิวเตอร์ พ.ศ.2560",
-        "PDPA พ.ศ.2562"
-      ],
-      "thailand_applicable": true,
-      "knowledge_id": "KN-T012",
-      "version": "1.0.0",
-      "confidence_score": 87,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:4814f2b80c53cdb86e208528a57d43a5d587de8aeffe183bab8c158c4cc0b1d8",
-      "approved_by": null,
-      "changelog": [
-        {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R004",
+          "name_th": "ความเสี่ยงการเปลี่ยนแปลงระบบสำคัญ (change) ทำระบบล่ม/ข้อมูลเพี้ยน",
+          "name_en": "Uncontrolled Changes to Critical Systems",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "change ผ่านช่องฉุกเฉินเกินจำเป็น/ไม่มี rollback ที่ทดสอบ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "วิเคราะห์ทะเบียน change: สัดส่วน emergency, การอนุมัติ, ผลทดสอบ+rollback plan และ incident ที่เกิดจาก change",
+                  "name_en": "",
+                  "method": "Data Analytics + Sampling",
+                  "std_refs": [
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "Governance/Management Objectives",
+                      "title": "EGIT Framework (ISACA)"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "ISMS",
+                      "title": "Information Security"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียน change ทั้งปีพร้อมประเภท",
+                    "หลักฐานอนุมัติและทดสอบก่อน deploy",
+                    "incident ที่โยงกับ change",
+                    "นโยบาย change management"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงความต่อเนื่องบริการ IT (DR) ไม่รองรับระบบธุรกิจหลักจริง",
+          "name_en": "IT Service Continuity Gap",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "DR site/backup ไม่เคย restore ทดสอบจริงครบระบบสำคัญ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจ BIA→RTO/RPO รายระบบ เทียบผลซ้อม DR จริง (รวม restore จริง) และช่องว่างระบบที่ไม่มี DR",
+                  "name_en": "",
+                  "method": "Document Review + Re-performance",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "ISMS",
+                      "title": "Information Security"
+                    },
+                    {
+                      "std": "IIA Cybersecurity Topical Requirement (มีผล 6 ก.พ. 2026)",
+                      "clause": "governance/risk/control",
+                      "title": "Mandatory IPPF Topical Requirement"
+                    }
+                  ],
+                  "evidence_types": [
+                    "BIA และ RTO/RPO รายระบบ",
+                    "รายงานซ้อม DR พร้อมเวลาจริง",
+                    "ผลทดสอบ restore backup",
+                    "ทะเบียนระบบที่ยังไม่มี DR"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงการนำ AI มาใช้โดยไม่มี governance (รวม AI ในระบบโครงข่าย/บริการลูกค้า)",
+          "name_en": "Ungoverned AI Adoption",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีทะเบียน use case AI, เกณฑ์อนุมัติ, และการทดสอบก่อนใช้กับงานวิกฤต",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานทะเบียน AI use cases เทียบกรอบ NIST AI RMF (Govern/Map/Measure/Manage) โดยเฉพาะระบบที่กระทบโครงข่าย/ลูกค้า และติดตาม AI RMF Critical Infrastructure Profile ที่ NIST กำลังร่าง",
+                  "name_en": "",
+                  "method": "Framework Mapping + Interview",
+                  "std_refs": [
+                    {
+                      "std": "NIST AI RMF 1.0",
+                      "clause": "Govern/Map/Measure/Manage",
+                      "title": "AI Risk Management (อยู่ระหว่าง revision)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียน AI use cases พร้อมเจ้าของ",
+                    "เกณฑ์อนุมัติ/ทดสอบก่อนใช้",
+                    "ผลประเมินความเสี่ยง AI รายระบบ",
+                    "นโยบาย AI ขององค์กร"
+                  ],
+                  "derivation": "READ_SOURCE"
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T012",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T23:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -3603,87 +4208,53 @@
         "T011",
         "T016"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
-        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล (PDPA) พ.ศ. 2562",
-        "ประกาศ กสทช. ว่าด้วยมาตรการรักษาความมั่นคงปลอดภัย"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED บนมาตรฐานใหม่เต็มระบบ: org_applicability + derivation + exemplar_refs | T010 แก้ org-scope กฎหมายแรงงาน (2518 เอกชน → 2543 SOE) | T012 อัพเดท AI RMF สถานะ being revised + CI profile กำลังมา",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T012-01",
+          "source_type": "international_framework",
+          "publisher": "ISACA",
+          "title": "COBIT 2019 (EGIT Framework)",
+          "url": "https://www.isaca.org/resources/cobit",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "หน้า official: COBIT 2019 คือฉบับปัจจุบัน (\"COBIT 2019 is an evolution of COBIT 5\") + core publications 4 เล่ม + ฟรี COBIT 2019 Toolkit | พบด้วย: ITAF 5th edition ออกแล้ว"
         },
         {
-          "source_id": "SRC003",
-          "source_type": "pdf_standard",
-          "credibility_score": 93,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T012-02",
+          "source_type": "international_standard",
+          "publisher": "The IIA",
+          "title": "Cybersecurity Topical Requirement",
+          "url": "https://www.theiia.org/globalassets/site/standards/topical-requirements/cybersecurity/cybersecurity_topical_requirement.pdf",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "mandatory IPPF มีผล 6 ก.พ. 2026 — กรอบประเมิน governance/risk/control ไซเบอร์ (ครอบคลุม IT oversight)"
+        },
+        {
+          "source_id": "SRC-T012-03",
+          "source_type": "international_framework",
+          "publisher": "NIST",
+          "title": "AI Risk Management Framework",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "\"Released on January 26, 2023... The AI RMF 1.0 is being revised\" + GenAI Profile (NIST-AI-600-1, ก.ค. 2024) + 7 เม.ย. 2026: concept note \"AI RMF Profile on Trustworthy AI in Critical Infrastructure\" — โปรไฟล์สำหรับ critical infrastructure กำลังมา (เกี่ยวการไฟฟ้าตรง)"
         }
       ],
-      "risks": [
-        {
-          "id": "R025",
-          "name_th": "ความเสี่ยงการพัฒนาระบบไม่เป็นไปตามความต้องการและงบประมาณ",
-          "name_en": "IT System Development Over Budget and Requirements Risk",
-          "level": "HIGH",
-          "likelihood": "สูง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF030",
-              "name_th": "ขาดกระบวนการบริหารโครงการระบบสารสนเทศที่มีประสิทธิภาพ",
-              "name_en": "Ineffective IT project management process",
-              "audit_procedures": [
-                {
-                  "id": "AP032",
-                  "name_th": "ตรวจสอบกระบวนการบริหารโครงการ IT และการกำกับดูแล",
-                  "name_en": "Review IT project management and governance process",
-                  "method": "Project Audit + Document Review",
-                  "evidence_types": [
-                    "IT Governance Framework",
-                    "Project Charter และ Scope Document",
-                    "รายงานความก้าวหน้าโครงการ (Progress Report)",
-                    "Steering Committee Meeting Minutes",
-                    "รายงานการทดสอบระบบ (UAT Report)"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R026",
-          "name_th": "ความเสี่ยงการละเมิดข้อมูลส่วนบุคคล (PDPA)",
-          "name_en": "Personal Data Breach Risk (PDPA)",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF031",
-              "name_th": "ขาดระบบคุ้มครองและจัดการข้อมูลส่วนบุคคลตาม PDPA",
-              "name_en": "No PDPA-compliant personal data protection system",
-              "audit_procedures": [
-                {
-                  "id": "AP033",
-                  "name_th": "ตรวจสอบการปฏิบัติตาม PDPA และระบบจัดการข้อมูลส่วนบุคคล",
-                  "name_en": "Review PDPA compliance and personal data management system",
-                  "method": "Compliance Audit + System Review",
-                  "evidence_types": [
-                    "นโยบายคุ้มครองข้อมูลส่วนบุคคล",
-                    "ทะเบียนกิจกรรมการประมวลผลข้อมูล (ROPA)",
-                    "บันทึก Data Subject Request",
-                    "Data Privacy Impact Assessment (DPIA)",
-                    "รายงานการตรวจสอบ PDPA Compliance"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:726d66af64277f509f9e183fc4cc05041fcb9be317412f56081a36985ac71234"
     },
     {
       "id": "T013",
