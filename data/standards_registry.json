@@ -520,13 +520,10 @@
         {
           "version": "2021",
           "status": "CURRENT",
-          "verified": false,
+          "verified": true,
           "last_verified": "2026-07-13",
-          "evidence_url": "https://www.globalreporting.org/standards/",
-          "evidence_excerpt": "",
-          "exception_code": "EX-TH-ADOPTION",
-          "open_question": "ยืนยัน Universal Standards 2021 ยังเป็นชุดปัจจุบัน + ไทยใช้ในบริบทไหน (ตลท./ก.ล.ต.)",
-          "sla_deadline": "2026-09-11"
+          "evidence_url": "https://www.globalreporting.org/standards",
+          "evidence_excerpt": "หน้า official: Universal Standards (GRI 1,2,3) published October 2021, effective 1 January 2023 — ยังเป็นชุดปัจจุบัน; มี consultation ร่างมาตรฐาน pollution (มี.ค. 2026) และแถลงร่วม GRI-IFRS complementary disclosures (26 พ.ค. 2026)"
         }
       ]
     },
@@ -782,6 +779,218 @@
           "evidence_excerpt": "",
           "exception_code": "EX-AMENDED",
           "open_question": "ยืนยันรายการฉบับแก้ไขทั้งหมดจากกฤษฎีกาฉบับ update",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "pmbok",
+      "display": "PMI PMBOK Guide",
+      "match": "PMBOK",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2021",
+          "status": "WITHDRAWN",
+          "superseded_by": "2025",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.pmi.org/standards/pmbok",
+          "evidence_excerpt": "หน้า PMBOK ปัจจุบันคือ Eighth Edition — \"retains the principles and performance domains foundation of the Seventh Edition\" (ฉบับ 7/2021 ถูกแทน)",
+          "notes": "PMI ยังจำหน่ายฉบับ 7 แต่มาตรฐานปัจจุบันคือฉบับ 8"
+        },
+        {
+          "version": "2025",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.pmi.org/standards/pmbok",
+          "evidence_excerpt": "Eighth Edition, Publication Date: November 2025, 408 pages, Errata Second Printing updated April 2026 — six core principles + seven performance domains + AI/PMO/procurement"
+        }
+      ]
+    },
+    {
+      "family_id": "fidic",
+      "display": "FIDIC Contracts",
+      "match": "FIDIC",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2017",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://fidic.org",
+          "evidence_excerpt": "",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "fidic.org อ่านผ่าน fetch ไม่ได้ — ยืนยัน 2017 Suite + reprints 2022 จากหน้า official",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-22301",
+      "display": "ISO 22301 (BCMS)",
+      "match": "ISO\\s*22301",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2019",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/75106.html",
+          "evidence_excerpt": "",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "ตรวจ stage บน iso.org (systematic review รอบล่าสุด)",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-28000",
+      "display": "ISO 28000 (Supply Chain Security)",
+      "match": "ISO\\s*28000",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2022",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/79612.html",
+          "evidence_excerpt": "",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "ตรวจ stage บน iso.org (2022 แทน 2007)",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "nist-sp-800-34",
+      "display": "NIST SP 800-34 (Contingency Planning)",
+      "match": "800-34",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2010",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final",
+          "evidence_excerpt": "Rev.1 Final — May 2010 (Updated 11/11/2010), ไม่มีประกาศ supersede/withdraw บนหน้า + BIA/CP templates ยังเผยแพร่",
+          "notes": "อายุ 16 ปี — ใช้เป็นแนว BIA/ISCP ได้ แต่ควบคู่ SP 800-53 CP controls ฉบับปัจจุบัน"
+        }
+      ]
+    },
+    {
+      "family_id": "nist-sp-1108",
+      "display": "NIST SP 1108 (Smart Grid Interoperability Framework)",
+      "match": "1108",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2021",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.nist.gov/publications/nist-framework-and-roadmap-smart-grid-interoperability-standards-release-40",
+          "evidence_excerpt": "Release 4.0 Published February 18, 2021 — Conceptual Model update + Interoperability Profile concept; ไม่มี r5 ประกาศ"
+        }
+      ]
+    },
+    {
+      "family_id": "iec-cim",
+      "display": "IEC 61968/61970 (CIM)",
+      "match": "6196[89]|61970",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://webstore.iec.ch",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "series มาตรฐานหลายส่วน — ระบุ part ที่องค์กรใช้และตรวจ edition จาก IEC webstore",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "ieee-2030",
+      "display": "IEEE 2030 (Smart Grid Interoperability)",
+      "match": "IEEE\\s*2030",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2011",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://standards.ieee.org/ieee/2030/4761/",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ตรวจสถานะ active/superseded บน IEEE SA + series 2030.x ที่เกี่ยว",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "th-pdp",
+      "display": "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศ (PDP)",
+      "match": "PDP(?!A)|แผนพัฒนากำลังผลิตไฟฟ้า",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2018 Rev.1",
+          "status": "TO_BE_REVISED",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.eppo.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-TRANSITION",
+          "open_question": "ร่าง PDP2024 ผ่าน กพช./ครม. แล้วหรือยัง — ตรวจประกาศ สนพ./กพช. ฉบับล่าสุด",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "th-disaster-2550",
+      "display": "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550",
+      "match": "ป้องกันและบรรเทาสาธารณภัย",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2550",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.disaster.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ยืนยันไม่มีฉบับแก้ไข + แผน ปภ.ชาติ ฉบับปัจจุบันปีใด",
           "sla_deadline": "2026-09-11"
         }
       ]

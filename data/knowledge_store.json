@@ -4479,43 +4479,311 @@
       "id": "T013",
       "name_th": "การบริหารโครงการลงทุนและงานก่อสร้าง",
       "name_en": "Capital Project & Construction Management",
-      "category": "Investment",
-      "category_th": "การลงทุน",
+      "category": "Operations",
+      "category_th": "ปฏิบัติการ",
       "icon": "🏗️",
-      "color": "#E74C3C",
+      "color": "#B9770E",
       "priority": "HIGH",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
       "applicable_standards": [
-        "PMI PMBOK",
-        "FIDIC",
-        "IIA 2100",
-        "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
-        "มาตรฐาน กฟผ./กฟน./กฟภ."
+        "PMI PMBOK Guide — 8th Edition (2025)",
+        "FIDIC Contracts 2017 Suite",
+        "IIA GIAS 2024",
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "ระเบียบสำนักงานคณะกรรมการนโยบายรัฐวิสาหกิจว่าด้วยการบริหารโครงการลงทุน"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T013",
-      "version": "1.0.0",
-      "confidence_score": 86,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:0bca68dc80e70d643f36f876f3a11e497cf959038bb586a97a495ab3fd354272",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 (รัฐ/รัฐวิสาหกิจ)",
+        "หลักเกณฑ์การบริหารโครงการลงทุนของรัฐวิสาหกิจ (สคร.)",
+        "พ.ร.บ.ควบคุมอาคาร และกฎหมายสิ่งแวดล้อม (EIA) ที่เกี่ยวข้อง"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงโครงการลงทุนใหญ่ล่าช้า/งบบานปลาย (สายส่ง สถานีไฟฟ้า โรงไฟฟ้า)",
+          "name_en": "Major Capital Project Delay & Cost Overrun",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ไม่มี baseline ที่ถูกอนุมัติชัดและการรายงาน EVM/สถานะจริงต่อผู้บริหารอย่างอิสระ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทาน baseline งบ/เวลา/ขอบเขตที่อนุมัติ เทียบผลจริงด้วย earned value (EVM) และตรวจความอิสระของสายรายงานสถานะตาม performance domains ของ PMBOK ฉบับ 8",
+                  "name_en": "",
+                  "method": "Project Review + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "PMI PMBOK Guide — 8th Edition (2025)",
+                      "clause": "Performance Domains (governance/scope/schedule/finance/risk)",
+                      "title": "Project Management Body of Knowledge"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "baseline โครงการที่บอร์ดอนุมัติ",
+                    "รายงาน EVM/สถานะรายงวด",
+                    "ทะเบียนเหตุล่าช้าและผู้รับผิดชอบ",
+                    "รายงานอิสระ (PMO/ที่ปรึกษา) เทียบรายงานผู้จัดการโครงการ"
+                  ],
+                  "derivation": "READ_SOURCE"
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงการเปลี่ยนแปลงงาน (variation/claim) ไม่ควบคุม ทำมูลค่าสัญญาโต",
+          "name_en": "Uncontrolled Variations & Claims",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "อนุมัติงานเพิ่ม-ลดไม่ผ่านกระบวนการ/ไม่วิเคราะห์ราคาก่อนสั่ง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "วิเคราะห์ทะเบียน variation orders: มูลค่าสะสมเทียบสัญญาเดิม, อำนาจอนุมัติ, ที่มาราคา, และ claim ผู้รับเหมาพร้อมการต่อสู้",
+                  "name_en": "",
+                  "method": "Data Analytics + Contract Review",
+                  "std_refs": [
+                    {
+                      "std": "FIDIC Contracts 2017 Suite",
+                      "clause": "Red/Yellow/Silver Book",
+                      "title": "International Construction Contracts"
+                    },
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "หมวดบริหารสัญญา/การตรวจรับ",
+                      "title": "Public Procurement Act",
+                      "org_scope": [
+                        "GOV",
+                        "SOE",
+                        "LOCAL_GOV"
+                      ]
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียน VO ทุกสัญญาพร้อมมูลค่า",
+                    "เอกสารวิเคราะห์ราคางานเพิ่ม",
+                    "บันทึกอนุมัติตามลำดับอำนาจ",
+                    "ทะเบียน claim และผลการเจรจา"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001"
+                  ]
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงคุณภาพงานก่อสร้างไม่ตามแบบ/สเปค และการตรวจรับหละหลวม",
+          "name_en": "Construction Quality & Acceptance Failure",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "กรรมการตรวจรับไม่มีความรู้เทคนิค/ไม่ลงหน้างานจริง + ไม่มี independent QA",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สุ่มโครงการตรวจสอบรายงานทดสอบวัสดุ/งานเทียบสเปค, บันทึกการลงพื้นที่ของกรรมการตรวจรับ, และผล independent inspection",
+                  "name_en": "",
+                  "method": "Sampling + Site Observation",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "หมวดบริหารสัญญา/การตรวจรับ",
+                      "title": "Public Procurement Act",
+                      "org_scope": [
+                        "GOV",
+                        "SOE",
+                        "LOCAL_GOV"
+                      ]
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานทดสอบวัสดุจากแลบ",
+                    "บันทึกตรวจงานประจำงวดพร้อมภาพถ่าย",
+                    "รายงานที่ปรึกษาควบคุมงาน (CSC)",
+                    "ทะเบียนงานแก้ไข (defect list) และการปิด"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-TH-001"
+                  ]
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงการศึกษาความเป็นไปได้/ประมาณการผลตอบแทนเกินจริงเพื่อผลักดันโครงการ (optimism bias)",
+          "name_en": "Feasibility Overstatement",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "สมมุติฐาน demand/ราคาไม่ถูกทดสอบอิสระก่อนขออนุมัติ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "สอบทานสมมุติฐานสำคัญใน feasibility เทียบข้อมูลจริงย้อนหลังของโครงการลักษณะเดียวกัน และตรวจว่ามี independent review ก่อนเสนอบอร์ด",
+                  "name_en": "",
+                  "method": "Analytical Review + Benchmarking",
+                  "std_refs": [
+                    {
+                      "std": "PMI PMBOK Guide — 8th Edition (2025)",
+                      "clause": "Performance Domains (governance/scope/schedule/finance/risk)",
+                      "title": "Project Management Body of Knowledge"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน feasibility ฉบับอนุมัติ",
+                    "ข้อมูลผลจริงโครงการเทียบเคียง 3-5 โครงการ",
+                    "ความเห็น independent reviewer",
+                    "post-completion review โครงการที่จบแล้ว"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงไม่ปฏิบัติตามเงื่อนไข EIA/การมีส่วนร่วมชุมชนระหว่างก่อสร้าง",
+          "name_en": "EIA & Community Compliance Gap",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "มาตรการ EIA ไม่ถูกแปลงเป็น checklist หน้างานและไม่มีผู้รับผิดชอบติดตาม",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจ matrix มาตรการ EIA → ผู้รับผิดชอบ → หลักฐานปฏิบัติจริงรายมาตรการ และทะเบียนข้อร้องเรียนชุมชนพร้อมการแก้ไข",
+                  "name_en": "",
+                  "method": "Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน EIA และเงื่อนไขแนบท้าย",
+                    "รายงานติดตามมาตรการ (monitoring report) ส่ง สผ.",
+                    "ทะเบียนข้อร้องเรียนชุมชนรอบพื้นที่",
+                    "บันทึกประชุมไตรภาคี/มวลชนสัมพันธ์"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงส่งมอบแล้วไม่ถูกใช้/ไม่ได้ประโยชน์ตามวัตถุประสงค์ (benefit realization)",
+          "name_en": "Benefit Realization Failure",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มี post-implementation review และผู้รับผิดชอบ benefit หลังปิดโครงการ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "ตรวจว่าโครงการที่ปิดแล้ว 1-2 ปีมี post-implementation review เทียบ benefit ที่ใช้ขออนุมัติ และมีการนำบทเรียนเข้าโครงการใหม่",
+                  "name_en": "",
+                  "method": "Document Review + Interview",
+                  "std_refs": [
+                    {
+                      "std": "PMI PMBOK Guide — 8th Edition (2025)",
+                      "clause": "Performance Domains (governance/scope/schedule/finance/risk)",
+                      "title": "Project Management Body of Knowledge"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารขออนุมัติพร้อม benefit ที่สัญญาไว้",
+                    "รายงาน post-implementation review",
+                    "ข้อมูลการใช้งานจริงของสินทรัพย์",
+                    "ทะเบียน lessons learned"
+                  ],
+                  "derivation": "READ_SOURCE"
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T013",
+      "version": "2.0.0",
+      "confidence_score": 85,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-14T01:30:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -4523,128 +4791,353 @@
         "T005",
         "T014"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
-        "ระเบียบว่าด้วยการบริหารโครงการลงทุนของรัฐวิสาหกิจ สคร.",
-        "มาตรฐานการบริหารโครงการ กฟผ./กฟน./กฟภ."
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED (batch สุดท้าย): แก้ IIA 2100/2120 (เลขตาย) → GIAS 2024 | PMBOK ผูกฉบับ 8th Edition (พ.ย. 2025 — verified pmi.org) | SP 800-34 R1/SP 1108r4 verified | ตัด \"แนวทาง สนช.\" ที่ไม่มีที่มา | org tags + derivation + exemplar_refs",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T013-01",
+          "source_type": "international_standard",
+          "publisher": "Project Management Institute (PMI)",
+          "title": "PMBOK Guide — Eighth Edition",
+          "url": "https://www.pmi.org/standards/pmbok",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "หน้า official: Eighth Edition, Publication Date November 2025, 408 หน้า, Errata Second Printing (updated April 2026) — \"retains the principles and performance domains foundation of the Seventh Edition\" + six core principles + seven performance domains (governance, scope, schedule, finance, stakeholders, resources, risk) + expanded AI/PMO/procurement"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T013-02",
+          "source_type": "thai_law",
+          "publisher": "ราชกิจจานุเบกษา",
+          "title": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2560/A/024/13.PDF",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 98,
+          "excerpt": "ยืนยันไว้แล้วใน T001 (เล่ม 134 ตอนที่ 24 ก) — หมวดบริหารสัญญา/ตรวจรับผูกงานก่อสร้างภาครัฐ",
+          "org_scope": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
         }
+      ],
+      "hash_signature": "sha256:457c69d2eb78180f263154c34fd0a5c2a5669f2a6b053a3eea7d29ddf05ce000"
+    },
+    {
+      "id": "T014",
+      "name_th": "การบริหารห่วงโซ่อุปทานและคลังพัสดุ",
+      "name_en": "Supply Chain & Warehouse Management",
+      "category": "Operations",
+      "category_th": "ปฏิบัติการ",
+      "icon": "📦",
+      "color": "#117864",
+      "priority": "MEDIUM",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
+      "applicable_standards": [
+        "ISO 28000:2022",
+        "IIA GIAS 2024",
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2564"
+      ],
+      "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.การจัดซื้อจัดจ้างฯ พ.ศ. 2560 หมวดการบริหารพัสดุ (เก็บ บันทึก เบิกจ่าย ยืม ตรวจสอบ จำหน่าย)",
+        "ระเบียบกระทรวงการคลังฯ 2560 + (ฉบับที่ 2) 2564 ส่วนที่ว่าด้วยการบริหารพัสดุ"
       ],
       "risks": [
         {
-          "id": "R027",
-          "name_th": "ความเสี่ยงโครงการล่าช้าและเกินงบประมาณ",
-          "name_en": "Project Delay and Cost Overrun Risk",
-          "level": "HIGH",
-          "likelihood": "สูง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF032",
-              "name_th": "ขาดการควบคุมและติดตามโครงการอย่างมีประสิทธิภาพ",
-              "name_en": "Ineffective project control and monitoring",
-              "audit_procedures": [
-                {
-                  "id": "AP034",
-                  "name_th": "ตรวจสอบระบบควบคุมและติดตามโครงการลงทุน",
-                  "name_en": "Review capital project control and monitoring system",
-                  "method": "Project Review + Site Inspection",
-                  "evidence_types": [
-                    "แผนโครงการ (Project Plan / Gantt Chart)",
-                    "รายงานความก้าวหน้าโครงการรายเดือน",
-                    "รายงาน Earned Value Management (EVM)",
-                    "บันทึกการประชุมติดตามโครงการ",
-                    "รายงานการตรวจรับงานก่อสร้าง"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R028",
-          "name_th": "ความเสี่ยงคุณภาพงานก่อสร้างไม่เป็นไปตามมาตรฐาน",
-          "name_en": "Construction Quality Below Standard Risk",
+          "id": "R001",
+          "name_th": "ความเสี่ยงขาดแคลนพัสดุวิกฤตซ่อมฉุกเฉิน (หม้อแปลง สาย อุปกรณ์สถานี) เมื่อเกิดเหตุ",
+          "name_en": "Critical Materials Stockout",
           "level": "HIGH",
           "likelihood": "ปานกลาง",
           "impact": "สูงมาก",
           "control_failures": [
             {
-              "id": "CF033",
-              "name_th": "ขาดระบบการตรวจสอบคุณภาพงานก่อสร้างและการตรวจรับงาน",
-              "name_en": "No construction quality inspection and acceptance system",
+              "id": "CF001",
+              "name_th": "ไม่มี min-max อิงความเสี่ยง/lead time จริง และไม่เชื่อมแผนซ่อมฉุกเฉิน",
+              "name_en": "",
               "audit_procedures": [
                 {
-                  "id": "AP035",
-                  "name_th": "ตรวจสอบกระบวนการควบคุมคุณภาพงานก่อสร้างและการตรวจรับ",
-                  "name_en": "Review construction quality control and acceptance process",
-                  "method": "Site Inspection + Document Review",
+                  "id": "AP001",
+                  "name_th": "วิเคราะห์รายการพัสดุวิกฤต: ระดับคงคลังเทียบ min-max, lead time จริงจากผู้ผลิต, และเหตุการณ์ขาดแคลนย้อนหลังพร้อมผลกระทบต่อเวลากู้ระบบ",
+                  "name_en": "",
+                  "method": "Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
                   "evidence_types": [
-                    "Quality Management Plan",
-                    "บันทึกการตรวจสอบคุณภาพ (Inspection Record)",
-                    "รายงานผลการทดสอบวัสดุ (Material Test Report)",
-                    "ใบรับรองคุณภาพ (Certificate of Compliance)",
-                    "รายงานการตรวจรับงานสุดท้าย (Final Acceptance Report)"
+                    "ทะเบียนพัสดุวิกฤตพร้อมเกณฑ์กำหนด",
+                    "ข้อมูลคงคลัง vs min-max รายเดือน",
+                    "สถิติ lead time จริงรายผู้ผลิต",
+                    "บันทึกเหตุขาดแคลนและผลกระทบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "ความเสี่ยงทุจริตคลังพัสดุ (ของหาย เบิกผี ขายเศษซากต่ำกว่าจริง)",
+          "name_en": "Warehouse Fraud & Shrinkage",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "ตรวจนับไม่อิสระ/ไม่ครบ + การจำหน่ายพัสดุเสื่อมไม่โปร่งใส",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "สังเกตการณ์ตรวจนับจริง เทียบยอดระบบ-กายภาพ วิเคราะห์รายการเบิกผิดปกติ (นอกเวลา/ผู้เบิกซ้ำ/ปริมาณผิดวิสัย) และตรวจกระบวนการจำหน่ายเศษซากเทียบระเบียบคลัง",
+                  "name_en": "",
+                  "method": "Physical Observation + Forensic Analytics",
+                  "std_refs": [
+                    {
+                      "std": "ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2564",
+                      "clause": "ส่วนคลังพัสดุ",
+                      "title": "MOF Procurement Regulation",
+                      "org_scope": [
+                        "GOV",
+                        "SOE",
+                        "LOCAL_GOV"
+                      ]
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผลตรวจนับพร้อมส่วนต่างและคำอธิบาย",
+                    "log การเบิกจ่ายทั้งปี",
+                    "เอกสารจำหน่ายพัสดุ (ประมูล/ขาย) พร้อมราคาอ้างอิง",
+                    "รายงานสอบข้อเท็จจริงของหายย้อนหลัง"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-TH-001"
                   ]
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงพัสดุรับเข้าไม่ตรงสเปค/ของปลอม (counterfeit) เข้าระบบโครงข่าย",
+          "name_en": "Non-conforming & Counterfeit Materials",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ตรวจรับด้วยเอกสารอย่างเดียว ไม่สุ่มทดสอบทางเทคนิค",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สุ่มพัสดุสำคัญตรวจ certificate of origin/test report เทียบตัวจริง และผลทดสอบแลบอิสระสำหรับ lot เสี่ยงสูง",
+                  "name_en": "",
+                  "method": "Sampling + Technical Testing",
+                  "std_refs": [
+                    {
+                      "std": "ISO 28000:2022",
+                      "clause": "Security & Resilience — Supply Chain",
+                      "title": "Security Management Systems"
+                    },
+                    {
+                      "std": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "หมวดบริหารสัญญา/การตรวจรับ",
+                      "title": "Public Procurement Act",
+                      "org_scope": [
+                        "GOV",
+                        "SOE",
+                        "LOCAL_GOV"
+                      ]
+                    }
+                  ],
+                  "evidence_types": [
+                    "ใบ certificate ผู้ผลิตราย lot",
+                    "ผลทดสอบแลบอิสระ",
+                    "ทะเบียนผู้ผลิตที่ถูกขึ้นบัญชีปัญหา",
+                    "บันทึกการปฏิเสธรับของและการเคลม"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงพึ่งพาผู้ผลิตรายเดียว (single source) สำหรับอุปกรณ์สำคัญ",
+          "name_en": "Single-Source Dependency",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มีทะเบียน single source และแผนลดการพึ่งพา/qualify รายใหม่",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "จัดทำ/สอบทานทะเบียนอุปกรณ์ single source วิเคราะห์ความเสี่ยงหยุดผลิต-geopolitical และตรวจความคืบหน้าการ qualify ผู้ผลิตทางเลือก",
+                  "name_en": "",
+                  "method": "Data Analytics + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO 28000:2022",
+                      "clause": "Security & Resilience — Supply Chain",
+                      "title": "Security Management Systems"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียน single source พร้อมมูลค่าซื้อ/ปี",
+                    "ผลประเมินความเสี่ยงรายผู้ผลิต",
+                    "แผนและผล qualify ผู้ผลิตรายใหม่",
+                    "สัญญาระยะยาว/ข้อผูกพันที่มี"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงพัสดุคงคลังเสื่อมสภาพ/ล้าสมัย (obsolete) กองเป็นมูลค่าจม",
+          "name_en": "Obsolete & Dead Stock",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มีรอบทบทวน slow-moving และตัดสินใจจำหน่ายล่าช้า",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "วิเคราะห์อายุคงคลัง (aging) แยก slow-moving/dead stock คำนวณมูลค่าจม เทียบกับการตั้งด้อยค่าทางบัญชี และตรวจรอบการทบทวนเพื่อจำหน่าย",
+                  "name_en": "",
+                  "method": "Data Analytics + Recalculation",
+                  "std_refs": [
+                    {
+                      "std": "ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2564",
+                      "clause": "ส่วนคลังพัสดุ",
+                      "title": "MOF Procurement Regulation",
+                      "org_scope": [
+                        "GOV",
+                        "SOE",
+                        "LOCAL_GOV"
+                      ]
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน inventory aging",
+                    "มูลค่า dead stock และการตั้งสำรอง/ด้อยค่า",
+                    "บันทึกคณะกรรมการทบทวนพัสดุคงคลัง",
+                    "ผลการจำหน่ายและมูลค่าคืนได้"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงข้อมูลคลังในระบบ ERP ไม่ตรงของจริง (master data) ทำการวางแผนพลาดทั้งระบบ",
+          "name_en": "Inventory Master Data Integrity",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีเจ้าของ master data และสิทธิ์แก้ไขข้อมูลคลังกว้างเกิน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "ทดสอบความถูกต้อง master data (หน่วยนับ ราคา ที่เก็บ) สุ่มเทียบของจริง และตรวจสิทธิ์แก้ไขข้อมูลในระบบพร้อม audit log",
+                  "name_en": "",
+                  "method": "IT Testing + Sampling",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานคุณภาพ master data",
+                    "ผลสุ่มเทียบระบบ-กายภาพ",
+                    "ทะเบียนสิทธิ์ผู้แก้ไขข้อมูลคลัง",
+                    "audit log การแก้ไขผิดปกติ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
           ]
         }
-      ]
-    },
-    {
-      "id": "T014",
-      "name_th": "การบริหารห่วงโซ่อุปทานและคลังพัสดุ",
-      "name_en": "Supply Chain & Materials/Warehouse Management",
-      "category": "Operations",
-      "category_th": "การดำเนินงาน",
-      "icon": "📦",
-      "color": "#F39C12",
-      "priority": "MEDIUM",
-      "applicable_standards": [
-        "ISO 28000:2022",
-        "IIA 2100",
-        "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
-        "ระเบียบการเก็บรักษาพัสดุ"
       ],
-      "thailand_applicable": true,
       "knowledge_id": "KN-T014",
-      "version": "1.0.0",
-      "confidence_score": 84,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:c16aedfe0353d8d10d0e00350c12d448a25fc2102fe794693b87b70e96f69b2c",
+      "version": "2.0.0",
+      "confidence_score": 85,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
       "approved_by": null,
-      "changelog": [
-        {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
-        },
-        {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
-        }
-      ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-14T01:30:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -4652,50 +5145,199 @@
         "T003",
         "T013"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
-        "ระเบียบการเก็บรักษาและจ่ายพัสดุของรัฐวิสาหกิจ",
-        "ประกาศ กรมศุลกากร ว่าด้วยการนำเข้าอุปกรณ์ไฟฟ้า"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED (batch สุดท้าย): แก้ IIA 2100/2120 (เลขตาย) → GIAS 2024 | PMBOK ผูกฉบับ 8th Edition (พ.ย. 2025 — verified pmi.org) | SP 800-34 R1/SP 1108r4 verified | ตัด \"แนวทาง สนช.\" ที่ไม่มีที่มา | org tags + derivation + exemplar_refs",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T014-01",
+          "source_type": "thai_law",
+          "publisher": "ราชกิจจานุเบกษา",
+          "title": "ระเบียบกระทรวงการคลังฯ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2564",
+          "url": "https://www.ratchakitcha.soc.go.th",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "ยืนยัน pattern AMENDED ไว้แล้ว (PR ก่อนหน้า) — ส่วนการบริหารพัสดุ: เก็บ บันทึก เบิกจ่าย ตรวจสอบ จำหน่าย ใช้เป็นเกณฑ์ตรวจคลังพัสดุ",
+          "org_scope": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T014-02",
+          "source_type": "international_guidance",
+          "publisher": "INTOSAI",
+          "title": "GUID 5280 — Guidance for Audits of Public Procurement",
+          "url": "https://www.issai.org/pronouncements/guid-5280-guidance-for-audits-of-public-procurement/",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "อ่านเนื้อในแล้ว (T001) — ครอบคลุม contract management และ supply phase ใช้เทียบกระบวนการพัสดุ"
         }
+      ],
+      "hash_signature": "sha256:09bc0731f368223f8ed13a72370b925b64b4b27dddb3f093f0334267876e826d"
+    },
+    {
+      "id": "T015",
+      "name_th": "การบริหารความต่อเนื่องทางธุรกิจและการจัดการภาวะวิกฤต",
+      "name_en": "Business Continuity & Crisis Management",
+      "category": "Resilience",
+      "category_th": "ความยืดหยุ่นองค์กร",
+      "icon": "🚨",
+      "color": "#922B21",
+      "priority": "HIGH",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
+      "applicable_standards": [
+        "ISO 22301:2019",
+        "NIST SP 800-34 Rev.1 (2010)",
+        "IIA GIAS 2024",
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+        "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550"
+      ],
+      "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 (บทบาทหน่วยงานโครงสร้างพื้นฐานในแผน ปภ.)",
+        "เกณฑ์ กกพ. ว่าด้วยคุณภาพ/ความต่อเนื่องการให้บริการ",
+        "ประกาศ สกมช. สำหรับ CII (มิติ cyber resilience)"
       ],
       "risks": [
         {
-          "id": "R029",
-          "name_th": "ความเสี่ยงการขาดแคลนอุปกรณ์/วัสดุสำคัญ",
-          "name_en": "Critical Equipment/Material Shortage Risk",
+          "id": "R001",
+          "name_th": "ความเสี่ยง BIA ไม่สะท้อนกระบวนการวิกฤตจริง ทำ RTO/RPO ตั้งผิดทั้งระบบ",
+          "name_en": "Flawed BIA Foundation",
           "level": "HIGH",
           "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "BIA ทำครั้งเดียวไม่อัพเดท/ไม่ครอบคลุมงานควบคุมโครงข่าย-ศูนย์สั่งจ่ายไฟ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทาน BIA ล่าสุด: ครอบคลุมกระบวนการวิกฤต (ศูนย์ควบคุม, billing, call center), เกณฑ์จัดลำดับ, และ RTO/RPO ที่อนุมัติ เทียบแม่แบบ BIA ของ NIST SP 800-34",
+                  "name_en": "",
+                  "method": "Document Review + Interview",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 800-34 Rev.1 (2010)",
+                      "clause": "ISCP/BIA/DRP",
+                      "title": "Contingency Planning Guide"
+                    },
+                    {
+                      "std": "ISO 22301:2019",
+                      "clause": "BCMS Requirements",
+                      "title": "Business Continuity Management Systems"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน BIA พร้อมวันที่ทบทวน",
+                    "RTO/RPO รายกระบวนการที่อนุมัติ",
+                    "เกณฑ์การจัดลำดับความวิกฤต",
+                    "บันทึกอนุมัติจากผู้บริหารระดับสูง"
+                  ],
+                  "derivation": "READ_SOURCE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "ความเสี่ยงแผน BCP ไม่เคยซ้อมเต็มรูปแบบ (ซ้อมแต่ tabletop) เมื่อเกิดจริงใช้ไม่ได้",
+          "name_en": "Untested Continuity Plans",
+          "level": "HIGH",
+          "likelihood": "สูง",
           "impact": "สูง",
           "control_failures": [
             {
-              "id": "CF034",
-              "name_th": "ขาดระบบบริหารสต๊อคและการวางแผนความต้องการวัสดุ",
-              "name_en": "No inventory management and material requirements planning system",
+              "id": "CF002",
+              "name_th": "การซ้อมไม่ครอบคลุม scenario วิกฤตจริงและไม่ปิด gap ที่พบจากการซ้อม",
+              "name_en": "",
               "audit_procedures": [
                 {
-                  "id": "AP036",
-                  "name_th": "ตรวจสอบระบบบริหารคลังพัสดุและการวางแผนจัดซื้อ",
-                  "name_en": "Review warehouse management and procurement planning system",
-                  "method": "Physical Count + System Reconciliation",
+                  "id": "AP002",
+                  "name_th": "ตรวจประวัติการซ้อม 3 ปี: ประเภท (tabletop/functional/full-scale), scenario ที่ใช้, gap ที่พบ, และหลักฐานการปิด gap ก่อนรอบถัดไป",
+                  "name_en": "",
+                  "method": "Re-performance Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO 22301:2019",
+                      "clause": "BCMS Requirements",
+                      "title": "Business Continuity Management Systems"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
                   "evidence_types": [
-                    "ทะเบียนพัสดุคงคลัง (Inventory Register)",
-                    "รายงานการตรวจนับพัสดุประจำปี",
-                    "Reorder Point / Safety Stock Analysis",
-                    "รายงาน Slow Moving และ Obsolete Items",
-                    "รายงานการเบิก-จ่ายพัสดุ"
+                    "แผนและรายงานผลการซ้อมรายครั้ง",
+                    "ทะเบียน gap จากการซ้อมและสถานะปิด",
+                    "scenario ที่ใช้เทียบ risk register",
+                    "บันทึกผู้เข้าร่วมซ้อมระดับบริหาร"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงการกู้คืนระบบเทคโนโลยีหลังไซเบอร์/ภัยพิบัติไม่ทันตาม RTO",
+          "name_en": "Technology Recovery Shortfall",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "DR ไม่เคย restore จริงครบระบบ + แผนกู้คืน OT แยกไม่ชัดจาก IT",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "เทียบผลซ้อม DR จริง (เวลากู้คืนจริงรายระบบ) กับ RTO ที่อนุมัติ และตรวจแผนกู้คืนฝั่ง OT/ศูนย์ควบคุมแยกจาก IT ตามแนว contingency planning",
+                  "name_en": "",
+                  "method": "Re-performance + Technical Review",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 800-34 Rev.1 (2010)",
+                      "clause": "ISCP/BIA/DRP",
+                      "title": "Contingency Planning Guide"
+                    },
+                    {
+                      "std": "IIA Cybersecurity Topical Requirement",
+                      "clause": "incident response/recovery (มีผล 6 ก.พ. 2026)",
+                      "title": "Mandatory Topical Requirement"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานซ้อม DR พร้อมเวลาจริง",
+                    "ผล restore backup จริงรายระบบวิกฤต",
+                    "แผนกู้คืน OT/EMS แยกจาก IT",
+                    "ทะเบียนระบบที่ยังไม่มี DR"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-INTL-002",
+                    "EXM-CYBER-EN-001"
                   ]
                 }
               ]
@@ -4703,78 +5345,141 @@
           ]
         },
         {
-          "id": "R030",
-          "name_th": "ความเสี่ยงการทุจริตในคลังพัสดุ",
-          "name_en": "Warehouse/Inventory Fraud Risk",
+          "id": "R004",
+          "name_th": "ความเสี่ยงการสื่อสารภาวะวิกฤตล้มเหลว (ประชาชน สื่อ ผู้กำกับ) ซ้ำเติมความเสียหาย",
+          "name_en": "Crisis Communication Failure",
           "level": "MEDIUM",
           "likelihood": "ปานกลาง",
           "impact": "สูง",
           "control_failures": [
             {
-              "id": "CF035",
-              "name_th": "ขาดการควบคุมการเข้าถึงและระบบรักษาความปลอดภัยคลังพัสดุ",
-              "name_en": "Insufficient warehouse access control and security",
+              "id": "CF004",
+              "name_th": "ไม่มีโครงสร้างการสื่อสารวิกฤตที่ซ้อมแล้ว/โฆษกไม่ถูกกำหนดล่วงหน้า",
+              "name_en": "",
               "audit_procedures": [
                 {
-                  "id": "AP037",
-                  "name_th": "ตรวจสอบระบบควบคุมการเข้าถึงคลังพัสดุและการติดตามทรัพย์สิน",
-                  "name_en": "Review warehouse access control and asset tracking",
-                  "method": "Physical Inspection + CCTV Review",
+                  "id": "AP004",
+                  "name_th": "สอบทานแผนสื่อสารวิกฤต: ผู้มีอำนาจแถลง, ข้อความสำเร็จรูปราย scenario, ช่องทางแจ้งลูกค้าเมื่อไฟดับวงกว้าง, และผลจริงจากเหตุการณ์ล่าสุด",
+                  "name_en": "",
+                  "method": "Document Review + Case Study",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550",
+                      "clause": "-",
+                      "title": "Disaster Prevention and Mitigation Act"
+                    },
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "-",
+                      "title": "Service Quality Standards"
+                    }
+                  ],
                   "evidence_types": [
-                    "บันทึกการเข้า-ออกคลังพัสดุ",
-                    "รายงาน CCTV Footage",
-                    "บันทึกการเบิก-คืนพัสดุ",
-                    "รายงานผลต่างจากการตรวจนับ (Discrepancy Report)",
-                    "รายงานการสอบสวนกรณีสูญหาย"
-                  ]
+                    "แผนสื่อสารวิกฤตฉบับปัจจุบัน",
+                    "บันทึกการสื่อสารจริงในเหตุการณ์ล่าสุด",
+                    "ผลสำรวจ/เสียงสะท้อนสาธารณะหลังเหตุ",
+                    "รายงานส่งผู้กำกับ (กกพ./ปภ.) ตามเวลากำหนด"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงบทบาทตามแผน ปภ.ชาติ/จังหวัดไม่ถูกซักซ้อมร่วมกับหน่วยภายนอก",
+          "name_en": "External Coordination Gap (ปภ.)",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่เข้าร่วมซ้อมแผนจังหวัด/ไม่มี MOU ทรัพยากรฉุกเฉินกับหน่วยข้างเคียง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจหลักฐานการเข้าร่วมซ้อมแผน ปภ. ระดับจังหวัด/ชาติ, MOU ช่วยเหลือระหว่างการไฟฟ้า/หน่วยงานข้างเคียง, และบทเรียนจากภัยจริงล่าสุด",
+                  "name_en": "",
+                  "method": "Compliance Testing + Interview",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550",
+                      "clause": "-",
+                      "title": "Disaster Prevention and Mitigation Act"
+                    }
+                  ],
+                  "evidence_types": [
+                    "หนังสือเชิญ+บันทึกเข้าร่วมซ้อม ปภ.",
+                    "MOU/ข้อตกลงช่วยเหลือฉุกเฉิน",
+                    "รายงานถอดบทเรียนภัยจริง (AAR)",
+                    "แผนเผชิญเหตุที่สอดรับแผนจังหวัด"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงห่วงโซ่อุปทานของ BCM เอง (ผู้ให้บริการภายนอกวิกฤต) ไม่มีแผนต่อเนื่อง",
+          "name_en": "Third-Party Continuity Gap",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "สัญญา vendor วิกฤต (cloud, call center, ขนส่งน้ำมัน) ไม่กำหนดข้อผูกพัน BCP",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานรายชื่อ vendor วิกฤต ตรวจข้อสัญญาด้าน BCP/SLA ภาวะฉุกเฉิน และหลักฐานการทดสอบแผนของ vendor",
+                  "name_en": "",
+                  "method": "Contract Review + Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "ISO 22301:2019",
+                      "clause": "BCMS Requirements",
+                      "title": "Business Continuity Management Systems"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียน vendor วิกฤตพร้อมเกณฑ์",
+                    "ข้อสัญญา BCP/แผนฉุกเฉินของ vendor",
+                    "ผลซ้อม/รายงาน BCP ของ vendor",
+                    "แผนสำรองกรณี vendor ล้ม"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
           ]
         }
-      ]
-    },
-    {
-      "id": "T015",
-      "name_th": "การบริหารความต่อเนื่องทางธุรกิจและการจัดการภาวะวิกฤต",
-      "name_en": "Business Continuity Management & Crisis Response",
-      "category": "Resilience",
-      "category_th": "ความยืดหยุ่น",
-      "icon": "🛡️",
-      "color": "#2C3E50",
-      "priority": "CRITICAL",
-      "applicable_standards": [
-        "ISO 22301:2019",
-        "NIST SP 800-34",
-        "IIA 2120",
-        "ประกาศ กกพ. ว่าด้วยความมั่นคงของระบบไฟฟ้า",
-        "แนวทาง สนช."
       ],
-      "thailand_applicable": true,
       "knowledge_id": "KN-T015",
-      "version": "1.0.0",
-      "confidence_score": 90,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:11669dee37efa8228c6b6627d10d34bcb68a19488e7549c634ef40ec8fcffed1",
+      "version": "2.0.0",
+      "confidence_score": 85,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
       "approved_by": null,
-      "changelog": [
-        {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
-        },
-        {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
-        }
-      ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-14T01:30:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -4782,135 +5487,327 @@
         "T004",
         "T007"
       ],
-      "thai_law_refs": [
-        "ประกาศ กกพ. ว่าด้วยความมั่นคงและความเชื่อถือได้ของระบบไฟฟ้า",
-        "แผนความมั่นคงพลังงานแห่งชาติ (สนพ.)",
-        "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED (batch สุดท้าย): แก้ IIA 2100/2120 (เลขตาย) → GIAS 2024 | PMBOK ผูกฉบับ 8th Edition (พ.ย. 2025 — verified pmi.org) | SP 800-34 R1/SP 1108r4 verified | ตัด \"แนวทาง สนช.\" ที่ไม่มีที่มา | org tags + derivation + exemplar_refs",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T015-01",
+          "source_type": "international_framework",
+          "publisher": "NIST CSRC",
+          "title": "SP 800-34 Rev.1 — Contingency Planning Guide",
+          "url": "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "หน้า official: Date Published May 2010 (Updated 11/11/2010), สถานะ Final ไม่มีประกาศ supersede/withdraw + Supplemental Material: BIA Template, CP Templates (Low/Moderate/High Impact) — หมายเหตุ: อายุ 16 ปี ใช้เป็นแนวเรื่อง BIA/ISCP ได้ แต่ควรอ่านคู่ NIST SP 800-53 CP controls ฉบับปัจจุบัน"
         },
         {
-          "source_id": "SRC003",
-          "source_type": "pdf_standard",
-          "credibility_score": 93,
-          "knowledge_layer": "L0"
-        },
-        {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T015-02",
+          "source_type": "thai_regulator",
+          "publisher": "สำนักงาน กกพ.",
+          "title": "มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า",
+          "url": "https://www.erc.or.th/th/service-quality-standards",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "ยืนยันไว้แล้ว (T011) — เกณฑ์ความต่อเนื่อง/คุณภาพบริการผูกหน้าที่กู้คืนระบบ"
         }
       ],
-      "risks": [
-        {
-          "id": "R031",
-          "name_th": "ความเสี่ยงแผน BCP/DRP ไม่มีประสิทธิภาพ",
-          "name_en": "Ineffective BCP/DRP Risk",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูงมาก",
-          "control_failures": [
-            {
-              "id": "CF036",
-              "name_th": "แผน BCP/DRP ไม่ครอบคลุมหรือไม่ได้รับการทดสอบ",
-              "name_en": "BCP/DRP not comprehensive or not tested",
-              "audit_procedures": [
-                {
-                  "id": "AP038",
-                  "name_th": "ตรวจสอบความครอบคลุมและการทดสอบแผน BCP/DRP",
-                  "name_en": "Review BCP/DRP comprehensiveness and testing",
-                  "method": "Document Review + Exercise Observation",
-                  "evidence_types": [
-                    "Business Continuity Plan (BCP)",
-                    "Disaster Recovery Plan (DRP)",
-                    "Business Impact Analysis (BIA)",
-                    "รายงานผลการซ้อมแผน (Test/Exercise Report)",
-                    "รายงาน RTO/RPO Compliance"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R032",
-          "name_th": "ความเสี่ยงการตอบสนองต่อภัยพิบัติทางธรรมชาติล่าช้า",
-          "name_en": "Delayed Response to Natural Disaster Risk",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูงมาก",
-          "control_failures": [
-            {
-              "id": "CF037",
-              "name_th": "ขาดโปรโตคอลการประสานงานกับหน่วยงานภายนอกในภาวะวิกฤต",
-              "name_en": "No external coordination protocol during crisis",
-              "audit_procedures": [
-                {
-                  "id": "AP039",
-                  "name_th": "ตรวจสอบโปรโตคอลการประสานงานวิกฤตและการสื่อสารฉุกเฉิน",
-                  "name_en": "Review crisis coordination protocol and emergency communication",
-                  "method": "Document Review + Interview + Drill",
-                  "evidence_types": [
-                    "Crisis Communication Plan",
-                    "MOU กับหน่วยงานสนับสนุน (กองทัพ, อปท., หน่วยกู้ภัย)",
-                    "Emergency Contact Directory",
-                    "รายงานการซ้อมแผนร่วมกับหน่วยงานภายนอก",
-                    "After Action Review Report"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:52910ec2562e9469dbe99c0a4cf8b6f887c022427e183d0ac2d8a327de66bfe9"
     },
     {
       "id": "T016",
       "name_th": "Smart Grid และการจัดการนวัตกรรมดิจิทัล",
       "name_en": "Smart Grid & Digital Innovation Management",
-      "category": "Innovation",
-      "category_th": "นวัตกรรม",
-      "icon": "🔮",
-      "color": "#1ABC9C",
-      "priority": "MEDIUM",
+      "category": "Technology & Infrastructure",
+      "category_th": "เทคโนโลยีและโครงสร้างพื้นฐาน",
+      "icon": "⚡",
+      "color": "#1F618D",
+      "priority": "HIGH",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
       "applicable_standards": [
+        "NIST SP 1108r4 — Smart Grid Interoperability Framework Release 4.0 (2021)",
         "IEC 61968/61970 (CIM)",
         "IEEE 2030",
-        "NIST SP 1108r4 (Smart Grid)",
-        "แผน PDP 2024",
-        "ยุทธศาสตร์ดิจิทัลของ MEA/PEA/EGAT"
+        "IIA GIAS 2024",
+        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศ (PDP)"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T016",
-      "version": "1.0.0",
-      "confidence_score": 81,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:e71a1a044b33ecff41a54286ba14dda78963feb4f09068e181ace6549944e87c",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศ (PDP) และแผนแม่บท Smart Grid ของกระทรวงพลังงาน",
+        "ประกาศ/มติ กกพ. เกี่ยวกับมิเตอร์อัจฉริยะและ third party access",
+        "PDPA พ.ศ. 2562 (ข้อมูลการใช้ไฟฟ้ารายครัวเรือน)"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงลงทุน smart grid แล้วอุปกรณ์ต่างค่ายคุยกันไม่ได้ (interoperability) กลายเป็นระบบเกาะ",
+          "name_en": "Interoperability Failure Across Vendors",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "จัดซื้อรายโครงการโดยไม่มีสถาปัตยกรรม/มาตรฐาน interoperability กลางขององค์กร",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทานว่าองค์กรมีสถาปัตยกรรม smart grid อ้างอิงมาตรฐานสากล (เทียบ NIST SP 1108r4 conceptual model + interoperability profile, IEC CIM) และ TOR จัดซื้อบังคับมาตรฐาน interface กลาง",
+                  "name_en": "",
+                  "method": "Architecture Review + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 1108r4 — Smart Grid Interoperability Framework Release 4.0 (2021)",
+                      "clause": "Conceptual Model/Interoperability Profile",
+                      "title": "Smart Grid Framework"
+                    },
+                    {
+                      "std": "IEC 61968/61970 (CIM)",
+                      "clause": "Common Information Model",
+                      "title": "EMS/DMS Integration"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารสถาปัตยกรรม smart grid ขององค์กร",
+                    "มาตรฐาน interface ที่บังคับใน TOR",
+                    "ผลทดสอบ interoperability ระหว่างระบบจริง",
+                    "ทะเบียนระบบที่เชื่อมกันไม่ได้และแผนแก้"
+                  ],
+                  "derivation": "READ_SOURCE"
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงข้อมูลมิเตอร์อัจฉริยะรายครัวเรือนรั่ว/ใช้ผิดวัตถุประสงค์ (ละเมิด PDPA)",
+          "name_en": "Smart Meter Data Privacy Breach",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "ข้อมูลการใช้ไฟความละเอียดสูงถูกเก็บ/แชร์โดยไม่มีฐานกฎหมายและ retention ชัด",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "ตรวจ data flow ข้อมูลมิเตอร์: ฐาน PDPA รายวัตถุประสงค์, retention, การแชร์บุคคลที่สาม (รวม third party access ตามแนว กกพ.), และมาตรการ anonymize",
+                  "name_en": "",
+                  "method": "Data Flow Analysis + Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+                      "clause": "-",
+                      "title": "PDPA"
+                    },
+                    {
+                      "std": "NIST SP 1108r4 — Smart Grid Interoperability Framework Release 4.0 (2021)",
+                      "clause": "Conceptual Model/Interoperability Profile",
+                      "title": "Smart Grid Framework"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ROPA ส่วนข้อมูลมิเตอร์",
+                    "นโยบาย retention และหลักฐานลบจริง",
+                    "สัญญา/ฐานการแชร์ข้อมูลบุคคลที่สาม",
+                    "ผลทดสอบ re-identification risk"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงโครงการนำร่อง (pilot) ไม่ถูกประเมินจริงก่อน scale ทำให้ลงทุนซ้ำความล้มเหลว",
+          "name_en": "Pilot-to-Scale Without Evaluation",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่มีเกณฑ์ success/exit ของ pilot ก่อนเริ่ม และผล pilot ไม่ถูกรายงานตรง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "ตรวจโครงการนำร่อง smart grid ย้อนหลัง: เกณฑ์ success ที่ตั้งก่อนเริ่ม, ผลประเมินจริง, การตัดสินใจ scale/หยุด, และบทเรียนเข้าโครงการถัดไป",
+                  "name_en": "",
+                  "method": "Project Review + Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารอนุมัติ pilot พร้อมเกณฑ์ success",
+                    "รายงานประเมินผล pilot",
+                    "มติการ scale/ยุติพร้อมเหตุผล",
+                    "งบที่ใช้จริงเทียบผลที่ได้"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงความมั่นคงไซเบอร์ของอุปกรณ์ปลายทางจำนวนมหาศาล (มิเตอร์/IoT/DER edge)",
+          "name_en": "Massive Edge Device Attack Surface",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มี security baseline/การอัพเดท firmware ของอุปกรณ์ edge หลักล้านตัว",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "สอบทาน security baseline อุปกรณ์ edge (มิเตอร์, RTU, DER gateway): การจัดการ firmware/key, การตรวจจับอุปกรณ์แปลกปลอม, และ segment แยกจากระบบควบคุมหลัก ตามแนว cybersecurity ใน SP 1108r4",
+                  "name_en": "",
+                  "method": "Technical Review + Sampling",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 1108r4 — Smart Grid Interoperability Framework Release 4.0 (2021)",
+                      "clause": "Conceptual Model/Interoperability Profile",
+                      "title": "Smart Grid Framework"
+                    },
+                    {
+                      "std": "IIA Cybersecurity Topical Requirement",
+                      "clause": "incident response/recovery (มีผล 6 ก.พ. 2026)",
+                      "title": "Mandatory Topical Requirement"
+                    }
+                  ],
+                  "evidence_types": [
+                    "security baseline รายประเภทอุปกรณ์",
+                    "กระบวนการ+ประวัติอัพเดท firmware",
+                    "ผล penetration test ฝั่ง AMI/edge",
+                    "แผนผัง segmentation edge-to-core"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001",
+                    "EXM-CYBER-INTL-002"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงการเชื่อมพลังงานหมุนเวียน/prosumer (DER) กระทบเสถียรภาพและรายได้โครงข่าย",
+          "name_en": "DER Integration Impact",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มีการศึกษา hosting capacity และโครงสร้างค่าบริการรองรับ prosumer",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานการศึกษา hosting capacity รายพื้นที่ ผลกระทบรายได้จาก net billing/prosumer และความพร้อมระบบควบคุม DER เทียบแผน PDP/แผนแม่บท smart grid",
+                  "name_en": "",
+                  "method": "Analytical Review + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "NIST SP 1108r4 — Smart Grid Interoperability Framework Release 4.0 (2021)",
+                      "clause": "Conceptual Model/Interoperability Profile",
+                      "title": "Smart Grid Framework"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผลศึกษา hosting capacity",
+                    "ประมาณการผลกระทบรายได้จาก DER",
+                    "สถานะระบบ DERMS/การควบคุม",
+                    "ความสอดคล้องกับแผน PDP ฉบับปัจจุบัน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงการพึ่งพาเทคโนโลยีต่างประเทศ/ผู้ขายเดียวในระบบ AMI ทั้งระบบ",
+          "name_en": "AMI Vendor & Technology Lock-in",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "เลือกเทคโนโลยี proprietary ทั้งระบบโดยไม่มี exit/escrow และแผนเปลี่ยนผ่าน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "ตรวจสัญญา AMI/head-end system: ข้อกำหนด open standard, source code escrow, สิทธิ์ข้อมูล, และต้นทุนเปลี่ยนผู้ขาย (switching cost) ที่ประเมินไว้",
+                  "name_en": "",
+                  "method": "Contract Review",
+                  "std_refs": [
+                    {
+                      "std": "IEC 61968/61970 (CIM)",
+                      "clause": "Common Information Model",
+                      "title": "EMS/DMS Integration"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สัญญา AMI พร้อมข้อ escrow/exit",
+                    "การประเมิน switching cost",
+                    "มาตรฐาน open ที่ระบบรองรับจริง",
+                    "แผนเปลี่ยนผ่านกรณีผู้ขายเลิกกิจการ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T016",
+      "version": "2.0.0",
+      "confidence_score": 85,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-14T01:30:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -4918,87 +5815,43 @@
         "T003",
         "T012"
       ],
-      "thai_law_refs": [
-        "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศไทย (PDP 2024)",
-        "ยุทธศาสตร์ดิจิทัลเพื่อเศรษฐกิจและสังคม พ.ศ. 2561-2580",
-        "ประกาศ กกพ. ว่าด้วย Smart Grid และมิเตอร์อัจฉริยะ"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED (batch สุดท้าย): แก้ IIA 2100/2120 (เลขตาย) → GIAS 2024 | PMBOK ผูกฉบับ 8th Edition (พ.ย. 2025 — verified pmi.org) | SP 800-34 R1/SP 1108r4 verified | ตัด \"แนวทาง สนช.\" ที่ไม่มีที่มา | org tags + derivation + exemplar_refs",
+          "approved_by": "pending PR merge"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC003",
-          "source_type": "pdf_standard",
-          "credibility_score": 93,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T016-01",
+          "source_type": "international_framework",
+          "publisher": "NIST",
+          "title": "NIST Framework and Roadmap for Smart Grid Interoperability Standards, Release 4.0 (SP 1108r4)",
+          "url": "https://www.nist.gov/publications/nist-framework-and-roadmap-smart-grid-interoperability-standards-release-40",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "หน้า official: Published February 18, 2021 — \"includes updates to the Smart Grid Conceptual Model, introduces new Communication Pathways Scenarios and an Ontology... provides guidance on cybersecurity practices and tools, and develops the concept of an Interoperability Profile to facilitate testing and certification\" — ไม่มี r5 ประกาศ"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T016-02",
+          "source_type": "thai_regulator",
+          "publisher": "สกมช./ราชกิจจานุเบกษา",
+          "title": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562 (CII มิติ edge/AMI)",
+          "url": "https://www.ncsa.or.th",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "ยืนยันไว้แล้ว (T002) — พลังงานเป็น CII; ขยายผลคุมอุปกรณ์ edge จำนวนมากของ smart grid"
         }
       ],
-      "risks": [
-        {
-          "id": "R033",
-          "name_th": "ความเสี่ยงการลงทุน Smart Grid ไม่บรรลุผลลัพธ์ที่คาดหวัง",
-          "name_en": "Smart Grid Investment Fails to Deliver Expected Outcomes",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF038",
-              "name_th": "ขาดกรอบการประเมินผลตอบแทนการลงทุน Smart Grid",
-              "name_en": "No ROI evaluation framework for Smart Grid investment",
-              "audit_procedures": [
-                {
-                  "id": "AP040",
-                  "name_th": "ตรวจสอบกรอบการวัดและประเมินผลโครงการ Smart Grid",
-                  "name_en": "Review Smart Grid project measurement and evaluation framework",
-                  "method": "Performance Audit + Benefit Realization Review",
-                  "evidence_types": [
-                    "Business Case และ ROI Analysis",
-                    "KPI Dashboard ของโครงการ Smart Grid",
-                    "รายงานผลประโยชน์ที่ได้รับ (Benefit Realization Report)",
-                    "รายงานการเปรียบเทียบแผน vs. ผล (Planned vs. Actual)",
-                    "Lessons Learned Report"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R034",
-          "name_th": "ความเสี่ยงการบูรณาการระบบ Digital/IoT กับโครงข่ายไฟฟ้าเดิม",
-          "name_en": "Digital/IoT Integration with Legacy Grid Infrastructure Risk",
-          "level": "HIGH",
-          "likelihood": "สูง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF039",
-              "name_th": "ขาดสถาปัตยกรรมการบูรณาการระบบ IT/OT ที่ชัดเจน",
-              "name_en": "No clear IT/OT system integration architecture",
-              "audit_procedures": [
-                {
-                  "id": "AP041",
-                  "name_th": "ตรวจสอบสถาปัตยกรรมและแผนการบูรณาการระบบ Digital กับโครงสร้างพื้นฐานเดิม",
-                  "name_en": "Review Digital system integration architecture and plan with legacy infrastructure",
-                  "method": "Architecture Review + Technical Assessment",
-                  "evidence_types": [
-                    "Enterprise Architecture Document",
-                    "IT/OT Integration Roadmap",
-                    "รายงาน Interoperability Testing",
-                    "รายงานความปลอดภัยของระบบ IoT",
-                    "รายงานความพร้อม Cybersecurity สำหรับ Smart Devices"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:636e3268281444f6fdea3de618ba1cd189cd3a350bc99e86aa67a79786f1c163"
     }
   ],
   "skills_registry": {
