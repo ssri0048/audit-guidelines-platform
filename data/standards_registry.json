@@ -351,6 +351,109 @@
           "evidence_excerpt": "หน้า official สำนักงาน กกพ. — เกณฑ์ พ.ศ. 2565 ประเภทใบอนุญาตระบบส่งไฟฟ้า"
         }
       ]
+    },
+    {
+      "family_id": "oecd-cg",
+      "display": "G20/OECD Principles of Corporate Governance",
+      "match": "OECD.{0,30}Corporate Governance",
+      "editions": [
+        {
+          "version": "2015",
+          "status": "WITHDRAWN",
+          "superseded_by": "2023",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.oecd.org/en/publications/g20-oecd-principles-of-corporate-governance-2023_ed750b30-en.html",
+          "evidence_excerpt": "ฉบับ 2023 \"revised\" adopted June 2023, endorsed by G20 Sept 2023 — แทนฉบับ 2015"
+        },
+        {
+          "version": "2023",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.oecd.org/en/publications/g20-oecd-principles-of-corporate-governance-2023_ed750b30-en.html",
+          "evidence_excerpt": "adopted by OECD Council June 2023, endorsed by G20 Leaders September 2023"
+        }
+      ]
+    },
+    {
+      "family_id": "th-fiscal-discipline-2561",
+      "display": "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+      "match": "วินัยการเงินการคลัง",
+      "editions": [
+        {
+          "version": "2561",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.audit.go.th/th/พระราชบัญญัติ-วินัยการเงินการคลังของรัฐ-พศ-2561",
+          "evidence_excerpt": "ตัวบทเผยแพร่บนเว็บ สตง."
+        }
+      ]
+    },
+    {
+      "family_id": "th-elec-safety-2558",
+      "display": "กฎกระทรวงความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558",
+      "match": "ความปลอดภัย.{0,20}ไฟฟ้า.{0,15}2558",
+      "editions": [
+        {
+          "version": "2558",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2558/A/007/1.PDF",
+          "evidence_excerpt": "ราชกิจจาฯ เล่ม 132 ตอนที่ 7 ก, 6 ก.พ. 2558"
+        }
+      ]
+    },
+    {
+      "family_id": "ieee-1366",
+      "display": "IEEE 1366 (Reliability Indices)",
+      "match": "IEEE\\s*1366",
+      "editions": [
+        {
+          "version": "2022",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://standards.ieee.org/ieee/1366/",
+          "evidence_excerpt": "",
+          "notes": "เวอร์ชันล่าสุดต้อง verify จากทะเบียน IEEE (คาด 1366-2022)"
+        }
+      ]
+    },
+    {
+      "family_id": "tfrs",
+      "display": "TFRS (สภาวิชาชีพบัญชี)",
+      "match": "TFRS",
+      "editions": [
+        {
+          "version": "ชุดปัจจุบัน",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.tfac.or.th",
+          "evidence_excerpt": "",
+          "notes": "TFRS ปรับรายฉบับทุกปี — ตรวจปีบังคับใช้รายฉบับกับ TFAC"
+        }
+      ]
+    },
+    {
+      "family_id": "intosai-gov-9100",
+      "display": "INTOSAI GOV 9100 (Internal Control Guidelines)",
+      "match": "INTOSAI\\s+GOV\\s*9100",
+      "editions": [
+        {
+          "version": "2004",
+          "status": "WITHDRAWN",
+          "superseded_by": "IFPP restructure (ตรวจเลขใหม่ที่ issai.org)",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.issai.org",
+          "evidence_excerpt": "",
+          "notes": "ตระกูล GOV ถูกจัดโครงสร้างใหม่เข้า IFPP — ต้อง verify เลขเอกสารปัจจุบันก่อนอ้าง"
+        }
+      ]
     }
   ]
 }

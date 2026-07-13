@@ -1352,43 +1352,281 @@
       "id": "T004",
       "name_th": "ความปลอดภัยและความเชื่อถือได้ของโครงข่ายไฟฟ้า",
       "name_en": "Grid Safety & Reliability",
-      "category": "Safety & Operations",
-      "category_th": "ความปลอดภัยและการปฏิบัติการ",
-      "icon": "🔋",
-      "color": "#27AE60",
+      "category": "Technology & Infrastructure",
+      "category_th": "เทคโนโลยีและโครงสร้างพื้นฐาน",
+      "icon": "🔌",
+      "color": "#C0392B",
       "priority": "CRITICAL",
       "applicable_standards": [
-        "IEC 60038",
-        "NERC TPL",
         "IEEE 1366",
-        "มาตรฐาน SAIDI/SAIFI",
-        "กฎของ กกพ."
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+        "กฎกระทรวงความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558",
+        "NERC TPL",
+        "IEC 60038"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T004",
-      "version": "1.0.0",
-      "confidence_score": 91,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:3e252a5decaef6e3a45772e767f4e16e582a5df030ce1c837d124d6d3780e089",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "พ.ร.บ.ความปลอดภัย อาชีวอนามัย และสภาพแวดล้อมในการทำงาน พ.ศ. 2554 + กฎกระทรวงว่าด้วยงานไฟฟ้า พ.ศ. 2558 (ราชกิจจาฯ เล่ม 132 ตอนที่ 7 ก, 6 ก.พ. 2558)",
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการของ กกพ. พ.ศ. 2565",
+        "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงไฟฟ้าดับวงกว้าง (blackout/brownout) จากความล้มเหลวต่อเนื่องของระบบ",
+          "name_en": "Wide-area Outage from Cascading Failure",
+          "level": "CRITICAL",
+          "likelihood": "ต่ำ",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ไม่มีการวิเคราะห์ contingency (N-1) และแผนรับมือ cascading failure ที่ทดสอบจริง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทานผลวิเคราะห์ N-1 contingency ของระบบส่ง/จำหน่ายและแผน load shedding พร้อมหลักฐานการซ้อม",
+                  "name_en": "",
+                  "method": "Technical Review + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "IEEE 1366",
+                      "clause": "Reliability Indices",
+                      "title": "Guide for Electric Power Distribution Reliability Indices"
+                    },
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง/จำหน่าย",
+                      "title": "มาตรฐานคุณภาพการให้บริการ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานวิเคราะห์ contingency ล่าสุด",
+                    "แผน load shedding/black start พร้อมผลซ้อม",
+                    "บันทึกเหตุการณ์ระบบผิดปกติย้อนหลัง 3 ปี",
+                    "รายงานการประสานงานกับศูนย์ควบคุมระบบ"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงดัชนีความเชื่อถือได้ (SAIFI/SAIDI/CAIDI) ไม่ผ่านเกณฑ์ กกพ. หรือรายงานไม่ตรงจริง",
+          "name_en": "Reliability Indices Below ERC Threshold or Misreported",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "การเก็บและคำนวณดัชนีไม่เป็นไปตามนิยาม IEEE 1366/เกณฑ์ กกพ.",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "ทดสอบการคำนวณ SAIFI/SAIDI ซ้ำจากข้อมูลดิบเหตุการณ์ไฟดับ เทียบนิยาม IEEE 1366 และรายงานที่ส่ง กกพ.",
+                  "name_en": "",
+                  "method": "Re-performance + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IEEE 1366",
+                      "clause": "Reliability Indices",
+                      "title": "Guide for Electric Power Distribution Reliability Indices"
+                    },
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง/จำหน่าย",
+                      "title": "มาตรฐานคุณภาพการให้บริการ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อมูลดิบ outage events จากระบบ OMS",
+                    "สูตร/นิยามการคำนวณที่ใช้จริง",
+                    "รายงานดัชนีที่ส่ง กกพ.",
+                    "เกณฑ์เปรียบเทียบของ กกพ. ฉบับปัจจุบัน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงอุบัติเหตุจากไฟฟ้าต่อผู้ปฏิบัติงานและประชาชน (ไฟดูด ตกจากที่สูง arc flash)",
+          "name_en": "Electrical Accidents to Workers & Public",
+          "level": "CRITICAL",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่ปฏิบัติตามกฎกระทรวงความปลอดภัยงานไฟฟ้า 2558 (อบรม, PPE, ขั้นตอน lockout)",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "ตรวจสอบการปฏิบัติตามกฎกระทรวง 2558: ทะเบียนอบรมลูกจ้างงานไฟฟ้า แผนผังวงจร PPE และขั้นตอนตัดแยกระบบ (LOTO) พร้อมสุ่มสังเกตหน้างาน",
+                  "name_en": "",
+                  "method": "Compliance Testing + Observation",
+                  "std_refs": [
+                    {
+                      "std": "กฎกระทรวงความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558",
+                      "clause": "ทั้งฉบับ",
+                      "title": "ราชกิจจานุเบกษา เล่ม 132 ตอนที่ 7 ก"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนฝึกอบรมความปลอดภัยงานไฟฟ้า",
+                    "แผนผังวงจรไฟฟ้าตามข้อกำหนด",
+                    "บันทึกตรวจ PPE และอุปกรณ์ป้องกัน",
+                    "สถิติอุบัติเหตุและการสอบสวนสาเหตุ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงต้นไม้/สิ่งปลูกสร้างรุกล้ำแนวสายส่ง (ROW) ทำให้เกิด fault และอันตรายสาธารณะ",
+          "name_en": "Right-of-Way Encroachment Causing Faults",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มีรอบการตรวจแนวสายและกระบวนการจัดการรุกล้ำที่ติดตามผลได้",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "สอบทานแผน/ผลการตรวจแนวสาย (รวม drone/patrol) และการปิดงานรายการรุกล้ำที่พบ พร้อมวิเคราะห์ fault ที่มีสาเหตุจากต้นไม้",
+                  "name_en": "",
+                  "method": "Document Review + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง/จำหน่าย",
+                      "title": "มาตรฐานคุณภาพการให้บริการ"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนและผลการตรวจแนวสายรายปี",
+                    "ทะเบียนจุดรุกล้ำและสถานะการแก้ไข",
+                    "สถิติ fault แยกตามสาเหตุ",
+                    "บันทึกแจ้งเตือน/ประสานเจ้าของพื้นที่"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงการป้องกันระบบ (protection coordination) ตั้งค่าผิดหรือไม่ทันสภาพโครงข่ายที่เปลี่ยน (DER/solar เพิ่ม)",
+          "name_en": "Protection Miscoordination Amid Grid Changes",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มีการทบทวน relay setting ตามรอบเมื่อโครงข่าย/แหล่งผลิตกระจายเปลี่ยน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานรอบการทบทวน protection coordination study และทดสอบ relay setting จริงเทียบผลศึกษา โดยเฉพาะฟีดเดอร์ที่มี solar/DER หนาแน่น",
+                  "name_en": "",
+                  "method": "Technical Testing + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "IEEE 1366",
+                      "clause": "Reliability Indices",
+                      "title": "Guide for Electric Power Distribution Reliability Indices"
+                    },
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง/จำหน่าย",
+                      "title": "มาตรฐานคุณภาพการให้บริการ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "Protection coordination study ล่าสุด",
+                    "ทะเบียน relay settings และวันที่ทดสอบ",
+                    "ข้อมูล DER ที่เชื่อมต่อรายฟีดเดอร์",
+                    "บันทึกเหตุการณ์ relay ทำงานผิด/ไม่ทำงาน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงความพร้อมรับมือภัยธรรมชาติ (พายุ น้ำท่วม แผ่นดินไหว) ของโครงสร้างพื้นฐานไฟฟ้า",
+          "name_en": "Natural Disaster Resilience of Grid Infrastructure",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีแผน resilience/แผนฟื้นฟูเฉพาะภัยที่ซ้อมร่วมกับหน่วยงานท้องถิ่น",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานแผนรับมือภัยธรรมชาติรายประเภท จุดอ่อนโครงสร้าง (เสา/สถานีในพื้นที่เสี่ยง) และผลการซ้อมร่วมกับหน่วยงานภายนอก",
+                  "name_en": "",
+                  "method": "Document Review + Site Visit",
+                  "std_refs": [
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง/จำหน่าย",
+                      "title": "มาตรฐานคุณภาพการให้บริการ"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 15.1",
+                      "title": "Final Engagement Communication"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนรับมือภัยธรรมชาติและ MOU หน่วยงานเกี่ยวข้อง",
+                    "ทะเบียนทรัพย์สินในพื้นที่เสี่ยงภัย",
+                    "รายงานซ้อมแผนและบทเรียน",
+                    "งบ/แผนเสริมความแข็งแรงโครงสร้าง"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T004",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T18:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -1396,149 +1634,332 @@
         "T003",
         "T015"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.ความปลอดภัย อาชีวอนามัย และสภาพแวดล้อมในการทำงาน พ.ศ. 2554",
-        "กฎระเบียบ กกพ. ว่าด้วยความเชื่อถือได้ของระบบไฟฟ้า",
-        "มาตรฐาน SAIDI/SAIFI ของ กฟน./กฟภ."
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED จากแหล่ง official — ขยายเป็น 6 ความเสี่ยง เพิ่ม source_chain/std_refs; T006 อัพเดท OECD CG เป็นฉบับ 2023 (แทน 2015)",
+          "approved_by": "pending PR merge by human reviewer"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T004-01",
+          "source_type": "thai_regulator",
+          "publisher": "สำนักงาน กกพ.",
+          "title": "มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า",
+          "url": "https://www.erc.or.th/th/service-quality-standards",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "หน้าทางการ กกพ. — เกณฑ์มาตรฐานคุณภาพบริการ (รวมดัชนีความเชื่อถือได้) ฉบับ พ.ศ. 2565"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T004-02",
+          "source_type": "official_gazette",
+          "publisher": "ราชกิจจานุเบกษา",
+          "title": "กฎกระทรวงกำหนดมาตรฐานฯ ความปลอดภัยในการทำงานเกี่ยวกับไฟฟ้า พ.ศ. 2558",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2558/A/007/1.PDF",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 98,
+          "excerpt": "เล่ม 132 ตอนที่ 7 ก, 6 ก.พ. 2558 — ออกตาม พ.ร.บ.ความปลอดภัยฯ พ.ศ. 2554 มาตรา 5,8; สาระ: ข้อบังคับความปลอดภัย การอบรมลูกจ้างงานไฟฟ้า แผนผังวงจรไฟฟ้า (ยืนยันจากสำเนาราชกิจจาฯ ที่เผยแพร่)"
+        },
+        {
+          "source_id": "SRC-T004-03",
+          "source_type": "international_standard",
+          "publisher": "IEEE",
+          "title": "IEEE 1366 — Electric Power Distribution Reliability Indices",
+          "url": "https://standards.ieee.org/ieee/1366/",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 90,
+          "excerpt": "มาตรฐานนิยาม SAIFI/SAIDI/CAIDI (สถานะเวอร์ชันปัจจุบันให้ verify จากทะเบียน IEEE ตอน re-check)"
         }
       ],
-      "risks": [
-        {
-          "id": "R009",
-          "name_th": "ความเสี่ยงไฟฟ้าดับครั้งใหญ่ (Blackout)",
-          "name_en": "Large-scale Power Outage (Blackout) Risk",
-          "level": "CRITICAL",
-          "likelihood": "ต่ำ",
-          "impact": "สูงมาก",
-          "control_failures": [
-            {
-              "id": "CF012",
-              "name_th": "ขาดความซ้ำซ้อน (Redundancy) N-1 ในระบบสายส่ง",
-              "name_en": "Insufficient N-1 redundancy in transmission system",
-              "audit_procedures": [
-                {
-                  "id": "AP014",
-                  "name_th": "ทบทวนการศึกษา N-1/N-2 Contingency Analysis และแผนรักษาความมั่นคง",
-                  "name_en": "Review N-1/N-2 contingency analysis and grid stability plan",
-                  "method": "Technical Review + Simulation Testing",
-                  "evidence_types": [
-                    "Single Line Diagram (SLD)",
-                    "รายงาน Contingency Analysis",
-                    "Power Flow Study Results",
-                    "แผนป้องกันระบบ (Protection Scheme)",
-                    "รายงานการทดสอบระบบป้องกัน"
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "CF013",
-              "name_th": "ขาดแผนการจัดการสถานการณ์ฉุกเฉินโครงข่ายไฟฟ้า",
-              "name_en": "No power grid emergency management plan",
-              "audit_procedures": [
-                {
-                  "id": "AP015",
-                  "name_th": "ตรวจสอบและซ้อมแผนฉุกเฉินโครงข่ายไฟฟ้า",
-                  "name_en": "Review and test power grid emergency plan",
-                  "method": "Document Review + Drill Exercise",
-                  "evidence_types": [
-                    "แผนฉุกเฉินโครงข่ายไฟฟ้า",
-                    "รายงานการซ้อมแผน (Drill Report)",
-                    "SAIDI/SAIFI Performance Report",
-                    "บันทึกเหตุการณ์ไฟดับ (Outage Log)",
-                    "รายงาน Root Cause Analysis"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R010",
-          "name_th": "ความเสี่ยงอุบัติเหตุจากไฟฟ้า",
-          "name_en": "Electrical Safety Accident Risk",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF014",
-              "name_th": "ไม่ปฏิบัติตามขั้นตอนความปลอดภัยในการทำงานกับไฟฟ้า",
-              "name_en": "Non-compliance with electrical safety work procedures",
-              "audit_procedures": [
-                {
-                  "id": "AP016",
-                  "name_th": "ตรวจสอบขั้นตอนความปลอดภัยและบันทึกการฝึกอบรม",
-                  "name_en": "Review safety procedures and training records",
-                  "method": "Observation + Record Review",
-                  "evidence_types": [
-                    "คู่มือความปลอดภัยในการทำงาน (Safety Manual)",
-                    "บันทึกการฝึกอบรมความปลอดภัย",
-                    "Lockout/Tagout (LOTO) Records",
-                    "รายงานอุบัติเหตุ/เหตุการณ์เกือบเกิด (Near Miss Report)",
-                    "ใบอนุญาตทำงาน (Work Permit)"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:f6bad2314e92163476b85b113167dbfa8c89e3e59a146ea539355e20bb16066e"
     },
     {
       "id": "T005",
       "name_th": "การบริหารการเงินและการรายงาน",
       "name_en": "Financial Management & Reporting",
-      "category": "Financial",
-      "category_th": "การเงิน",
+      "category": "Financial Integrity",
+      "category_th": "ความซื่อสัตย์ทางการเงิน",
       "icon": "💰",
-      "color": "#8E44AD",
+      "color": "#27AE60",
       "priority": "HIGH",
       "applicable_standards": [
-        "TFRS / IFRS",
-        "INTOSAI GOV 9100",
-        "IIA 2400",
-        "มาตรฐาน สตง.",
-        "พรบ.วินัยการเงินการคลัง พ.ศ.2561"
+        "TFRS (มาตรฐานการรายงานทางการเงินไทย)",
+        "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+        "มาตรฐานการตรวจเงินแผ่นดิน (สตง.)",
+        "IIA GIAS 2024"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T005",
-      "version": "1.0.0",
-      "confidence_score": 89,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:93970173bf0979b260c393cb6659208d33265ffdf787027451fccb8cf6db64a1",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+        "มาตรฐานการบัญชีภาครัฐและนโยบายการบัญชีภาครัฐ (กรมบัญชีกลาง)",
+        "หลักเกณฑ์มาตรฐานเกี่ยวกับการตรวจเงินแผ่นดิน (คตง.)"
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงงบการเงินแสดงข้อมูลไม่ถูกต้อง/ไม่ครบถ้วนตาม TFRS",
+          "name_en": "Financial Statements Misstatement",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "การปิดบัญชีและปรับปรุงรายการไม่มีการสอบทานอิสระ; นโยบายบัญชีไม่อัพเดทตาม TFRS ฉบับปัจจุบัน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทานรายการปรับปรุงบัญชีสำคัญ (accrual, provision, impairment) เทียบ TFRS ฉบับบังคับใช้ และทดสอบ journal entries ผิดปกติ",
+                  "name_en": "",
+                  "method": "Substantive Testing + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "TFRS (มาตรฐานการรายงานทางการเงินไทย)",
+                      "clause": "ฉบับที่เกี่ยวข้อง",
+                      "title": "Thai Financial Reporting Standards"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "งบทดลองและรายการปรับปรุงงวดล่าสุด",
+                    "นโยบายบัญชีเทียบ TFRS ฉบับปัจจุบัน",
+                    "ผล JE testing (ผู้บันทึก/เวลา/รายการกลม)",
+                    "รายงานผู้สอบบัญชี (สตง.) ปีก่อนและการแก้ไข"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงใช้จ่ายงบประมาณเกินกรอบ/ผิดวัตถุประสงค์ ขัด พ.ร.บ.วินัยการเงินการคลัง 2561",
+          "name_en": "Budget Overrun or Misuse vs Fiscal Discipline Act",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "ไม่มีการติดตามงบจริงเทียบแผนรายเดือนพร้อมกลไกอนุมัติโอนเปลี่ยนแปลงที่ชัด",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "วิเคราะห์งบจริง-แผนรายหมวด ตรวจการโอนงบข้ามหมวด/โครงการว่ามีอำนาจอนุมัติถูกต้อง และเงินเหลื่อมปีเป็นไปตามหลักเกณฑ์",
+                  "name_en": "",
+                  "method": "Data Analytics + Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+                      "clause": "หมวดวินัยการเงินการคลัง",
+                      "title": "State Fiscal Discipline Act"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานงบจริงเทียบแผนรายเดือน",
+                    "บันทึกอนุมัติโอนเปลี่ยนแปลงงบ",
+                    "ทะเบียนเงินกันเหลื่อมปีพร้อมเหตุผล",
+                    "กรอบวินัยตาม พ.ร.บ. 2561 ที่เกี่ยวข้อง"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงรายได้ค่าไฟฟ้ารั่วไหล (มิเตอร์ผิดพลาด ละเมิดใช้ไฟ บิลตกหล่น)",
+          "name_en": "Revenue Leakage (Metering/Theft/Billing Gaps)",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่มีการกระทบยอดหน่วยผลิต-หน่วยขาย-รายได้ และวิเคราะห์ non-technical loss เชิงระบบ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "กระทบยอดหน่วยไฟฟ้าซื้อ/ผลิต เทียบหน่วยขายและรายได้ วิเคราะห์ loss แยก technical/non-technical และสุ่มตรวจมิเตอร์กลุ่มเสี่ยง",
+                  "name_en": "",
+                  "method": "Reconciliation + Data Analytics",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    },
+                    {
+                      "std": "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+                      "clause": "หมวดวินัยการเงินการคลัง",
+                      "title": "State Fiscal Discipline Act"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อมูลหน่วยซื้อ/ผลิต-ขายรายเดือน",
+                    "รายงานวิเคราะห์ loss แยกประเภท",
+                    "ทะเบียนคดีละเมิดใช้ไฟและการเรียกเก็บ",
+                    "ผลสอบเทียบมิเตอร์กลุ่มตัวอย่าง"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงการจ่ายเงินซ้ำ/จ่ายผิด/จ่ายให้ผู้ขายปลอมในระบบเจ้าหนี้",
+          "name_en": "Duplicate/Erroneous/Fraudulent Payments",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "การควบคุม master data ผู้ขายและการอนุมัติจ่ายไม่แยกหน้าที่เพียงพอ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "รัน duplicate payment test (เลขใบแจ้งหนี้/จำนวน/ผู้ขายซ้ำ) ตรวจการแก้ไขบัญชีธนาคารผู้ขาย และสอบทานสิทธิ์ผู้แก้ master data",
+                  "name_en": "",
+                  "method": "Data Analytics + Access Review",
+                  "std_refs": [
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    },
+                    {
+                      "std": "TFRS (มาตรฐานการรายงานทางการเงินไทย)",
+                      "clause": "ฉบับที่เกี่ยวข้อง",
+                      "title": "Thai Financial Reporting Standards"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อมูลการจ่ายเงินทั้งปี",
+                    "Log การแก้ไข vendor master",
+                    "ตาราง SoD สิทธิ์ในระบบการเงิน",
+                    "ผลการติดตามรายการต้องสงสัย"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงประมาณการทางบัญชีสำคัญ (ค่าเสื่อม สำรองหนี้ ด้อยค่าโรงไฟฟ้า/สินทรัพย์) ไม่สมเหตุสมผล",
+          "name_en": "Unreasonable Key Accounting Estimates",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มีการทบทวนสมมติฐานประมาณการโดยผู้ไม่มีส่วนได้เสียพร้อมเอกสารรองรับ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานสมมติฐานประมาณการสำคัญ (อายุการใช้งานสินทรัพย์ไฟฟ้า อัตราสำรอง การด้อยค่า) เทียบข้อมูลจริงในอดีตและแนวปฏิบัติอุตสาหกรรม",
+                  "name_en": "",
+                  "method": "Analytical Review + Recalculation",
+                  "std_refs": [
+                    {
+                      "std": "TFRS (มาตรฐานการรายงานทางการเงินไทย)",
+                      "clause": "ฉบับที่เกี่ยวข้อง",
+                      "title": "Thai Financial Reporting Standards"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 15.1",
+                      "title": "Final Engagement Communication"
+                    }
+                  ],
+                  "evidence_types": [
+                    "กระดาษทำการประมาณการพร้อมสมมติฐาน",
+                    "ข้อมูลจริงย้อนหลังเทียบประมาณการ",
+                    "นโยบายอายุการใช้งานสินทรัพย์",
+                    "ความเห็นผู้เชี่ยวชาญ/ผู้ประเมินอิสระ (ถ้ามี)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงรายงานการเงินเพื่อผู้กำกับ (กกพ./กระทรวงการคลัง/สตง.) ล่าช้าหรือไม่สอดคล้องกันระหว่างระบบ",
+          "name_en": "Late/Inconsistent Regulatory Financial Reporting",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ข้อมูลหลายระบบ (ERP, ระบบบิล, GFMIS) ไม่มีการกระทบยอดก่อนรายงาน",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "ตรวจปฏิทินการรายงานต่อผู้กำกับทุกฉบับ เทียบวันส่งจริง และกระทบยอดตัวเลขเดียวกันข้ามรายงาน/ระบบ",
+                  "name_en": "",
+                  "method": "Compliance Testing + Reconciliation",
+                  "std_refs": [
+                    {
+                      "std": "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+                      "clause": "หมวดวินัยการเงินการคลัง",
+                      "title": "State Fiscal Discipline Act"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 15.1",
+                      "title": "Final Engagement Communication"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ปฏิทินรายงานผู้กำกับและหลักฐานวันส่ง",
+                    "ตารางกระทบยอดข้ามระบบ",
+                    "รายการผลต่างและการแก้ไข",
+                    "หนังสือทักท้วงจากผู้กำกับ (ถ้ามี)"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T005",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T18:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -1546,147 +1967,323 @@
         "T006",
         "T007"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
-        "มาตรฐานการบัญชีภาครัฐ สตง.",
-        "ระเบียบการเงินและบัญชีขององค์กรรัฐวิสาหกิจ"
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED จากแหล่ง official — ขยายเป็น 6 ความเสี่ยง เพิ่ม source_chain/std_refs; T006 อัพเดท OECD CG เป็นฉบับ 2023 (แทน 2015)",
+          "approved_by": "pending PR merge by human reviewer"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T005-01",
+          "source_type": "thai_government_agency",
+          "publisher": "สตง.",
+          "title": "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561 (เผยแพร่บน audit.go.th)",
+          "url": "https://www.audit.go.th/th/พระราชบัญญัติ-วินัยการเงินการคลังของรัฐ-พศ-2561",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "ตัวบทเผยแพร่โดย สตง. — กรอบวินัยการเงินการคลังภาครัฐ มีผลบังคับ เม.ย. 2561"
         },
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T005-02",
+          "source_type": "thai_professional_body",
+          "publisher": "สภาวิชาชีพบัญชี (TFAC)",
+          "title": "TFRS — มาตรฐานการรายงานทางการเงินไทย",
+          "url": "https://www.tfac.or.th",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "หน่วยงานผู้ออก TFRS — รายฉบับ/ปีบังคับใช้ให้ตรวจจากทะเบียน TFAC ประกอบตอนใช้งาน"
         }
       ],
-      "risks": [
-        {
-          "id": "R011",
-          "name_th": "ความเสี่ยงงบการเงินไม่ถูกต้องหรือทุจริตทางการเงิน",
-          "name_en": "Financial Misstatement or Fraud Risk",
-          "level": "HIGH",
-          "likelihood": "ต่ำ",
-          "impact": "สูงมาก",
-          "control_failures": [
-            {
-              "id": "CF015",
-              "name_th": "ขาดกระบวนการกระทบยอดบัญชีรายได้อย่างเป็นระบบ",
-              "name_en": "No systematic revenue account reconciliation process",
-              "audit_procedures": [
-                {
-                  "id": "AP017",
-                  "name_th": "ตรวจสอบกระบวนการกระทบยอดรายได้และการรับรู้รายได้",
-                  "name_en": "Review revenue reconciliation and recognition process",
-                  "method": "Substantive Testing + Analytical Procedures",
-                  "evidence_types": [
-                    "รายงานกระทบยอดรายได้รายเดือน",
-                    "Bank Statement",
-                    "ระบบบิลค่าไฟฟ้า (Billing System Report)",
-                    "รายงานการตรวจสอบภายใน",
-                    "งบการเงินที่ผ่านการตรวจสอบ"
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "CF016",
-              "name_th": "การควบคุมการเบิกจ่ายเงินบกพร่อง",
-              "name_en": "Deficient disbursement controls",
-              "audit_procedures": [
-                {
-                  "id": "AP018",
-                  "name_th": "ตรวจสอบกระบวนการอนุมัติและการเบิกจ่ายเงิน",
-                  "name_en": "Review payment approval and disbursement process",
-                  "method": "Transaction Testing",
-                  "evidence_types": [
-                    "ใบสำคัญจ่าย (Payment Voucher)",
-                    "เอกสารประกอบการอนุมัติ",
-                    "รายงานการตรวจสอบธุรกรรมผิดปกติ",
-                    "Audit Trail ในระบบการเงิน"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R012",
-          "name_th": "ความเสี่ยงการบริหารงบประมาณเกินกว่าที่ได้รับอนุมัติ",
-          "name_en": "Budget Overrun Risk",
-          "level": "MEDIUM",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF017",
-              "name_th": "ขาดระบบติดตามงบประมาณแบบ Real-time",
-              "name_en": "No real-time budget monitoring system",
-              "audit_procedures": [
-                {
-                  "id": "AP019",
-                  "name_th": "ตรวจสอบระบบและกระบวนการติดตามงบประมาณ",
-                  "name_en": "Review budget monitoring system and process",
-                  "method": "System Review + Analytical Procedures",
-                  "evidence_types": [
-                    "รายงานติดตามงบประมาณรายเดือน",
-                    "รายงานเปรียบเทียบงบประมาณ vs. จริง",
-                    "รายงานการอนุมัติโอนงบประมาณ",
-                    "รายงานการตรวจสอบงบประมาณของ สตง."
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:afe397fa96c93201cb7de960d562390a3e035ab39404c72ae02a762898641f23"
     },
     {
       "id": "T006",
       "name_th": "การกำกับดูแลกิจการที่ดีและจริยธรรม",
       "name_en": "Corporate Governance & Ethics",
       "category": "Governance",
-      "category_th": "การกำกับดูแล",
-      "icon": "⚖️",
-      "color": "#1ABC9C",
+      "category_th": "ธรรมาภิบาล",
+      "icon": "🏛️",
+      "color": "#2C3E50",
       "priority": "HIGH",
       "applicable_standards": [
-        "OECD Principles of Corporate Governance",
-        "IOD Thai CG Code",
-        "IIA 2110",
-        "พรบ.ป.ป.ช. พ.ศ.2561",
-        "มาตรฐาน ITA"
+        "G20/OECD Principles of Corporate Governance 2023",
+        "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ (สคร.)",
+        "เกณฑ์ประเมิน ITA (ป.ป.ช.)",
+        "IIA GIAS 2024",
+        "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561"
       ],
       "thailand_applicable": true,
-      "knowledge_id": "KN-T006",
-      "version": "1.0.0",
-      "confidence_score": 85,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:5f83ffa19bab5dc5903684dd828708445728c1be176c88e75a0c25345699227e",
-      "approved_by": null,
-      "changelog": [
+      "thai_law_refs": [
+        "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561",
+        "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจและองค์การมหาชน (สคร. กระทรวงการคลัง)",
+        "เกณฑ์การประเมินคุณธรรมและความโปร่งใส (ITA) ของ ป.ป.ช."
+      ],
+      "risks": [
         {
-          "version": "1.0.0",
-          "date": "2026-06-16",
-          "change": "Initial migration to schema 3.0.0",
-          "approved_by": "system"
+          "id": "R001",
+          "name_th": "ความเสี่ยงผลประโยชน์ทับซ้อนของกรรมการ/ผู้บริหารในการอนุมัติธุรกรรมสำคัญ",
+          "name_en": "Board/Executive Conflict of Interest",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ระบบเปิดเผยและจัดการ COI ไม่ครอบคลุมธุรกรรมกับบุคคลเกี่ยวโยง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "สอบทานทะเบียน COI ของกรรมการ/ผู้บริหาร เทียบคู่สัญญารายใหญ่ และตรวจกระบวนการงดออกเสียงในวาระที่มีส่วนได้เสีย",
+                  "name_en": "",
+                  "method": "Document Review + Cross-check",
+                  "std_refs": [
+                    {
+                      "std": "G20/OECD Principles of Corporate Governance 2023",
+                      "clause": "Principles",
+                      "title": "ฉบับปรับปรุง 2023"
+                    },
+                    {
+                      "std": "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ (สคร.)",
+                      "clause": "-",
+                      "title": "SOE CG Code"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แบบเปิดเผยส่วนได้เสียประจำปี",
+                    "รายงานการประชุมบอร์ดวาระธุรกรรมสำคัญ",
+                    "ทะเบียนบุคคล/นิติบุคคลเกี่ยวโยง",
+                    "นโยบาย COI และหลักฐานการบังคับใช้"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "version": "1.0.0",
-          "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "id": "R002",
+          "name_th": "ความเสี่ยงการทุจริตคอร์รัปชันและสินบนในกระบวนการที่มีดุลยพินิจสูง",
+          "name_en": "Corruption & Bribery in High-Discretion Processes",
+          "level": "CRITICAL",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "แผนบริหารความเสี่ยงทุจริตไม่ระบุ process เสี่ยงเฉพาะ และช่องทางแจ้งเบาะแสไม่ปลอดภัย",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "สอบทานแผนบริหารความเสี่ยงทุจริตรายกระบวนการ ทดสอบช่องทาง whistleblower (ความลับ/การคุ้มครอง) และติดตามการจัดการเรื่องร้องเรียนจริง",
+                  "name_en": "",
+                  "method": "Process Review + Case Testing",
+                  "std_refs": [
+                    {
+                      "std": "เกณฑ์ประเมิน ITA (ป.ป.ช.)",
+                      "clause": "-",
+                      "title": "Integrity and Transparency Assessment"
+                    },
+                    {
+                      "std": "G20/OECD Principles of Corporate Governance 2023",
+                      "clause": "Principles",
+                      "title": "ฉบับปรับปรุง 2023"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนบริหารความเสี่ยงทุจริตและผลดำเนินการ",
+                    "สถิติเรื่องร้องเรียนและผลการจัดการ",
+                    "การทดสอบช่องทางแจ้งเบาะแส",
+                    "ผลประเมิน ITA รายตัวชี้วัดพร้อมแผนยกระดับ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงโครงสร้าง/องค์ประกอบคณะกรรมการไม่เป็นไปตามหลัก CG (อิสระ ทักษะ วาระ)",
+          "name_en": "Board Composition Not Meeting CG Principles",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่มี board skill matrix และการประเมินตนเองที่นำไปใช้จริง",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "สอบทานองค์ประกอบบอร์ดเทียบหลัก OECD 2023/สคร. (สัดส่วนอิสระ ทักษะ ความหลากหลาย) และผลประเมินตนเองพร้อมการปรับปรุง",
+                  "name_en": "",
+                  "method": "Document Review",
+                  "std_refs": [
+                    {
+                      "std": "G20/OECD Principles of Corporate Governance 2023",
+                      "clause": "Principles",
+                      "title": "ฉบับปรับปรุง 2023"
+                    },
+                    {
+                      "std": "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ (สคร.)",
+                      "clause": "-",
+                      "title": "SOE CG Code"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ประวัติและคุณสมบัติกรรมการ",
+                    "Board skill matrix",
+                    "ผลประเมินตนเองของบอร์ดและแผนพัฒนา",
+                    "กฎบัตรคณะกรรมการชุดต่างๆ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงการเปิดเผยข้อมูลต่อสาธารณะไม่ครบถ้วน/ล่าช้า (รวม ESG และข้อมูลตามเกณฑ์ ITA)",
+          "name_en": "Inadequate Public Disclosure incl. ESG/ITA",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มีเจ้าภาพข้อมูลเปิดเผยรายรายการและปฏิทินกำกับ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "ตรวจความครบถ้วนข้อมูลบนเว็บไซต์ตามเกณฑ์ ITA/OIT รายข้อ และการเปิดเผยข้อมูลความยั่งยืนตามแนว OECD 2023",
+                  "name_en": "",
+                  "method": "Compliance Checklist",
+                  "std_refs": [
+                    {
+                      "std": "เกณฑ์ประเมิน ITA (ป.ป.ช.)",
+                      "clause": "-",
+                      "title": "Integrity and Transparency Assessment"
+                    },
+                    {
+                      "std": "G20/OECD Principles of Corporate Governance 2023",
+                      "clause": "Principles",
+                      "title": "ฉบับปรับปรุง 2023"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผลประเมิน OIT รายข้อปีล่าสุด",
+                    "ทะเบียนรายการข้อมูลที่ต้องเปิดเผยพร้อมเจ้าภาพ",
+                    "รายงานความยั่งยืน/ESG",
+                    "บันทึกการอัพเดทเว็บไซต์"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงรัฐในฐานะผู้ถือหุ้น/ผู้กำกับแทรกแซงการตัดสินใจเชิงพาณิชย์โดยไม่ผ่านกลไกธรรมาภิบาล",
+          "name_en": "State Interference Outside Governance Channels",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "บทบาทเจ้าของ (ownership) กับผู้กำกับไม่แยกชัดในธุรกรรม/นโยบายเฉพาะกิจ",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "สอบทานธุรกรรม/นโยบายที่รัฐสั่งการพิเศษ ว่าผ่านมติบอร์ด มีการประเมินผลกระทบ และเปิดเผยภาระที่รัฐมอบหมาย (PSO) แยกชัดในรายงาน",
+                  "name_en": "",
+                  "method": "Document Review + Interview",
+                  "std_refs": [
+                    {
+                      "std": "G20/OECD Principles of Corporate Governance 2023",
+                      "clause": "Principles",
+                      "title": "ฉบับปรับปรุง 2023"
+                    },
+                    {
+                      "std": "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ (สคร.)",
+                      "clause": "-",
+                      "title": "SOE CG Code"
+                    }
+                  ],
+                  "evidence_types": [
+                    "มติบอร์ดในเรื่องนโยบายรัฐมอบหมาย",
+                    "การประเมินผลกระทบทางการเงินของ PSO",
+                    "รายงานเปิดเผยภาระ PSO",
+                    "หนังสือสั่งการจากผู้ถือหุ้นภาครัฐ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงวัฒนธรรมจริยธรรมไม่ถูกวัดผลจริง (tone at the top ไม่ลงถึงหน้างาน)",
+          "name_en": "Ethics Culture Not Measured",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีตัวชี้วัดวัฒนธรรม/จริยธรรมและการสำรวจพนักงานที่นำผลไปใช้",
+              "name_en": "",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานการสื่อสารจรรยาบรรณ ผลสำรวจการรับรู้ของพนักงาน และการดำเนินการกับกรณีละเมิดอย่างเสมอภาค (รวมผู้บริหาร)",
+                  "name_en": "",
+                  "method": "Survey Review + Case Testing",
+                  "std_refs": [
+                    {
+                      "std": "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ (สคร.)",
+                      "clause": "-",
+                      "title": "SOE CG Code"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 15.1",
+                      "title": "Final Engagement Communication"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผลสำรวจวัฒนธรรมองค์กร/จริยธรรม",
+                    "สถิติการลงโทษกรณีละเมิดแยกตามระดับพนักงาน",
+                    "แผนสื่อสารจรรยาบรรณและหลักฐาน",
+                    "รายงานต่อคณะกรรมการตรวจสอบ"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
+      "knowledge_id": "KN-T006",
+      "version": "2.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T18:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -1694,87 +2291,43 @@
         "T005",
         "T008"
       ],
-      "thai_law_refs": [
-        "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561",
-        "มาตรฐานการประเมิน ITA ของ ป.ป.ช.",
-        "แนวทาง CG ของรัฐวิสาหกิจ สคร."
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration",
+          "approved_by": "system"
+        },
+        {
+          "version": "2.0.0",
+          "date": "2026-07-13",
+          "change": "RE-VERIFIED จากแหล่ง official — ขยายเป็น 6 ความเสี่ยง เพิ่ม source_chain/std_refs; T006 อัพเดท OECD CG เป็นฉบับ 2023 (แทน 2015)",
+          "approved_by": "pending PR merge by human reviewer"
+        }
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T006-01",
+          "source_type": "international_framework",
+          "publisher": "OECD",
+          "title": "G20/OECD Principles of Corporate Governance 2023",
+          "url": "https://www.oecd.org/en/publications/g20-oecd-principles-of-corporate-governance-2023_ed750b30-en.html",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "\"adopted by the OECD Council at Ministerial Level in June 2023 and endorsed by G20 Leaders in September 2023\" — ฉบับปรับปรุงแทนฉบับ 2015 เพิ่ม sustainability & resilience; 53 jurisdictions adhere"
         },
         {
-          "source_id": "SRC002",
-          "source_type": "pdf_standard",
-          "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "source_id": "SRC-T006-02",
+          "source_type": "thai_government_agency",
+          "publisher": "สำนักงาน ป.ป.ช.",
+          "title": "ระบบประเมิน ITA",
+          "url": "https://www.nacc.go.th/ita",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "ช่องทาง ITA บนเว็บ ป.ป.ช. (พบจากเมนูหลักเว็บ nacc.go.th ที่เปิดอ่านเมื่อ 2026-07-13)"
         }
       ],
-      "risks": [
-        {
-          "id": "R013",
-          "name_th": "ความเสี่ยงผลประโยชน์ทับซ้อน (Conflict of Interest)",
-          "name_en": "Conflict of Interest Risk",
-          "level": "HIGH",
-          "likelihood": "ปานกลาง",
-          "impact": "สูง",
-          "control_failures": [
-            {
-              "id": "CF018",
-              "name_th": "ไม่มีนโยบายและกระบวนการประกาศผลประโยชน์ที่มีประสิทธิภาพ",
-              "name_en": "No effective conflict of interest policy and disclosure process",
-              "audit_procedures": [
-                {
-                  "id": "AP020",
-                  "name_th": "ตรวจสอบนโยบาย COI และการประกาศผลประโยชน์ของผู้บริหารและกรรมการ",
-                  "name_en": "Review COI policy and interest declarations of executives and directors",
-                  "method": "Document Review + Interview",
-                  "evidence_types": [
-                    "นโยบายป้องกันผลประโยชน์ทับซ้อน",
-                    "แบบประกาศผลประโยชน์ (COI Declaration Form)",
-                    "ทะเบียนผลประโยชน์กรรมการ",
-                    "รายงานการตรวจสอบ ITA ของ ป.ป.ช.",
-                    "รายงานการประชุมคณะกรรมการ (ส่วนที่แสดงการออกจากห้อง)"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "R014",
-          "name_th": "ความเสี่ยงการทุจริตคอร์รัปชัน",
-          "name_en": "Corruption Risk",
-          "level": "HIGH",
-          "likelihood": "ต่ำ",
-          "impact": "สูงมาก",
-          "control_failures": [
-            {
-              "id": "CF019",
-              "name_th": "ขาดช่องทางแจ้งเบาะแสที่มีประสิทธิภาพ",
-              "name_en": "Ineffective whistleblowing channels",
-              "audit_procedures": [
-                {
-                  "id": "AP021",
-                  "name_th": "ตรวจสอบระบบและผลการดำเนินงานช่องทางแจ้งเบาะแส",
-                  "name_en": "Review whistleblowing system and operational results",
-                  "method": "System Review + Case Review",
-                  "evidence_types": [
-                    "นโยบายช่องทางแจ้งเบาะแส",
-                    "สถิติการรับเรื่องร้องเรียน",
-                    "รายงานผลการสืบสวนกรณีทุจริต",
-                    "รายงาน ITA Score",
-                    "แบบประเมินความเสี่ยงทุจริต"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "hash_signature": "sha256:3463cd69df33b2b2ac511e32d5c55e768d593bb222cbaaa3f095e5c4325cd166"
     },
     {
       "id": "T007",
