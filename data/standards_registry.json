@@ -126,15 +126,12 @@
       "editions": [
         {
           "version": "2018",
-          "status": "CURRENT",
-          "notes": "คาด CONFIRMED (stage 90.93) — ห้ามถือเป็น verified จนกว่าอ่านหน้า lifecycle ได้",
+          "status": "TO_BE_REVISED",
+          "notes": "2018 ยังเป็นฉบับใช้งาน แต่ฉบับแก้กำลังร่าง (CD stage) — ธงเฝ้ารอ re-verify เมื่อประกาศ",
           "evidence_url": "https://www.iso.org/standard/65694.html",
-          "evidence_excerpt": "",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "exception_code": "EX-JS-PAGE",
-          "open_question": "iso.org/standard/65694 เปิดไม่สำเร็จทั้ง fetch และ browser (หน้า JS ค้าง) — ต้องลองใหม่/ใช้ OBP เพื่ออ่าน stage code ยืนยันว่า 2018 ยัง confirmed",
-          "sla_deadline": "2026-09-11"
+          "evidence_excerpt": "อ่านหน้า iso.org จริง: Published (Edition 2, 2018-02) | \"This publication was last reviewed and confirmed in 2023. Therefore this version remains current.\" แต่ Stage ปัจจุบัน = 90.92 International Standard to be revised (2024-10-11) | Will be replaced by: ISO/CD 31000 (under development)",
+          "verified": true,
+          "last_verified": "2026-07-14"
         }
       ]
     },
@@ -839,14 +836,15 @@
       "editions": [
         {
           "version": "2019",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
+          "status": "AMENDED",
+          "verified": true,
+          "last_verified": "2026-07-14",
           "evidence_url": "https://www.iso.org/standard/75106.html",
-          "evidence_excerpt": "",
-          "exception_code": "EX-JS-PAGE",
-          "open_question": "ตรวจ stage บน iso.org (systematic review รอบล่าสุด)",
-          "sla_deadline": "2026-09-11"
+          "evidence_excerpt": "อ่านหน้า iso.org จริง: Published (Edition 2, 2019-10) | \"This standard has 1 amendment\" — ISO 22301:2019/Amd 1:2024 Climate action changes (ราคา CHF 0) | Stage 90.92 to be revised (2025-12-05) | Will be replaced by: ISO/CD 22301 (under development)",
+          "amendments": [
+            "Amd 1:2024 (Climate action changes)"
+          ],
+          "notes": "อ้างคู่ Amd 1:2024 + เตรียม re-verify เมื่อฉบับใหม่ประกาศ (CD stage)"
         }
       ]
     },
@@ -1403,6 +1401,159 @@
           "evidence_excerpt": "",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "อ่านตัวบทจากราชกิจจาฯ (เล่ม 135) — โดยเฉพาะหมวดขัดกันแห่งผลประโยชน์ (ม.126-128) ที่ T006 ใช้",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-9001",
+      "display": "ISO 9001 (Quality Management Systems)",
+      "match": "ISO\\s*9001",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2015",
+          "status": "AMENDED",
+          "amendments": [
+            "Amd 1:2024 (Climate action)"
+          ],
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.iso.org/standard/62085.html",
+          "evidence_excerpt": "อ่านหน้า iso.org จริง: Status: Published | Publication date: 2015-09 | Edition: 5 | ISO/TC 176/SC 2",
+          "notes": "Amd 1:2024 อิงชุด climate amendments ที่ ISO ออกทั้งตระกูล MSS (ยืนยันรูปแบบจากหน้า ISO 22301/Amd 1:2024 และ ISO 27001/Amd 1:2024 ที่อ่านแล้ว) — ตรวจหน้า Amd เฉพาะของ 9001 ตอนรอบ STALE"
+        }
+      ]
+    },
+    {
+      "family_id": "nerc",
+      "display": "NERC Reliability Standards (CIP / TPL)",
+      "match": "NERC",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.nerc.com/pa/Stand/Pages/ReliabilityStandards.aspx",
+          "evidence_excerpt": "อ่านหน้า official จริง: \"the legislative framework to make standards enforceable exists through action of the regulatory authority in the United States (through FERC) and in the Canadian provinces...\" — มาตรฐานบังคับในสหรัฐ/บางรัฐแคนาดา",
+          "notes": "THAILAND APPLICABILITY: ไม่ผูกพันไทย — ใช้เป็น benchmark/แนวปฏิบัติชั้นนำของ grid security (CIP) และ transmission planning (TPL) เท่านั้น | มาตรฐานรายฉบับ (CIP-002 ฯลฯ) มีเวอร์ชันหมุนเร็ว ตรวจเฉพาะเมื่ออ้างเจาะจง"
+        }
+      ]
+    },
+    {
+      "family_id": "itil",
+      "display": "ITIL (IT Service Management — PeopleCert/Axelos)",
+      "match": "ITIL",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "v4",
+          "status": "TRANSITION",
+          "superseded_by": "Version 5",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1",
+          "evidence_excerpt": "อ่านหน้า official จริง: ตัวกรองหลักสูตรแสดง \"ITIL 4\" และ \"ITIL (Version 5)\" ขายคู่กัน — ITIL 4 ยังเปิดสอบ/ใช้งาน",
+          "notes": "ช่วงเปลี่ยนผ่านไม่มีวันสิ้นสุดประกาศ — องค์กรที่อ้าง ITIL v4 ยังใช้ได้ แต่ควรวางแผนอัพเกรด"
+        },
+        {
+          "version": "Version 5",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1",
+          "evidence_excerpt": "\"The new ITIL is here!\" — ITIL Foundation (Version 5) เปิดแล้ว + \"ITIL Foundation Bridge (Version 5): A fast, focused route for ITIL 4 certified professionals to upgrade\" — บันไดเปลี่ยนผ่านจาก v4 อย่างเป็นทางการ (AI-native by design)"
+        }
+      ]
+    },
+    {
+      "family_id": "iec-62443",
+      "display": "IEC 62443 (Industrial Automation & Control Systems Security)",
+      "match": "IEC\\s*62443",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://webstore.iec.ch",
+          "evidence_excerpt": "",
+          "exception_code": "EX-PAYWALL",
+          "open_question": "ชุดมาตรฐานหลาย parts (ISA/IEC ร่วม) — ระบุ part ที่องค์กรใช้ (เช่น 62443-2-1, 62443-3-3) และตรวจ edition จาก IEC webstore",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "iec-62351",
+      "display": "IEC 62351 (Power Systems Communication Security)",
+      "match": "IEC\\s*62351",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://webstore.iec.ch",
+          "evidence_excerpt": "",
+          "exception_code": "EX-PAYWALL",
+          "open_question": "ชุดหลาย parts (security ของ 61850/CIM protocols) — ตรวจ part+edition จาก IEC webstore",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "iec-60300",
+      "display": "IEC 60300 (Dependability Management)",
+      "match": "IEC\\s*60300",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://webstore.iec.ch",
+          "evidence_excerpt": "",
+          "exception_code": "EX-PAYWALL",
+          "open_question": "ตรวจ 60300-1 edition ปัจจุบันจาก IEC webstore",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "iec-60038",
+      "display": "IEC 60038 (Standard Voltages)",
+      "match": "IEC\\s*60038",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://webstore.iec.ch",
+          "evidence_excerpt": "",
+          "exception_code": "EX-PAYWALL",
+          "open_question": "ตรวจ edition ปัจจุบัน (2009+AMD?) จาก IEC webstore",
           "sla_deadline": "2026-09-12"
         }
       ]
