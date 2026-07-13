@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "knowledge.schema.json",
+  "title": "Audit Knowledge Store — Canonical Schema v3.1",
+  "type": "object",
+  "required": ["metadata", "topics"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["schema_version", "platform", "last_updated"],
+      "properties": {
+        "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "platform": { "type": "string" },
+        "last_updated": { "type": "string" },
+        "write_policy": { "type": "string" }
+      }
+    },
+    "topics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/topic" }
+    },
+    "skills_registry": { "type": "object" }
+  },
+  "$defs": {
+    "topic": {
+      "type": "object",
+      "required": [
+        "id", "name_th", "name_en", "category", "priority",
+        "applicable_standards", "knowledge_id", "version",
+        "knowledge_layer", "approval_status", "hash_signature",
+        "changelog", "created_at", "updated_at", "risks"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^T\\d{3,}$" },
+        "name_th": { "type": "string", "minLength": 3 },
+        "name_en": { "type": "string" },
+        "category": { "type": "string" },
+        "category_th": { "type": "string" },
+        "icon": { "type": "string" },
+        "color": { "type": "string" },
+        "priority": { "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] },
+        "applicable_standards": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "thailand_applicable": { "type": "boolean" },
+        "thai_law_refs": { "type": "array", "items": { "type": "string" } },
+        "knowledge_id": { "type": "string" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "confidence_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "quality_gate_status": { "type": "string" },
+        "approval_status": { "enum": ["APPROVED", "PENDING_REVIEW", "REJECTED", "LEGACY_UNVERIFIED", "DRAFT"] },
+        "knowledge_layer": { "enum": ["L0", "L1", "L2", "L3"] },
+        "hash_signature": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "approved_by": { "type": ["string", "null"] },
+        "changelog": { "type": "array", "minItems": 1 },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" },
+        "source_chain": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source_id": { "type": "string" },
+              "source_type": { "type": "string" },
+              "url": { "type": "string" },
+              "publisher": { "type": "string" },
+              "retrieved_at": { "type": "string" },
+              "excerpt": { "type": "string" },
+              "credibility_score": { "type": "number", "minimum": 0, "maximum": 100 }
+            }
+          }
+        },
+        "risks": { "type": "array", "items": { "$ref": "#/$defs/risk" }, "minItems": 1 }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": ["id", "name_th", "level", "likelihood", "impact", "control_failures"],
+      "properties": {
+        "id": { "type": "string" },
+        "name_th": { "type": "string", "minLength": 3 },
+        "name_en": { "type": "string" },
+        "level": { "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] },
+        "likelihood": { "type": "string" },
+        "impact": { "type": "string" },
+        "control_failures": { "type": "array", "items": { "$ref": "#/$defs/control_failure" }, "minItems": 1 }
+      }
+    },
+    "control_failure": {
+      "type": "object",
+      "required": ["id", "name_th", "audit_procedures"],
+      "properties": {
+        "id": { "type": "string" },
+        "name_th": { "type": "string" },
+        "name_en": { "type": "string" },
+        "audit_procedures": { "type": "array", "items": { "$ref": "#/$defs/audit_procedure" }, "minItems": 1 }
+      }
+    },
+    "audit_procedure": {
+      "type": "object",
+      "required": ["id", "name_th", "method", "evidence_types"],
+      "properties": {
+        "id": { "type": "string" },
+        "name_th": { "type": "string" },
+        "name_en": { "type": "string" },
+        "method": { "type": "string" },
+        "std_refs": { "type": "array", "items": { "type": "object" } },
+        "evidence_types": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    }
+  }
+}

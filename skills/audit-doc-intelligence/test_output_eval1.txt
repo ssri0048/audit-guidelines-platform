@@ -1,0 +1,283 @@
+Document Analysis Complete
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Document:        customer_service_audit_2025.pdf
+Type detected:   csma (Customer Service Management Audit)
+Confidence:      HIGH — 10/10 keyword matches
+                 (CSAT, NPS, SLA, complaint handling, CRM, ISO 10002,
+                  staff training, omnichannel, PDPA, customer satisfaction)
+Standards basis: ISO 10002:2018, ISO 9001:2015, ISO/IEC 27701:2019,
+                 PDPA Thailand, COBIT 2019, IIA Standards 2024, ISO 30414:2018
+Risk domains:    7
+
+DOC_KNOWLEDGE_LIBRARY entry:
+─────────────────────────────
+
+csma: {
+  ic: '🎧',
+  nth: 'การตรวจสอบการจัดการบริการลูกค้าและประสบการณ์ผู้รับบริการ',
+  nen: 'Customer Service Management Audit (CSMA)',
+  cat: 'Governance',
+  col: '#16A085',
+  pri: 'HIGH',
+  std: [
+    'ISO 10002:2018 — Customer Satisfaction & Complaints Handling',
+    'ISO 9001:2015 Clause 9.1.2 — Customer Satisfaction Monitoring',
+    'ISO/IEC 27701:2019 — Privacy Information Management (CRM/PDPA)',
+    'พรบ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562 (PDPA)',
+    'COBIT 2019 DSS01 — Managed Operations (CRM Uptime/SLA)',
+    'IIA International Standards for the Professional Practice 2024',
+    'ISO 30414:2018 — Human Capital Reporting (Staff Competency)'
+  ],
+  risks: [
+    {
+      nth: 'ความเสี่ยง SLA และ KPI การบริการลูกค้าไม่เป็นไปตามเป้าหมายที่กำหนด ส่งผลต่อความพึงพอใจและความเชื่อมั่นของลูกค้า',
+      lv: 'HIGH',
+      lk: 'สูง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดระบบติดตาม SLA แบบ Real-time และกลไก Escalation เมื่อ SLA ใกล้ละเมิด ทำให้ตอบสนองต่อการแก้ไขได้ล่าช้า',
+          pr: [
+            {
+              nth: 'ตรวจสอบ SLA Performance Dashboard และ Escalation Log เพื่อประเมินอัตราการละเมิด SLA และประสิทธิภาพการ Escalation',
+              mt: 'Data Analytics + Document Review',
+              ev: [
+                'SLA Performance Dashboard (รายงาน 12 เดือนย้อนหลัง)',
+                'SLA Breach Register พร้อมสาเหตุและผลกระทบ',
+                'Escalation Log และ Resolution Timestamp',
+                'CSAT Score Report (แยกตามช่องทางและประเภทบริการ)',
+                'NPS Tracking Report (รายไตรมาส)',
+                'Customer Complaint Volume vs SLA Breach Correlation Analysis',
+                'SLA Agreement Document ฉบับปัจจุบัน'
+              ]
+            }
+          ]
+        },
+        {
+          nth: 'ตัวชี้วัด KPI ไม่ถูกทบทวนให้สอดคล้องกับความต้องการลูกค้าและกลยุทธ์องค์กร ทำให้การประเมินผลการบริการบิดเบือนจากความเป็นจริง',
+          pr: [
+            {
+              nth: 'วิเคราะห์ความสอดคล้องของ KPI Framework กับผลลัพธ์ CSAT/NPS และเปรียบเทียบกับมาตรฐานอุตสาหกรรม',
+              mt: 'Benchmarking + Interview',
+              ev: [
+                'KPI Framework Document (เวอร์ชันปัจจุบันและปีก่อน)',
+                'Customer Satisfaction Survey Results (CSAT Raw Data)',
+                'NPS Survey Methodology และ Response Rate Report',
+                'Board/Management Approval of KPI Targets',
+                'Customer Journey Mapping Document',
+                'Industry Benchmark Comparison Report (CSAT/NPS)'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงการรั่วไหลและละเมิดความเป็นส่วนตัวของข้อมูลลูกค้าในระบบ CRM ที่ส่งผลต่อการปฏิบัติตาม PDPA และความไว้วางใจของลูกค้า',
+      lv: 'CRITICAL',
+      lk: 'ปานกลาง',
+      im: 'สูงมาก',
+      cf: [
+        {
+          nth: 'ขาดการควบคุม Data Access, Data Retention และ Consent Management ตาม PDPA ทำให้มีความเสี่ยงต่อการใช้ข้อมูลโดยไม่ได้รับอนุญาต',
+          pr: [
+            {
+              nth: 'ตรวจสอบ Consent Register และ Data Retention Schedule เพื่อประเมินความสมบูรณ์และการปฏิบัติตาม PDPA',
+              mt: 'Compliance Testing + Document Review',
+              ev: [
+                'PDPA Consent Register (ระบบเก็บและจัดการ Consent)',
+                'Data Retention Policy และ Deletion Log',
+                'PDPA DPO Monthly/Quarterly Reports',
+                'Privacy Impact Assessment (PIA) สำหรับระบบ CRM',
+                'Data Subject Request (DSR) Log และ Response Time',
+                'PDPA Audit Trail จากระบบ CRM',
+                'สัญญาข้อมูลส่วนบุคคลกับ Third-party Vendors'
+              ]
+            }
+          ]
+        },
+        {
+          nth: 'ระบบ CRM ขาดการเข้ารหัสข้อมูลลูกค้าและการป้องกันการเข้าถึงที่ไม่ได้รับอนุญาตตาม ISO/IEC 27701',
+          pr: [
+            {
+              nth: 'ประเมินความปลอดภัยของระบบ CRM ด้านการเข้ารหัส การควบคุมการเข้าถึง และการบันทึก Audit Trail',
+              mt: 'Technical Review + Data Analytics',
+              ev: [
+                'CRM Security Assessment Report',
+                'User Access Control Matrix (Role-based Access)',
+                'Encryption Configuration Log (Data at Rest / In Transit)',
+                'CRM Audit Trail — User Activity Log (90 วัน)',
+                'Penetration Test Report (ล่าสุดไม่เกิน 12 เดือน)',
+                'ISO/IEC 27701 Compliance Gap Assessment'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงระบบ CRM ล่มหรือหยุดทำงาน ส่งผลให้ช่องทางบริการลูกค้าหยุดชะงักและ SLA Uptime ไม่เป็นไปตามเกณฑ์ที่กำหนด',
+      lv: 'HIGH',
+      lk: 'ปานกลาง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดแผน Business Continuity และ Disaster Recovery สำหรับระบบ CRM และช่องทางบริการดิจิทัล',
+          pr: [
+            {
+              nth: 'ทบทวน BCP/DRP ของระบบ CRM และตรวจสอบผลการทดสอบ Recovery ว่าเป็นไปตาม RTO/RPO ที่กำหนด',
+              mt: 'Document Review + Technical Review',
+              ev: [
+                'CRM System Availability / Uptime Report (12 เดือน)',
+                'BCP/DRP Document สำหรับระบบ CRM',
+                'DR Test Results (วันที่และผลการทดสอบล่าสุด)',
+                'RTO/RPO Documentation และ SLA ที่ตกลงกับผู้ให้บริการ',
+                'Incident Log — CRM Downtime Incidents',
+                'Change Management Log (การเปลี่ยนแปลงระบบ CRM)',
+                'Vendor SLA Agreement (Cloud/On-premise CRM Provider)'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงระบบจัดการข้อร้องเรียนลูกค้าไม่เป็นไปตามมาตรฐาน ISO 10002 ส่งผลให้ช่องว่างการปฏิบัติตามข้อกำหนด (Compliance Gap) ไม่ได้รับการแก้ไข',
+      lv: 'HIGH',
+      lk: 'สูง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดกระบวนการรับ ติดตาม และปิดข้อร้องเรียนที่เป็นมาตรฐาน และไม่มีการ Map กระบวนการกับข้อกำหนด ISO 10002:2018',
+          pr: [
+            {
+              nth: 'ตรวจสอบ Complaint Register และประเมิน Compliance Gap เทียบกับข้อกำหนด ISO 10002:2018 ทุกข้อ',
+              mt: 'Compliance Testing + Document Review',
+              ev: [
+                'Complaint Register (ระบบบันทึกข้อร้องเรียนทุกช่องทาง)',
+                'ISO 10002 Compliance Gap Assessment Report',
+                'Complaint Resolution Rate และ Average Handling Time',
+                'Root Cause Analysis Reports (ข้อร้องเรียนซ้ำ)',
+                'Complaint Trend Dashboard (แนวโน้มรายเดือน/ไตรมาส)',
+                'Regulatory Complaint Records (สคบ. / กกพ. หากเกี่ยวข้อง)',
+                'Customer Complaint Policy Document'
+              ]
+            }
+          ]
+        },
+        {
+          nth: 'ไม่มีการวิเคราะห์แนวโน้มข้อร้องเรียนเชิงระบบ (Systemic Analysis) เพื่อนำไปสู่การปรับปรุงกระบวนการอย่างต่อเนื่อง',
+          pr: [
+            {
+              nth: 'วิเคราะห์ข้อมูล Complaint Trend และ Pareto Analysis เพื่อประเมินประสิทธิผลของมาตรการแก้ไขเชิงระบบ',
+              mt: 'Data Analytics + Interview',
+              ev: [
+                'Pareto Analysis of Complaint Categories (Top 20%)',
+                'Corrective Action Plan (CAP) จากข้อร้องเรียนซ้ำ',
+                'CAP Follow-up and Closure Evidence',
+                'Management Review Meeting Minutes (ที่กล่าวถึงข้อร้องเรียน)',
+                'Process Improvement Log ที่เกิดจากข้อร้องเรียน'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงสมรรถนะบุคลากรงานบริการลูกค้าไม่เพียงพอ ส่งผลต่อคุณภาพการให้บริการและ CSAT Score',
+      lv: 'HIGH',
+      lk: 'สูง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดแผนพัฒนาสมรรถนะและระบบติดตามผลการฝึกอบรมบุคลากรบริการลูกค้าที่เชื่อมโยงกับผลลัพธ์ KPI',
+          pr: [
+            {
+              nth: 'ทบทวน Staff Training Records และประเมินความครบถ้วนของหลักสูตรฝึกอบรมเทียบกับ Competency Framework',
+              mt: 'Document Review + Interview',
+              ev: [
+                'Staff Training Records (รายบุคคล 12 เดือนย้อนหลัง)',
+                'Competency Framework สำหรับบุคลากรบริการลูกค้า',
+                'Training Needs Analysis (TNA) Report',
+                'Post-Training Assessment Results',
+                'Agent Quality Monitoring Scores (QA Scorecard)',
+                'Staff Turnover Rate Analysis (Customer Service Team)',
+                'Performance Appraisal Records (Customer Service Agents)'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงประสบการณ์ลูกค้าหลายช่องทาง (Omnichannel) ไม่สอดคล้องกัน ทำให้คุณภาพบริการแตกต่างกันในแต่ละช่องทาง',
+      lv: 'HIGH',
+      lk: 'สูง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดการบูรณาการข้อมูลลูกค้าและกระบวนการบริการระหว่างช่องทาง Phone, App, Web และ Walk-in',
+          pr: [
+            {
+              nth: 'ประเมิน Omnichannel Integration Architecture และทดสอบความสอดคล้องของข้อมูลลูกค้าข้ามช่องทาง',
+              mt: 'Technical Review + Data Analytics',
+              ev: [
+                'Omnichannel Blueprint / Channel Integration Architecture',
+                'Cross-Channel Data Consistency Test Results',
+                'Customer Journey Map (ทุก Touchpoint)',
+                'First Contact Resolution (FCR) Rate แยกตามช่องทาง',
+                'CSAT/NPS Score แยกตามช่องทาง (Phone/App/Web/Walk-in)',
+                'Omnichannel Gap Assessment Report',
+                'Voice of Customer (VOC) Program Reports'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงช่องว่างการปฏิบัติตาม ISO 10002 (Compliance Gap) ไม่ได้รับการแก้ไขอย่างเป็นระบบ ส่งผลต่อสถานะการรับรองมาตรฐานและความน่าเชื่อถือองค์กร',
+      lv: 'HIGH',
+      lk: 'ปานกลาง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดกระบวนการติดตามและปิด ISO 10002 Compliance Gap อย่างเป็นระบบ และไม่มีผู้รับผิดชอบที่ชัดเจน',
+          pr: [
+            {
+              nth: 'ตรวจสอบ ISO 10002 Gap Register และประเมินสถานะการแก้ไขแต่ละ Gap Item พร้อม Timeline ที่กำหนด',
+              mt: 'Compliance Testing + Interview',
+              ev: [
+                'ISO 10002 Compliance Gap Register (ล่าสุด)',
+                'Gap Remediation Plan พร้อม Owner และ Due Date',
+                'Gap Closure Evidence (เอกสาร/หลักฐานการแก้ไขแต่ละ Gap)',
+                'Internal Audit Report ด้าน ISO 10002',
+                'Management Review Meeting Minutes (ISO 10002 Agenda)',
+                'Certification Body Assessment Report (ถ้ามี)',
+                'Corrective Action Tracking System Records'
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+detectDocType() rule to add:
+─────────────────────────────
+
+{type:'csma', kw:['customer service','csat','nps','sla compliance','complaint handling','crm','iso 10002','omnichannel','pdpa data handling','customer satisfaction survey','nps tracking','crm system uptime','staff training records','omnichannel experience','บริการลูกค้า','ข้อร้องเรียน','contact center','call center','voice of customer','customer journey','first contact resolution']}
+
+
+Insertion Instructions:
+─────────────────────────────
+1. Open audit-platform-public.html
+2. Find:  const DOC_KNOWLEDGE_LIBRARY = {
+3. Navigate to the last entry (just before the closing  };  )
+4. Add a comma after the last entry's closing  }
+5. Paste the csma: { ... } block above
+6. Find the rules array inside detectDocType() and append the detection rule object above
+7. Verify syntax with:
+   node -e "const fs=require('fs'); new Function(fs.readFileSync('audit-platform-public.html','utf8').match(/<script[^>]*>([\s\S]*?)<\/script>/gi)[2])()"

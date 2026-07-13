@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "schema_version": "3.0.0",
+    "file_type": "knowledge_staging",
+    "description": "Staging area for new audit knowledge pending quality gate review before merging into knowledge_store.json",
+    "created_at": "2026-06-16T00:00:00Z",
+    "last_updated": "2026-06-16T00:00:00Z",
+    "staging_version": "1.0.0",
+    "quality_gates_required": ["G1_SCHEMA", "G2_DEDUP", "G3_AUTHORITY", "G4_HALLUCINATION", "G5_CERTIFICATION", "G6_THAILAND"],
+    "auto_approve_threshold": 85,
+    "manual_review_threshold": 70,
+    "reject_threshold": 69,
+    "retention_days": 90
+  },
+  "queue_stats": {
+    "total_pending": 0,
+    "total_approved": 0,
+    "total_rejected": 0,
+    "total_merged": 0,
+    "last_merge_date": null,
+    "last_merge_topic_ids": []
+  },
+  "pending_review": [],
+  "approved_queue": [],
+  "rejected_queue": [],
+  "merge_history": [],
+  "gate_results_schema": {
+    "G1_SCHEMA": {
+      "description": "Schema validation — all required fields present and correctly typed",
+      "pass_criteria": "All mandatory fields present, types correct, IDs unique",
+      "weight": 1.0
+    },
+    "G2_DEDUP": {
+      "description": "Deduplication — no duplicate topic, risk, or procedure IDs",
+      "pass_criteria": "No duplicate IDs vs knowledge_store.json; semantic similarity < 0.85",
+      "weight": 1.0
+    },
+    "G3_AUTHORITY": {
+      "description": "Source authority — knowledge sourced from credible, verifiable standards",
+      "pass_criteria": "At least one L0 source (credibility >= 90) in source_chain",
+      "weight": 1.0
+    },
+    "G4_HALLUCINATION": {
+      "description": "Hallucination check — no fabricated standards, laws, or procedures",
+      "pass_criteria": "All cited standards exist; Thai law references are real and current",
+      "weight": 1.0
+    },
+    "G5_CERTIFICATION": {
+      "description": "Certification validity — IIA, INTOSAI, ISO standards correctly referenced",
+      "pass_criteria": "Standard codes correct; version numbers match current published editions",
+      "weight": 1.0
+    },
+    "G6_THAILAND": {
+      "description": "Thailand applicability — content applies to Thai electricity authority context",
+      "pass_criteria": "thai_law_refs populated; thailand_applicable=true; Thai terminology correct",
+      "weight": 1.0
+    }
+  },
+  "staging_entry_template": {
+    "_comment": "Template for new staging entries — copy and populate before submitting",
+    "staging_id": "STG-YYYYMMDD-NNN",
+    "submitted_at": "ISO8601_DATETIME",
+    "submitted_by": "source_identifier",
+    "source_mode": "EXTERNAL_RESEARCH|LEARNING|MANUAL",
+    "topic_data": {
+      "id": "T-NEW",
+      "name_th": "",
+      "name_en": "",
+      "category": "",
+      "priority": "CRITICAL|HIGH|MEDIUM|LOW",
+      "knowledge_id": "KN-T-NEW",
+      "version": "1.0.0",
+      "confidence_score": 0,
+      "quality_gate_status": "PENDING",
+      "approval_status": "PENDING",
+      "knowledge_layer": "L2|L3",
+      "thai_law_refs": [],
+      "source_chain": [],
+      "risks": []
+    },
+    "gate_results": {
+      "G1_SCHEMA": {"status": "PENDING", "score": null, "notes": ""},
+      "G2_DEDUP": {"status": "PENDING", "score": null, "notes": ""},
+      "G3_AUTHORITY": {"status": "PENDING", "score": null, "notes": ""},
+      "G4_HALLUCINATION": {"status": "PENDING", "score": null, "notes": ""},
+      "G5_CERTIFICATION": {"status": "PENDING", "score": null, "notes": ""},
+      "G6_THAILAND": {"status": "PENDING", "score": null, "notes": ""}
+    },
+    "overall_confidence": null,
+    "review_decision": "PENDING",
+    "reviewer": null,
+    "review_date": null,
+    "review_notes": ""
+  }
+}

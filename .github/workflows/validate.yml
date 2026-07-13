@@ -1,0 +1,31 @@
+name: Quality Gates — Knowledge Validation
+
+# รันทุก Pull Request และทุก push เข้า main
+# ถ้า gates ไม่ผ่าน → merge ไม่ได้ (ตั้ง branch protection ชี้มาที่ job นี้)
+on:
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 'Gate 1-6 + Policy: validate knowledge_store.json'
+        run: node scripts/validate.js data/knowledge_store.json
+
+      - name: 'Staging file: JSON parse check'
+        run: node -e "JSON.parse(require('fs').readFileSync('data/knowledge_staging.json','utf8')); console.log('✅ staging JSON valid')"

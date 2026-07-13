@@ -1,0 +1,2561 @@
+{
+  "metadata": {
+    "schema_version": "3.1.0",
+    "knowledge_base_version": "3.0.0",
+    "platform": "Intelligent AI Audit Guidelines Platform",
+    "organization_type": "electricity_authority",
+    "country": "TH",
+    "language_primary": "th",
+    "language_secondary": "en",
+    "standards_base": [
+      "INTOSAI",
+      "IIA 2024",
+      "COSO 2013",
+      "ISO 19011:2018",
+      "NIST CSF 2.0",
+      "IEC 62351",
+      "NERC CIP",
+      "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
+      "พรบ.คอมพิวเตอร์ พ.ศ.2560",
+      "มาตรฐาน สตง."
+    ],
+    "last_updated": "2026-07-13",
+    "migration_date": "2026-06-16",
+    "migration_from": "2.0.0",
+    "migration_approved_by": "system:auto-migration",
+    "maintainer": "AI Audit Intelligence Engine",
+    "total_topics": 16,
+    "total_risks": 34,
+    "total_procedures": 41,
+    "operating_modes": [
+      "MASTER_KNOWLEDGE",
+      "EXTERNAL_RESEARCH",
+      "LOCAL_FALLBACK",
+      "LEARNING"
+    ],
+    "knowledge_sufficiency_threshold": 70,
+    "knowledge_freshness_months": 18,
+    "quality_gates": [
+      "G1_SCHEMA",
+      "G2_DEDUP",
+      "G3_AUTHORITY",
+      "G4_HALLUCINATION",
+      "G5_CERTIFICATION",
+      "G6_THAILAND"
+    ],
+    "source_documents": [
+      {
+        "id": "SRC001",
+        "filename": "20250203-internal-audit-standard-government.pdf",
+        "title_th": "มาตรฐานการตรวจสอบภายในภาครัฐ พ.ศ. 2568",
+        "title_en": "Internal Audit Standard for Government Agencies 2025",
+        "publisher_th": "กรมบัญชีกลาง กระทรวงการคลัง",
+        "publisher_en": "Comptroller General's Department, Ministry of Finance",
+        "published_date": "2025-02-03",
+        "language": "th",
+        "pages": 39,
+        "access": "public",
+        "public_url": "https://www.cgd.go.th/cs/internet/internet/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99.html",
+        "applicable_topics": [
+          "T001",
+          "T002",
+          "T003",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008"
+        ]
+      },
+      {
+        "id": "SRC002",
+        "filename": "topical_requirements_application_guidance_english.pdf",
+        "title_en": "IIA Topical Requirements and Application Guidance",
+        "publisher_en": "The Institute of Internal Auditors (IIA)",
+        "published_date": "2024-01-01",
+        "language": "en",
+        "access": "public",
+        "public_url": "https://www.theiia.org/globalassets/site/standards/topical-requirements/topical_requirements_application_guidance_english.pdf",
+        "applicable_topics": [
+          "T001",
+          "T002",
+          "T003",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008",
+          "T009",
+          "T010",
+          "T011"
+        ]
+      },
+      {
+        "id": "SRC003",
+        "filename": "cybersecurity_tr_user_guide23.pdf",
+        "title_en": "Cybersecurity Technical Reference User Guide 2023",
+        "publisher_en": "International Cybersecurity Standards Body",
+        "published_date": "2023-01-01",
+        "language": "en",
+        "access": "public",
+        "public_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf",
+        "applicable_topics": [
+          "T002",
+          "T009",
+          "T011",
+          "T012",
+          "T015"
+        ]
+      },
+      {
+        "id": "SRC004",
+        "filename": "deep-research-report-electricity-audit.pdf",
+        "title_en": "Deep Research Report: Internal Audit for Electricity Authorities",
+        "publisher_en": "AI Audit Guidelines Platform Research",
+        "published_date": "2025-06-01",
+        "language": "en",
+        "access": "internal",
+        "applicable_topics": [
+          "T001",
+          "T002",
+          "T003",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008",
+          "T009",
+          "T010",
+          "T011",
+          "T012",
+          "T013",
+          "T014",
+          "T015",
+          "T016"
+        ]
+      }
+    ],
+    "migration_note": "v3 canonical store — all 16 legacy topics marked LEGACY_UNVERIFIED (L3). Each must pass re-verification pipeline + human approval (PR merge) before promotion to L1.",
+    "write_policy": "READ_ONLY for web clients. All writes via Pull Request + human approval only."
+  },
+  "topics": [
+    {
+      "id": "T001",
+      "name_th": "การจัดซื้อจัดจ้างและบริหารสัญญา",
+      "name_en": "Procurement & Contract Management",
+      "category": "Financial Integrity",
+      "category_th": "ความซื่อสัตย์ทางการเงิน",
+      "icon": "📋",
+      "color": "#E74C3C",
+      "priority": "CRITICAL",
+      "applicable_standards": [
+        "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
+        "INTOSAI GOV 9140",
+        "IIA Standard 2130"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T001",
+      "version": "1.0.0",
+      "confidence_score": 92,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:2990a00aa5a841311d77dbc753cae4d5cf5ff3ebfdb7ff3e39bd6dfc1a3de3dd",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T005",
+        "T006",
+        "T014"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "ระเบียบกระทรวงการคลัง ว่าด้วยการจัดซื้อจัดจ้าง พ.ศ. 2560",
+        "ประกาศ สตง. ว่าด้วยการตรวจสอบการจัดซื้อจัดจ้าง"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R001",
+          "name_th": "ความเสี่ยงทุจริตในกระบวนการจัดซื้อ",
+          "name_en": "Procurement Fraud Risk",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "ขาดการแบ่งแยกหน้าที่ในกระบวนการจัดซื้อ",
+              "name_en": "Lack of Segregation of Duties in Procurement",
+              "audit_procedures": [
+                {
+                  "id": "AP001",
+                  "name_th": "ตรวจสอบโครงสร้างคณะกรรมการจัดซื้อและอำนาจอนุมัติ",
+                  "name_en": "Review procurement committee structure and approval authority",
+                  "method": "Document Review + Interview",
+                  "evidence_types": [
+                    "คำสั่งแต่งตั้งคณะกรรมการจัดซื้อ",
+                    "แผนภูมิอำนาจอนุมัติ",
+                    "รายงานการประชุมคณะกรรมการ",
+                    "ระเบียบการจัดซื้อจัดจ้างภายใน"
+                  ]
+                },
+                {
+                  "id": "AP002",
+                  "name_th": "วิเคราะห์รูปแบบการจัดซื้อซ้ำซ้อนกับผู้ขายรายเดิม",
+                  "name_en": "Analyze repetitive procurement patterns with same vendors",
+                  "method": "Data Analytics",
+                  "evidence_types": [
+                    "ทะเบียนสัญญา 3 ปีย้อนหลัง",
+                    "รายงานผู้ขายที่ได้รับการคัดเลือก",
+                    "ข้อมูลระบบ e-GP",
+                    "บันทึกการเสนอราคา"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CF002",
+              "name_th": "TOR/คุณสมบัติถูกกำหนดเพื่อเอื้อประโยชน์ผู้ขายรายใดรายหนึ่ง",
+              "name_en": "TOR specifications tailored to benefit specific vendor",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "เปรียบเทียบ TOR กับมาตรฐานสากลและราคาตลาด",
+                  "name_en": "Compare TOR against international standards and market pricing",
+                  "method": "Benchmarking + Technical Review",
+                  "evidence_types": [
+                    "เอกสาร TOR ฉบับสมบูรณ์",
+                    "ราคากลาง / ราคาอ้างอิง",
+                    "เอกสารเสนอราคาของผู้เข้าร่วม",
+                    "รายงานผลการพิจารณาคุณสมบัติ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "ความเสี่ยงการบริหารสัญญาที่ไม่มีประสิทธิภาพ",
+          "name_en": "Ineffective Contract Management Risk",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "ไม่มีระบบติดตามสัญญาและการส่งมอบงาน",
+              "name_en": "No contract and delivery monitoring system",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "ตรวจสอบระบบบริหารสัญญาและประสิทธิภาพการส่งมอบ",
+                  "name_en": "Review contract management system and delivery performance",
+                  "method": "System Review + File Inspection",
+                  "evidence_types": [
+                    "ทะเบียนสัญญาปัจจุบัน",
+                    "รายงานสถานะการส่งมอบ",
+                    "บันทึกการตรวจรับงาน",
+                    "หลักฐานการปรับค่าปรับ (ถ้ามี)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงการจัดซื้อไม่เป็นไปตามกฎหมาย",
+          "name_en": "Non-compliance with Procurement Law",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่ปฏิบัติตาม พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
+              "name_en": "Non-compliance with Government Procurement Act B.E. 2560",
+              "audit_procedures": [
+                {
+                  "id": "AP005",
+                  "name_th": "ตรวจสอบกระบวนการจัดซื้อตาม พรบ. และระเบียบที่เกี่ยวข้อง",
+                  "name_en": "Audit procurement process against the Act and related regulations",
+                  "method": "Compliance Testing",
+                  "evidence_types": [
+                    "เอกสารการประกวดราคา",
+                    "ประกาศเชิญชวนบนเว็บไซต์ราชการ",
+                    "รายงานการตรวจสอบของ สตง.",
+                    "ผลการตรวจสอบ e-GP"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T002",
+      "name_th": "ความมั่นคงปลอดภัยทางไซเบอร์ (SCADA/OT)",
+      "name_en": "Cybersecurity for SCADA/OT Systems",
+      "category": "Technology & Infrastructure",
+      "category_th": "เทคโนโลยีและโครงสร้างพื้นฐาน",
+      "icon": "🔒",
+      "color": "#2C3E50",
+      "priority": "CRITICAL",
+      "applicable_standards": [
+        "NIST CSF 2.0",
+        "IEC 62443",
+        "IEC 62351",
+        "NERC CIP",
+        "พรบ.คอมพิวเตอร์ พ.ศ.2560",
+        "พรบ.ความมั่นคงปลอดภัยไซเบอร์ พ.ศ.2562"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T002",
+      "version": "1.0.0",
+      "confidence_score": 90,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:ce54ab53982a9fa8857a183112b60bb70e2ee5133e6699c514bfc2916e182638",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T003",
+        "T004",
+        "T012",
+        "T016"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
+        "ประกาศ กสทช. ว่าด้วยมาตรการรักษาความปลอดภัยโครงข่าย"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC003",
+          "source_type": "pdf_standard",
+          "credibility_score": 93,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงการโจมตีระบบควบคุมโครงข่ายไฟฟ้า (SCADA)",
+          "name_en": "Cyberattack on Power Grid Control Systems (SCADA)",
+          "level": "CRITICAL",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF005",
+              "name_th": "ไม่มีการแบ่งส่วนเครือข่าย IT/OT (Network Segmentation)",
+              "name_en": "No IT/OT Network Segmentation",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "ตรวจสอบสถาปัตยกรรมเครือข่ายและการแบ่งส่วน IT/OT",
+                  "name_en": "Review network architecture and IT/OT segmentation",
+                  "method": "Technical Inspection + Penetration Testing",
+                  "evidence_types": [
+                    "แผนผังเครือข่าย (Network Diagram)",
+                    "รายงาน Firewall Rules",
+                    "บันทึก Network Traffic Log",
+                    "รายงาน Penetration Test",
+                    "ผล Vulnerability Assessment"
+                  ]
+                },
+                {
+                  "id": "AP007",
+                  "name_th": "ทดสอบประสิทธิภาพ Firewall และการควบคุมการเข้าถึงระหว่าง IT/OT",
+                  "name_en": "Test firewall effectiveness and IT/OT access controls",
+                  "method": "Configuration Review + Testing",
+                  "evidence_types": [
+                    "Firewall Policy Configuration",
+                    "ACL (Access Control List)",
+                    "DMZ Architecture Documentation",
+                    "Test Results Log"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีแผนการจัดการช่องโหว่และการอัปเดตระบบ SCADA",
+              "name_en": "No vulnerability management and patch plan for SCADA",
+              "audit_procedures": [
+                {
+                  "id": "AP008",
+                  "name_th": "ตรวจสอบกระบวนการบริหารจัดการ Patch และ Vulnerability ของระบบ OT",
+                  "name_en": "Review OT system patch and vulnerability management process",
+                  "method": "Document Review + Technical Testing",
+                  "evidence_types": [
+                    "Patch Management Policy",
+                    "Vulnerability Scan Report",
+                    "Change Management Log",
+                    "Vendor Security Advisory Records",
+                    "System Inventory (Asset Register)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงการเข้าถึงระบบโดยไม่ได้รับอนุญาต",
+          "name_en": "Unauthorized Access to Critical Systems",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF007",
+              "name_th": "การจัดการสิทธิ์การเข้าถึง Privileged Account บกพร่อง",
+              "name_en": "Inadequate Privileged Access Management",
+              "audit_procedures": [
+                {
+                  "id": "AP009",
+                  "name_th": "ตรวจสอบการจัดการ Privileged Account และ Multi-Factor Authentication",
+                  "name_en": "Review Privileged Account Management and MFA implementation",
+                  "method": "Access Review + Configuration Audit",
+                  "evidence_types": [
+                    "Active Directory / LDAP User List",
+                    "Privileged Access Management (PAM) Report",
+                    "MFA Configuration Screenshot",
+                    "Access Review Report (รายงานทบทวนสิทธิ์รายไตรมาส)",
+                    "Remote Access Log"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงความต่อเนื่องทางธุรกิจหลังเหตุการณ์ไซเบอร์",
+          "name_en": "Business Continuity Risk After Cyber Incident",
+          "level": "HIGH",
+          "likelihood": "ต่ำ",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF008",
+              "name_th": "ขาดแผนรับมือเหตุการณ์ไซเบอร์ที่ครอบคลุมระบบ OT",
+              "name_en": "No comprehensive cyber incident response plan for OT",
+              "audit_procedures": [
+                {
+                  "id": "AP010",
+                  "name_th": "ตรวจสอบและทดสอบแผน Incident Response และ Business Continuity Plan",
+                  "name_en": "Review and test Incident Response Plan and BCP",
+                  "method": "Document Review + Tabletop Exercise",
+                  "evidence_types": [
+                    "Cyber Incident Response Plan",
+                    "Business Continuity Plan (BCP)",
+                    "Disaster Recovery Plan (DRP)",
+                    "รายงานการซ้อมแผน (Tabletop Exercise Report)",
+                    "RTO/RPO Documentation"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T003",
+      "name_th": "การบริหารสินทรัพย์ระบบไฟฟ้า",
+      "name_en": "Electrical Asset Management",
+      "category": "Operations",
+      "category_th": "การดำเนินงาน",
+      "icon": "⚡",
+      "color": "#F39C12",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "ISO 55000:2014",
+        "IEC 60300",
+        "PAS 55",
+        "มาตรฐาน กฟผ./กฟน./กฟภ.",
+        "NERC FAC-001"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T003",
+      "version": "1.0.0",
+      "confidence_score": 87,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:c4e95db8723ef663ea27426fc621ebf76c3c12e0d291c1fe3d7c3ce6efbc9251",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T002",
+        "T004",
+        "T013"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย พ.ศ. 2511",
+        "มาตรฐานการบำรุงรักษาสินทรัพย์ กฟผ./กฟน./กฟภ."
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R007",
+          "name_th": "ความเสี่ยงความล้มเหลวของสินทรัพย์โครงข่ายไฟฟ้า",
+          "name_en": "Power Grid Asset Failure Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF009",
+              "name_th": "ไม่มีแผนบำรุงรักษาเชิงป้องกัน (Preventive Maintenance Plan)",
+              "name_en": "No Preventive Maintenance Plan",
+              "audit_procedures": [
+                {
+                  "id": "AP011",
+                  "name_th": "ตรวจสอบแผนและบันทึกการบำรุงรักษาสินทรัพย์วิกฤต",
+                  "name_en": "Review maintenance plan and records for critical assets",
+                  "method": "Document Review + Site Inspection",
+                  "evidence_types": [
+                    "แผนบำรุงรักษาประจำปี (Annual Maintenance Plan)",
+                    "Maintenance Work Order Records",
+                    "รายงานสภาพสินทรัพย์ (Asset Condition Report)",
+                    "รายงานการตรวจสอบภาคสนาม",
+                    "Predictive Maintenance Data"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CF010",
+              "name_th": "ทะเบียนสินทรัพย์ไม่ครบถ้วนหรือล้าสมัย",
+              "name_en": "Incomplete or outdated asset register",
+              "audit_procedures": [
+                {
+                  "id": "AP012",
+                  "name_th": "ตรวจนับและยืนยันความถูกต้องของทะเบียนสินทรัพย์",
+                  "name_en": "Count and verify accuracy of asset register",
+                  "method": "Physical Verification + System Reconciliation",
+                  "evidence_types": [
+                    "ทะเบียนสินทรัพย์ถาวร (Fixed Asset Register)",
+                    "รายงาน GIS/SCADA Asset Data",
+                    "รายงานการตรวจนับสินทรัพย์",
+                    "เอกสารการรับมอบสินทรัพย์",
+                    "ประกันภัยสินทรัพย์"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R008",
+          "name_th": "ความเสี่ยงการจัดการวงจรชีวิตสินทรัพย์ไม่เหมาะสม",
+          "name_en": "Inadequate Asset Lifecycle Management",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF011",
+              "name_th": "ไม่มีเกณฑ์การทดแทนสินทรัพย์ที่ชัดเจน",
+              "name_en": "No clear asset replacement criteria",
+              "audit_procedures": [
+                {
+                  "id": "AP013",
+                  "name_th": "ทบทวนนโยบายและเกณฑ์การทดแทนสินทรัพย์",
+                  "name_en": "Review asset replacement policy and criteria",
+                  "method": "Policy Review + Financial Analysis",
+                  "evidence_types": [
+                    "นโยบายบริหารสินทรัพย์",
+                    "แผนทดแทนสินทรัพย์ระยะยาว (CAPEX Plan)",
+                    "รายงาน End-of-Life Analysis",
+                    "ประวัติการซ่อมแซมสินทรัพย์"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T004",
+      "name_th": "ความปลอดภัยและความเชื่อถือได้ของโครงข่ายไฟฟ้า",
+      "name_en": "Grid Safety & Reliability",
+      "category": "Safety & Operations",
+      "category_th": "ความปลอดภัยและการปฏิบัติการ",
+      "icon": "🔋",
+      "color": "#27AE60",
+      "priority": "CRITICAL",
+      "applicable_standards": [
+        "IEC 60038",
+        "NERC TPL",
+        "IEEE 1366",
+        "มาตรฐาน SAIDI/SAIFI",
+        "กฎของ กกพ."
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T004",
+      "version": "1.0.0",
+      "confidence_score": 91,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:3e252a5decaef6e3a45772e767f4e16e582a5df030ce1c837d124d6d3780e089",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T002",
+        "T003",
+        "T015"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.ความปลอดภัย อาชีวอนามัย และสภาพแวดล้อมในการทำงาน พ.ศ. 2554",
+        "กฎระเบียบ กกพ. ว่าด้วยความเชื่อถือได้ของระบบไฟฟ้า",
+        "มาตรฐาน SAIDI/SAIFI ของ กฟน./กฟภ."
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R009",
+          "name_th": "ความเสี่ยงไฟฟ้าดับครั้งใหญ่ (Blackout)",
+          "name_en": "Large-scale Power Outage (Blackout) Risk",
+          "level": "CRITICAL",
+          "likelihood": "ต่ำ",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF012",
+              "name_th": "ขาดความซ้ำซ้อน (Redundancy) N-1 ในระบบสายส่ง",
+              "name_en": "Insufficient N-1 redundancy in transmission system",
+              "audit_procedures": [
+                {
+                  "id": "AP014",
+                  "name_th": "ทบทวนการศึกษา N-1/N-2 Contingency Analysis และแผนรักษาความมั่นคง",
+                  "name_en": "Review N-1/N-2 contingency analysis and grid stability plan",
+                  "method": "Technical Review + Simulation Testing",
+                  "evidence_types": [
+                    "Single Line Diagram (SLD)",
+                    "รายงาน Contingency Analysis",
+                    "Power Flow Study Results",
+                    "แผนป้องกันระบบ (Protection Scheme)",
+                    "รายงานการทดสอบระบบป้องกัน"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CF013",
+              "name_th": "ขาดแผนการจัดการสถานการณ์ฉุกเฉินโครงข่ายไฟฟ้า",
+              "name_en": "No power grid emergency management plan",
+              "audit_procedures": [
+                {
+                  "id": "AP015",
+                  "name_th": "ตรวจสอบและซ้อมแผนฉุกเฉินโครงข่ายไฟฟ้า",
+                  "name_en": "Review and test power grid emergency plan",
+                  "method": "Document Review + Drill Exercise",
+                  "evidence_types": [
+                    "แผนฉุกเฉินโครงข่ายไฟฟ้า",
+                    "รายงานการซ้อมแผน (Drill Report)",
+                    "SAIDI/SAIFI Performance Report",
+                    "บันทึกเหตุการณ์ไฟดับ (Outage Log)",
+                    "รายงาน Root Cause Analysis"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R010",
+          "name_th": "ความเสี่ยงอุบัติเหตุจากไฟฟ้า",
+          "name_en": "Electrical Safety Accident Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF014",
+              "name_th": "ไม่ปฏิบัติตามขั้นตอนความปลอดภัยในการทำงานกับไฟฟ้า",
+              "name_en": "Non-compliance with electrical safety work procedures",
+              "audit_procedures": [
+                {
+                  "id": "AP016",
+                  "name_th": "ตรวจสอบขั้นตอนความปลอดภัยและบันทึกการฝึกอบรม",
+                  "name_en": "Review safety procedures and training records",
+                  "method": "Observation + Record Review",
+                  "evidence_types": [
+                    "คู่มือความปลอดภัยในการทำงาน (Safety Manual)",
+                    "บันทึกการฝึกอบรมความปลอดภัย",
+                    "Lockout/Tagout (LOTO) Records",
+                    "รายงานอุบัติเหตุ/เหตุการณ์เกือบเกิด (Near Miss Report)",
+                    "ใบอนุญาตทำงาน (Work Permit)"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T005",
+      "name_th": "การบริหารการเงินและการรายงาน",
+      "name_en": "Financial Management & Reporting",
+      "category": "Financial",
+      "category_th": "การเงิน",
+      "icon": "💰",
+      "color": "#8E44AD",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "TFRS / IFRS",
+        "INTOSAI GOV 9100",
+        "IIA 2400",
+        "มาตรฐาน สตง.",
+        "พรบ.วินัยการเงินการคลัง พ.ศ.2561"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T005",
+      "version": "1.0.0",
+      "confidence_score": 89,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:93970173bf0979b260c393cb6659208d33265ffdf787027451fccb8cf6db64a1",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T001",
+        "T006",
+        "T007"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561",
+        "มาตรฐานการบัญชีภาครัฐ สตง.",
+        "ระเบียบการเงินและบัญชีขององค์กรรัฐวิสาหกิจ"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R011",
+          "name_th": "ความเสี่ยงงบการเงินไม่ถูกต้องหรือทุจริตทางการเงิน",
+          "name_en": "Financial Misstatement or Fraud Risk",
+          "level": "HIGH",
+          "likelihood": "ต่ำ",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF015",
+              "name_th": "ขาดกระบวนการกระทบยอดบัญชีรายได้อย่างเป็นระบบ",
+              "name_en": "No systematic revenue account reconciliation process",
+              "audit_procedures": [
+                {
+                  "id": "AP017",
+                  "name_th": "ตรวจสอบกระบวนการกระทบยอดรายได้และการรับรู้รายได้",
+                  "name_en": "Review revenue reconciliation and recognition process",
+                  "method": "Substantive Testing + Analytical Procedures",
+                  "evidence_types": [
+                    "รายงานกระทบยอดรายได้รายเดือน",
+                    "Bank Statement",
+                    "ระบบบิลค่าไฟฟ้า (Billing System Report)",
+                    "รายงานการตรวจสอบภายใน",
+                    "งบการเงินที่ผ่านการตรวจสอบ"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CF016",
+              "name_th": "การควบคุมการเบิกจ่ายเงินบกพร่อง",
+              "name_en": "Deficient disbursement controls",
+              "audit_procedures": [
+                {
+                  "id": "AP018",
+                  "name_th": "ตรวจสอบกระบวนการอนุมัติและการเบิกจ่ายเงิน",
+                  "name_en": "Review payment approval and disbursement process",
+                  "method": "Transaction Testing",
+                  "evidence_types": [
+                    "ใบสำคัญจ่าย (Payment Voucher)",
+                    "เอกสารประกอบการอนุมัติ",
+                    "รายงานการตรวจสอบธุรกรรมผิดปกติ",
+                    "Audit Trail ในระบบการเงิน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R012",
+          "name_th": "ความเสี่ยงการบริหารงบประมาณเกินกว่าที่ได้รับอนุมัติ",
+          "name_en": "Budget Overrun Risk",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF017",
+              "name_th": "ขาดระบบติดตามงบประมาณแบบ Real-time",
+              "name_en": "No real-time budget monitoring system",
+              "audit_procedures": [
+                {
+                  "id": "AP019",
+                  "name_th": "ตรวจสอบระบบและกระบวนการติดตามงบประมาณ",
+                  "name_en": "Review budget monitoring system and process",
+                  "method": "System Review + Analytical Procedures",
+                  "evidence_types": [
+                    "รายงานติดตามงบประมาณรายเดือน",
+                    "รายงานเปรียบเทียบงบประมาณ vs. จริง",
+                    "รายงานการอนุมัติโอนงบประมาณ",
+                    "รายงานการตรวจสอบงบประมาณของ สตง."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T006",
+      "name_th": "การกำกับดูแลกิจการที่ดีและจริยธรรม",
+      "name_en": "Corporate Governance & Ethics",
+      "category": "Governance",
+      "category_th": "การกำกับดูแล",
+      "icon": "⚖️",
+      "color": "#1ABC9C",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "OECD Principles of Corporate Governance",
+        "IOD Thai CG Code",
+        "IIA 2110",
+        "พรบ.ป.ป.ช. พ.ศ.2561",
+        "มาตรฐาน ITA"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T006",
+      "version": "1.0.0",
+      "confidence_score": 85,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:5f83ffa19bab5dc5903684dd828708445728c1be176c88e75a0c25345699227e",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T001",
+        "T005",
+        "T008"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561",
+        "มาตรฐานการประเมิน ITA ของ ป.ป.ช.",
+        "แนวทาง CG ของรัฐวิสาหกิจ สคร."
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R013",
+          "name_th": "ความเสี่ยงผลประโยชน์ทับซ้อน (Conflict of Interest)",
+          "name_en": "Conflict of Interest Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF018",
+              "name_th": "ไม่มีนโยบายและกระบวนการประกาศผลประโยชน์ที่มีประสิทธิภาพ",
+              "name_en": "No effective conflict of interest policy and disclosure process",
+              "audit_procedures": [
+                {
+                  "id": "AP020",
+                  "name_th": "ตรวจสอบนโยบาย COI และการประกาศผลประโยชน์ของผู้บริหารและกรรมการ",
+                  "name_en": "Review COI policy and interest declarations of executives and directors",
+                  "method": "Document Review + Interview",
+                  "evidence_types": [
+                    "นโยบายป้องกันผลประโยชน์ทับซ้อน",
+                    "แบบประกาศผลประโยชน์ (COI Declaration Form)",
+                    "ทะเบียนผลประโยชน์กรรมการ",
+                    "รายงานการตรวจสอบ ITA ของ ป.ป.ช.",
+                    "รายงานการประชุมคณะกรรมการ (ส่วนที่แสดงการออกจากห้อง)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R014",
+          "name_th": "ความเสี่ยงการทุจริตคอร์รัปชัน",
+          "name_en": "Corruption Risk",
+          "level": "HIGH",
+          "likelihood": "ต่ำ",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF019",
+              "name_th": "ขาดช่องทางแจ้งเบาะแสที่มีประสิทธิภาพ",
+              "name_en": "Ineffective whistleblowing channels",
+              "audit_procedures": [
+                {
+                  "id": "AP021",
+                  "name_th": "ตรวจสอบระบบและผลการดำเนินงานช่องทางแจ้งเบาะแส",
+                  "name_en": "Review whistleblowing system and operational results",
+                  "method": "System Review + Case Review",
+                  "evidence_types": [
+                    "นโยบายช่องทางแจ้งเบาะแส",
+                    "สถิติการรับเรื่องร้องเรียน",
+                    "รายงานผลการสืบสวนกรณีทุจริต",
+                    "รายงาน ITA Score",
+                    "แบบประเมินความเสี่ยงทุจริต"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T007",
+      "name_th": "การบริหารความเสี่ยงองค์กร (ERM)",
+      "name_en": "Enterprise Risk Management (ERM)",
+      "category": "Risk Management",
+      "category_th": "การบริหารความเสี่ยง",
+      "icon": "🎯",
+      "color": "#E67E22",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "COSO ERM 2017",
+        "ISO 31000:2018",
+        "INTOSAI GOV 9130",
+        "มาตรฐาน กพ./คสช.",
+        "แนวทาง สคร."
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T007",
+      "version": "1.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:0de9cf5a41fa648cff306691f1f48b79b8f99cfe5498ef73433645489b3ab936",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T005",
+        "T006",
+        "T015"
+      ],
+      "thai_law_refs": [
+        "แนวทางการบริหารความเสี่ยงของ สคร.",
+        "มาตรฐานการบริหารความเสี่ยงสำหรับรัฐวิสาหกิจ กพ.",
+        "ระเบียบ กพ. ว่าด้วยการบริหารจัดการความเสี่ยง"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R015",
+          "name_th": "ความเสี่ยงกรอบ ERM ไม่ครอบคลุมความเสี่ยงที่สำคัญ",
+          "name_en": "ERM Framework Incomplete Coverage of Key Risks",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF020",
+              "name_th": "กระบวนการระบุและประเมินความเสี่ยงไม่เป็นระบบ",
+              "name_en": "Non-systematic risk identification and assessment process",
+              "audit_procedures": [
+                {
+                  "id": "AP022",
+                  "name_th": "ทบทวนกรอบ ERM และกระบวนการบริหารความเสี่ยง",
+                  "name_en": "Review ERM framework and risk management process",
+                  "method": "Framework Assessment + Interview",
+                  "evidence_types": [
+                    "กรอบการบริหารความเสี่ยงองค์กร",
+                    "ทะเบียนความเสี่ยง (Risk Register)",
+                    "รายงานการประเมินความเสี่ยงรายปี",
+                    "Risk Heat Map",
+                    "รายงานการติดตามมาตรการจัดการความเสี่ยง"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R016",
+          "name_th": "ความเสี่ยงการบูรณาการ ERM กับกลยุทธ์องค์กรบกพร่อง",
+          "name_en": "Poor ERM-Strategy Integration",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF021",
+              "name_th": "ขาดการเชื่อมโยงความเสี่ยงกับเป้าหมายเชิงกลยุทธ์",
+              "name_en": "Lack of risk-strategy alignment",
+              "audit_procedures": [
+                {
+                  "id": "AP023",
+                  "name_th": "ตรวจสอบการเชื่อมโยงระหว่างทะเบียนความเสี่ยงกับแผนยุทธศาสตร์",
+                  "name_en": "Review linkage between risk register and strategic plan",
+                  "method": "Document Review + Management Interview",
+                  "evidence_types": [
+                    "แผนยุทธศาสตร์องค์กร",
+                    "ทะเบียนความเสี่ยงที่มีการเชื่อมโยงกลยุทธ์",
+                    "รายงาน KRI (Key Risk Indicators)",
+                    "รายงานการประชุม Risk Committee"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T008",
+      "name_th": "การปฏิบัติตามกฎหมายและข้อกำหนด",
+      "name_en": "Regulatory & Legal Compliance",
+      "category": "Compliance",
+      "category_th": "การปฏิบัติตามกฎระเบียบ",
+      "icon": "📜",
+      "color": "#2980B9",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "IIA 2110",
+        "INTOSAI ISSAI 4000",
+        "พรบ.พลังงาน พ.ศ.2550",
+        "กฎระเบียบ กกพ.",
+        "พรบ.สิ่งแวดล้อม พ.ศ.2535"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T008",
+      "version": "1.0.0",
+      "confidence_score": 88,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:9251971a78f7558d512d49caa053a50745144ce9a4cc39827d3f2945e21cb01a",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T006",
+        "T009"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.พลังงาน พ.ศ. 2550",
+        "ข้อกำหนดของ กกพ. ว่าด้วยใบอนุญาตประกอบกิจการพลังงาน",
+        "พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R017",
+          "name_th": "ความเสี่ยงการละเมิดกฎหมายพลังงานและกฎระเบียบ กกพ.",
+          "name_en": "Non-compliance with Energy Law and ERC Regulations",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF022",
+              "name_th": "ไม่มีระบบติดตามการเปลี่ยนแปลงกฎหมายและข้อกำหนด",
+              "name_en": "No system to monitor regulatory changes",
+              "audit_procedures": [
+                {
+                  "id": "AP024",
+                  "name_th": "ตรวจสอบระบบติดตามกฎหมายและการปฏิบัติตามข้อกำหนด กกพ.",
+                  "name_en": "Review regulatory monitoring system and ERC compliance",
+                  "method": "Compliance Testing + Document Review",
+                  "evidence_types": [
+                    "ทะเบียนกฎหมายที่เกี่ยวข้อง (Legal Register)",
+                    "รายงานการปฏิบัติตามข้อกำหนด กกพ.",
+                    "ใบอนุญาตประกอบกิจการพลังงาน",
+                    "รายงานการตรวจสอบจาก กกพ.",
+                    "บันทึกการฝึกอบรมกฎหมายพลังงาน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R018",
+          "name_th": "ความเสี่ยงการไม่ปฏิบัติตามมาตรฐานสิ่งแวดล้อม",
+          "name_en": "Environmental Non-compliance Risk",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF023",
+              "name_th": "ขาดการติดตามและรายงานผลกระทบสิ่งแวดล้อมอย่างสม่ำเสมอ",
+              "name_en": "Lack of regular environmental impact monitoring and reporting",
+              "audit_procedures": [
+                {
+                  "id": "AP025",
+                  "name_th": "ตรวจสอบกระบวนการติดตามผลกระทบสิ่งแวดล้อมและรายงาน EIA",
+                  "name_en": "Review environmental impact monitoring and EIA reporting",
+                  "method": "Compliance Audit + Site Inspection",
+                  "evidence_types": [
+                    "รายงาน EIA (Environmental Impact Assessment)",
+                    "รายงานติดตามตรวจสอบผลกระทบสิ่งแวดล้อม",
+                    "ใบอนุญาตสิ่งแวดล้อม",
+                    "รายงานการตรวจสอบจากหน่วยงานด้านสิ่งแวดล้อม",
+                    "Carbon Footprint Report"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T009",
+      "name_th": "ความยั่งยืนและพลังงานสะอาด",
+      "name_en": "Sustainability & Clean Energy",
+      "category": "ESG",
+      "category_th": "ESG",
+      "icon": "🌱",
+      "color": "#16A085",
+      "priority": "MEDIUM",
+      "applicable_standards": [
+        "GRI Standards 2021",
+        "TCFD",
+        "ISO 14001:2015",
+        "Thailand NDC",
+        "Thailand Green Taxonomy",
+        "SASB Electric Utilities"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T009",
+      "version": "1.0.0",
+      "confidence_score": 82,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:69f8feddd08dcde148abfd9dcfc635280afdd76b94c30883770b6855fbeeca19",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T008",
+        "T016"
+      ],
+      "thai_law_refs": [
+        "นโยบาย Thailand NDC ว่าด้วยการลดการปล่อยก๊าซเรือนกระจก",
+        "Thailand Green Taxonomy ของ สนง.คณะกรรมการกำกับหลักทรัพย์",
+        "แผน PDP 2024 ด้านพลังงานหมุนเวียน"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R019",
+          "name_th": "ความเสี่ยงการรายงาน ESG/ความยั่งยืนไม่ถูกต้อง",
+          "name_en": "Inaccurate ESG/Sustainability Reporting Risk",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF024",
+              "name_th": "ขาดระบบรวบรวมและตรวจสอบข้อมูล ESG",
+              "name_en": "No ESG data collection and verification system",
+              "audit_procedures": [
+                {
+                  "id": "AP026",
+                  "name_th": "ตรวจสอบความน่าเชื่อถือของข้อมูลในรายงาน ESG",
+                  "name_en": "Verify reliability of ESG report data",
+                  "method": "Data Verification + Process Review",
+                  "evidence_types": [
+                    "รายงานความยั่งยืน (Sustainability Report)",
+                    "ข้อมูลการปล่อยก๊าซเรือนกระจก (GHG Inventory)",
+                    "รายงาน Carbon Offset",
+                    "รายงานการใช้พลังงานทดแทน",
+                    "Third-party Assurance Report"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R020",
+          "name_th": "ความเสี่ยงการเปลี่ยนผ่านพลังงาน (Energy Transition)",
+          "name_en": "Energy Transition Risk",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF025",
+              "name_th": "ขาดแผนรองรับพลังงานหมุนเวียนในโครงข่ายไฟฟ้า",
+              "name_en": "No plan for renewable energy grid integration",
+              "audit_procedures": [
+                {
+                  "id": "AP027",
+                  "name_th": "ทบทวนแผนรองรับพลังงานหมุนเวียนและความพร้อมโครงข่ายไฟฟ้า",
+                  "name_en": "Review renewable energy integration plan and grid readiness",
+                  "method": "Strategic Plan Review + Technical Assessment",
+                  "evidence_types": [
+                    "แผนพัฒนากำลังผลิตไฟฟ้า (PDP)",
+                    "Smart Grid Roadmap",
+                    "รายงานความพร้อมรับ RE (Renewable Energy Readiness)",
+                    "แผน Grid Modernization",
+                    "รายงาน AEMO / Regional Energy Plan"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T010",
+      "name_th": "การบริหารทรัพยากรบุคคลและวัฒนธรรมองค์กร",
+      "name_en": "Human Resource Management & Organizational Culture",
+      "category": "People",
+      "category_th": "บุคคล",
+      "icon": "👥",
+      "color": "#C0392B",
+      "priority": "MEDIUM",
+      "applicable_standards": [
+        "IIA 2030",
+        "ISO 30414:2018",
+        "พรบ.แรงงานสัมพันธ์ พ.ศ.2518",
+        "พรบ.คุ้มครองแรงงาน พ.ศ.2541",
+        "มาตรฐาน กพ."
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T010",
+      "version": "1.0.0",
+      "confidence_score": 84,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:33f6a21f7b7b86675a144439ab9429a4095e3e684c0cc5e0dc4f4740b4cf236c",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T006",
+        "T008"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.คุ้มครองแรงงาน พ.ศ. 2541",
+        "พ.ร.บ.แรงงานสัมพันธ์ พ.ศ. 2518",
+        "ระเบียบ กพ. ว่าด้วยการบริหารทรัพยากรบุคคล",
+        "พ.ร.บ.ระเบียบข้าราชการพลเรือนรัฐวิสาหกิจ"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R021",
+          "name_th": "ความเสี่ยงการสูญเสียบุคลากรที่มีความเชี่ยวชาญด้านระบบไฟฟ้า",
+          "name_en": "Loss of Critical Power System Expertise",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF026",
+              "name_th": "ขาดแผนสืบทอดตำแหน่งและการถ่ายทอดความรู้",
+              "name_en": "No succession plan and knowledge transfer plan",
+              "audit_procedures": [
+                {
+                  "id": "AP028",
+                  "name_th": "ตรวจสอบแผนสืบทอดตำแหน่งและการจัดการความรู้สำคัญ",
+                  "name_en": "Review succession planning and critical knowledge management",
+                  "method": "Document Review + Interview",
+                  "evidence_types": [
+                    "แผนสืบทอดตำแหน่ง (Succession Plan)",
+                    "แผนพัฒนาบุคลากร (IDP)",
+                    "ทะเบียนผู้เชี่ยวชาญด้านระบบไฟฟ้า",
+                    "ระบบบริหารจัดการความรู้ (KM System)",
+                    "รายงานอัตราการลาออก (Turnover Rate)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R022",
+          "name_th": "ความเสี่ยงการฝึกอบรมและพัฒนาไม่ตรงความต้องการ",
+          "name_en": "Misaligned Training & Development",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF027",
+              "name_th": "ขาดการวิเคราะห์ความต้องการฝึกอบรม (TNA) อย่างเป็นระบบ",
+              "name_en": "No systematic Training Needs Analysis (TNA)",
+              "audit_procedures": [
+                {
+                  "id": "AP029",
+                  "name_th": "ตรวจสอบกระบวนการวิเคราะห์ความต้องการและผลการฝึกอบรม",
+                  "name_en": "Review training needs analysis process and outcomes",
+                  "method": "Document Review + Effectiveness Assessment",
+                  "evidence_types": [
+                    "รายงาน Training Needs Analysis",
+                    "แผนการฝึกอบรมประจำปี",
+                    "บันทึกชั่วโมงฝึกอบรมต่อคน",
+                    "รายงานประเมินผลการฝึกอบรม (Kirkpatrick Level 1-4)",
+                    "งบประมาณฝึกอบรมเทียบกับผลลัพธ์"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T011",
+      "name_th": "การบริการลูกค้าและการจัดการรายได้",
+      "name_en": "Customer Service & Revenue Management",
+      "category": "Revenue",
+      "category_th": "การจัดการรายได้",
+      "icon": "👤",
+      "color": "#3498DB",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "IIA 2100",
+        "ISO 9001:2015",
+        "กฎ กกพ. ว่าด้วยการให้บริการ",
+        "พรบ.คุ้มครองผู้บริโภค พ.ศ.2522"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T011",
+      "version": "1.0.0",
+      "confidence_score": 83,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:d7555744ea85070167fa6a33652ca45197171aa68803a0b6ae4b7eacb9b5cca0",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T004",
+        "T012"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522",
+        "กฎ กกพ. ว่าด้วยการให้บริการไฟฟ้าและการคำนวณค่าไฟฟ้า",
+        "มาตรฐานการให้บริการของ กฟน./กฟภ."
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC002",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R023",
+          "name_th": "ความเสี่ยงการสูญเสียรายได้จากการเรียกเก็บค่าไฟฟ้า",
+          "name_en": "Revenue Loss from Electricity Billing",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF028",
+              "name_th": "ระบบมิเตอร์และการอ่านค่าไม่แม่นยำ",
+              "name_en": "Inaccurate metering and meter reading system",
+              "audit_procedures": [
+                {
+                  "id": "AP030",
+                  "name_th": "ตรวจสอบความแม่นยำของมิเตอร์และกระบวนการอ่านค่า",
+                  "name_en": "Review meter accuracy and reading process",
+                  "method": "Physical Inspection + Data Analytics",
+                  "evidence_types": [
+                    "รายงานการสอบเทียบมิเตอร์ (Meter Calibration Report)",
+                    "บันทึกการอ่านค่ามิเตอร์ (Meter Reading Records)",
+                    "รายงาน Non-Technical Losses",
+                    "ผลการตรวจสอบมิเตอร์ AMI",
+                    "รายงานการร้องเรียนจากลูกค้า"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R024",
+          "name_th": "ความเสี่ยงการให้บริการลูกค้าไม่เป็นไปตามมาตรฐาน",
+          "name_en": "Customer Service Below Standard Risk",
+          "level": "MEDIUM",
+          "likelihood": "สูง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF029",
+              "name_th": "ขาดระบบติดตามและวัดผลคุณภาพการให้บริการ",
+              "name_en": "No system to monitor and measure service quality",
+              "audit_procedures": [
+                {
+                  "id": "AP031",
+                  "name_th": "ตรวจสอบระบบวัดผลคุณภาพการให้บริการและการตอบสนองต่อข้อร้องเรียน",
+                  "name_en": "Review service quality measurement and complaint response system",
+                  "method": "Process Review + Customer Survey",
+                  "evidence_types": [
+                    "รายงาน Customer Satisfaction Score (CSAT)",
+                    "สถิติการร้องเรียนและการแก้ไข",
+                    "SLA (Service Level Agreement) Report",
+                    "บันทึก Call Center Performance",
+                    "รายงาน Net Promoter Score (NPS)"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T012",
+      "name_th": "การกำกับดูแลด้านเทคโนโลยีสารสนเทศ",
+      "name_en": "IT Governance & System Development",
+      "category": "Technology",
+      "category_th": "เทคโนโลยี",
+      "icon": "💻",
+      "color": "#9B59B6",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "COBIT 2019",
+        "ISO/IEC 27001:2022",
+        "ITIL v4",
+        "พรบ.คอมพิวเตอร์ พ.ศ.2560",
+        "PDPA พ.ศ.2562"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T012",
+      "version": "1.0.0",
+      "confidence_score": 87,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:4814f2b80c53cdb86e208528a57d43a5d587de8aeffe183bab8c158c4cc0b1d8",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T002",
+        "T011",
+        "T016"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
+        "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล (PDPA) พ.ศ. 2562",
+        "ประกาศ กสทช. ว่าด้วยมาตรการรักษาความมั่นคงปลอดภัย"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC003",
+          "source_type": "pdf_standard",
+          "credibility_score": 93,
+          "knowledge_layer": "L0"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R025",
+          "name_th": "ความเสี่ยงการพัฒนาระบบไม่เป็นไปตามความต้องการและงบประมาณ",
+          "name_en": "IT System Development Over Budget and Requirements Risk",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF030",
+              "name_th": "ขาดกระบวนการบริหารโครงการระบบสารสนเทศที่มีประสิทธิภาพ",
+              "name_en": "Ineffective IT project management process",
+              "audit_procedures": [
+                {
+                  "id": "AP032",
+                  "name_th": "ตรวจสอบกระบวนการบริหารโครงการ IT และการกำกับดูแล",
+                  "name_en": "Review IT project management and governance process",
+                  "method": "Project Audit + Document Review",
+                  "evidence_types": [
+                    "IT Governance Framework",
+                    "Project Charter และ Scope Document",
+                    "รายงานความก้าวหน้าโครงการ (Progress Report)",
+                    "Steering Committee Meeting Minutes",
+                    "รายงานการทดสอบระบบ (UAT Report)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R026",
+          "name_th": "ความเสี่ยงการละเมิดข้อมูลส่วนบุคคล (PDPA)",
+          "name_en": "Personal Data Breach Risk (PDPA)",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF031",
+              "name_th": "ขาดระบบคุ้มครองและจัดการข้อมูลส่วนบุคคลตาม PDPA",
+              "name_en": "No PDPA-compliant personal data protection system",
+              "audit_procedures": [
+                {
+                  "id": "AP033",
+                  "name_th": "ตรวจสอบการปฏิบัติตาม PDPA และระบบจัดการข้อมูลส่วนบุคคล",
+                  "name_en": "Review PDPA compliance and personal data management system",
+                  "method": "Compliance Audit + System Review",
+                  "evidence_types": [
+                    "นโยบายคุ้มครองข้อมูลส่วนบุคคล",
+                    "ทะเบียนกิจกรรมการประมวลผลข้อมูล (ROPA)",
+                    "บันทึก Data Subject Request",
+                    "Data Privacy Impact Assessment (DPIA)",
+                    "รายงานการตรวจสอบ PDPA Compliance"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T013",
+      "name_th": "การบริหารโครงการลงทุนและงานก่อสร้าง",
+      "name_en": "Capital Project & Construction Management",
+      "category": "Investment",
+      "category_th": "การลงทุน",
+      "icon": "🏗️",
+      "color": "#E74C3C",
+      "priority": "HIGH",
+      "applicable_standards": [
+        "PMI PMBOK",
+        "FIDIC",
+        "IIA 2100",
+        "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
+        "มาตรฐาน กฟผ./กฟน./กฟภ."
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T013",
+      "version": "1.0.0",
+      "confidence_score": 86,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:0bca68dc80e70d643f36f876f3a11e497cf959038bb586a97a495ab3fd354272",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T001",
+        "T005",
+        "T014"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "ระเบียบว่าด้วยการบริหารโครงการลงทุนของรัฐวิสาหกิจ สคร.",
+        "มาตรฐานการบริหารโครงการ กฟผ./กฟน./กฟภ."
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R027",
+          "name_th": "ความเสี่ยงโครงการล่าช้าและเกินงบประมาณ",
+          "name_en": "Project Delay and Cost Overrun Risk",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF032",
+              "name_th": "ขาดการควบคุมและติดตามโครงการอย่างมีประสิทธิภาพ",
+              "name_en": "Ineffective project control and monitoring",
+              "audit_procedures": [
+                {
+                  "id": "AP034",
+                  "name_th": "ตรวจสอบระบบควบคุมและติดตามโครงการลงทุน",
+                  "name_en": "Review capital project control and monitoring system",
+                  "method": "Project Review + Site Inspection",
+                  "evidence_types": [
+                    "แผนโครงการ (Project Plan / Gantt Chart)",
+                    "รายงานความก้าวหน้าโครงการรายเดือน",
+                    "รายงาน Earned Value Management (EVM)",
+                    "บันทึกการประชุมติดตามโครงการ",
+                    "รายงานการตรวจรับงานก่อสร้าง"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R028",
+          "name_th": "ความเสี่ยงคุณภาพงานก่อสร้างไม่เป็นไปตามมาตรฐาน",
+          "name_en": "Construction Quality Below Standard Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF033",
+              "name_th": "ขาดระบบการตรวจสอบคุณภาพงานก่อสร้างและการตรวจรับงาน",
+              "name_en": "No construction quality inspection and acceptance system",
+              "audit_procedures": [
+                {
+                  "id": "AP035",
+                  "name_th": "ตรวจสอบกระบวนการควบคุมคุณภาพงานก่อสร้างและการตรวจรับ",
+                  "name_en": "Review construction quality control and acceptance process",
+                  "method": "Site Inspection + Document Review",
+                  "evidence_types": [
+                    "Quality Management Plan",
+                    "บันทึกการตรวจสอบคุณภาพ (Inspection Record)",
+                    "รายงานผลการทดสอบวัสดุ (Material Test Report)",
+                    "ใบรับรองคุณภาพ (Certificate of Compliance)",
+                    "รายงานการตรวจรับงานสุดท้าย (Final Acceptance Report)"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T014",
+      "name_th": "การบริหารห่วงโซ่อุปทานและคลังพัสดุ",
+      "name_en": "Supply Chain & Materials/Warehouse Management",
+      "category": "Operations",
+      "category_th": "การดำเนินงาน",
+      "icon": "📦",
+      "color": "#F39C12",
+      "priority": "MEDIUM",
+      "applicable_standards": [
+        "ISO 28000:2022",
+        "IIA 2100",
+        "พรบ.จัดซื้อจัดจ้าง พ.ศ.2560",
+        "ระเบียบการเก็บรักษาพัสดุ"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T014",
+      "version": "1.0.0",
+      "confidence_score": 84,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:c16aedfe0353d8d10d0e00350c12d448a25fc2102fe794693b87b70e96f69b2c",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T001",
+        "T003",
+        "T013"
+      ],
+      "thai_law_refs": [
+        "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "ระเบียบการเก็บรักษาและจ่ายพัสดุของรัฐวิสาหกิจ",
+        "ประกาศ กรมศุลกากร ว่าด้วยการนำเข้าอุปกรณ์ไฟฟ้า"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R029",
+          "name_th": "ความเสี่ยงการขาดแคลนอุปกรณ์/วัสดุสำคัญ",
+          "name_en": "Critical Equipment/Material Shortage Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF034",
+              "name_th": "ขาดระบบบริหารสต๊อคและการวางแผนความต้องการวัสดุ",
+              "name_en": "No inventory management and material requirements planning system",
+              "audit_procedures": [
+                {
+                  "id": "AP036",
+                  "name_th": "ตรวจสอบระบบบริหารคลังพัสดุและการวางแผนจัดซื้อ",
+                  "name_en": "Review warehouse management and procurement planning system",
+                  "method": "Physical Count + System Reconciliation",
+                  "evidence_types": [
+                    "ทะเบียนพัสดุคงคลัง (Inventory Register)",
+                    "รายงานการตรวจนับพัสดุประจำปี",
+                    "Reorder Point / Safety Stock Analysis",
+                    "รายงาน Slow Moving และ Obsolete Items",
+                    "รายงานการเบิก-จ่ายพัสดุ"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R030",
+          "name_th": "ความเสี่ยงการทุจริตในคลังพัสดุ",
+          "name_en": "Warehouse/Inventory Fraud Risk",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF035",
+              "name_th": "ขาดการควบคุมการเข้าถึงและระบบรักษาความปลอดภัยคลังพัสดุ",
+              "name_en": "Insufficient warehouse access control and security",
+              "audit_procedures": [
+                {
+                  "id": "AP037",
+                  "name_th": "ตรวจสอบระบบควบคุมการเข้าถึงคลังพัสดุและการติดตามทรัพย์สิน",
+                  "name_en": "Review warehouse access control and asset tracking",
+                  "method": "Physical Inspection + CCTV Review",
+                  "evidence_types": [
+                    "บันทึกการเข้า-ออกคลังพัสดุ",
+                    "รายงาน CCTV Footage",
+                    "บันทึกการเบิก-คืนพัสดุ",
+                    "รายงานผลต่างจากการตรวจนับ (Discrepancy Report)",
+                    "รายงานการสอบสวนกรณีสูญหาย"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T015",
+      "name_th": "การบริหารความต่อเนื่องทางธุรกิจและการจัดการภาวะวิกฤต",
+      "name_en": "Business Continuity Management & Crisis Response",
+      "category": "Resilience",
+      "category_th": "ความยืดหยุ่น",
+      "icon": "🛡️",
+      "color": "#2C3E50",
+      "priority": "CRITICAL",
+      "applicable_standards": [
+        "ISO 22301:2019",
+        "NIST SP 800-34",
+        "IIA 2120",
+        "ประกาศ กกพ. ว่าด้วยความมั่นคงของระบบไฟฟ้า",
+        "แนวทาง สนช."
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T015",
+      "version": "1.0.0",
+      "confidence_score": 90,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:11669dee37efa8228c6b6627d10d34bcb68a19488e7549c634ef40ec8fcffed1",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T002",
+        "T004",
+        "T007"
+      ],
+      "thai_law_refs": [
+        "ประกาศ กกพ. ว่าด้วยความมั่นคงและความเชื่อถือได้ของระบบไฟฟ้า",
+        "แผนความมั่นคงพลังงานแห่งชาติ (สนพ.)",
+        "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC001",
+          "source_type": "pdf_standard",
+          "credibility_score": 95,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC003",
+          "source_type": "pdf_standard",
+          "credibility_score": 93,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R031",
+          "name_th": "ความเสี่ยงแผน BCP/DRP ไม่มีประสิทธิภาพ",
+          "name_en": "Ineffective BCP/DRP Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF036",
+              "name_th": "แผน BCP/DRP ไม่ครอบคลุมหรือไม่ได้รับการทดสอบ",
+              "name_en": "BCP/DRP not comprehensive or not tested",
+              "audit_procedures": [
+                {
+                  "id": "AP038",
+                  "name_th": "ตรวจสอบความครอบคลุมและการทดสอบแผน BCP/DRP",
+                  "name_en": "Review BCP/DRP comprehensiveness and testing",
+                  "method": "Document Review + Exercise Observation",
+                  "evidence_types": [
+                    "Business Continuity Plan (BCP)",
+                    "Disaster Recovery Plan (DRP)",
+                    "Business Impact Analysis (BIA)",
+                    "รายงานผลการซ้อมแผน (Test/Exercise Report)",
+                    "รายงาน RTO/RPO Compliance"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R032",
+          "name_th": "ความเสี่ยงการตอบสนองต่อภัยพิบัติทางธรรมชาติล่าช้า",
+          "name_en": "Delayed Response to Natural Disaster Risk",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF037",
+              "name_th": "ขาดโปรโตคอลการประสานงานกับหน่วยงานภายนอกในภาวะวิกฤต",
+              "name_en": "No external coordination protocol during crisis",
+              "audit_procedures": [
+                {
+                  "id": "AP039",
+                  "name_th": "ตรวจสอบโปรโตคอลการประสานงานวิกฤตและการสื่อสารฉุกเฉิน",
+                  "name_en": "Review crisis coordination protocol and emergency communication",
+                  "method": "Document Review + Interview + Drill",
+                  "evidence_types": [
+                    "Crisis Communication Plan",
+                    "MOU กับหน่วยงานสนับสนุน (กองทัพ, อปท., หน่วยกู้ภัย)",
+                    "Emergency Contact Directory",
+                    "รายงานการซ้อมแผนร่วมกับหน่วยงานภายนอก",
+                    "After Action Review Report"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T016",
+      "name_th": "Smart Grid และการจัดการนวัตกรรมดิจิทัล",
+      "name_en": "Smart Grid & Digital Innovation Management",
+      "category": "Innovation",
+      "category_th": "นวัตกรรม",
+      "icon": "🔮",
+      "color": "#1ABC9C",
+      "priority": "MEDIUM",
+      "applicable_standards": [
+        "IEC 61968/61970 (CIM)",
+        "IEEE 2030",
+        "NIST SP 1108r4 (Smart Grid)",
+        "แผน PDP 2024",
+        "ยุทธศาสตร์ดิจิทัลของ MEA/PEA/EGAT"
+      ],
+      "thailand_applicable": true,
+      "knowledge_id": "KN-T016",
+      "version": "1.0.0",
+      "confidence_score": 81,
+      "quality_gate_status": "PENDING_REVERIFY",
+      "approval_status": "LEGACY_UNVERIFIED",
+      "knowledge_layer": "L3",
+      "hash_signature": "sha256:e71a1a044b33ecff41a54286ba14dda78963feb4f09068e181ace6549944e87c",
+      "approved_by": null,
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-06-16",
+          "change": "Initial migration to schema 3.0.0",
+          "approved_by": "system"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-13",
+          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
+          "approved_by": "pending"
+        }
+      ],
+      "created_at": "2026-06-16T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [
+        "T002",
+        "T003",
+        "T012"
+      ],
+      "thai_law_refs": [
+        "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศไทย (PDP 2024)",
+        "ยุทธศาสตร์ดิจิทัลเพื่อเศรษฐกิจและสังคม พ.ศ. 2561-2580",
+        "ประกาศ กกพ. ว่าด้วย Smart Grid และมิเตอร์อัจฉริยะ"
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC003",
+          "source_type": "pdf_standard",
+          "credibility_score": 93,
+          "knowledge_layer": "L0"
+        },
+        {
+          "source_id": "SRC004",
+          "source_type": "research_report",
+          "credibility_score": 88,
+          "knowledge_layer": "L1"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R033",
+          "name_th": "ความเสี่ยงการลงทุน Smart Grid ไม่บรรลุผลลัพธ์ที่คาดหวัง",
+          "name_en": "Smart Grid Investment Fails to Deliver Expected Outcomes",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF038",
+              "name_th": "ขาดกรอบการประเมินผลตอบแทนการลงทุน Smart Grid",
+              "name_en": "No ROI evaluation framework for Smart Grid investment",
+              "audit_procedures": [
+                {
+                  "id": "AP040",
+                  "name_th": "ตรวจสอบกรอบการวัดและประเมินผลโครงการ Smart Grid",
+                  "name_en": "Review Smart Grid project measurement and evaluation framework",
+                  "method": "Performance Audit + Benefit Realization Review",
+                  "evidence_types": [
+                    "Business Case และ ROI Analysis",
+                    "KPI Dashboard ของโครงการ Smart Grid",
+                    "รายงานผลประโยชน์ที่ได้รับ (Benefit Realization Report)",
+                    "รายงานการเปรียบเทียบแผน vs. ผล (Planned vs. Actual)",
+                    "Lessons Learned Report"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R034",
+          "name_th": "ความเสี่ยงการบูรณาการระบบ Digital/IoT กับโครงข่ายไฟฟ้าเดิม",
+          "name_en": "Digital/IoT Integration with Legacy Grid Infrastructure Risk",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF039",
+              "name_th": "ขาดสถาปัตยกรรมการบูรณาการระบบ IT/OT ที่ชัดเจน",
+              "name_en": "No clear IT/OT system integration architecture",
+              "audit_procedures": [
+                {
+                  "id": "AP041",
+                  "name_th": "ตรวจสอบสถาปัตยกรรมและแผนการบูรณาการระบบ Digital กับโครงสร้างพื้นฐานเดิม",
+                  "name_en": "Review Digital system integration architecture and plan with legacy infrastructure",
+                  "method": "Architecture Review + Technical Assessment",
+                  "evidence_types": [
+                    "Enterprise Architecture Document",
+                    "IT/OT Integration Roadmap",
+                    "รายงาน Interoperability Testing",
+                    "รายงานความปลอดภัยของระบบ IoT",
+                    "รายงานความพร้อม Cybersecurity สำหรับ Smart Devices"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "skills_registry": {
+    "SKL001": {
+      "name": "Knowledge Harvester",
+      "name_th": "ตัวรวบรวมความรู้",
+      "version": "1.0",
+      "description": "Searches worldwide audit knowledge from INTOSAI, IIA, ISACA, IEEE, IEC sources",
+      "inputs": [
+        "topic_name",
+        "organization_type",
+        "country"
+      ],
+      "outputs": [
+        "raw_knowledge_items",
+        "source_urls",
+        "confidence_scores"
+      ]
+    },
+    "SKL002": {
+      "name": "Standards Validator",
+      "name_th": "ตัวตรวจสอบมาตรฐาน",
+      "version": "1.0",
+      "description": "Validates standard versions, applicability, and currency",
+      "inputs": [
+        "standard_name",
+        "version_claimed"
+      ],
+      "outputs": [
+        "current_version",
+        "is_valid",
+        "superseded_by"
+      ]
+    },
+    "SKL003": {
+      "name": "Thailand Applicability Checker",
+      "name_th": "ตัวตรวจสอบความใช้ได้ในประเทศไทย",
+      "version": "1.0",
+      "description": "Maps international standards to Thai regulations and laws",
+      "inputs": [
+        "international_standard",
+        "topic"
+      ],
+      "outputs": [
+        "thai_equivalent",
+        "applicable_laws",
+        "applicability_score"
+      ]
+    },
+    "SKL004": {
+      "name": "Topic Classification Engine",
+      "name_th": "เครื่องจำแนกหัวข้อ",
+      "version": "1.0",
+      "description": "Classifies audit topics into categories and assigns priority",
+      "inputs": [
+        "topic_text"
+      ],
+      "outputs": [
+        "category",
+        "priority",
+        "related_topics"
+      ]
+    },
+    "SKL005": {
+      "name": "Risk Classification Module",
+      "name_th": "โมดูลจำแนกความเสี่ยง",
+      "version": "1.0",
+      "description": "Classifies risks by likelihood, impact, and level using standard matrix",
+      "inputs": [
+        "risk_description",
+        "context"
+      ],
+      "outputs": [
+        "risk_level",
+        "likelihood",
+        "impact",
+        "risk_score"
+      ]
+    },
+    "SKL006": {
+      "name": "Control Failure Mapper",
+      "name_th": "ตัวแมปความบกพร่องของการควบคุม",
+      "version": "1.0",
+      "description": "Maps risks to their root control failures using COSO and IIA frameworks",
+      "inputs": [
+        "risk_id",
+        "risk_description"
+      ],
+      "outputs": [
+        "control_failures",
+        "control_type",
+        "severity"
+      ]
+    },
+    "SKL007": {
+      "name": "Audit Procedure Generator",
+      "name_th": "เครื่องสร้างขั้นตอนการตรวจสอบ",
+      "version": "1.0",
+      "description": "Generates specific audit procedures mapped to control failures",
+      "inputs": [
+        "control_failure_id",
+        "organization_context"
+      ],
+      "outputs": [
+        "procedures",
+        "method",
+        "sample_size",
+        "timing"
+      ]
+    },
+    "SKL008": {
+      "name": "Evidence Type Generator",
+      "name_th": "เครื่องสร้างประเภทหลักฐาน",
+      "version": "1.0",
+      "description": "Identifies required evidence types for each audit procedure",
+      "inputs": [
+        "procedure_id",
+        "standard_reference"
+      ],
+      "outputs": [
+        "evidence_types",
+        "format",
+        "source",
+        "retention_period"
+      ]
+    },
+    "SKL009": {
+      "name": "Thai Translation Engine",
+      "name_th": "เครื่องแปลภาษาไทย",
+      "version": "1.0",
+      "description": "Translates all audit content to Thai using specialized audit terminology",
+      "inputs": [
+        "english_text",
+        "domain"
+      ],
+      "outputs": [
+        "thai_text",
+        "technical_terms_glossary"
+      ]
+    },
+    "SKL010": {
+      "name": "UX/UI Renderer",
+      "name_th": "ตัวแสดงผล UX/UI",
+      "version": "1.0",
+      "description": "Renders structured knowledge into enterprise-grade Thai audit UI",
+      "inputs": [
+        "normalized_knowledge",
+        "user_role",
+        "device_type"
+      ],
+      "outputs": [
+        "html_artifact",
+        "export_data",
+        "print_format"
+      ]
+    }
+  }
+}

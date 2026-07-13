@@ -1,0 +1,287 @@
+Document Analysis Complete
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Document type detected: supply_chain_risk (NEW TYPE — confidence: HIGH, 9/9 keyword matches)
+Standards referenced:   ISO 28001, ISO 31000, ISO 9001, CTPAT, WCO SAFE Framework, TPRM (Gartner/Deloitte), COSO ERM
+Risk domains identified: 6
+
+New type key created: supply_chain_risk
+Domain: Supply Chain Risk & Third-Party Management
+Category: Governance
+Color: #8E44AD (purple — Risk Management domain)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOC_KNOWLEDGE_LIBRARY ENTRY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+supply_chain_risk: {
+  ic: '🔗',
+  nth: 'การบริหารความเสี่ยงห่วงโซ่อุปทานและการตรวจสอบคู่ค้าบุคคลที่สาม',
+  nen: 'Supply Chain Risk Management & Third-Party Due Diligence',
+  cat: 'Governance',
+  col: '#8E44AD',
+  pri: 'CRITICAL',
+  std: [
+    'ISO 28001:2007 Supply Chain Security Management',
+    'ISO 31000:2018 Risk Management Guidelines',
+    'ISO 9001:2015 Quality Management Systems',
+    'WCO SAFE Framework of Standards 2021',
+    'CTPAT Minimum Security Criteria 2020',
+    'COSO ERM Integrated Framework 2017',
+    'Gartner TPRM Framework 2023'
+  ],
+  risks: [
+    {
+      nth: 'ความเสี่ยงการพึ่งพาผู้ผลิตรายเดียว (Single-Source Dependency) ที่ส่งผลให้ห่วงโซ่อุปทานหยุดชะงักอย่างสมบูรณ์เมื่อเกิดเหตุการณ์ไม่คาดคิด',
+      lv: 'CRITICAL',
+      lk: 'สูง',
+      im: 'สูงมาก',
+      cf: [
+        {
+          nth: 'องค์กรไม่มีนโยบายและกระบวนการอย่างเป็นทางการในการระบุและบริหารจัดการความเสี่ยงจากการพึ่งพาซัพพลายเออร์รายเดียว',
+          pr: [
+            {
+              nth: 'ตรวจสอบทะเบียนซัพพลายเออร์และสัญญาจัดซื้อเพื่อระบุวัสดุหรือบริการที่มีผู้ให้บริการเพียงรายเดียว และประเมินความเสี่ยงการหยุดชะงักของการผลิต',
+              mt: 'Document Review + Data Analysis',
+              ev: [
+                'ทะเบียนซัพพลายเออร์ (Approved Vendor List — AVL)',
+                'สัญญาจัดซื้อระยะยาว (Long-Term Purchase Agreement)',
+                'รายงาน Single-Source Item Register',
+                'Business Continuity Plan (BCP) ห่วงโซ่อุปทาน',
+                'บันทึกการประเมิน Supplier Risk Profile',
+                'รายงานการวิเคราะห์ Spend Concentration Analysis'
+              ]
+            },
+            {
+              nth: 'สัมภาษณ์ผู้จัดการฝ่ายจัดซื้อและโลจิสติกส์เพื่อประเมินความเพียงพอของแผนสำรองซัพพลายเออร์และการทดสอบแผนฉุกเฉิน',
+              mt: 'Interview + Walkthrough',
+              ev: [
+                'Supplier Diversification Policy',
+                'บันทึกการทดสอบ BCP ประจำปี (BCP Test Record)',
+                'Alternate Supplier Qualification Record',
+                'รายงานผลการประชุม Supply Chain Risk Committee',
+                'Emergency Sourcing Protocol Document',
+                'บันทึกการอนุมัติ Safety Stock Level'
+              ]
+            }
+          ]
+        },
+        {
+          nth: 'ขาดการกำหนดระดับสต็อกสำรองฉุกเฉิน (Safety Stock) และแผนการจัดหาทดแทนที่ผ่านการทดสอบจริง',
+          pr: [
+            {
+              nth: 'วิเคราะห์ระดับสินค้าคงคลังและนโยบาย Safety Stock เปรียบเทียบกับมาตรฐาน ISO 28001 เพื่อประเมินความเพียงพอในการรองรับการหยุดชะงัก',
+              mt: 'Document Review + Data Analysis',
+              ev: [
+                'Inventory Management Policy',
+                'Safety Stock Calculation Model',
+                'ERP System Inventory Report (SAP/Oracle)',
+                'Supplier Lead Time Analysis Report',
+                'รายงานสรุปการขาดแคลนวัสดุย้อนหลัง 3 ปี',
+                'Demand Forecasting Accuracy Report'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงการประเมินคู่ค้าบุคคลที่สาม (TPRM) ไม่ครบถ้วน ส่งผลให้องค์กรรับความเสี่ยงด้านการปฏิบัติตามกฎหมาย การทุจริต และความมั่นคงปลอดภัยโดยไม่รู้ตัว',
+      lv: 'CRITICAL',
+      lk: 'สูง',
+      im: 'สูงมาก',
+      cf: [
+        {
+          nth: 'กระบวนการ Due Diligence ก่อนแต่งตั้งซัพพลายเออร์ขาดการตรวจสอบด้านการเงิน ความซื่อสัตย์ และการปฏิบัติตามกฎหมายอย่างเป็นระบบ',
+          pr: [
+            {
+              nth: 'ทบทวนกระบวนการคัดเลือกและรับรองซัพพลายเออร์ใหม่ตาม TPRM Framework เพื่อประเมินความครบถ้วนของการตรวจสอบประวัติ การเงิน และการปฏิบัติตามกฎหมาย',
+              mt: 'Document Review + Interview',
+              ev: [
+                'Vendor Onboarding Checklist',
+                'Third-Party Due Diligence Report Template',
+                'Supplier Financial Health Screening Record',
+                'Sanctions & Blacklist Screening Log (OFAC/UN)',
+                'Anti-Bribery & Corruption (ABC) Declaration Form',
+                'Supplier Code of Conduct Acknowledgement',
+                'บันทึกผลการ Audit Supplier Site Visit'
+              ]
+            }
+          ]
+        },
+        {
+          nth: 'ไม่มีการติดตามและประเมินซัพพลายเออร์ที่ได้รับการแต่งตั้งแล้วอย่างต่อเนื่อง (Ongoing Monitoring) ตลอดอายุสัญญา',
+          pr: [
+            {
+              nth: 'ตรวจสอบบันทึกการประเมินซัพพลายเออร์รายปีและกระบวนการแจ้งเตือนความเสี่ยงเพื่อประเมินประสิทธิผลของระบบ Continuous Monitoring',
+              mt: 'Document Review + System Walkthrough',
+              ev: [
+                'Supplier Performance Scorecard (รายไตรมาส)',
+                'Supplier Risk Re-assessment Record',
+                'Contract Renewal Due Diligence Checklist',
+                'Third-Party Risk Register',
+                'Escalation Log สำหรับซัพพลายเออร์ High-Risk',
+                'Supplier Watch List Monitoring Report'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงการหยุดชะงักของห่วงโซ่อุปทาน (Supply Chain Disruption) จากภัยพิบัติ ความขัดแย้งทางการเมือง หรือการระบาดของโรค ที่ไม่มีแผนรองรับที่เพียงพอ',
+      lv: 'HIGH',
+      lk: 'ปานกลาง',
+      im: 'สูงมาก',
+      cf: [
+        {
+          nth: 'แผนความต่อเนื่องทางธุรกิจ (BCP) ของห่วงโซ่อุปทานไม่ครอบคลุมสถานการณ์การหยุดชะงักระดับภูมิภาคหรือไม่ผ่านการทดสอบจริง',
+          pr: [
+            {
+              nth: 'ประเมินความครอบคลุมและความสมจริงของแผน BCP ห่วงโซ่อุปทานโดยเปรียบเทียบกับสถานการณ์จำลองและผลการทดสอบย้อนหลัง',
+              mt: 'Document Review + Tabletop Exercise Review',
+              ev: [
+                'Supply Chain Business Continuity Plan (SC-BCP)',
+                'BCP Test / Simulation Exercise Report',
+                'Risk Scenario Analysis Document',
+                'Geographic Concentration Risk Map',
+                'Crisis Communication Protocol',
+                'Post-Incident After Action Review (AAR) Report',
+                'รายงานการวิเคราะห์ผลกระทบทางธุรกิจ (Business Impact Analysis — BIA)'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงการตรวจสอบซัพพลายเออร์ (Supplier Audit) ไม่ครอบคลุมหรือขาดความถี่ที่เหมาะสม ส่งผลให้ไม่ตรวจพบการไม่ปฏิบัติตามข้อกำหนดคุณภาพ สิ่งแวดล้อม และแรงงาน',
+      lv: 'HIGH',
+      lk: 'สูง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'แผนการตรวจสอบซัพพลายเออร์ประจำปีไม่ได้กำหนดตามระดับความเสี่ยงของซัพพลายเออร์แต่ละราย และขาดการติดตามผลการแก้ไขข้อบกพร่อง',
+          pr: [
+            {
+              nth: 'ตรวจสอบแผนการ Audit ซัพพลายเออร์และบันทึกผลการตรวจสอบเพื่อประเมินความครอบคลุมตามระดับความเสี่ยงและประสิทธิผลของกระบวนการติดตามผล CAR',
+              mt: 'Document Review + Interview',
+              ev: [
+                'Supplier Audit Plan (Annual)',
+                'Supplier Audit Checklist (Quality/EHS/Labor)',
+                'Corrective Action Request (CAR) Register',
+                'CAR Closure Verification Record',
+                'Supplier Risk Tier Classification Matrix',
+                'บันทึกผลการ Audit ซัพพลายเออร์ Tier 1–3',
+                'Supplier Non-Conformance Report (NCR)'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงการกระจุกตัว (Concentration Risk) ของซัพพลายเออร์ในพื้นที่ภูมิศาสตร์เดียว ส่งผลให้เกิดการหยุดชะงักพร้อมกันเมื่อเกิดเหตุการณ์ระดับภูมิภาค',
+      lv: 'HIGH',
+      lk: 'ปานกลาง',
+      im: 'สูงมาก',
+      cf: [
+        {
+          nth: 'ขาดการวิเคราะห์และติดตาม Geographic Concentration Risk ในฐานซัพพลายเออร์อย่างเป็นระบบ',
+          pr: [
+            {
+              nth: 'วิเคราะห์การกระจายตัวทางภูมิศาสตร์ของซัพพลายเออร์หลักและประเมินความเสี่ยงการหยุดชะงักพร้อมกันจากเหตุการณ์ระดับภูมิภาคหรือระดับประเทศ',
+              mt: 'Data Analysis + Document Review',
+              ev: [
+                'Supplier Geographic Distribution Map',
+                'Country Risk Assessment Report',
+                'Spend by Region / Country Analysis',
+                'Geopolitical Risk Monitoring Report',
+                'Natural Disaster Exposure Analysis',
+                'Trade Compliance & Export Control Register',
+                'ทะเบียนซัพพลายเออร์พร้อมข้อมูลที่ตั้งโรงงาน'
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nth: 'ความเสี่ยงการไม่ปฏิบัติตามกฎระเบียบด้านโลจิสติกส์และการค้าระหว่างประเทศ (Logistics Compliance) ที่ส่งผลให้เกิดการอายัดสินค้า บทลงโทษ หรือการเพิกถอนสิทธิ์นำเข้าส่งออก',
+      lv: 'HIGH',
+      lk: 'ปานกลาง',
+      im: 'สูง',
+      cf: [
+        {
+          nth: 'ขาดระบบติดตามและตรวจสอบการปฏิบัติตามกฎระเบียบการค้าระหว่างประเทศ ใบอนุญาตนำเข้า-ส่งออก และมาตรฐาน WCO/CTPAT อย่างเป็นระบบ',
+          pr: [
+            {
+              nth: 'ตรวจสอบกระบวนการ Trade Compliance และบันทึกการผ่านพิธีการศุลกากรเพื่อประเมินความสอดคล้องกับ WCO SAFE Framework และ CTPAT Minimum Security Criteria',
+              mt: 'Document Review + Regulatory Compliance Testing',
+              ev: [
+                'Trade Compliance Policy & Procedure Manual',
+                'Import/Export License Register',
+                'Customs Declaration Records (ใบขนสินค้า)',
+                'CTPAT/AEO Certification Documents',
+                'Denied Party Screening Log',
+                'Freight Forwarder Due Diligence Record',
+                'Incoterms Compliance Checklist'
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+detectDocType() RULE TO ADD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{type:'supply_chain_risk', kw:['supply chain','vendor risk','third-party due diligence','TPRM','supplier audit','concentration risk','logistics compliance','ISO 28001','single-source','supply chain disruption','third party risk management','ห่วงโซ่อุปทาน','ซัพพลายเออร์','การตรวจสอบคู่ค้า']}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSERTION INSTRUCTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1 — Insert the DOC_KNOWLEDGE_LIBRARY entry:
+  1. Open audit-platform-public.html in your editor.
+  2. Search for: const DOC_KNOWLEDGE_LIBRARY = {
+  3. Navigate to the LAST entry in the object (just before the closing };).
+  4. Add a comma after that last entry's closing brace:  },
+  5. Paste the entire supply_chain_risk: { ... } block above on the next line.
+
+Step 2 — Insert the detectDocType() rule:
+  1. In the same file, search for: function detectDocType(
+  2. Locate the rules array inside that function.
+  3. Find the last rule object in the array.
+  4. Add a comma after it, then paste the new rule on the next line:
+     {type:'supply_chain_risk', kw:['supply chain','vendor risk','third-party due diligence','TPRM','supplier audit','concentration risk','logistics compliance','ISO 28001','single-source','supply chain disruption','third party risk management','ห่วงโซ่อุปทาน','ซัพพลายเออร์','การตรวจสอบคู่ค้า']}
+
+Step 3 — Verify syntax:
+  Run this command from the directory containing the file:
+  node -e "const fs=require('fs'); new Function(fs.readFileSync('audit-platform-public.html','utf8').match(/<script[^>]*>([\s\S]*?)<\/script>/gi)[2])()"
+  No output = syntax is valid.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANALYSIS NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+New type key justification:
+  'supply_chain_risk' is a new type key. The closest existing type is 'risk_management'
+  (ERM/COSO/ISO 31000), but supply chain / TPRM is a sufficiently distinct domain
+  with its own standards (ISO 28001, WCO SAFE, CTPAT), regulatory landscape, and
+  audit procedures. A dedicated type key enables precise document detection and
+  prevents false positives against general enterprise risk documents.
+
+Document coverage:
+  All 9 key phrases from the document description are addressed across the 6 risk domains:
+  - vendor risk assessment         → Risk 2 (TPRM / Due Diligence)
+  - third-party due diligence      → Risk 2 (TPRM ongoing monitoring)
+  - supply chain disruption        → Risk 3 (BCP / disruption)
+  - supplier audit                 → Risk 4 (Supplier Audit frequency)
+  - TPRM framework                 → Risk 2 (control failure + procedure)
+  - concentration risk             → Risk 5 (Geographic Concentration)
+  - logistics compliance           → Risk 6 (Trade Compliance / WCO / CTPAT)
+  - ISO 28001                      → std[] array + Risk 3 procedure reference
+  - single-source dependency       → Risk 1 (Single-Source Dependency — CRITICAL)
