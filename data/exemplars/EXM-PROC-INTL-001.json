@@ -1,0 +1,25 @@
+{
+  "exemplar_id": "EXM-PROC-INTL-001",
+  "domain": "procurement",
+  "org_scope": [
+    "GOV",
+    "SOE"
+  ],
+  "lang_original": "en",
+  "publisher": "INTOSAI",
+  "title": "GUID 5280 — Guidance for Audits of Public Procurement",
+  "url": "https://www.issai.org/wp-content/uploads/2023/02/Guid-5280-Guidance-for-audits-of-public-procurement.pdf",
+  "page_ref": "para 31-36 (p.17-20) + Annex 9-10",
+  "excerpt_original": "\"auditors look into the associated risks and control measures implemented by the regulations and the audited entity... the auditor pays attention to internal processes and main risk factors increasing the system vulnerabilities: The volume of contracts awarded through closed or restricted procurement procedures; ... Historical conduct (tracking record) of the entity's bidders or suppliers and of public officials who are members of the entity's selection committees.\"",
+  "excerpt_th": "ผู้ตรวจสอบพิจารณาความเสี่ยงและมาตรการควบคุม...โดยให้ความสำคัญกับปัจจัยเสี่ยงที่เพิ่มความเปราะบางของระบบ เช่น สัดส่วนสัญญาที่ใช้วิธีจำกัดการแข่งขัน และประวัติพฤติการณ์ (Tracking Record) ของผู้เสนอราคาและเจ้าหน้าที่ในคณะกรรมการคัดเลือก",
+  "pattern_notes_th": "แบบแผน: เขียนเป็น 'สิ่งที่ผู้ตรวจต้องมอง' (auditor looks into / pays attention to) ตามด้วยรายการปัจจัยเสี่ยงที่วัด/นับได้ — เหมาะใช้เป็นโครงตอนแปลง risk → procedure; มี Annex 9 (integrity risks ราย phase) และ Annex 10 (audit risk questions) เป็นแบบคำถามตรวจสอบสำเร็จรูป",
+  "_claim": {
+    "state": "VERIFIED",
+    "evidence": {
+      "url": "https://www.issai.org/wp-content/uploads/2023/02/Guid-5280-Guidance-for-audits-of-public-procurement.pdf",
+      "excerpt": "อ่าน para 31-38 + สารบัญ Annexes",
+      "read_at": "2026-07-13"
+    },
+    "last_checked": "2026-07-13"
+  }
+}

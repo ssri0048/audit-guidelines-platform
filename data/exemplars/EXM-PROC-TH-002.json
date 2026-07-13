@@ -1,0 +1,22 @@
+{
+  "exemplar_id": "EXM-PROC-TH-002",
+  "domain": "procurement",
+  "org_scope": [
+    "GOV"
+  ],
+  "lang_original": "th",
+  "publisher": "สำนักงานผู้ตรวจการแผ่นดิน",
+  "title": "คู่มือการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ",
+  "url": "https://www.ombudsman.go.th/new/wp-content/uploads/2024/04/O10-ProcurementManaual.pdf",
+  "page_ref": "-",
+  "excerpt_original": "",
+  "excerpt_th": "",
+  "pattern_notes_th": "ยังใช้เป็น exemplar ไม่ได้ — ไฟล์ดึงข้อความไม่ได้ (EX-SCANNED-PDF) บันทึกการมีอยู่เพื่อกลับมาเก็บ",
+  "_claim": {
+    "state": "UNRESOLVED",
+    "last_checked": "2026-07-13",
+    "exception_code": "EX-SCANNED-PDF",
+    "open_question": "PDF ดึง text ไม่ได้ — ลองเครื่องมือ OCR หรือหาเวอร์ชัน text",
+    "sla_deadline": "2026-09-11"
+  }
+}
