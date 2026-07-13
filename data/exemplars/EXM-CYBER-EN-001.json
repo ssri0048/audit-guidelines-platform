@@ -1,0 +1,28 @@
+{
+  "exemplar_id": "EXM-CYBER-EN-001",
+  "domain": "cybersecurity",
+  "org_scope": [
+    "UNIVERSAL"
+  ],
+  "lang_original": "en",
+  "publisher": "NIST",
+  "title": "SP 800-82 Rev.3 — Guide to Operational Technology (OT) Security",
+  "url": "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+  "page_ref": "Abstract + document scope",
+  "excerpt_original": "\"The document provides an overview of OT and typical system topologies, identifies common threats and vulnerabilities to these systems, and provides recommended security countermeasures to mitigate the associated risks.\" (Keywords: SCADA, DCS, PLC; Sectors: energy)",
+  "excerpt_th": "เอกสารให้ภาพรวมระบบ OT และโครงสร้างระบบตามแบบฉบับ ระบุภัยคุกคามและช่องโหว่ที่พบบ่อย และเสนอมาตรการควบคุม (Countermeasures) เพื่อลดความเสี่ยง — ครอบคลุม SCADA/DCS/PLC ภาคพลังงาน",
+  "pattern_notes_th": "แบบแผน: โครง threat→vulnerability→countermeasure ราย component — ใช้เป็นแม่แบบผูก 'ความเสี่ยง OT → การควบคุมที่คาดหวัง → สิ่งที่ auditor ทดสอบ'; หมายเหตุ: อ่านถึงระดับ abstract/scope — เนื้อ chapter รายมาตรการยังไม่ได้อ่าน (open_question)",
+  "_claim": {
+    "state": "VERIFIED",
+    "evidence": {
+      "url": "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+      "excerpt": "อ่านหน้า publication (abstract, supersedes, keywords, history)",
+      "read_at": "2026-07-13"
+    },
+    "last_checked": "2026-07-13",
+    "open_question": "อ่านเนื้อ chapter 6 (countermeasures) เพื่อยกระดับเป็น exemplar เชิงลึก",
+    "sla_deadline": "2026-09-11"
+  },
+  "content_role": "BOTH",
+  "registry_family": "nist-sp-800-82"
+}

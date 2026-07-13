@@ -1,0 +1,175 @@
+{
+  "metadata": {
+    "description": "แผนผังองค์กรกำกับ/กำหนดมาตรฐานวิชาชีพตรวจสอบทั่วโลก ราย domain — ผลของ Zero-Base Sweep (research สด ห้าม derive จากของเดิม) | ทุกรายการมี inclusion_rationale",
+    "schema_version": "1.0.0",
+    "last_updated": "2026-07-13",
+    "zero_base_rule": "ก่อนสร้าง/ขยายชั้นความรู้ใด: (1) นิยามจักรวาลจาก research สด (2) diff กับของที่มี (3) รายการตก=ธง SLA (4) ทุกการเข้า/ไม่เข้า มี rationale"
+  },
+  "bodies": [
+    {
+      "body_id": "iia-global",
+      "name": "The IIA + IIASB",
+      "domain": [
+        "internal_audit"
+      ],
+      "tier": "GLOBAL_STANDARD_SETTER",
+      "inclusion_rationale": "ผู้ออก GIAS/Topical Requirements ที่วิชาชีพ IA โลกใช้ (~265,000 สมาชิก 170 ประเทศ); ไทยรับผ่าน สตท. และหลักเกณฑ์ กค. อิงกรอบนี้",
+      "in_system": {
+        "registry": true,
+        "universe": true,
+        "exemplar": "commit นี้"
+      },
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13",
+        "evidence": {
+          "excerpt": "theiia.org/standards + IIASB governance page (sweep 2026-07-13)",
+          "read_at": "2026-07-13"
+        }
+      }
+    },
+    {
+      "body_id": "intosai",
+      "name": "INTOSAI",
+      "domain": [
+        "public_sector_audit"
+      ],
+      "tier": "GLOBAL_STANDARD_SETTER",
+      "inclusion_rationale": "มาตรฐานตรวจเงินแผ่นดินโลก — สตง.ไทยเป็นสมาชิก/นั่ง Governing Board",
+      "in_system": {
+        "registry": true,
+        "universe": true,
+        "exemplar": true
+      },
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13",
+        "evidence": {
+          "excerpt": "audit.go.th + issai.org (อ่านก่อนหน้า)",
+          "read_at": "2026-07-13"
+        }
+      }
+    },
+    {
+      "body_id": "isaca",
+      "name": "ISACA",
+      "domain": [
+        "it_audit"
+      ],
+      "tier": "GLOBAL_STANDARD_SETTER",
+      "inclusion_rationale": "ผู้ออก ITAF/COBIT — IIA TR User Guide เอง map ไป COBIT 2019; จำเป็นต่อ topics ด้าน IT/cyber",
+      "in_system": {
+        "registry": false,
+        "universe": "commit นี้",
+        "exemplar": false
+      },
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ ITAF/COBIT edition ปัจจุบัน + ISACA Bangkok Chapter",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "body_id": "ifac-ipsasb",
+      "name": "IFAC / IPSASB",
+      "domain": [
+        "public_sector_accounting"
+      ],
+      "tier": "GLOBAL_STANDARD_SETTER",
+      "inclusion_rationale": "IPSAS = มาตรฐานบัญชีภาครัฐ กระทบ T005 — พบจาก sweep ว่าไม่เคยอยู่ในระบบ",
+      "in_system": {
+        "registry": false,
+        "universe": "commit นี้",
+        "exemplar": false
+      },
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "ตรวจว่ามาตรฐานบัญชีภาครัฐไทยอิง IPSAS ฉบับไหน",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "body_id": "acfe",
+      "name": "ACFE",
+      "domain": [
+        "fraud_examination"
+      ],
+      "tier": "GLOBAL_PROFESSIONAL_BODY",
+      "inclusion_rationale": "วิชาชีพตรวจสอบทุจริต — Report to the Nations ใช้กับ T001/T006",
+      "in_system": {
+        "registry": false,
+        "universe": "commit นี้",
+        "exemplar": false
+      },
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ Report to the Nations ฉบับล่าสุด",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "body_id": "eciia",
+      "name": "ECIIA",
+      "domain": [
+        "internal_audit"
+      ],
+      "tier": "REGIONAL_BODY",
+      "inclusion_rationale": "สหพันธ์ IA ยุโรป — position papers ฟรี มุม utilities/SOE",
+      "in_system": {
+        "registry": false,
+        "universe": "commit นี้",
+        "exemplar": false
+      },
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ papers ที่เกี่ยว",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "body_id": "aciia",
+      "name": "ACIIA (Asian Confederation)",
+      "domain": [
+        "internal_audit"
+      ],
+      "tier": "REGIONAL_BODY",
+      "inclusion_rationale": "สมาพันธ์ IA เอเชียที่ สตท. สังกัด — สะพานบริบทเอเชีย",
+      "in_system": {
+        "registry": false,
+        "universe": false,
+        "exemplar": false
+      },
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "ยืนยันบทบาท+เอกสารเผยแพร่ และความสัมพันธ์กับ สตท.",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "body_id": "iaasb-iesba",
+      "name": "IAASB / IESBA (ใต้ IFAC)",
+      "domain": [
+        "external_audit",
+        "ethics"
+      ],
+      "tier": "GLOBAL_STANDARD_SETTER",
+      "inclusion_rationale": "มาตรฐานสอบบัญชีภายนอก/จรรยาบรรณ — เกี่ยวทางอ้อม (การพึ่งพางานผู้สอบบัญชี); เข้าเพื่อความครบ อาจ RETIRED ถ้าไม่ใช้",
+      "in_system": {
+        "registry": false,
+        "universe": false,
+        "exemplar": false
+      },
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "ตัดสิน scope: จำเป็นระดับไหนต่อระบบ",
+        "sla_deadline": "2026-09-11"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "exemplar_id": "EXM-CYBER-INTL-002",
+  "domain": "cybersecurity",
+  "org_scope": [
+    "UNIVERSAL"
+  ],
+  "lang_original": "en (มี 20 ภาษา)",
+  "content_role": "BOTH",
+  "registry_family": "iia-topical-requirements",
+  "publisher": "The IIA",
+  "title": "Cybersecurity Topical Requirement + User Guide",
+  "url": "https://www.theiia.org/globalassets/site/standards/topical-requirements/cybersecurity/cybersecurity_topical_requirement.pdf",
+  "page_ref": "ทั้งฉบับ + User Guide",
+  "excerpt_original": "mandatory component of the IPPF, effective February 6, 2026 — provides a consistent, comprehensive approach to assessing the design and implementation of cybersecurity governance, risk management, and control processes; User Guide maps requirements to NIST CSF 2.0, COBIT 2019, NIST 800-53",
+  "excerpt_th": "ข้อกำหนดบังคับของ IPPF มีผล 6 ก.พ. 2026 — กรอบประเมิน governance/risk/control ด้านไซเบอร์ พร้อมคู่มือ map ไป 3 frameworks",
+  "pattern_notes_th": "แบบแผน: requirement รายข้อที่ประเมินได้ แยกหมวด governance/risk/control + ตาราง crosswalk — แม่แบบ procedure ด้าน cyber ที่ตรวจย้อนถึงมาตรฐานได้ทุกแถว",
+  "_claim": {
+    "state": "VERIFIED",
+    "last_checked": "2026-07-13",
+    "evidence": {
+      "url": "https://www.theiia.org/en/content/communications/press-releases/2025/february/the-institute-of-internal-auditors-releases-the-cybersecurity-topical-requirement/",
+      "excerpt": "Press release + หน้า TR (2026-07-13)",
+      "read_at": "2026-07-13"
+    },
+    "open_question": "อ่าน requirement รายข้อใน PDF เพื่อ excerpt ระดับข้อ",
+    "sla_deadline": "2026-09-11"
+  }
+}

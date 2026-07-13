@@ -21,36 +21,651 @@
     "matching_rule": "Match ANY — องค์กรที่เป็นหลายประเภทเห็นเนื้อหาของทุกป้ายที่เกี่ยว; ไม่มีป้าย = UNIVERSAL"
   },
   "publishers": [
-    {"publisher_id": "intl-iia", "name": "The IIA", "governs": ["UNIVERSAL"], "doc_types": ["GIAS", "Topical Requirements", "Practice Guides"], "official_register": "https://www.theiia.org/en/standards/", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "intl-intosai", "name": "INTOSAI", "governs": ["GOV", "SOE"], "doc_types": ["ISSAI", "GUID", "INTOSAI-P"], "official_register": "https://www.issai.org", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "intl-iso", "name": "ISO/IEC", "governs": ["UNIVERSAL"], "doc_types": ["มาตรฐานสากลทุกชุด"], "official_register": "https://www.iso.org", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "intl-coso", "name": "COSO", "governs": ["UNIVERSAL"], "doc_types": ["IC Framework", "ERM", "ICSR", "thought papers"], "official_register": "https://www.coso.org", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "intl-nist", "name": "NIST", "governs": ["UNIVERSAL"], "doc_types": ["CSF", "SP series", "AI RMF"], "official_register": "https://csrc.nist.gov/pubs", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "intl-oecd", "name": "OECD", "governs": ["UNIVERSAL", "SOE"], "doc_types": ["CG Principles", "SOE Guidelines"], "official_register": "https://www.oecd.org/en/publications", "coverage": "PARTIAL", "notes": "มี OECD Guidelines on Corporate Governance of SOEs — ยังไม่เก็บ", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "open_question": "เก็บ OECD SOE Guidelines ฉบับปัจจุบัน (คาด 2024 revision)", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "intl-ifrs-issb", "name": "IFRS Foundation / ISSB", "governs": ["UNIVERSAL"], "doc_types": ["IFRS S1/S2"], "official_register": "https://www.ifrs.org/sustainability/", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "intl-gao", "name": "US GAO", "governs": ["GOV", "SOE"], "doc_types": ["FAM", "Yellow Book", "audit methodology"], "official_register": "https://www.gao.gov", "coverage": "NOT_YET", "notes": "เป้าหมาย exemplar corpus (EN)", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "intl-idi", "name": "INTOSAI Development Initiative (IDI)", "governs": ["GOV", "SOE"], "doc_types": ["audit handbooks หลายภาษา"], "official_register": "https://www.idi.no", "coverage": "NOT_YET", "notes": "เป้าหมาย exemplar corpus", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "intl-eca", "name": "European Court of Auditors", "governs": ["GOV"], "doc_types": ["audit methodology (หลายภาษา EU)"], "official_register": "https://www.eca.europa.eu", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "intl-asia-sai", "name": "SAI เอเชีย (Board of Audit JP / BAI KR / CNAO)", "governs": ["GOV", "SOE"], "doc_types": ["คู่มือตรวจสอบ (ja/ko/zh)"], "official_register": "https://www.jbaudit.go.jp | https://english.bai.go.kr", "coverage": "NOT_YET", "notes": "เป้าหมาย exemplar หลายภาษา บริบท SOE ใกล้ไทย", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-ratchakitcha", "name": "ราชกิจจานุเบกษา", "governs": ["UNIVERSAL"], "doc_types": ["พ.ร.บ./กฎกระทรวง/ประกาศ (ต้นฉบับ)"], "official_register": "https://www.ratchakitcha.soc.go.th", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-krisdika", "name": "สำนักงานคณะกรรมการกฤษฎีกา", "governs": ["UNIVERSAL"], "doc_types": ["ตัวบทกฎหมายฉบับ update"], "official_register": "https://www.krisdika.go.th", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-cgd", "name": "กรมบัญชีกลาง", "governs": ["GOV", "SOE"], "doc_types": ["หลักเกณฑ์ IA ภาครัฐ (ฉบับ 1-4)", "ระเบียบพัสดุ", "คู่มือ/แบบฟอร์ม"], "official_register": "https://www.cgd.go.th", "coverage": "PARTIAL", "notes": "หลักเกณฑ์ IA 2561+ฉบับ 4 (ว55/2566) ยืนยันการมีอยู่แล้ว — ยังไม่เก็บเนื้อรายข้อ", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-oag", "name": "สตง. (สำนักงานการตรวจเงินแผ่นดิน)", "governs": ["GOV", "SOE", "LOCAL_GOV"], "doc_types": ["หลักเกณฑ์มาตรฐานตรวจเงินแผ่นดิน", "คู่มือตรวจสอบ"], "official_register": "https://www.audit.go.th", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-sepo", "name": "สคร. (สำนักงานคณะกรรมการนโยบายรัฐวิสาหกิจ)", "governs": ["SOE"], "doc_types": ["SOE CG Code 2562", "SE-AM", "ระเบียบ คตส.รัฐวิสาหกิจ", "แผนพัฒนารัฐวิสาหกิจ"], "official_register": "https://www.sepo.go.th/content/311", "coverage": "PARTIAL", "notes": "CG 2562 PDF เจอแล้ว; SE-AM เกณฑ์รายหมวดยังต้องเก็บ", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-nacc", "name": "ป.ป.ช.", "governs": ["GOV", "SOE", "LOCAL_GOV"], "doc_types": ["ITA", "มาตรการป้องกันทุจริต", "พ.ร.ป. 2561"], "official_register": "https://www.nacc.go.th", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-erc", "name": "กกพ. (คณะกรรมการกำกับกิจการพลังงาน)", "governs": ["SOE", "PRIVATE"], "doc_types": ["เงื่อนไขใบอนุญาต", "เกณฑ์คุณภาพบริการ"], "official_register": "https://www.erc.or.th", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-ncsa", "name": "สกมช.", "governs": ["GOV", "SOE", "PRIVATE"], "doc_types": ["ประกาศ CII", "มาตรฐานไซเบอร์"], "official_register": "https://www.ncsa.or.th/standards/laws", "coverage": "PARTIAL", "_claim": {"state": "VERIFIED", "last_checked": "2026-07-13"}},
-    {"publisher_id": "th-sec", "name": "ก.ล.ต.", "governs": ["LISTED"], "doc_types": ["CG Code 2560", "เกณฑ์เปิดเผยข้อมูล 56-1 One Report"], "official_register": "https://www.sec.or.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "open_question": "เก็บ CG Code + เกณฑ์คณะกรรมการตรวจสอบฉบับปัจจุบัน", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-set", "name": "ตลาดหลักทรัพย์ฯ (ตลท.)", "governs": ["LISTED"], "doc_types": ["เกณฑ์คณะกรรมการตรวจสอบ", "แนวปฏิบัติ IA บริษัทจดทะเบียน"], "official_register": "https://www.set.or.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-iod", "name": "IOD Thailand", "governs": ["LISTED", "PRIVATE", "SOE"], "doc_types": ["CG guidelines", "board practices"], "official_register": "https://www.thai-iod.com", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-iia-thailand", "name": "สมาคมผู้ตรวจสอบภายในแห่งประเทศไทย (สตท.)", "governs": ["UNIVERSAL"], "doc_types": ["ศัพท์บัญญัติ IA ไทย", "แนวปฏิบัติ"], "official_register": "https://www.theiiat.or.th", "coverage": "NOT_YET", "notes": "สำคัญต่อ glossary", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-tfac", "name": "สภาวิชาชีพบัญชี (TFAC)", "governs": ["UNIVERSAL"], "doc_types": ["TFRS", "มาตรฐานสอบบัญชี"], "official_register": "https://www.tfac.or.th", "coverage": "PARTIAL", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-dla", "name": "กรมส่งเสริมการปกครองท้องถิ่น (มท.)", "governs": ["LOCAL_GOV"], "doc_types": ["ระเบียบตรวจสอบภายใน อปท."], "official_register": "https://www.dla.go.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-cad", "name": "กรมตรวจบัญชีสหกรณ์", "governs": ["COOP_COMMUNITY"], "doc_types": ["มาตรฐาน/คู่มือสอบบัญชีสหกรณ์"], "official_register": "https://www.cad.go.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-onep", "name": "สผ. (นโยบายและแผนสิ่งแวดล้อม)", "governs": ["UNIVERSAL"], "doc_types": ["เกณฑ์ EIA/EHIA"], "official_register": "https://www.onep.go.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-tgo", "name": "อบก. (องค์การบริหารจัดการก๊าซเรือนกระจก)", "governs": ["UNIVERSAL"], "doc_types": ["เกณฑ์ GHG inventory/verification"], "official_register": "https://www.tgo.or.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-pdpc", "name": "สคส. (คณะกรรมการคุ้มครองข้อมูลส่วนบุคคล)", "governs": ["UNIVERSAL"], "doc_types": ["ประกาศ/แนวปฏิบัติ PDPA"], "official_register": "https://www.pdpc.or.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-opdc", "name": "ก.พ.ร.", "governs": ["GOV"], "doc_types": ["เกณฑ์ PMQA", "การควบคุมภายในภาครัฐ"], "official_register": "https://www.opdc.go.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}},
-    {"publisher_id": "th-osmep", "name": "สสว. (ส่งเสริม SME)", "governs": ["SME"], "doc_types": ["นิยาม SME", "แนวปฏิบัติธรรมาภิบาล SME"], "official_register": "https://www.sme.go.th", "coverage": "NOT_YET", "_claim": {"state": "UNVERIFIED", "last_checked": "2026-07-13", "sla_deadline": "2026-09-11"}}
+    {
+      "publisher_id": "intl-iia",
+      "name": "The IIA",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "GIAS",
+        "Topical Requirements",
+        "Practice Guides"
+      ],
+      "official_register": "https://www.theiia.org/en/standards/",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "intl-intosai",
+      "name": "INTOSAI",
+      "governs": [
+        "GOV",
+        "SOE"
+      ],
+      "doc_types": [
+        "ISSAI",
+        "GUID",
+        "INTOSAI-P"
+      ],
+      "official_register": "https://www.issai.org",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "intl-iso",
+      "name": "ISO/IEC",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "มาตรฐานสากลทุกชุด"
+      ],
+      "official_register": "https://www.iso.org",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "intl-coso",
+      "name": "COSO",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "IC Framework",
+        "ERM",
+        "ICSR",
+        "thought papers"
+      ],
+      "official_register": "https://www.coso.org",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "intl-nist",
+      "name": "NIST",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "CSF",
+        "SP series",
+        "AI RMF"
+      ],
+      "official_register": "https://csrc.nist.gov/pubs",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "intl-oecd",
+      "name": "OECD",
+      "governs": [
+        "UNIVERSAL",
+        "SOE"
+      ],
+      "doc_types": [
+        "CG Principles",
+        "SOE Guidelines"
+      ],
+      "official_register": "https://www.oecd.org/en/publications",
+      "coverage": "PARTIAL",
+      "notes": "มี OECD Guidelines on Corporate Governance of SOEs — ยังไม่เก็บ",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ OECD SOE Guidelines ฉบับปัจจุบัน (คาด 2024 revision)",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-ifrs-issb",
+      "name": "IFRS Foundation / ISSB",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "IFRS S1/S2"
+      ],
+      "official_register": "https://www.ifrs.org/sustainability/",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "intl-gao",
+      "name": "US GAO",
+      "governs": [
+        "GOV",
+        "SOE"
+      ],
+      "doc_types": [
+        "FAM",
+        "Yellow Book",
+        "audit methodology"
+      ],
+      "official_register": "https://www.gao.gov",
+      "coverage": "NOT_YET",
+      "notes": "เป้าหมาย exemplar corpus (EN)",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-idi",
+      "name": "INTOSAI Development Initiative (IDI)",
+      "governs": [
+        "GOV",
+        "SOE"
+      ],
+      "doc_types": [
+        "audit handbooks หลายภาษา"
+      ],
+      "official_register": "https://www.idi.no",
+      "coverage": "NOT_YET",
+      "notes": "เป้าหมาย exemplar corpus",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-eca",
+      "name": "European Court of Auditors",
+      "governs": [
+        "GOV"
+      ],
+      "doc_types": [
+        "audit methodology (หลายภาษา EU)"
+      ],
+      "official_register": "https://www.eca.europa.eu",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-asia-sai",
+      "name": "SAI เอเชีย (Board of Audit JP / BAI KR / CNAO)",
+      "governs": [
+        "GOV",
+        "SOE"
+      ],
+      "doc_types": [
+        "คู่มือตรวจสอบ (ja/ko/zh)"
+      ],
+      "official_register": "https://www.jbaudit.go.jp | https://english.bai.go.kr",
+      "coverage": "NOT_YET",
+      "notes": "เป้าหมาย exemplar หลายภาษา บริบท SOE ใกล้ไทย",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-ratchakitcha",
+      "name": "ราชกิจจานุเบกษา",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "พ.ร.บ./กฎกระทรวง/ประกาศ (ต้นฉบับ)"
+      ],
+      "official_register": "https://www.ratchakitcha.soc.go.th",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-krisdika",
+      "name": "สำนักงานคณะกรรมการกฤษฎีกา",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "ตัวบทกฎหมายฉบับ update"
+      ],
+      "official_register": "https://www.krisdika.go.th",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-cgd",
+      "name": "กรมบัญชีกลาง",
+      "governs": [
+        "GOV",
+        "SOE"
+      ],
+      "doc_types": [
+        "หลักเกณฑ์ IA ภาครัฐ (ฉบับ 1-4)",
+        "ระเบียบพัสดุ",
+        "คู่มือ/แบบฟอร์ม"
+      ],
+      "official_register": "https://www.cgd.go.th",
+      "coverage": "PARTIAL",
+      "notes": "หลักเกณฑ์ IA 2561+ฉบับ 4 (ว55/2566) ยืนยันการมีอยู่แล้ว — ยังไม่เก็บเนื้อรายข้อ",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-oag",
+      "name": "สตง. (สำนักงานการตรวจเงินแผ่นดิน)",
+      "governs": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "doc_types": [
+        "หลักเกณฑ์มาตรฐานตรวจเงินแผ่นดิน",
+        "คู่มือตรวจสอบ"
+      ],
+      "official_register": "https://www.audit.go.th",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-sepo",
+      "name": "สคร. (สำนักงานคณะกรรมการนโยบายรัฐวิสาหกิจ)",
+      "governs": [
+        "SOE"
+      ],
+      "doc_types": [
+        "SOE CG Code 2562",
+        "SE-AM",
+        "ระเบียบ คตส.รัฐวิสาหกิจ",
+        "แผนพัฒนารัฐวิสาหกิจ"
+      ],
+      "official_register": "https://www.sepo.go.th/content/311",
+      "coverage": "PARTIAL",
+      "notes": "CG 2562 PDF เจอแล้ว; SE-AM เกณฑ์รายหมวดยังต้องเก็บ",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-nacc",
+      "name": "ป.ป.ช.",
+      "governs": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "doc_types": [
+        "ITA",
+        "มาตรการป้องกันทุจริต",
+        "พ.ร.ป. 2561"
+      ],
+      "official_register": "https://www.nacc.go.th",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-erc",
+      "name": "กกพ. (คณะกรรมการกำกับกิจการพลังงาน)",
+      "governs": [
+        "SOE",
+        "PRIVATE"
+      ],
+      "doc_types": [
+        "เงื่อนไขใบอนุญาต",
+        "เกณฑ์คุณภาพบริการ"
+      ],
+      "official_register": "https://www.erc.or.th",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-ncsa",
+      "name": "สกมช.",
+      "governs": [
+        "GOV",
+        "SOE",
+        "PRIVATE"
+      ],
+      "doc_types": [
+        "ประกาศ CII",
+        "มาตรฐานไซเบอร์"
+      ],
+      "official_register": "https://www.ncsa.or.th/standards/laws",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13"
+      }
+    },
+    {
+      "publisher_id": "th-sec",
+      "name": "ก.ล.ต.",
+      "governs": [
+        "LISTED"
+      ],
+      "doc_types": [
+        "CG Code 2560",
+        "เกณฑ์เปิดเผยข้อมูล 56-1 One Report"
+      ],
+      "official_register": "https://www.sec.or.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ CG Code + เกณฑ์คณะกรรมการตรวจสอบฉบับปัจจุบัน",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-set",
+      "name": "ตลาดหลักทรัพย์ฯ (ตลท.)",
+      "governs": [
+        "LISTED"
+      ],
+      "doc_types": [
+        "เกณฑ์คณะกรรมการตรวจสอบ",
+        "แนวปฏิบัติ IA บริษัทจดทะเบียน"
+      ],
+      "official_register": "https://www.set.or.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-iod",
+      "name": "IOD Thailand",
+      "governs": [
+        "LISTED",
+        "PRIVATE",
+        "SOE"
+      ],
+      "doc_types": [
+        "CG guidelines",
+        "board practices"
+      ],
+      "official_register": "https://www.thai-iod.com",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-iia-thailand",
+      "name": "สมาคมผู้ตรวจสอบภายในแห่งประเทศไทย (สตท.)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "ศัพท์บัญญัติ IA ไทย",
+        "แนวปฏิบัติ"
+      ],
+      "official_register": "https://www.theiiat.or.th",
+      "coverage": "NOT_YET",
+      "notes": "สำคัญต่อ glossary",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-tfac",
+      "name": "สภาวิชาชีพบัญชี (TFAC)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "TFRS",
+        "มาตรฐานสอบบัญชี"
+      ],
+      "official_register": "https://www.tfac.or.th",
+      "coverage": "PARTIAL",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-dla",
+      "name": "กรมส่งเสริมการปกครองท้องถิ่น (มท.)",
+      "governs": [
+        "LOCAL_GOV"
+      ],
+      "doc_types": [
+        "ระเบียบตรวจสอบภายใน อปท."
+      ],
+      "official_register": "https://www.dla.go.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-cad",
+      "name": "กรมตรวจบัญชีสหกรณ์",
+      "governs": [
+        "COOP_COMMUNITY"
+      ],
+      "doc_types": [
+        "มาตรฐาน/คู่มือสอบบัญชีสหกรณ์"
+      ],
+      "official_register": "https://www.cad.go.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-onep",
+      "name": "สผ. (นโยบายและแผนสิ่งแวดล้อม)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "เกณฑ์ EIA/EHIA"
+      ],
+      "official_register": "https://www.onep.go.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-tgo",
+      "name": "อบก. (องค์การบริหารจัดการก๊าซเรือนกระจก)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "เกณฑ์ GHG inventory/verification"
+      ],
+      "official_register": "https://www.tgo.or.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-pdpc",
+      "name": "สคส. (คณะกรรมการคุ้มครองข้อมูลส่วนบุคคล)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "ประกาศ/แนวปฏิบัติ PDPA"
+      ],
+      "official_register": "https://www.pdpc.or.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-opdc",
+      "name": "ก.พ.ร.",
+      "governs": [
+        "GOV"
+      ],
+      "doc_types": [
+        "เกณฑ์ PMQA",
+        "การควบคุมภายในภาครัฐ"
+      ],
+      "official_register": "https://www.opdc.go.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "th-osmep",
+      "name": "สสว. (ส่งเสริม SME)",
+      "governs": [
+        "SME"
+      ],
+      "doc_types": [
+        "นิยาม SME",
+        "แนวปฏิบัติธรรมาภิบาล SME"
+      ],
+      "official_register": "https://www.sme.go.th",
+      "coverage": "NOT_YET",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-isaca",
+      "name": "ISACA",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "ITAF",
+        "COBIT 2019",
+        "audit programs (member)"
+      ],
+      "official_register": "https://www.isaca.org",
+      "coverage": "NOT_YET",
+      "inclusion_rationale": "IT audit standard setter — IIA TR map ไป COBIT เอง",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ ITAF ฉบับปัจจุบัน + ของฟรี",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-eciia",
+      "name": "ECIIA",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "position papers (ฟรี)"
+      ],
+      "official_register": "https://www.eciia.eu",
+      "coverage": "NOT_YET",
+      "inclusion_rationale": "มุมยุโรป utilities/SOE",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ papers ที่เกี่ยว",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-acfe",
+      "name": "ACFE",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "Report to the Nations (ฟรี)",
+        "Fraud Examiners Manual (member)"
+      ],
+      "official_register": "https://www.acfe.com",
+      "coverage": "NOT_YET",
+      "inclusion_rationale": "ฐานความรู้ fraud risk T001/T006",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "เก็บ Report to the Nations ล่าสุด",
+        "sla_deadline": "2026-09-11"
+      }
+    },
+    {
+      "publisher_id": "intl-ifac",
+      "name": "IFAC / IPSASB",
+      "governs": [
+        "GOV",
+        "SOE"
+      ],
+      "doc_types": [
+        "IPSAS"
+      ],
+      "official_register": "https://www.ipsasb.org",
+      "coverage": "NOT_YET",
+      "inclusion_rationale": "บัญชีภาครัฐ — โยง T005 และมาตรฐานกรมบัญชีกลาง",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "ตรวจ มาตรฐานบัญชีภาครัฐไทยอิง IPSAS ฉบับไหน",
+        "sla_deadline": "2026-09-11"
+      }
+    }
   ]
 }

@@ -644,6 +644,34 @@
           "sla_deadline": "2026-09-11"
         }
       ]
+    },
+    {
+      "family_id": "iia-topical-requirements",
+      "display": "IIA Topical Requirements (mandatory IPPF)",
+      "match": "Topical Requirement",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "Cybersecurity 2025",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.theiia.org/globalassets/site/standards/topical-requirements/cybersecurity/cybersecurity_topical_requirement.pdf",
+          "evidence_excerpt": "ฟรี 20 ภาษา; mandatory component of the IPPF effective February 6, 2026 (Press Room ก.พ. 2025); User Guide map ไป NIST CSF 2.0, COBIT 2019, NIST 800-53",
+          "notes": "บังคับแล้ว (มีผล 6 ก.พ. 2026) — T002 ต้อง backfill ให้อ้าง"
+        },
+        {
+          "version": "Third-Party Risk (upcoming)",
+          "status": "TO_BE_REVISED",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.theiia.org/en/standards/2024-standards/topical-requirements/",
+          "evidence_excerpt": "IIA ประกาศ TR ตัวถัดไป = third-party risk",
+          "notes": "ธงเฝ้ารอ"
+        }
+      ]
     }
   ]
 }
