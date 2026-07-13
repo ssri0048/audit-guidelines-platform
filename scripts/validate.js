@@ -254,6 +254,47 @@ for (const t of store.topics) {
   }
 }
 
+// แหล่งที่ 3+4: source_universe.json + glossary.json (claim envelope เดียวกัน)
+function loadClaimFile(fname, listKey, refFn, todoFn) {
+  const p = path.join(path.dirname(STORE), fname);
+  if (!fs.existsSync(p)) return null;
+  let data;
+  try { data = JSON.parse(fs.readFileSync(p, 'utf8')); }
+  catch (e) { errors.push(`[FILE] ${fname} parse ไม่ได้: ${e.message}`); return null; }
+  for (const item of data[listKey] || []) {
+    const c = item._claim || {};
+    if (c.state === 'UNVERIFIED' || c.state === 'UNRESOLVED') {
+      const age = ageDays(c.last_checked);
+      queue.push({ type: fname.replace('.json',''), ref: refFn(item), state: c.state, age, todo: todoFn(item) });
+      if (c.sla_deadline && NOW_MS > Date.parse(c.sla_deadline))
+        errors.push(`[SLA] ${fname}: ${refFn(item)} — เกิน SLA ${c.sla_deadline} ต้องปิดธงก่อน merge`);
+    }
+  }
+  return data;
+}
+loadClaimFile('source_universe.json', 'publishers',
+  p => `${p.name} [${(p.governs||[]).join(',')}] coverage:${p.coverage}`,
+  p => (p._claim && p._claim.open_question) || `harvest เอกสารหลักจาก ${p.official_register}`);
+loadClaimFile('glossary.json', 'terms',
+  t => `ศัพท์ "${t.en}" → "${t.th}"`,
+  t => (t._claim && t._claim.open_question) || `ยืนยันที่มาศัพท์จาก ${t.term_source}`);
+
+// ── ORG APPLICABILITY (Provenance & Coverage) ──
+// นโยบาย: topic ที่ verify ใหม่ (PENDING_REVIEW/APPROVED v2+) ควรมี org_applicability
+// ช่วง transition = warning; หลัง backfill PR-D จะยกเป็น error
+for (const t of store.topics) {
+  const isNewlyVerified = t.approval_status !== 'LEGACY_UNVERIFIED' && parseInt(t.version) >= 2;
+  if (isNewlyVerified && !Array.isArray(t.org_applicability))
+    warnings.push(`[P_ORG] ${t.id}: ไม่มี org_applicability (transition: จะเป็น error หลัง backfill PR-D) — ไม่มีป้าย=UNIVERSAL ต้องประกาศชัด`);
+  // derivation ต่อ procedure (transition-level warning นับรวม)
+  let noDeriv = 0, total = 0;
+  for (const r of t.risks || []) for (const cf of r.control_failures || []) for (const ap of cf.audit_procedures || []) {
+    total++; if (!ap.derivation) noDeriv++;
+  }
+  if (isNewlyVerified && noDeriv > 0)
+    warnings.push(`[P_DERIVATION] ${t.id}: ${noDeriv}/${total} procedures ไม่มี derivation label (READ_SOURCE/EXEMPLAR_GROUNDED/PROFESSIONAL_SYNTHESIS)`);
+}
+
 // ── สรุปผล ──
 const legacy = store.topics.filter(t => t.approval_status === 'LEGACY_UNVERIFIED').length;
 const verified = store.topics.filter(t => ['L0', 'L1'].includes(t.knowledge_layer) && t.approval_status === 'APPROVED').length;

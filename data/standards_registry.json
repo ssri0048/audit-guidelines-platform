@@ -561,6 +561,89 @@
           "evidence_excerpt": "\"In 2023 COSO issued supplemental guidance... internal control over sustainability reporting (ICSR)\" — supplement ของ ICIF-2013, มีฉบับแปลไทยบนหน้าเดียวกัน"
         }
       ]
+    },
+    {
+      "family_id": "th-mof-ia-standard",
+      "display": "หลักเกณฑ์กระทรวงการคลังว่าด้วยมาตรฐานฯ การตรวจสอบภายในสำหรับหน่วยงานของรัฐ",
+      "match": "หลักเกณฑ์กระทรวงการคลัง.{0,40}ตรวจสอบภายใน",
+      "org_scope": [
+        "GOV",
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "2561",
+          "status": "AMENDED",
+          "amendments": [
+            "(ฉบับที่ 2)",
+            "(ฉบับที่ 3)",
+            "(ฉบับที่ 4) พ.ศ. 2566 (ว55 16 มี.ค. 2566)"
+          ],
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://audit.prd.go.th/th/content/category/detail/id/9/iid/345284",
+          "evidence_excerpt": "หน้ารวมหลักเกณฑ์ฯ พ.ศ. 2561 (ฉบับที่ 1-4) — ฉบับที่ 4 ตามหนังสือ กค 0409.2/ว55 ลว. 16 มี.ค. 2566; ต้องอ่านทั้ง 4 ฉบับประกอบกัน",
+          "exception_code": "EX-AMENDED",
+          "notes": "มาตรฐาน IA ภาคบังคับของหน่วยงานรัฐ (ตาม พ.ร.บ.วินัยการเงินการคลัง); รัฐวิสาหกิจปฏิบัติตามที่ สคร. กำหนด"
+        }
+      ]
+    },
+    {
+      "family_id": "th-soe-dev-act-2562",
+      "display": "พ.ร.บ.การพัฒนาการกำกับดูแลและบริหารรัฐวิสาหกิจ พ.ศ. 2562",
+      "match": "พัฒนาการกำกับดูแล.{0,20}รัฐวิสาหกิจ",
+      "org_scope": [
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "2562",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://dl.parliament.go.th/handle/20.500.13072/547326",
+          "evidence_excerpt": "ฉบับเต็มในคลังสารสนเทศรัฐสภา — กำหนดแผนพัฒนารัฐวิสาหกิจ 5 ปี (ฉบับ 2566-2570 ประกาศแล้วตามประกาศ คนร. ราชกิจจาฯ เล่ม 139 ตอนพิเศษ 277 ง)"
+        }
+      ]
+    },
+    {
+      "family_id": "th-sepo-cg-2562",
+      "display": "หลักการและแนวทางการกำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ พ.ศ. 2562 (สคร.)",
+      "match": "กำกับดูแลกิจการที่ดีในรัฐวิสาหกิจ",
+      "org_scope": [
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "2562",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.dad.co.th/download/About-dad29/SEPO%20CG%202562.pdf",
+          "evidence_excerpt": "เอกสาร SOE CG Code ฉบับเต็ม (สคร.) — T006 ควรอ้างฉบับนี้แทนการอ้างลอย"
+        }
+      ]
+    },
+    {
+      "family_id": "th-seam",
+      "display": "SE-AM (ระบบประเมินผลรัฐวิสาหกิจ ของ สคร.)",
+      "match": "SE-?AM",
+      "org_scope": [
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "current",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.sepo.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "หาเอกสารเกณฑ์ SE-AM ฉบับปัจจุบัน (Core Business Enablers รวมหมวดตรวจสอบภายใน) จาก sepo.go.th",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
     }
   ]
 }
