@@ -1018,26 +1018,30 @@
       "id": "T003",
       "name_th": "การบริหารสินทรัพย์ระบบไฟฟ้า",
       "name_en": "Electrical Asset Management",
-      "category": "Operations",
-      "category_th": "การดำเนินงาน",
+      "category": "Technology & Infrastructure",
+      "category_th": "เทคโนโลยีและโครงสร้างพื้นฐาน",
       "icon": "⚡",
       "color": "#F39C12",
       "priority": "HIGH",
       "applicable_standards": [
-        "ISO 55000:2014",
+        "ISO 55000:2024",
+        "ISO 55001:2024",
         "IEC 60300",
-        "PAS 55",
-        "มาตรฐาน กฟผ./กฟน./กฟภ.",
-        "NERC FAC-001"
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า (กกพ.) พ.ศ. 2565",
+        "มาตรฐานภายใน กฟผ./กฟน./กฟภ."
       ],
       "thailand_applicable": true,
+      "thai_law_refs": [
+        "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550 (อำนาจ กกพ. กำหนดมาตรฐานคุณภาพบริการ)",
+        "เกณฑ์มาตรฐานคุณภาพการให้บริการ ประเภทใบอนุญาตระบบส่งไฟฟ้า พ.ศ. 2565 (กกพ.)",
+        "มาตรฐานการบำรุงรักษาสินทรัพย์ภายใน กฟผ./กฟน./กฟภ."
+      ],
       "knowledge_id": "KN-T003",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "confidence_score": 87,
-      "quality_gate_status": "PENDING_REVERIFY",
-      "approval_status": "LEGACY_UNVERIFIED",
-      "knowledge_layer": "L3",
-      "hash_signature": "sha256:c4e95db8723ef663ea27426fc621ebf76c3c12e0d291c1fe3d7c3ce6efbc9251",
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
       "approved_by": null,
       "changelog": [
         {
@@ -1047,84 +1051,89 @@
           "approved_by": "system"
         },
         {
-          "version": "1.0.0",
+          "version": "2.0.0",
           "date": "2026-07-13",
-          "change": "Migration to v3 repo — stamped LEGACY_UNVERIFIED pending re-verification from official sources (มติ: ความรู้เดิมยังเชื่อไม่ได้จนกว่าจะ re-verify)",
-          "approved_by": "pending"
+          "change": "RE-VERIFIED — พบว่าอ้าง ISO 55000:2014 ซึ่ง WITHDRAWN แล้ว (หลักฐาน: iso.org lifecycle) แก้เป็นฉบับ 2024, ตัด PAS 55 ที่ถูกแทนที่, ขยาย 2→6 ความเสี่ยง, เพิ่มเกณฑ์ กกพ. 2565",
+          "approved_by": "pending PR merge by human reviewer"
         }
       ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T16:00:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
-        "T002",
-        "T004",
-        "T013"
-      ],
-      "thai_law_refs": [
-        "พ.ร.บ.การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย พ.ศ. 2511",
-        "มาตรฐานการบำรุงรักษาสินทรัพย์ กฟผ./กฟน./กฟภ."
+        "T001",
+        "T007",
+        "T016"
       ],
       "source_chain": [
         {
-          "source_id": "SRC001",
-          "source_type": "pdf_standard",
+          "source_id": "SRC-T003-01",
+          "source_type": "international_standard",
+          "publisher": "ISO",
+          "title": "ISO 55000:2024 — Asset management (Edition 2)",
+          "url": "https://www.iso.org/standard/83053.html",
+          "retrieved_at": "2026-07-13",
           "credibility_score": 95,
-          "knowledge_layer": "L0"
+          "excerpt": "\"Published (Edition 2, 2024) · Publication date 2024-07 · Stage 60.60\" | Life cycle: \"Previously: Withdrawn — ISO 55000:2014\" | หลักการ: value, alignment, leadership; ครอบคลุมการบริหารสินทรัพย์ตลอดวงจรชีวิต"
         },
         {
-          "source_id": "SRC004",
-          "source_type": "research_report",
-          "credibility_score": 88,
-          "knowledge_layer": "L1"
+          "source_id": "SRC-T003-02",
+          "source_type": "international_standard",
+          "publisher": "ISO",
+          "title": "ISO 55001:2024 — Asset management system Requirements",
+          "url": "https://www.iso.org/standard/83054.html",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "ฉบับ requirements ของชุด 55000 (พบจากทะเบียน iso.org — เนื้อหารายข้อให้เปิดตรวจประกอบตอนใช้)"
+        },
+        {
+          "source_id": "SRC-T003-03",
+          "source_type": "thai_regulator",
+          "publisher": "สำนักงาน กกพ. (ERC)",
+          "title": "มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า",
+          "url": "https://www.erc.or.th/th/service-quality-standards",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "หน้าทางการ กกพ. รวมเกณฑ์มาตรฐานคุณภาพบริการ รวมเอกสาร \"เกณฑ์มาตรฐานคุณภาพการให้บริการ ประเภทใบอนุญาตระบบส่งไฟฟ้า พ.ศ. 2565\" — ผูก asset performance ของการไฟฟ้าเข้ากับเกณฑ์กำกับโดยตรง"
         }
       ],
       "risks": [
         {
-          "id": "R007",
-          "name_th": "ความเสี่ยงความล้มเหลวของสินทรัพย์โครงข่ายไฟฟ้า",
-          "name_en": "Power Grid Asset Failure Risk",
-          "level": "HIGH",
+          "id": "R001",
+          "name_th": "ความเสี่ยงสินทรัพย์วิกฤต (หม้อแปลง สายส่ง สถานีไฟฟ้า) ล้มเหลวโดยไม่คาดการณ์ กระทบการจ่ายไฟและเกณฑ์คุณภาพบริการ กกพ.",
+          "name_en": "Unanticipated Critical Asset Failure Impacting Supply & ERC Standards",
+          "level": "CRITICAL",
           "likelihood": "ปานกลาง",
           "impact": "สูงมาก",
           "control_failures": [
             {
-              "id": "CF009",
-              "name_th": "ไม่มีแผนบำรุงรักษาเชิงป้องกัน (Preventive Maintenance Plan)",
-              "name_en": "No Preventive Maintenance Plan",
+              "id": "CF001",
+              "name_th": "ไม่มีการประเมิน asset health/criticality อย่างเป็นระบบเพื่อจัดลำดับความเสี่ยง",
+              "name_en": "No systematic asset health & criticality assessment",
               "audit_procedures": [
                 {
-                  "id": "AP011",
-                  "name_th": "ตรวจสอบแผนและบันทึกการบำรุงรักษาสินทรัพย์วิกฤต",
-                  "name_en": "Review maintenance plan and records for critical assets",
-                  "method": "Document Review + Site Inspection",
+                  "id": "AP001",
+                  "name_th": "สอบทานระบบประเมินสุขภาพสินทรัพย์ (health index) และเกณฑ์ criticality เทียบกับสถิติ failure จริงย้อนหลัง และตัวชี้วัด SAIFI/SAIDI ตามเกณฑ์ กกพ.",
+                  "name_en": "Review asset health index & criticality vs actual failure statistics and SAIFI/SAIDI",
+                  "method": "Data Analytics + Document Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO 55000:2024",
+                      "clause": "Principles",
+                      "title": "Asset management — Vocabulary, overview and principles (Edition 2)"
+                    },
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง",
+                      "title": "มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า"
+                    }
+                  ],
                   "evidence_types": [
-                    "แผนบำรุงรักษาประจำปี (Annual Maintenance Plan)",
-                    "Maintenance Work Order Records",
-                    "รายงานสภาพสินทรัพย์ (Asset Condition Report)",
-                    "รายงานการตรวจสอบภาคสนาม",
-                    "Predictive Maintenance Data"
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "CF010",
-              "name_th": "ทะเบียนสินทรัพย์ไม่ครบถ้วนหรือล้าสมัย",
-              "name_en": "Incomplete or outdated asset register",
-              "audit_procedures": [
-                {
-                  "id": "AP012",
-                  "name_th": "ตรวจนับและยืนยันความถูกต้องของทะเบียนสินทรัพย์",
-                  "name_en": "Count and verify accuracy of asset register",
-                  "method": "Physical Verification + System Reconciliation",
-                  "evidence_types": [
-                    "ทะเบียนสินทรัพย์ถาวร (Fixed Asset Register)",
-                    "รายงาน GIS/SCADA Asset Data",
-                    "รายงานการตรวจนับสินทรัพย์",
-                    "เอกสารการรับมอบสินทรัพย์",
-                    "ประกันภัยสินทรัพย์"
+                    "ทะเบียน health index สินทรัพย์วิกฤตล่าสุด",
+                    "สถิติเหตุขัดข้อง/failure 3 ปีย้อนหลัง",
+                    "รายงาน SAIFI/SAIDI เทียบเกณฑ์ กกพ.",
+                    "เกณฑ์จัดลำดับ criticality พร้อมอนุมัติ"
                   ]
                 }
               ]
@@ -1132,35 +1141,212 @@
           ]
         },
         {
-          "id": "R008",
-          "name_th": "ความเสี่ยงการจัดการวงจรชีวิตสินทรัพย์ไม่เหมาะสม",
-          "name_en": "Inadequate Asset Lifecycle Management",
+          "id": "R002",
+          "name_th": "ความเสี่ยงทะเบียนสินทรัพย์ไม่ถูกต้อง ไม่ครบถ้วน หรือไม่ตรงกับของจริงภาคสนาม",
+          "name_en": "Inaccurate or Incomplete Asset Register",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002",
+              "name_th": "ไม่มีการสอบทาน/ตรวจนับสินทรัพย์ภาคสนามเทียบทะเบียนตามรอบ",
+              "name_en": "No periodic physical verification against register",
+              "audit_procedures": [
+                {
+                  "id": "AP002",
+                  "name_th": "สุ่มตรวจนับสินทรัพย์ภาคสนามเทียบทะเบียน (สองทาง: ทะเบียน→ของจริง และ ของจริง→ทะเบียน) และตรวจความครบของข้อมูลสำคัญ (อายุ พิกัด สภาพ)",
+                  "name_en": "Two-way physical-to-register sampling with key attribute completeness",
+                  "method": "Physical Inspection + Sampling",
+                  "std_refs": [
+                    {
+                      "std": "ISO 55001:2024",
+                      "clause": "AMS Requirements",
+                      "title": "Asset management system — Requirements"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนสินทรัพย์จากระบบ (EAM/ERP)",
+                    "ผลตรวจนับภาคสนามพร้อมภาพถ่าย",
+                    "รายงานผลต่าง/ปรับปรุงทะเบียน",
+                    "ผังกระบวนการรับ-จำหน่ายสินทรัพย์"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงแผนบำรุงรักษาไม่อิงความเสี่ยง/สภาพจริง (ยังเป็น time-based ทั้งที่ควรใช้ condition-based/RCM)",
+          "name_en": "Maintenance Not Risk/Condition-Based",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003",
+              "name_th": "แผนบำรุงรักษาไม่เชื่อมกับข้อมูล condition monitoring และประวัติ failure",
+              "name_en": "Maintenance plan disconnected from condition & failure data",
+              "audit_procedures": [
+                {
+                  "id": "AP003",
+                  "name_th": "เปรียบเทียบแผนบำรุงรักษากับข้อมูล condition monitoring (DGA หม้อแปลง, thermoscan) และวิเคราะห์ backlog งานซ่อมค้างพร้อมเหตุผล",
+                  "name_en": "Compare maintenance plan vs condition data; analyze backlog",
+                  "method": "Data Analytics + Interview",
+                  "std_refs": [
+                    {
+                      "std": "ISO 55000:2024",
+                      "clause": "Principles",
+                      "title": "Asset management — Vocabulary, overview and principles (Edition 2)"
+                    },
+                    {
+                      "std": "ISO 55001:2024",
+                      "clause": "AMS Requirements",
+                      "title": "Asset management system — Requirements"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนบำรุงรักษาประจำปีและผลดำเนินการ",
+                    "รายงาน condition monitoring สินทรัพย์วิกฤต",
+                    "ทะเบียน backlog งานค้างพร้อมอายุงาน",
+                    "เกณฑ์การจัดลำดับงานซ่อม"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความเสี่ยงการตัดสินใจลงทุน/เปลี่ยนทดแทนไม่อิงต้นทุนตลอดวงจรชีวิต (lifecycle cost) และ value",
+          "name_en": "Investment/Replacement Decisions Not Lifecycle-Value Based",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004",
+              "name_th": "ไม่มีการวิเคราะห์ lifecycle cost / risk-value trade-off ประกอบแผนลงทุน",
+              "name_en": "No lifecycle cost & value analysis in capital planning",
+              "audit_procedures": [
+                {
+                  "id": "AP004",
+                  "name_th": "สอบทานเอกสารประกอบแผนลงทุนเปลี่ยนทดแทนสินทรัพย์ ว่ามีการวิเคราะห์อายุคงเหลือ ต้นทุนตลอดวงจรชีวิต และทางเลือก (repair vs replace) ตามหลัก value ของ ISO 55000",
+                  "name_en": "Review capital plans for lifecycle cost & alternatives analysis",
+                  "method": "Document Review + Recalculation",
+                  "std_refs": [
+                    {
+                      "std": "ISO 55000:2024",
+                      "clause": "Principles",
+                      "title": "Asset management — Vocabulary, overview and principles (Edition 2)"
+                    },
+                    {
+                      "std": "IIA GIAS 2024",
+                      "clause": "Standard 14.1",
+                      "title": "Gathering Information for Analyses and Evaluation"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนลงทุนเปลี่ยนทดแทน 5 ปี",
+                    "การวิเคราะห์ lifecycle cost รายโครงการ",
+                    "เกณฑ์อนุมัติการลงทุนของคณะกรรมการ",
+                    "รายงานประเมินอายุคงเหลือสินทรัพย์"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "ความเสี่ยงระบบบริหารสินทรัพย์อ้างอิงมาตรฐานที่ถูกยกเลิก (ISO 55000:2014 ถูกแทนด้วยฉบับ 2024) ทำให้นโยบาย/คู่มือล้าสมัย",
+          "name_en": "AMS References Withdrawn Standard (ISO 55000:2014 → 2024)",
           "level": "MEDIUM",
           "likelihood": "สูง",
           "impact": "ปานกลาง",
           "control_failures": [
             {
-              "id": "CF011",
-              "name_th": "ไม่มีเกณฑ์การทดแทนสินทรัพย์ที่ชัดเจน",
-              "name_en": "No clear asset replacement criteria",
+              "id": "CF005",
+              "name_th": "ไม่มีกระบวนการติดตามการเปลี่ยนแปลงมาตรฐาน/กฎเกณฑ์ที่ระบบบริหารสินทรัพย์อ้างอิง",
+              "name_en": "No standards-change monitoring for AMS references",
               "audit_procedures": [
                 {
-                  "id": "AP013",
-                  "name_th": "ทบทวนนโยบายและเกณฑ์การทดแทนสินทรัพย์",
-                  "name_en": "Review asset replacement policy and criteria",
-                  "method": "Policy Review + Financial Analysis",
+                  "id": "AP005",
+                  "name_th": "ตรวจสอบว่านโยบาย/คู่มือบริหารสินทรัพย์อ้างมาตรฐานฉบับปัจจุบัน (ISO 55000/55001:2024) และมีผู้รับผิดชอบติดตามการปรับปรุงมาตรฐาน",
+                  "name_en": "Verify AMS documents reference current editions and change-monitoring ownership",
+                  "method": "Document Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO 55000:2024",
+                      "clause": "Principles",
+                      "title": "Asset management — Vocabulary, overview and principles (Edition 2)"
+                    },
+                    {
+                      "std": "ISO 55001:2024",
+                      "clause": "AMS Requirements",
+                      "title": "Asset management system — Requirements"
+                    }
+                  ],
                   "evidence_types": [
-                    "นโยบายบริหารสินทรัพย์",
-                    "แผนทดแทนสินทรัพย์ระยะยาว (CAPEX Plan)",
-                    "รายงาน End-of-Life Analysis",
-                    "ประวัติการซ่อมแซมสินทรัพย์"
+                    "นโยบาย/คู่มือบริหารสินทรัพย์ฉบับบังคับใช้",
+                    "ทะเบียนมาตรฐาน/กฎเกณฑ์ที่องค์กรอ้างอิงพร้อมเวอร์ชัน",
+                    "บันทึกการทบทวนเอกสารเมื่อมาตรฐานเปลี่ยน",
+                    "คำสั่งผู้รับผิดชอบงานมาตรฐาน"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "ความเสี่ยงอะไหล่สำรองวิกฤต (critical spares) ไม่พร้อมใช้เมื่อเกิดเหตุ ทำให้กู้คืนระบบล่าช้า",
+          "name_en": "Critical Spares Unavailability Delaying Restoration",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006",
+              "name_th": "ไม่มีการกำหนดรายการ critical spares ตามผลวิเคราะห์ความเสี่ยง และไม่ตรวจสภาพ/ทดสอบตามรอบ",
+              "name_en": "Critical spares list not risk-based; no periodic testing",
+              "audit_procedures": [
+                {
+                  "id": "AP006",
+                  "name_th": "สอบทานรายการ critical spares เทียบสินทรัพย์วิกฤต ตรวจสภาพจริงในคลัง (รวมหม้อแปลงสำรอง) และเวลานำ (lead time) ของรายการที่ไม่สำรอง",
+                  "name_en": "Review critical spares vs critical assets; inspect storage condition and lead times",
+                  "method": "Physical Inspection + Analysis",
+                  "std_refs": [
+                    {
+                      "std": "ISO 55001:2024",
+                      "clause": "AMS Requirements",
+                      "title": "Asset management system — Requirements"
+                    },
+                    {
+                      "std": "เกณฑ์มาตรฐานคุณภาพการให้บริการ กกพ. พ.ศ. 2565",
+                      "clause": "ใบอนุญาตระบบส่ง",
+                      "title": "มาตรฐานคุณภาพการให้บริการในการประกอบกิจการไฟฟ้า"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายการ critical spares พร้อมเกณฑ์กำหนด",
+                    "ผลตรวจสภาพ/ทดสอบอะไหล่สำรองตามรอบ",
+                    "ข้อมูล lead time จัดหารายการวิกฤต",
+                    "บันทึกการเบิกใช้จริงในเหตุการณ์ที่ผ่านมา"
                   ]
                 }
               ]
             }
           ]
         }
-      ]
+      ],
+      "hash_signature": "sha256:5eaa45f755ef1f809a12825a28b0c84d90f91a2a50eefc959ed142c64add58c0"
     },
     {
       "id": "T004",
