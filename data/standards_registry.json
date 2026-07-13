@@ -202,11 +202,12 @@
       "editions": [
         {
           "version": "1.0",
-          "status": "CURRENT",
+          "status": "TO_BE_REVISED",
           "evidence_url": "https://www.nist.gov/itl/ai-risk-management-framework",
-          "evidence_excerpt": "",
-          "verified": false,
-          "last_verified": "2026-07-13"
+          "evidence_excerpt": "\"Released on January 26, 2023\" + \"The AI RMF 1.0 is being revised\" + GenAI Profile NIST-AI-600-1 (26 ก.ค. 2024) + concept note AI RMF Profile for Critical Infrastructure (7 เม.ย. 2026)",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "notes": "1.0 ยังเป็นฉบับใช้งาน แต่ revision กำลังมา + CI Profile เกี่ยวการไฟฟ้าตรง — ธงเฝ้ารอ"
         }
       ]
     },
@@ -670,6 +671,118 @@
           "evidence_url": "https://www.theiia.org/en/standards/2024-standards/topical-requirements/",
           "evidence_excerpt": "IIA ประกาศ TR ตัวถัดไป = third-party risk",
           "notes": "ธงเฝ้ารอ"
+        }
+      ]
+    },
+    {
+      "family_id": "cobit",
+      "display": "COBIT (ISACA EGIT Framework)",
+      "match": "COBIT",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "5",
+          "status": "WITHDRAWN",
+          "superseded_by": "2019",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.isaca.org/resources/cobit",
+          "evidence_excerpt": "\"COBIT 2019 is an evolution of COBIT 5\" — หน้า official แสดง 2019 เป็นชุดหลัก"
+        },
+        {
+          "version": "2019",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.isaca.org/resources/cobit",
+          "evidence_excerpt": "Core publications 4 เล่ม + Toolkit ฟรี + focus areas (DevOps, InfoSec, I&T Risk)"
+        }
+      ]
+    },
+    {
+      "family_id": "itaf",
+      "display": "ITAF (ISACA IT Audit Framework)",
+      "match": "ITAF",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "5th Edition",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.isaca.org/resources/cobit",
+          "evidence_excerpt": "แบนเนอร์ official: \"The 5th edition of the IT Audit Framework is now available\""
+        }
+      ]
+    },
+    {
+      "family_id": "th-labor-soe-2543",
+      "display": "พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ พ.ศ. 2543",
+      "match": "แรงงานรัฐวิสาหกิจสัมพันธ์",
+      "org_scope": [
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "2543",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.pea.co.th/sites/default/files/documents/",
+          "evidence_excerpt": "ประกาศ 7 เม.ย. 2543 ยกเลิก พ.ร.บ.พนักงานรัฐวิสาหกิจสัมพันธ์ 2534 (สำเนาทางการบนเว็บ กฟภ./สนง.สลากฯ/กกท.)",
+          "notes": "org-scope: SOE ใช้ฉบับนี้ ไม่ใช่ พ.ร.บ.แรงงานสัมพันธ์ 2518 (เอกชน); มี \"และที่แก้ไขเพิ่มเติม\" — รายละเอียดฉบับแก้ไขติดธงตรวจ",
+          "exception_code": "EX-AMENDED"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-30414",
+      "display": "ISO 30414 (Human Capital Reporting)",
+      "match": "ISO\\s*30414",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2018",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.iso.org/standard/69338.html",
+          "evidence_excerpt": "",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "ตรวจ stage บน iso.org (guideline HR reporting)",
+          "sla_deadline": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "family_id": "th-consumer-2522",
+      "display": "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522",
+      "match": "คุ้มครองผู้บริโภค",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2522",
+          "status": "AMENDED",
+          "amendments": [
+            "(ฉบับที่ 2) พ.ศ. 2541",
+            "(ฉบับที่ 3) พ.ศ. 2556",
+            "(ฉบับที่ 4) พ.ศ. 2562"
+          ],
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": "https://www.ocpb.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-AMENDED",
+          "open_question": "ยืนยันรายการฉบับแก้ไขทั้งหมดจากกฤษฎีกาฉบับ update",
+          "sla_deadline": "2026-09-11"
         }
       ]
     }
