@@ -688,6 +688,47 @@
         "open_question": "เก็บประกาศ สคบ. ที่เกี่ยวบริการสาธารณูปโภค",
         "sla_deadline": "2026-09-11"
       }
+    },
+    {
+      "publisher_id": "intl-pmi",
+      "name": "Project Management Institute (PMI)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "PMBOK Guide + PMI Standards"
+      ],
+      "official_register": "https://www.pmi.org/standards",
+      "coverage": "PARTIAL",
+      "inclusion_rationale": "มาตรฐานบริหารโครงการที่การไฟฟ้าใช้อ้างในงานลงทุน (T013)",
+      "_claim": {
+        "state": "VERIFIED",
+        "last_checked": "2026-07-13",
+        "evidence": {
+          "url": "https://www.pmi.org/standards/pmbok",
+          "excerpt": "อ่านหน้า PMBOK: 8th Edition พ.ย. 2025 + errata เม.ย. 2026",
+          "read_at": "2026-07-13"
+        }
+      }
+    },
+    {
+      "publisher_id": "intl-fidic",
+      "name": "FIDIC (International Federation of Consulting Engineers)",
+      "governs": [
+        "UNIVERSAL"
+      ],
+      "doc_types": [
+        "สัญญาก่อสร้างมาตรฐานสากล (Red/Yellow/Silver)"
+      ],
+      "official_register": "https://fidic.org",
+      "coverage": "NOT_YET",
+      "inclusion_rationale": "สัญญางานก่อสร้างใหญ่ของการไฟฟ้ามักอ้างเงื่อนไข FIDIC (T013)",
+      "_claim": {
+        "state": "UNVERIFIED",
+        "last_checked": "2026-07-13",
+        "open_question": "fidic.org เป็น JS page — ยืนยัน 2017 Suite + errata/reprints จากแหล่ง official",
+        "sla_deadline": "2026-09-11"
+      }
     }
   ]
 }

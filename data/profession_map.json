@@ -141,13 +141,18 @@
       "in_system": {
         "registry": false,
         "universe": false,
-        "exemplar": false
+        "exemplar": false,
+        "decision": "CONTEXT_ONLY"
       },
       "_claim": {
-        "state": "UNVERIFIED",
+        "state": "VERIFIED",
         "last_checked": "2026-07-13",
-        "open_question": "ยืนยันบทบาท+เอกสารเผยแพร่ และความสัมพันธ์กับ สตท.",
-        "sla_deadline": "2026-09-11"
+        "evidence": {
+          "url": "https://www.aciia.asia/",
+          "excerpt": "อ่านหน้าจริง: ไทยเป็นสมาชิก (flag_th ในรายชื่อ member countries) แต่เนื้อหาเว็บหยุดที่ ~2016 (WordPress 3.6, event ล่าสุด IIA India National Conference 2016, download ล่าสุด 2015)",
+          "read_at": "2026-07-13"
+        },
+        "resolution": "ACIIA ยังมีสถานะสมาพันธ์แต่ไม่ใช่แหล่งความรู้ที่เดินอยู่ — ใช้ IIA Global (GIAS/Topical Requirements) เป็นแหล่งหลัก; ไม่นำเข้า registry/universe"
       }
     },
     {
