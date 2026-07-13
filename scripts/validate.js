@@ -17,19 +17,18 @@ const STORE = process.argv[2] || path.join(__dirname, '..', 'data', 'knowledge_s
 const CURRENT_YEAR = new Date().getFullYear();
 const BUDDHIST_OFFSET = 543;
 
-// ── ตารางเวอร์ชันมาตรฐานที่ "มีจริง" (SKL002 Standards Validator — enforcement จริง) ──
-// รูปแบบ: regex จับชื่อตระกูลมาตรฐาน → ปี/เวอร์ชันที่ถูกต้อง
-const STANDARD_VERSIONS = [
-  { family: /IIA\s+GIAS|Global Internal Audit Standards/i, valid: ['2024'] },
-  { family: /COSO\s+ERM/i, valid: ['2017'] },
-  { family: /COSO(?!\s+ERM)/i, valid: ['2013', '2017'] },
-  { family: /ISO\s*31000/i, valid: ['2018'] },
-  { family: /ISO\/?IEC?\s*27001/i, valid: ['2022'] },
-  { family: /ISO\s*19011/i, valid: ['2018'] },
-  { family: /ISO\/?IEC?\s*42001/i, valid: ['2023'] },
-  { family: /NIST\s+CSF/i, valid: ['2.0'] },
-  { family: /NIST\s+AI\s+RMF/i, valid: ['1.0'] },
-];
+// ── G5: Standards Lifecycle Registry (data/standards_registry.json) ──
+// สถานะ: CURRENT/CONFIRMED/TO_BE_REVISED/TRANSITION/WITHDRAWN/AMENDED/PARTIAL_REPEAL/PINNED_BY_THAI_LAW
+const REGISTRY_PATH = path.join(path.dirname(STORE), 'standards_registry.json');
+let REGISTRY = { metadata: {}, families: [] };
+try {
+  REGISTRY = JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf8'));
+} catch (e) {
+  console.error('❌ อ่าน standards_registry.json ไม่ได้: ' + e.message);
+  process.exit(1);
+}
+const STALE_DAYS = REGISTRY.metadata.staleness_threshold_days || 183;
+const NOW_MS = Date.now();
 
 // ── เกณฑ์นโยบาย (ตาม requirement ที่ user กำหนด) ──
 const POLICY = {
@@ -149,15 +148,65 @@ for (const t of store.topics) {
     }
   }
 
-  // ── G5: STANDARD VERSION REGISTRY ──
+  // ── G5: STANDARDS LIFECYCLE REGISTRY ──
+  const allStdText = (t.applicable_standards || []).join(' | ');
   for (const std of t.applicable_standards || []) {
-    for (const rule of STANDARD_VERSIONS) {
-      if (rule.family.test(std)) {
-        const ok = rule.valid.some(v => std.includes(v));
-        const hasVersionToken = /\d/.test(std);
-        if (hasVersionToken && !ok)
-          report(isLegacy, id, 'G5_VERSION', `"${std}" เวอร์ชันไม่ตรงทะเบียน (ที่ถูกต้อง: ${rule.valid.join('/')})`);
+    for (const fam of REGISTRY.families) {
+      let famRe;
+      try { famRe = new RegExp(fam.match, 'i'); } catch (e) { continue; }
+      if (!famRe.test(std)) continue;
+
+      // หา edition ที่เวอร์ชันปรากฏใน string ที่อ้าง
+      let ed = (fam.editions || []).find(e => std.includes(e.version));
+      if (!ed) {
+        // มี token ที่ "หน้าตาเป็นเวอร์ชัน" จริงไหม (ปี ค.ศ./พ.ศ. หรือ x.y) — เลขมาตรฐานอย่าง 5280 ไม่นับ
+        const hasVersionToken = extractYears(std).length > 0 || /\d+\.\d+/.test(std);
+        if (hasVersionToken) {
+          report(isLegacy, id, 'G5_VERSION', `"${std}" เวอร์ชันไม่อยู่ในทะเบียน ${fam.display} (ที่รู้จัก: ${(fam.editions || []).map(e => e.version).join('/')})`);
+          continue;
+        }
+        // อ้างระดับตระกูลโดยไม่ระบุเวอร์ชัน — ถ้าทะเบียนมี edition เดียว ใช้ตัวนั้นประเมิน
+        if ((fam.editions || []).length === 1) ed = fam.editions[0];
+        else continue;
       }
+
+      switch (ed.status) {
+        case 'CURRENT':
+        case 'CONFIRMED':
+        case 'PINNED_BY_THAI_LAW':
+          break; // ผ่าน
+        case 'TO_BE_REVISED':
+          warnings.push(`[G5_LIFECYCLE] ${id}: "${std}" — ผู้ออกประกาศว่ากำลังจะมีฉบับใหม่ (TO_BE_REVISED) → เข้าคิวเตรียม re-verify`);
+          break;
+        case 'TRANSITION': {
+          const until = ed.transition_until ? Date.parse(ed.transition_until) : null;
+          if (until && NOW_MS > until)
+            report(isLegacy, id, 'G5_LIFECYCLE', `"${std}" — ช่วงเปลี่ยนผ่านสิ้นสุดแล้ว (${ed.transition_until}) ต้องย้ายไป ${ed.superseded_by || 'ฉบับใหม่'}`);
+          else
+            warnings.push(`[G5_LIFECYCLE] ${id}: "${std}" — อยู่ช่วงเปลี่ยนผ่านถึง ${ed.transition_until || '(ไม่ระบุ)'}`);
+          break;
+        }
+        case 'WITHDRAWN':
+          report(isLegacy, id, 'G5_LIFECYCLE', `"${std}" — ถูกยกเลิกแล้ว (WITHDRAWN) แทนที่โดย ${ed.superseded_by || '?'} | หลักฐาน: ${ed.evidence_url}`);
+          break;
+        case 'AMENDED': {
+          const cited = (ed.amendments || []).some(a => {
+            const m = a.match(/Amd\s*\d+|ฉบับที่\s*\d+/i);
+            return m ? allStdText.includes(m[0]) : false;
+          });
+          if (!cited)
+            warnings.push(`[G5_AMENDED] ${id}: "${std}" — มีเอกสารแก้ไขเพิ่มเติมที่ควรอ้างคู่กัน: ${(ed.amendments || []).join(', ')}`);
+          break;
+        }
+        case 'PARTIAL_REPEAL':
+          warnings.push(`[G5_PARTIAL] ${id}: "${std}" — มีผลยกเลิก/ถูกยกเลิกบางส่วน: ${(ed.notes || '').slice(0, 120)}...`);
+          break;
+        default:
+          warnings.push(`[G5_LIFECYCLE] ${id}: "${std}" — สถานะทะเบียนไม่รู้จัก: ${ed.status}`);
+      }
+
+      if (ed.verified === false)
+        warnings.push(`[G5_UNVERIFIED] ${id}: "${std}" — รายการทะเบียนยังไม่ถูก verify จากหน้า official (เชื่อได้ระดับความรู้ทั่วไปเท่านั้น)`);
     }
   }
 
@@ -173,6 +222,17 @@ for (const t of store.topics) {
   const expect = sha256Of(t);
   if (t.hash_signature !== expect)
     hard(id, 'P_HASH', `hash ไม่ตรงเนื้อหา (คาด ${expect.slice(0, 20)}... พบ ${String(t.hash_signature).slice(0, 20)}...)`);
+}
+
+// ── ตรวจความสดของทะเบียนมาตรฐานเอง (registry staleness) ──
+for (const fam of REGISTRY.families) {
+  for (const ed of fam.editions || []) {
+    if (ed.last_verified) {
+      const ageDays = (NOW_MS - Date.parse(ed.last_verified)) / 86400000;
+      if (ageDays > STALE_DAYS)
+        warnings.push(`[REGISTRY_STALE] ${fam.display} v${ed.version} — ไม่ถูกตรวจซ้ำมา ${Math.round(ageDays)} วัน (เกณฑ์ ${STALE_DAYS}) → คิว re-check`);
+    }
+  }
 }
 
 // ── สรุปผล ──

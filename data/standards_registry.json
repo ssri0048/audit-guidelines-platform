@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "description": "ทะเบียนวงจรชีวิตมาตรฐาน (Standards Lifecycle Registry) — แหล่งความจริงเดียวสำหรับ G5 version validation",
+    "schema_version": "1.0.0",
+    "last_updated": "2026-07-13",
+    "staleness_threshold_days": 183,
+    "status_definitions": {
+      "CURRENT": "ฉบับปัจจุบัน ใช้อ้างได้",
+      "CONFIRMED": "ฉบับเก่าที่ผ่าน systematic review แล้วยืนยันว่ายังเป็นปัจจุบัน (เช่น ISO stage 90.93)",
+      "TO_BE_REVISED": "ยังใช้ได้ แต่ผู้ออกประกาศว่ากำลังจะมีฉบับใหม่ (ISO stage 90.92) — ติดธงเตรียม re-verify",
+      "TRANSITION": "ช่วงเปลี่ยนผ่าน — ฉบับเก่ายังใช้ได้ถึง transition_until",
+      "WITHDRAWN": "ถูกยกเลิกแล้ว — ห้ามอ้างเป็นปัจจุบัน (ดู superseded_by)",
+      "AMENDED": "ฉบับหลักยังปัจจุบัน แต่มีเอกสารแก้ไขเพิ่มเติมที่ต้องอ้างคู่กัน (ISO Amd / ไทย ฉบับที่ n)",
+      "PARTIAL_REPEAL": "บางมาตรา/บางข้อถูกยกเลิก — อ้างได้แต่ต้องตรวจรายมาตรา",
+      "PINNED_BY_THAI_LAW": "กฎหมาย/ประกาศไทยตรึงเวอร์ชันเฉพาะ — ในไทยยังบังคับแม้สากลจะเปลี่ยน"
+    },
+    "verified_meaning": "verified:true = Claude เปิดอ่านหน้า official จริงและบันทึก evidence แล้ว | verified:false = สถานะจากความรู้ทั่วไป ต้อง verify ก่อนเชื่อ 100%"
+  },
+  "families": [
+    {
+      "family_id": "iso-iec-27001",
+      "display": "ISO/IEC 27001 (ISMS)",
+      "match": "ISO\\/?\\s*IEC?\\s*27001",
+      "editions": [
+        {
+          "version": "2013",
+          "status": "WITHDRAWN",
+          "superseded_by": "2022",
+          "related_docs": ["Cor 1:2014 (Withdrawn)", "Cor 2:2015 (Withdrawn)"],
+          "evidence_url": "https://www.iso.org/standard/27001",
+          "evidence_excerpt": "Life cycle → Previously: Withdrawn — ISO/IEC 27001:2013",
+          "verified": true,
+          "last_verified": "2026-07-13"
+        },
+        {
+          "version": "2022",
+          "status": "AMENDED",
+          "amendments": ["Amd 1:2024 (Climate action changes)"],
+          "notes": "Amendments provide additional content; not included in the text of the existing standard — ต้องอ้าง 2022 + Amd 1:2024 คู่กันจึงครบ",
+          "evidence_url": "https://www.iso.org/standard/27001",
+          "evidence_excerpt": "Published (Edition 3, 2022) · Stage 60.60 published 2022-10-25 · This standard has 1 amendment: ISO/IEC 27001:2022/Amd 1:2024",
+          "verified": true,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "iia-gias",
+      "display": "IIA Global Internal Audit Standards",
+      "match": "IIA\\s+GIAS|Global Internal Audit Standards|GIAS",
+      "editions": [
+        {
+          "version": "2024",
+          "status": "CURRENT",
+          "notes": "วันมีผลบังคับ (effective date ม.ค. 2025 ตามที่เข้าใจ) ยังไม่ได้อ่านยืนยันจากหน้า IIA — ให้ verify ตอน re-check รอบหน้า",
+          "evidence_url": "https://www.theiia.org/globalassets/site/standards/globalinternalauditstandards_2024january9.pdf",
+          "evidence_excerpt": "เอกสารทางการ globalinternalauditstandards_2024january9.pdf — ยืนยันโครงสร้าง Domain/Standard จากสารบัญ (13.6, 14.1-14.6, 15.1-15.2)",
+          "verified": true,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "iia-ippf",
+      "display": "IIA IPPF Standards (ฉบับก่อน GIAS)",
+      "match": "IPPF|IIA Standard\\s+\\d{4}",
+      "editions": [
+        {
+          "version": "2017",
+          "status": "WITHDRAWN",
+          "superseded_by": "GIAS 2024",
+          "notes": "เลข clause แบบ 4 หลัก (เช่น IIA Standard 2130, 2030) เป็นระบบเลขของ IPPF เดิม — เมื่ออ้างต้อง map ไปเลข GIAS ใหม่; วันสิ้นผลจริงต้อง verify จาก theiia.org",
+          "evidence_url": "https://www.theiia.org/en/standards/",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "coso-ic",
+      "display": "COSO Internal Control — Integrated Framework",
+      "match": "COSO(?!\\s*ERM)",
+      "coexists_with": "coso-erm",
+      "editions": [
+        {
+          "version": "2013",
+          "status": "CURRENT",
+          "notes": "ใช้คู่กับ COSO ERM 2017 ได้ — คนละขอบเขต (Internal Control vs Enterprise Risk Management) ไม่มีใครแทนที่ใคร; ต้อง verify จาก coso.org",
+          "evidence_url": "https://www.coso.org/guidance-on-ic",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "coso-erm",
+      "display": "COSO Enterprise Risk Management",
+      "match": "COSO\\s*ERM",
+      "coexists_with": "coso-ic",
+      "editions": [
+        {
+          "version": "2017",
+          "status": "CURRENT",
+          "notes": "ต้อง verify จาก coso.org",
+          "evidence_url": "https://www.coso.org/guidance-erm",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-31000",
+      "display": "ISO 31000 (Risk Management)",
+      "match": "ISO\\s*31000",
+      "editions": [
+        {
+          "version": "2018",
+          "status": "CURRENT",
+          "notes": "คาดว่าอยู่ stage confirmed — ต้องเปิด iso.org/standard/65694 ตรวจ stage code",
+          "evidence_url": "https://www.iso.org/standard/65694.html",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-19011",
+      "display": "ISO 19011 (Auditing Management Systems)",
+      "match": "ISO\\s*19011",
+      "editions": [
+        {
+          "version": "2018",
+          "status": "CURRENT",
+          "notes": "ต้อง verify stage จาก iso.org",
+          "evidence_url": "https://www.iso.org/standard/70017.html",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "iso-iec-42001",
+      "display": "ISO/IEC 42001 (AI Management System)",
+      "match": "ISO\\/?\\s*IEC?\\s*42001",
+      "editions": [
+        {
+          "version": "2023",
+          "status": "CURRENT",
+          "notes": "ต้อง verify stage จาก iso.org",
+          "evidence_url": "https://www.iso.org/standard/42001",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "nist-csf",
+      "display": "NIST Cybersecurity Framework",
+      "match": "NIST\\s+CSF",
+      "editions": [
+        {
+          "version": "1.1",
+          "status": "WITHDRAWN",
+          "superseded_by": "2.0",
+          "notes": "CSF 2.0 ออก ก.พ. 2024 — ต้อง verify ประกาศ supersede จาก nist.gov",
+          "evidence_url": "https://www.nist.gov/cyberframework",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        },
+        {
+          "version": "2.0",
+          "status": "CURRENT",
+          "evidence_url": "https://www.nist.gov/cyberframework",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "nist-ai-rmf",
+      "display": "NIST AI Risk Management Framework",
+      "match": "NIST\\s+AI\\s+RMF",
+      "editions": [
+        {
+          "version": "1.0",
+          "status": "CURRENT",
+          "evidence_url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "evidence_excerpt": "",
+          "verified": false,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "intosai-guid-5280",
+      "display": "INTOSAI GUID 5280 (Audits of Public Procurement)",
+      "match": "GUID\\s*5280",
+      "editions": [
+        {
+          "version": "2022",
+          "status": "CURRENT",
+          "notes": "เอกสาร guidance (ไม่บังคับ) — ใช้เป็นแหล่งองค์ความรู้ความเสี่ยง ไม่ใช่ข้อกฎหมาย",
+          "evidence_url": "https://www.issai.org/wp-content/uploads/2023/02/Guid-5280-Guidance-for-audits-of-public-procurement.pdf",
+          "evidence_excerpt": "อ่านเนื้อหาจริง para 31-36 (Corruption and Fraud Risks in Public Procurement) เมื่อ 2026-07-13",
+          "verified": true,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "th-procurement-act",
+      "display": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+      "match": "พ\\.?ร\\.?บ\\.?.{0,10}จัดซื้อจัดจ้าง|พระราชบัญญัติการจัดซื้อจัดจ้าง",
+      "editions": [
+        {
+          "version": "2560",
+          "status": "PARTIAL_REPEAL",
+          "notes": "ตัว พ.ร.บ. เองยังบังคับใช้เต็มฉบับ แต่ 'มาตรา 3' ของมันมีผลยกเลิกบทบัญญัติเกี่ยวกับพัสดุในกฎหมาย/ระเบียบอื่นของหน่วยงานรัฐ — เมื่ออ้างระเบียบพัสดุเฉพาะหน่วยงาน (เช่น ของรัฐวิสาหกิจ) ต้องตรวจว่าส่วนนั้นถูกยกเลิกโดยมาตรา 3 หรือไม่; ตัวบทปัจจุบันยึดฉบับ update ของกฤษฎีกา",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2560/A/024/13.PDF",
+          "evidence_excerpt": "ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก, 24 กุมภาพันธ์ 2560 (ไฟล์สแกน — ยืนยันการมีอยู่และวันประกาศ)",
+          "verified": true,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    },
+    {
+      "family_id": "th-mof-procurement-regulation",
+      "display": "ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ",
+      "match": "ระเบียบกระทรวงการคลัง.{0,30}จัดซื้อจัดจ้าง",
+      "editions": [
+        {
+          "version": "2560",
+          "status": "AMENDED",
+          "amendments": ["(ฉบับที่ 2) พ.ศ. 2564"],
+          "notes": "ฉบับ 2560 เป็นฉบับหลัก ยังบังคับใช้ — แต่ถูกแก้ไขเพิ่มเติมโดย (ฉบับที่ 2) พ.ศ. 2564 ต้องอ่านสองฉบับประกอบกัน (แบบแผนเดียวกับ ISO Amendment)",
+          "evidence_url": "https://www.gprocurement.go.th/wps/wcm/connect/30b2077c-5c96-459d-9f98-28a696819738/ระเบียบกระทรวงการคลังว่าด้วยการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ+(ฉบับที่2)+พ.ศ.+2564.PDF?MOD=AJPERES",
+          "evidence_excerpt": "เอกสาร (ฉบับที่ 2) พ.ศ. 2564 เผยแพร่บนระบบ e-GP กรมบัญชีกลาง — ยืนยันการมีอยู่เมื่อ 2026-07-13",
+          "verified": true,
+          "last_verified": "2026-07-13"
+        }
+      ]
+    }
+  ]
+}
