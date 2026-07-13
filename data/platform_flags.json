@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "description": "ขีดความสามารถของแพลตฟอร์ม (คนละแกนกับสถานะมาตรฐานในทะเบียน) — การเปลี่ยนค่าใดๆ ต้องผ่าน PR + human merge เท่านั้น",
+    "fail_closed_rule": "ทั้ง validate.js และหน้าเว็บ: ถ้าอ่านไฟล์นี้ไม่ได้ ให้ถือว่าทุก flag = false (พลาดแล้วปลอดภัย)",
+    "last_updated": "2026-07-13"
+  },
+  "flags": {
+    "internal_doc_enabled": false
+  },
+  "flag_docs": {
+    "internal_doc_enabled": {
+      "what": "อนุญาตให้ความรู้ใช้หลักฐานจากเอกสารภายในองค์กร (source_type: internal_doc)",
+      "status_now": "ตั้งไว้รอ — โครง schema พร้อมแล้ว แต่ยังไม่เปิดใช้ (มติ 2026-07-13)",
+      "activation_path": "เชื่อม connector ฐานข้อมูลองค์กร → PR เปลี่ยนค่าเป็น true → หลักฐานต้องมี owner_org + doc_id (+checksum) → ยังผ่านเกต + PR อนุมัติรายรายการตามปกติ",
+      "permanent_rules": [
+        "internal_doc ไม่นับเป็นแหล่ง credibility/consensus ของ L1 ไม่ว่า flag เปิดหรือปิด",
+        "ห้ามใส่ excerpt จากเอกสารภายในลง repo สาธารณะ (G8_INTERNAL_PRIVACY บังคับ)",
+        "ความรู้ที่ยืนบนเอกสารภายใน = knowledge_layer L2"
+      ],
+      "open_question": "ตอนเปิดใช้จริงต้องเลือก: private repo คู่ขนาน (public เก็บ stub) หรือองค์กร fork ไปรันเป็น private — ดู docs/INTERNAL_KNOWLEDGE_PATH.md"
+    }
+  }
+}

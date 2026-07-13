@@ -994,6 +994,26 @@
           "sla_deadline": "2026-09-11"
         }
       ]
+    },
+    {
+      "family_id": "internal-org-standards",
+      "display": "มาตรฐาน/ระเบียบภายในองค์กร (กฟผ./กฟน./กฟภ. ฯลฯ)",
+      "match": "มาตรฐานภายใน",
+      "visibility": "INTERNAL",
+      "org_scope": [
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "org-internal",
+          "status": "INTERNAL_PARKED",
+          "verified": false,
+          "last_verified": "2026-07-13",
+          "evidence_url": null,
+          "evidence_excerpt": "",
+          "notes": "ตัวเลือกตั้งไว้รอ (มติ 2026-07-13): เอกสารไม่สาธารณะ verify จากภายนอกไม่ได้ — ใช้ได้เมื่อ internal_doc_enabled=true + เชื่อม connector ฐานข้อมูลองค์กร; ไม่มี SLA เพราะพักโดยเจตนา ไม่ใช่งานค้าง"
+        }
+      ]
     }
   ]
 }
