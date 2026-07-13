@@ -22,5 +22,7 @@
     "last_checked": "2026-07-13",
     "open_question": "อ่านเนื้อ chapter 6 (countermeasures) เพื่อยกระดับเป็น exemplar เชิงลึก",
     "sla_deadline": "2026-09-11"
-  }
+  },
+  "content_role": "BOTH",
+  "registry_family": "nist-sp-800-82"
 }
