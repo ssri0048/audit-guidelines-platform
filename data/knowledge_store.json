@@ -162,7 +162,7 @@
         "กฎกระทรวงกำหนดวงเงินการจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจง พ.ศ. 2560"
       ],
       "knowledge_id": "KN-T001",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 90,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
@@ -180,10 +180,16 @@
           "date": "2026-07-13",
           "change": "RE-VERIFIED จากแหล่ง official จริง 4 แหล่ง (INTOSAI GUID 5280, ป.ป.ช., IIA GIAS 2024, ราชกิจจานุเบกษา) — ขยายจาก 3 เป็น 6 ความเสี่ยง, เพิ่ม std_refs ระดับ procedure, เพิ่ม source_chain พร้อม URL+excerpt ตรวจย้อนได้ทุกแหล่ง",
           "approved_by": "pending PR merge by human reviewer"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
+          "approved_by": "pending PR merge"
         }
       ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T12:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -279,6 +285,11 @@
                     "หนังสือรับรองนิติบุคคลและบัญชีผู้ถือหุ้น (บอจ.5) ของผู้เสนอราคา",
                     "ตารางเปรียบเทียบราคาเสนอทุกราย",
                     "ทะเบียนสัญญาและผลการคัดเลือก"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001",
+                    "EXM-PROC-TH-001"
                   ]
                 },
                 {
@@ -303,6 +314,11 @@
                     "บันทึกขออนุมัติใช้วิธีเฉพาะเจาะจง/คัดเลือก",
                     "หลักฐานการเผยแพร่ประกาศเชิญชวน",
                     "รายงานการประชุมคณะกรรมการพิจารณาผล"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001",
+                    "EXM-PROC-TH-001"
                   ]
                 }
               ]
@@ -334,7 +350,8 @@
                     "หลักฐาน log การเผยแพร่บนเว็บไซต์หน่วยงาน",
                     "เกณฑ์ระยะเวลาตามระเบียบกระทรวงการคลัง พ.ศ. 2560",
                     "สถิติจำนวนผู้ดาวน์โหลด/ซื้อเอกสาร"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -375,6 +392,11 @@
                     "แคตตาล็อก/สเปคสินค้าของผู้ผลิตในตลาดอย่างน้อย 3 ราย",
                     "ข้อร้องเรียน/ข้อวิจารณ์ร่าง TOR จากการรับฟังความคิดเห็น",
                     "คำสั่งแต่งตั้งคณะกรรมการจัดทำ TOR และประวัติผู้เกี่ยวข้อง"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001",
+                    "EXM-PROC-TH-001"
                   ]
                 },
                 {
@@ -399,7 +421,8 @@
                     "ข้อวิจารณ์ที่ได้รับและบันทึกการพิจารณาตอบ",
                     "ร่าง TOR ก่อน-หลังแก้ไข (เปรียบเทียบ)",
                     "บันทึกอนุมัติ TOR ฉบับสุดท้าย"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -440,7 +463,8 @@
                     "เกณฑ์วงเงินตามกฎกระทรวง (วิธีเฉพาะเจาะจง)",
                     "รายงานจัดกลุ่มพัสดุประเภทเดียวกัน-ผู้ขายเดียวกัน",
                     "แผนจัดซื้อจัดจ้างประจำปีที่ประกาศ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -481,7 +505,8 @@
                     "ใบเสนอราคาที่ใช้อ้างอิง (≥3 ราย)",
                     "ราคาจัดซื้อรายการเดียวกันของหน่วยงานอื่นจาก e-GP",
                     "ประกาศเกณฑ์ราคากลางของกรมบัญชีกลาง"
-                  ]
+                  ],
+                  "derivation": "READ_SOURCE"
                 },
                 {
                   "id": "AP008",
@@ -505,6 +530,11 @@
                     "เกณฑ์ threshold ความผิดปกติที่หน่วยงานกำหนด",
                     "รายงานเหตุผลกรณีส่วนต่างผิดปกติ",
                     "เอกสารการต่อรองราคา"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001",
+                    "EXM-PROC-TH-001"
                   ]
                 }
               ]
@@ -546,6 +576,11 @@
                     "รายงานการตรวจรับพร้อมภาพถ่าย",
                     "ผลทดสอบ/commissioning (ถ้ามี)",
                     "บันทึกการลงพื้นที่ตรวจสภาพจริงของผู้ตรวจสอบ"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001",
+                    "EXM-PROC-TH-001"
                   ]
                 },
                 {
@@ -570,7 +605,8 @@
                     "ความเห็นคณะกรรมการตรวจรับและเจ้าหน้าที่พัสดุ",
                     "การคำนวณค่าปรับและหลักฐานการงด-ลด",
                     "สัญญาแก้ไขเพิ่มเติมทุกฉบับ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -611,6 +647,11 @@
                     "คำสั่งแต่งตั้งคณะกรรมการทุกชุด",
                     "ข้อมูลกรรมการ/ผู้ถือหุ้นผู้ชนะจาก DBD",
                     "นโยบาย/ประกาศ COI ของหน่วยงาน"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-PROC-INTL-001",
+                    "EXM-PROC-TH-001"
                   ]
                 },
                 {
@@ -635,14 +676,20 @@
                     "คำสั่งแต่งตั้งย้อนหลัง 3 ปี (วิเคราะห์รายชื่อซ้ำ)",
                     "นโยบายหมุนเวียนตำแหน่งเสี่ยง",
                     "ผลประเมินการควบคุมภายใน (ปค.) ด้านพัสดุ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
           ]
         }
       ],
-      "hash_signature": "sha256:33a9e4a84ab35dc64e3c26e07e9ad38c541452bc582ff27477538bb6b6a29ab5"
+      "hash_signature": "sha256:9b877a9bb7b51cbde4a86179410356b52ce9a7eb0a27054a3b1414da69058dbc",
+      "org_applicability": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ]
     },
     {
       "id": "T002",
@@ -660,7 +707,8 @@
         "IEC 62351",
         "NERC CIP",
         "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
-        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560"
+        "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
+        "IIA Cybersecurity Topical Requirement"
       ],
       "thailand_applicable": true,
       "thai_law_refs": [
@@ -669,7 +717,7 @@
         "ประกาศ/หลักเกณฑ์ของ สกมช. สำหรับหน่วยงาน CII"
       ],
       "knowledge_id": "KN-T002",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 88,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
@@ -687,10 +735,16 @@
           "date": "2026-07-13",
           "change": "RE-VERIFIED จากแหล่ง official 4 แหล่ง (NIST CSF 2.0, NIST SP 800-82 Rev.3, ราชกิจจานุเบกษา พ.ร.บ.ไซเบอร์ 2562, สกมช.) — ขยาย 3→6 ความเสี่ยง เพิ่ม std_refs และ source_chain ตรวจย้อนได้",
           "approved_by": "pending PR merge by human reviewer"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง + เพิ่ม IIA Cybersecurity Topical Requirement",
+          "approved_by": "pending PR merge"
         }
       ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T14:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -738,6 +792,16 @@
           "retrieved_at": "2026-07-13",
           "credibility_score": 92,
           "excerpt": "หน้ารวมกฎหมาย/ประกาศของหน่วยกำกับโดยตรงสำหรับหน่วยงาน CII (ยืนยันหน่วยงานและช่องทาง official — เนื้อหาประกาศรายฉบับให้เปิดตรวจประกอบตอนใช้งาน)"
+        },
+        {
+          "source_id": "SRC-T002-TR",
+          "source_type": "international_standard",
+          "publisher": "The IIA",
+          "title": "Cybersecurity Topical Requirement",
+          "url": "https://www.theiia.org/globalassets/site/standards/topical-requirements/cybersecurity/cybersecurity_topical_requirement.pdf",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "mandatory IPPF มีผล 6 ก.พ. 2026 — กรอบประเมิน governance/risk/control ด้านไซเบอร์ที่หัวหน้าตรวจสอบภายในต้องปฏิบัติเมื่อ scope ครอบคลุมไซเบอร์"
         }
       ],
       "risks": [
@@ -776,6 +840,10 @@
                     "ทะเบียน OT asset ทั้งหมดพร้อมระดับ criticality",
                     "รายงาน threat intelligence ที่ใช้ประกอบ",
                     "บันทึกการทบทวนโดยผู้บริหารด้านความมั่นคง"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
                   ]
                 },
                 {
@@ -793,6 +861,11 @@
                       "std": "IIA GIAS 2024",
                       "clause": "Standard 14.1",
                       "title": "Gathering Information for Analyses and Evaluation"
+                    },
+                    {
+                      "std": "IIA Cybersecurity Topical Requirement",
+                      "clause": "governance (มีผล 6 ก.พ. 2026)",
+                      "title": "Mandatory Topical Requirement"
                     }
                   ],
                   "evidence_types": [
@@ -800,6 +873,10 @@
                     "รายการข้อบกพร่องที่พบและสถานะแก้ไข",
                     "คำสั่งแต่งตั้งทีม CSIRT/SOC",
                     "บันทึกการรายงานผลต่อคณะกรรมการ"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
                   ]
                 }
               ]
@@ -841,6 +918,10 @@
                     "Firewall ruleset export พร้อมเหตุผลรายกฎ",
                     "ผลสแกน network path ระหว่างโซน",
                     "รายงานทบทวน rule ประจำงวด"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
                   ]
                 }
               ]
@@ -882,6 +963,10 @@
                     "การตั้งค่า MFA/VPN สำหรับ remote access",
                     "สัญญา/ข้อตกลงความปลอดภัยกับ vendor",
                     "Session log การเข้าถึงย้อนหลัง 6 เดือน"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
                   ]
                 }
               ]
@@ -923,6 +1008,10 @@
                     "ผลสแกนช่องโหว่ล่าสุดพร้อมสถานะ",
                     "ทะเบียนอุปกรณ์ legacy พร้อมมาตรการชดเชยรายตัว",
                     "บันทึกอนุมัติยอมรับความเสี่ยง (risk acceptance)"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
                   ]
                 }
               ]
@@ -964,7 +1053,8 @@
                     "รายงานประเมินความเสี่ยงตามรอบที่กฎหมายกำหนด",
                     "บันทึกการรายงานเหตุการณ์ต่อ สกมช. พร้อม timestamp",
                     "ผลตรวจ/ข้อสังเกตจากหน่วยกำกับ"
-                  ]
+                  ],
+                  "derivation": "READ_SOURCE"
                 }
               ]
             }
@@ -1005,6 +1095,10 @@
                     "รายงานผลการซ้อมพร้อมเวลากู้คืนจริง",
                     "ผลทดสอบ restore backup ของ SCADA/EMS",
                     "ทะเบียนการปรับปรุงแผนหลังการซ้อม"
+                  ],
+                  "derivation": "EXEMPLAR_GROUNDED",
+                  "exemplar_refs": [
+                    "EXM-CYBER-EN-001"
                   ]
                 }
               ]
@@ -1012,7 +1106,10 @@
           ]
         }
       ],
-      "hash_signature": "sha256:818945c6ef03b903842bef6be79a8469efc954f324e48164666d7b14fb8ac67d"
+      "hash_signature": "sha256:7a4b9ea18d15d741aa6807b61f5ebe202fea9702c568e298b707d17da7317b44",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T003",
@@ -1037,7 +1134,7 @@
         "มาตรฐานการบำรุงรักษาสินทรัพย์ภายใน กฟผ./กฟน./กฟภ."
       ],
       "knowledge_id": "KN-T003",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 87,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
@@ -1055,10 +1152,16 @@
           "date": "2026-07-13",
           "change": "RE-VERIFIED — พบว่าอ้าง ISO 55000:2014 ซึ่ง WITHDRAWN แล้ว (หลักฐาน: iso.org lifecycle) แก้เป็นฉบับ 2024, ตัด PAS 55 ที่ถูกแทนที่, ขยาย 2→6 ความเสี่ยง, เพิ่มเกณฑ์ กกพ. 2565",
           "approved_by": "pending PR merge by human reviewer"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
+          "approved_by": "pending PR merge"
         }
       ],
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T16:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -1134,7 +1237,8 @@
                     "สถิติเหตุขัดข้อง/failure 3 ปีย้อนหลัง",
                     "รายงาน SAIFI/SAIDI เทียบเกณฑ์ กกพ.",
                     "เกณฑ์จัดลำดับ criticality พร้อมอนุมัติ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1175,7 +1279,8 @@
                     "ผลตรวจนับภาคสนามพร้อมภาพถ่าย",
                     "รายงานผลต่าง/ปรับปรุงทะเบียน",
                     "ผังกระบวนการรับ-จำหน่ายสินทรัพย์"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1216,7 +1321,8 @@
                     "รายงาน condition monitoring สินทรัพย์วิกฤต",
                     "ทะเบียน backlog งานค้างพร้อมอายุงาน",
                     "เกณฑ์การจัดลำดับงานซ่อม"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1257,7 +1363,8 @@
                     "การวิเคราะห์ lifecycle cost รายโครงการ",
                     "เกณฑ์อนุมัติการลงทุนของคณะกรรมการ",
                     "รายงานประเมินอายุคงเหลือสินทรัพย์"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1298,7 +1405,8 @@
                     "ทะเบียนมาตรฐาน/กฎเกณฑ์ที่องค์กรอ้างอิงพร้อมเวอร์ชัน",
                     "บันทึกการทบทวนเอกสารเมื่อมาตรฐานเปลี่ยน",
                     "คำสั่งผู้รับผิดชอบงานมาตรฐาน"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1339,14 +1447,18 @@
                     "ผลตรวจสภาพ/ทดสอบอะไหล่สำรองตามรอบ",
                     "ข้อมูล lead time จัดหารายการวิกฤต",
                     "บันทึกการเบิกใช้จริงในเหตุการณ์ที่ผ่านมา"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
           ]
         }
       ],
-      "hash_signature": "sha256:5eaa45f755ef1f809a12825a28b0c84d90f91a2a50eefc959ed142c64add58c0"
+      "hash_signature": "sha256:63413c1fe05b33e4f2eee0f938fb905e8d20a3735a567be9da1440c75c6068ee",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T004",
@@ -1406,7 +1518,8 @@
                     "แผน load shedding/black start พร้อมผลซ้อม",
                     "บันทึกเหตุการณ์ระบบผิดปกติย้อนหลัง 3 ปี",
                     "รายงานการประสานงานกับศูนย์ควบคุมระบบ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1447,7 +1560,8 @@
                     "สูตร/นิยามการคำนวณที่ใช้จริง",
                     "รายงานดัชนีที่ส่ง กกพ.",
                     "เกณฑ์เปรียบเทียบของ กกพ. ฉบับปัจจุบัน"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1488,7 +1602,8 @@
                     "แผนผังวงจรไฟฟ้าตามข้อกำหนด",
                     "บันทึกตรวจ PPE และอุปกรณ์ป้องกัน",
                     "สถิติอุบัติเหตุและการสอบสวนสาเหตุ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1529,7 +1644,8 @@
                     "ทะเบียนจุดรุกล้ำและสถานะการแก้ไข",
                     "สถิติ fault แยกตามสาเหตุ",
                     "บันทึกแจ้งเตือน/ประสานเจ้าของพื้นที่"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1570,7 +1686,8 @@
                     "ทะเบียน relay settings และวันที่ทดสอบ",
                     "ข้อมูล DER ที่เชื่อมต่อรายฟีดเดอร์",
                     "บันทึกเหตุการณ์ relay ทำงานผิด/ไม่ทำงาน"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1611,7 +1728,8 @@
                     "ทะเบียนทรัพย์สินในพื้นที่เสี่ยงภัย",
                     "รายงานซ้อมแผนและบทเรียน",
                     "งบ/แผนเสริมความแข็งแรงโครงสร้าง"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1619,14 +1737,14 @@
         }
       ],
       "knowledge_id": "KN-T004",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 86,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
       "knowledge_layer": "L1",
       "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T18:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -1646,6 +1764,12 @@
           "date": "2026-07-13",
           "change": "RE-VERIFIED จากแหล่ง official — ขยายเป็น 6 ความเสี่ยง เพิ่ม source_chain/std_refs; T006 อัพเดท OECD CG เป็นฉบับ 2023 (แทน 2015)",
           "approved_by": "pending PR merge by human reviewer"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
+          "approved_by": "pending PR merge"
         }
       ],
       "source_chain": [
@@ -1680,7 +1804,10 @@
           "excerpt": "มาตรฐานนิยาม SAIFI/SAIDI/CAIDI (สถานะเวอร์ชันปัจจุบันให้ verify จากทะเบียน IEEE ตอน re-check)"
         }
       ],
-      "hash_signature": "sha256:f6bad2314e92163476b85b113167dbfa8c89e3e59a146ea539355e20bb16066e"
+      "hash_signature": "sha256:023ffd723fe3c2458fa498c01feb511e12a1add5c3ff3ea8b5ec6201b1af09bb",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T005",
@@ -1739,7 +1866,8 @@
                     "นโยบายบัญชีเทียบ TFRS ฉบับปัจจุบัน",
                     "ผล JE testing (ผู้บันทึก/เวลา/รายการกลม)",
                     "รายงานผู้สอบบัญชี (สตง.) ปีก่อนและการแก้ไข"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1780,10 +1908,16 @@
                     "บันทึกอนุมัติโอนเปลี่ยนแปลงงบ",
                     "ทะเบียนเงินกันเหลื่อมปีพร้อมเหตุผล",
                     "กรอบวินัยตาม พ.ร.บ. 2561 ที่เกี่ยวข้อง"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
           ]
         },
         {
@@ -1821,7 +1955,8 @@
                     "รายงานวิเคราะห์ loss แยกประเภท",
                     "ทะเบียนคดีละเมิดใช้ไฟและการเรียกเก็บ",
                     "ผลสอบเทียบมิเตอร์กลุ่มตัวอย่าง"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1862,7 +1997,8 @@
                     "Log การแก้ไข vendor master",
                     "ตาราง SoD สิทธิ์ในระบบการเงิน",
                     "ผลการติดตามรายการต้องสงสัย"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1903,7 +2039,8 @@
                     "ข้อมูลจริงย้อนหลังเทียบประมาณการ",
                     "นโยบายอายุการใช้งานสินทรัพย์",
                     "ความเห็นผู้เชี่ยวชาญ/ผู้ประเมินอิสระ (ถ้ามี)"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -1944,22 +2081,27 @@
                     "ตารางกระทบยอดข้ามระบบ",
                     "รายการผลต่างและการแก้ไข",
                     "หนังสือทักท้วงจากผู้กำกับ (ถ้ามี)"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE"
           ]
         }
       ],
       "knowledge_id": "KN-T005",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 86,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
       "knowledge_layer": "L1",
       "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T18:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -1979,6 +2121,12 @@
           "date": "2026-07-13",
           "change": "RE-VERIFIED จากแหล่ง official — ขยายเป็น 6 ความเสี่ยง เพิ่ม source_chain/std_refs; T006 อัพเดท OECD CG เป็นฉบับ 2023 (แทน 2015)",
           "approved_by": "pending PR merge by human reviewer"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
+          "approved_by": "pending PR merge"
         }
       ],
       "source_chain": [
@@ -2003,7 +2151,10 @@
           "excerpt": "หน่วยงานผู้ออก TFRS — รายฉบับ/ปีบังคับใช้ให้ตรวจจากทะเบียน TFAC ประกอบตอนใช้งาน"
         }
       ],
-      "hash_signature": "sha256:afe397fa96c93201cb7de960d562390a3e035ab39404c72ae02a762898641f23"
+      "hash_signature": "sha256:8f98815135d3c782ba204b3c921b9c1fbc6350f61abd5cc8f04cbe2b9c93859b",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T006",
@@ -2063,7 +2214,8 @@
                     "รายงานการประชุมบอร์ดวาระธุรกรรมสำคัญ",
                     "ทะเบียนบุคคล/นิติบุคคลเกี่ยวโยง",
                     "นโยบาย COI และหลักฐานการบังคับใช้"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2104,10 +2256,16 @@
                     "สถิติเรื่องร้องเรียนและผลการจัดการ",
                     "การทดสอบช่องทางแจ้งเบาะแส",
                     "ผลประเมิน ITA รายตัวชี้วัดพร้อมแผนยกระดับ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
+          ],
+          "org_applicability": [
+            "GOV",
+            "SOE",
+            "LOCAL_GOV"
           ]
         },
         {
@@ -2145,7 +2303,8 @@
                     "Board skill matrix",
                     "ผลประเมินตนเองของบอร์ดและแผนพัฒนา",
                     "กฎบัตรคณะกรรมการชุดต่างๆ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2186,7 +2345,8 @@
                     "ทะเบียนรายการข้อมูลที่ต้องเปิดเผยพร้อมเจ้าภาพ",
                     "รายงานความยั่งยืน/ESG",
                     "บันทึกการอัพเดทเว็บไซต์"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2227,10 +2387,14 @@
                     "การประเมินผลกระทบทางการเงินของ PSO",
                     "รายงานเปิดเผยภาระ PSO",
                     "หนังสือสั่งการจากผู้ถือหุ้นภาครัฐ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
+          ],
+          "org_applicability": [
+            "SOE"
           ]
         },
         {
@@ -2268,7 +2432,8 @@
                     "สถิติการลงโทษกรณีละเมิดแยกตามระดับพนักงาน",
                     "แผนสื่อสารจรรยาบรรณและหลักฐาน",
                     "รายงานต่อคณะกรรมการตรวจสอบ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2276,14 +2441,14 @@
         }
       ],
       "knowledge_id": "KN-T006",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 86,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
       "knowledge_layer": "L1",
       "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T18:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -2303,6 +2468,12 @@
           "date": "2026-07-13",
           "change": "RE-VERIFIED จากแหล่ง official — ขยายเป็น 6 ความเสี่ยง เพิ่ม source_chain/std_refs; T006 อัพเดท OECD CG เป็นฉบับ 2023 (แทน 2015)",
           "approved_by": "pending PR merge by human reviewer"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
+          "approved_by": "pending PR merge"
         }
       ],
       "source_chain": [
@@ -2327,7 +2498,10 @@
           "excerpt": "ช่องทาง ITA บนเว็บ ป.ป.ช. (พบจากเมนูหลักเว็บ nacc.go.th ที่เปิดอ่านเมื่อ 2026-07-13)"
         }
       ],
-      "hash_signature": "sha256:3463cd69df33b2b2ac511e32d5c55e768d593bb222cbaaa3f095e5c4325cd166"
+      "hash_signature": "sha256:9a392b6aa4d77fc771d46f47773d96a60fb09f8f7491c650c6925816ea5d8e08",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T007",
@@ -2385,7 +2559,8 @@
                     "รายการเหตุการณ์ความเสียหายจริง 3 ปีเทียบทะเบียน",
                     "บันทึกการทบทวนความเสี่ยงระหว่างปี",
                     "ผล benchmark กับการไฟฟ้า/รัฐวิสาหกิจอื่น"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2426,7 +2601,8 @@
                     "วาระบอร์ดด้านความเสี่ยงกลยุทธ์",
                     "แผนกลยุทธ์กับ risk profile ที่เชื่อมกัน",
                     "บันทึกการตัดสินใจที่อ้างผลประเมินความเสี่ยง"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2467,7 +2643,8 @@
                     "ตาราง limit/threshold รายประเภทความเสี่ยง",
                     "รายงานกรณีเกินเพดานและการจัดการ",
                     "บันทึกการทบทวน appetite ประจำปี"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2508,7 +2685,8 @@
                     "ข้อมูลดิบที่ใช้คำนวณงวดล่าสุด",
                     "รายงานความเสี่ยงที่เสนอผู้บริหาร/บอร์ด",
                     "เหตุการณ์จริงที่ขัดแย้งกับสถานะรายงาน"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2549,7 +2727,8 @@
                     "บันทึกสัมภาษณ์หน่วยงานตัวอย่าง",
                     "KPI ผู้บริหารที่ผูกกับการบริหารความเสี่ยง",
                     "ผลสำรวจวัฒนธรรมความเสี่ยง (ถ้ามี)"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2590,7 +2769,8 @@
                     "สถิติแผนล่าช้า/ค้างข้ามปี",
                     "รายงานติดตามต่อคณะกรรมการ",
                     "หลักฐานการปิดแผน (ผลลัพธ์จริง ไม่ใช่แค่ทำกิจกรรม)"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2598,14 +2778,14 @@
         }
       ],
       "knowledge_id": "KN-T007",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 86,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
       "knowledge_layer": "L1",
       "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T20:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -2624,6 +2804,12 @@
           "version": "2.0.0",
           "date": "2026-07-13",
           "change": "RE-VERIFIED — 6 ความเสี่ยง + source_chain; T009 แก้กรอบตกรุ่น TCFD→IFRS S1/S2 (ISSB), T007 ยืนยัน COSO ERM 2017 จาก coso.org",
+          "approved_by": "pending PR merge"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
           "approved_by": "pending PR merge"
         }
       ],
@@ -2649,7 +2835,10 @@
           "excerpt": "Standard 9.4 กำหนดแผนตรวจสอบต้องอิง documented assessment ของ strategies/objectives/risks อย่างน้อยปีละครั้ง (ยืนยันจากเอกสารทางการ)"
         }
       ],
-      "hash_signature": "sha256:88a72daea61066db425554d575a3502b1adb6b9a38773e9d3293c044fb74276b"
+      "hash_signature": "sha256:8b9efa8019570df50329d4c4b2a60d5a6ca1910bf1b0514cc942801d0113987f",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T008",
@@ -2709,7 +2898,8 @@
                     "ตาราง obligation-to-owner mapping",
                     "หลักฐานการปฏิบัติรายข้อที่สุ่ม",
                     "หนังสือโต้ตอบ/ข้อสังเกตจาก กกพ."
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2750,7 +2940,8 @@
                     "รายการกฎหมายอ้างอิงจากหน่วยกำกับ/สมาคม",
                     "ผลเทียบ gap ที่พบ",
                     "บันทึกอัพเดททะเบียนเมื่อกฎหมายใหม่ออก"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2791,7 +2982,8 @@
                     "รายงาน monitoring ที่ส่งหน่วยงานอนุมัติ",
                     "ทะเบียนข้อร้องเรียนสิ่งแวดล้อม",
                     "ผลตรวจวัดคุณภาพสิ่งแวดล้อมจริง"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2832,7 +3024,8 @@
                     "นโยบายความเป็นส่วนตัวและฐานการประมวลผล",
                     "ทะเบียนคำขอใช้สิทธิและเวลาตอบสนอง",
                     "ผลซ้อม/บันทึกเหตุการณ์ข้อมูลรั่วไหล"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2873,7 +3066,8 @@
                     "หลักฐานวันส่งจริงรายรายการ",
                     "หนังสือทักท้วง/เตือนจากหน่วยกำกับ",
                     "ระบบเตือนและผู้รับผิดชอบ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2914,7 +3108,8 @@
                     "บันทึกการประเมินผลกระทบกฎหมายใหม่",
                     "แผนเตรียมปฏิบัติตามพร้อม timeline",
                     "กรณีศึกษากฎหมายที่มีผลล่าสุด"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -2922,14 +3117,14 @@
         }
       ],
       "knowledge_id": "KN-T008",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 86,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
       "knowledge_layer": "L1",
       "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T20:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -2947,6 +3142,12 @@
           "version": "2.0.0",
           "date": "2026-07-13",
           "change": "RE-VERIFIED — 6 ความเสี่ยง + source_chain; T009 แก้กรอบตกรุ่น TCFD→IFRS S1/S2 (ISSB), T007 ยืนยัน COSO ERM 2017 จาก coso.org",
+          "approved_by": "pending PR merge"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
           "approved_by": "pending PR merge"
         }
       ],
@@ -2972,7 +3173,10 @@
           "excerpt": "มาตรฐานการตรวจสอบการปฏิบัติตามกฎเกณฑ์ในทะเบียน IFPP (issai.org) — เนื้อหารายข้อให้เปิดตรวจประกอบ (สถานะเวอร์ชันติดธง UNVERIFIED ใน registry พร้อม SLA)"
         }
       ],
-      "hash_signature": "sha256:ebdd82f5a370207ded7200b80604bcfaf39950354fd4880038f16c7e26d61fbc"
+      "hash_signature": "sha256:4223da9fc31f48afebc214a84e3971e6379ca124422d6d6bbc74cdd4b62beca0",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T009",
@@ -3032,7 +3236,8 @@
                     "mapping ตัวเลข ESG กับแหล่งข้อมูลและผู้ควบคุม",
                     "หลักฐานการสอบทาน/assurance (ถ้ามี)",
                     "กระดาษทำการทดสอบตัวเลขสำคัญ"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -3073,7 +3278,8 @@
                     "ประกาศ IFRS Foundation เรื่องรับโอนงาน TCFD",
                     "แผน transition ไป ISSB standards",
                     "เทียบ gap การเปิดเผยปัจจุบันกับ IFRS S2"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -3114,7 +3320,8 @@
                     "ข้อมูลดิบการใช้เชื้อเพลิง/ไฟฟ้า",
                     "emission factors และแหล่งอ้างอิง",
                     "ใบรับรองการทวนสอบ (verification) ถ้ามี"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -3155,7 +3362,8 @@
                     "แผนลงทุน 5 ปีด้านพลังงานสะอาด",
                     "ผลดำเนินการจริงเทียบเป้ารายปี",
                     "เอกสารอ้างอิง NDC/PDP ฉบับปัจจุบัน"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -3196,7 +3404,8 @@
                     "ทะเบียนความเสี่ยงที่รวม climate risks",
                     "แผนปรับตัวของสินทรัพย์ในพื้นที่เสี่ยง",
                     "วาระบอร์ด/คณะกรรมการความยั่งยืน"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -3237,7 +3446,8 @@
                     "ผลประเมินคู่ค้าประจำปี",
                     "รายงานตรวจคู่ค้าเสี่ยงสูง",
                     "ทะเบียนข้อร้องเรียนเกี่ยวกับคู่ค้า"
-                  ]
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
                 }
               ]
             }
@@ -3245,14 +3455,14 @@
         }
       ],
       "knowledge_id": "KN-T009",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "confidence_score": 86,
       "quality_gate_status": "PASS",
       "approval_status": "PENDING_REVIEW",
       "knowledge_layer": "L1",
       "approved_by": null,
       "created_at": "2026-06-16T00:00:00Z",
-      "updated_at": "2026-07-13T20:00:00Z",
+      "updated_at": "2026-07-13T23:59:00Z",
       "last_used_at": null,
       "usage_count": 0,
       "related_topics": [
@@ -3270,6 +3480,12 @@
           "version": "2.0.0",
           "date": "2026-07-13",
           "change": "RE-VERIFIED — 6 ความเสี่ยง + source_chain; T009 แก้กรอบตกรุ่น TCFD→IFRS S1/S2 (ISSB), T007 ยืนยัน COSO ERM 2017 จาก coso.org",
+          "approved_by": "pending PR merge"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-13",
+          "change": "Backfill มาตรฐานใหม่: org_applicability (topic+risk overrides) + derivation labels ทุก procedure + exemplar_refs ที่มีจริง",
           "approved_by": "pending PR merge"
         }
       ],
@@ -3295,7 +3511,10 @@
           "excerpt": "\"In 2023 COSO issued supplemental guidance for organizations to achieve effective internal control over sustainability reporting (ICSR)\" — หน้า official มีรายการ \"(THAI) COSO ICSR\" ฉบับแปลไทยให้ดาวน์โหลด = หลักฐาน Thailand applicability ตรง"
         }
       ],
-      "hash_signature": "sha256:88b8ff43610d0eee18b89a4368c97b848b23bd0f0a51f537d29dabfbcc183d2e"
+      "hash_signature": "sha256:3b920ae4df045e80b26626f833daee9afdeb31947b87a9e1e790723c6e24e276",
+      "org_applicability": [
+        "UNIVERSAL"
+      ]
     },
     {
       "id": "T010",
