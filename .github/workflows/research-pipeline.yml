@@ -69,14 +69,16 @@ jobs:
           git add data/drafts
           git commit -m "draft(research-pipeline): ร่างหัวข้อ '${{ steps.topic.outputs.topic }}' (L3/DRAFT — รอ verification)"
           git push -u origin "$BRANCH"
+          cp /tmp/research_out/READING_MANIFEST.md /tmp/pr_body.md
+          {
+            echo ""
+            echo "***"
+            echo "⚠️ **นี่คือ DRAFT (L3) จาก pipeline** — ยังไม่ใช่ความรู้ที่ verify แล้ว"
+            echo "ขั้นต่อไป: ทำ verification ตาม deep-research-protocol (อ่านแหล่งจริง + excerpt) ใน Cowork แล้วยกเป็น L1 ก่อนเข้า knowledge_store"
+            echo "**ห้าม merge PR นี้เข้า store โดยตรง**"
+          } >> /tmp/pr_body.md
           gh pr create --title "🤖 Draft: ${{ steps.topic.outputs.topic }}" \
-            --body "$(cat /tmp/research_out/READING_MANIFEST.md)
-
----
-⚠️ **นี่คือ DRAFT (L3) จาก pipeline** — ยังไม่ใช่ความรู้ที่ verify แล้ว
-ขั้นต่อไป: ทำ verification ตาม deep-research-protocol (อ่านแหล่งจริง + excerpt) ใน Cowork แล้วยกเป็น L1 ก่อน merge เข้า knowledge_store
-**ห้าม merge PR นี้เข้า store โดยตรง**" \
-            --base main --head "$BRANCH"
+            --body-file /tmp/pr_body.md --base main --head "$BRANCH"
 
       - name: Comment result on issue
         if: steps.topic.outputs.issue != ''
