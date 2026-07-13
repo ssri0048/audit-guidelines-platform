@@ -625,7 +625,7 @@
     {
       "family_id": "th-seam",
       "display": "SE-AM (ระบบประเมินผลรัฐวิสาหกิจ ของ สคร.)",
-      "match": "SE-?AM",
+      "match": "SE-?AM|ประเมินผลรัฐวิสาหกิจ",
       "org_scope": [
         "SOE"
       ],
@@ -633,13 +633,10 @@
         {
           "version": "current",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://www.sepo.go.th",
-          "evidence_excerpt": "",
-          "exception_code": "EX-NOT-FOUND",
-          "open_question": "หาเอกสารเกณฑ์ SE-AM ฉบับปัจจุบัน (Core Business Enablers รวมหมวดตรวจสอบภายใน) จาก sepo.go.th",
-          "sla_deadline": "2026-09-11"
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.sepo.go.th/content/72",
+          "evidence_excerpt": "อ่านโครงเว็บ สคร. จริง: \"ระบบ State Enterprise Assessment Model\" คือระบบปัจจุบัน ขณะที่ EVM / ระบบบริหารจัดการองค์กร (ข้อ 3) / SEPA / SOD ถูกป้ายกำกับ \"(ระบบประเมินผลในอดีต)\" ทั้งหมด | SE-AM ใช้ตั้งแต่ปีประเมิน 2563: KPA + Core Business Enablers 8 ด้าน (บริหารความเสี่ยง-ควบคุมภายใน = ด้านที่ 3)"
         }
       ]
     },
@@ -998,7 +995,7 @@
     {
       "family_id": "internal-org-standards",
       "display": "มาตรฐาน/ระเบียบภายในองค์กร (กฟผ./กฟน./กฟภ. ฯลฯ)",
-      "match": "มาตรฐานภายใน",
+      "match": "มาตรฐานภายใน|ภายใน กฟผ",
       "visibility": "INTERNAL",
       "org_scope": [
         "SOE"
@@ -1101,6 +1098,311 @@
           "evidence_excerpt": "ประกาศราชกิจจานุเบกษา 10 ธ.ค. 2550 มีผล 11 ธ.ค. 2550 — กฎหมายจัดตั้งระบบกำกับโดย กกพ. (ยืนยันจาก erc.or.th + eppo.go.th แต่ PDF ตัวบท fetch ไม่ได้)",
           "exception_code": "EX-JS-PAGE",
           "open_question": "อ่านตัวบทจริง (erc.or.th เป็น JS page, eppo PDF ดึงไม่ได้) + ตรวจว่ามีฉบับแก้ไขหรือไม่",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-sao-standards",
+      "display": "มาตรฐาน/หลักเกณฑ์การตรวจเงินแผ่นดิน (คตง./สตง.)",
+      "match": "ตรวจเงินแผ่นดิน",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2561",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.audit.go.th/th/standard",
+          "evidence_excerpt": "อ่านหน้ามาตรฐานของ สตง. จริง: ประกาศ คตง. เรื่อง หลักเกณฑ์มาตรฐานเกี่ยวกับการตรวจเงินแผ่นดิน + มาตรฐาน/มาตรการจำเป็นให้หน่วยรับตรวจปฏิบัติ (+เพิ่มเติม) + มตง.4 + มลก.3/มลก.6 | ราชกิจจาฯ เล่ม 135 ตอนที่ 10 ก (21 ก.พ. 2561) | ฐานอำนาจ: พรป.ตรวจเงินแผ่นดิน 2561 ม.27(2) กำหนด 6 องค์ประกอบขั้นต่ำของหลักเกณฑ์มาตรฐาน",
+          "notes": "ชุดประกาศมีหลายฉบับต่อเนื่อง (รวมหลักเกณฑ์อุทธรณ์ฯ 2564) — ตรวจรายฉบับเมื่ออ้างเจาะจง"
+        }
+      ]
+    },
+    {
+      "family_id": "th-ita",
+      "display": "เกณฑ์ประเมิน ITA (ป.ป.ช.)",
+      "match": "\\bITA\\b|คุณธรรมและความโปร่งใส",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2569",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://itas.nacc.go.th/home/listcontent?Note=ITA+2026",
+          "evidence_excerpt": "อ่านหน้า itas.nacc.go.th จริง: Kickoff ITA 2026 (26 มี.ค. 2569) แนวคิด Insight-Driven Assessment — ใช้สถิติคำกล่าวหาร้องเรียนจริงออกแบบเครื่องมือ | คู่มือประเมิน 2569 + มาตรฐานการตรวจให้คะแนน OIT 2569 + ปฏิทินประเมิน เผยแพร่ครบ",
+          "notes": "LIFECYCLE พิเศษ: เกณฑ์รายปีงบประมาณ — ฉบับปีก่อนตกรุ่นอัตโนมัติเมื่อประกาศปีใหม่ ต้อง re-verify ทุกปี (จุดเดียวกับที่ ISO ใช้ systematic review)"
+        }
+      ]
+    },
+    {
+      "family_id": "th-mof-risk-2562",
+      "display": "หลักเกณฑ์กระทรวงการคลังว่าด้วยมาตรฐานฯ การบริหารจัดการความเสี่ยงสำหรับหน่วยงานของรัฐ พ.ศ. 2562",
+      "match": "บริหารจัดการความเสี่ยงสำหรับหน่วยงานของรัฐ|หลักเกณฑ์การบริหารความเสี่ยงของ สคร|ว่าด้วยการบริหารจัดการความเสี่ยง",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2562",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://audit.prd.go.th/th/content/category/detail/id/9/iid/65625",
+          "evidence_excerpt": "หนังสือ กค 0409.4/ว23 ลว. 19 มี.ค. 2562 (กรมบัญชีกลาง) — สำเนาเผยแพร่บนหน่วยตรวจสอบภายในหลายหน่วยงาน",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "อ่านตัวบทหลักเกณฑ์จาก PDF กรมบัญชีกลางโดยตรง | หมายเหตุ: T007 เขียนว่า \"ของ สคร.\" — ผู้ออกจริงคือกระทรวงการคลัง/กรมบัญชีกลาง ต้องแก้สตริงตอน re-verify",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-integrity-pact",
+      "display": "ข้อตกลงคุณธรรม (Integrity Pact)",
+      "match": "ข้อตกลงคุณธรรม|Integrity Pact",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2558",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2560/A/024/13.PDF",
+          "evidence_excerpt": "เริ่มจากมติ ครม. 3 ก.พ. 2558 (โครงการนำร่อง) ต่อมาถูกยกระดับเป็นกลไกตามกฎหมายใน พ.ร.บ.จัดซื้อจัดจ้างฯ 2560 (หมวดการมีส่วนร่วมของภาคประชาชน)",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "อ่าน ม.16-19 แห่ง พ.ร.บ.จัดซื้อฯ ยืนยันกลไก + ประกาศ ค.ป.ท. ที่เกี่ยวข้อง",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-sepo-investment",
+      "display": "หลักเกณฑ์/ระเบียบการบริหารโครงการลงทุนของรัฐวิสาหกิจ (สคร.)",
+      "match": "โครงการลงทุนของรัฐวิสาหกิจ|ว่าด้วยการบริหารโครงการลงทุน",
+      "org_scope": [
+        "SOE"
+      ],
+      "editions": [
+        {
+          "version": "current",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.sepo.go.th/content/332",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ระบุชื่อ/ปีเอกสารจริงจากหน้า สคร. (การเบิกจ่ายงบลงทุนรัฐวิสาหกิจ) — สตริงเดิมใน T013 อาจไม่ตรงชื่อทางการ",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-cgd-public-accounting",
+      "display": "มาตรฐานการบัญชีภาครัฐและนโยบายการบัญชีภาครัฐ (กรมบัญชีกลาง)",
+      "match": "บัญชีภาครัฐ",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2561",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.cgd.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ตรวจฉบับปัจจุบัน+ที่แก้ไขเพิ่มเติมจากกรมบัญชีกลาง (อิง IPSAS)",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-ncsa-cii",
+      "display": "ประกาศ/แนวปฏิบัติ สกมช. สำหรับหน่วยงาน CII",
+      "match": "สกมช",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "series",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.ncsa.or.th",
+          "evidence_excerpt": "อ่านหน้า \"กฎหมายและมาตรฐาน\" ของ สกมช. แล้ว (batch T002) — ชุดประกาศภายใต้ พ.ร.บ.ไซเบอร์ 2562 สำหรับ CII (พลังงานเป็น CII)",
+          "notes": "เอกสารชุดออกต่อเนื่อง — ตรวจฉบับเจาะจงเมื่ออ้างรายมาตรการ ตามรอบ STALE"
+        }
+      ]
+    },
+    {
+      "family_id": "th-osh-2554",
+      "display": "พ.ร.บ.ความปลอดภัย อาชีวอนามัย และสภาพแวดล้อมในการทำงาน พ.ศ. 2554",
+      "match": "ความปลอดภัย อาชีวอนามัย",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2554",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.labour.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ยืนยันไม่มีฉบับแก้ไข + กฎกระทรวงลูกที่เกี่ยวไฟฟ้า",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-envi-2535",
+      "display": "พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 และกฎหมายสิ่งแวดล้อม/EIA",
+      "match": "สิ่งแวดล้อม|ควบคุมอาคาร",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2535",
+          "status": "AMENDED",
+          "amendments": [
+            "(ฉบับที่ 2) พ.ศ. 2561"
+          ],
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.onep.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ยืนยัน (ฉบับที่ 2) 2561 (หมวด EIA) จากราชกิจจาฯ + ประกาศ EIA ปัจจุบันของ สผ.",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-ocsc-position",
+      "display": "มาตรฐานกำหนดตำแหน่ง/หลักเกณฑ์ ก.พ.",
+      "match": "มาตรฐานกำหนดตำแหน่ง|หลักเกณฑ์ กพ",
+      "org_scope": [
+        "GOV"
+      ],
+      "editions": [
+        {
+          "version": "current",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.ocsc.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ระบุเอกสาร ก.พ. ที่ใช้จริง (มาตรฐานกำหนดตำแหน่ง) จากระบบ ก.พ.",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-proc-subregs",
+      "display": "กฎกระทรวง/ประกาศลูกภายใต้ พ.ร.บ.จัดซื้อจัดจ้างฯ 2560",
+      "match": "กฎกระทรวงกำหนดวงเงิน",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2560",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.gprocurement.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "กฎกระทรวงกำหนดวงเงินฯ มีฉบับแก้ไขภายหลังหรือไม่ (วงเงินเฉพาะเจาะจงเคยถูกปรับ)",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "th-sec-esg-disclosure",
+      "display": "แนวปฏิบัติการเปิดเผยข้อมูลความยั่งยืน (ก.ล.ต./ตลท. — 56-1 One Report)",
+      "match": "เปิดเผยข้อมูลความยั่งยืน|56-1 One Report",
+      "org_scope": [
+        "LISTED"
+      ],
+      "editions": [
+        {
+          "version": "current",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.sec.or.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "ยืนยันเวอร์ชันแบบ 56-1 One Report ปัจจุบัน + ส่วน ESG ที่บังคับ",
+          "sla_deadline": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "family_id": "nacc-article-procurement",
+      "display": "บทความวิชาการสำนักงาน ป.ป.ช. (แหล่งอ้างอิงประกอบ ไม่ใช่มาตรฐาน)",
+      "match": "บทความสำนักงาน ป\\.ป\\.ช",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2566",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.nacc.go.th",
+          "evidence_excerpt": "อ่านเนื้อในจริงตอน re-verify T001 (บทความ \"จัดซื้อจัดจ้าง รากฐานของการทุจริต\" 10 ก.ค. 2566 — ประเด็นราคากลาง/TOR/COI)",
+          "notes": "จัดประเภท: reference article — ไม่ใช่มาตรฐาน/กฎหมาย ควรย้ายออกจาก std_refs ไปเป็น source_chain ตอน revision ถัดไปของ T001"
+        }
+      ]
+    },
+    {
+      "family_id": "th-nacc-act-2561",
+      "display": "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561",
+      "match": "ป้องกันและปราบปรามการทุจริต พ\\.ศ\\.\\s*2561",
+      "org_scope": [
+        "GOV",
+        "SOE",
+        "LOCAL_GOV"
+      ],
+      "editions": [
+        {
+          "version": "2561",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.nacc.go.th",
+          "evidence_excerpt": "",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "อ่านตัวบทจากราชกิจจาฯ (เล่ม 135) — โดยเฉพาะหมวดขัดกันแห่งผลประโยชน์ (ม.126-128) ที่ T006 ใช้",
           "sla_deadline": "2026-09-12"
         }
       ]
