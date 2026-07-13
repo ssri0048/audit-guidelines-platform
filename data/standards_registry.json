@@ -2,7 +2,7 @@
   "metadata": {
     "description": "ทะเบียนวงจรชีวิตมาตรฐาน (Standards Lifecycle Registry) — แหล่งความจริงเดียวสำหรับ G5 version validation",
     "schema_version": "1.0.0",
-    "last_updated": "2026-07-13",
+    "last_updated": "2026-07-14",
     "staleness_threshold_days": 183,
     "status_definitions": {
       "CURRENT": "ฉบับปัจจุบัน ใช้อ้างได้",
@@ -1012,6 +1012,96 @@
           "evidence_url": null,
           "evidence_excerpt": "",
           "notes": "ตัวเลือกตั้งไว้รอ (มติ 2026-07-13): เอกสารไม่สาธารณะ verify จากภายนอกไม่ได้ — ใช้ได้เมื่อ internal_doc_enabled=true + เชื่อม connector ฐานข้อมูลองค์กร; ไม่มี SLA เพราะพักโดยเจตนา ไม่ใช่งานค้าง"
+        }
+      ]
+    },
+    {
+      "family_id": "th-pdpa-2562",
+      "display": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+      "match": "PDPA|คุ้มครองข้อมูลส่วนบุคคล",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2562",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0052.PDF",
+          "evidence_excerpt": "ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก (27 พ.ค. 2562) — มาตรา 2: ใช้บังคับวันถัดจากประกาศ เว้นแต่หมวด 2,3,5,6,7 และมาตรา 95,96 ใช้บังคับเมื่อพ้น 1 ปี (บังคับแบบแบ่งเฟส) | เอกสารทางการยืนยันซ้ำที่ law.prd.go.th (กปส.)",
+          "notes": "ไม่มีพระราชบัญญัติแก้ไข ณ วันตรวจ — ประกาศลูกออกโดยคณะกรรมการ/สคส. ต่อเนื่อง ตรวจซ้ำตามรอบ STALE"
+        }
+      ]
+    },
+    {
+      "family_id": "th-computer-crime",
+      "display": "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์",
+      "match": "กระทำความผิดเกี่ยวกับคอมพิวเตอร์",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2550",
+          "status": "AMENDED",
+          "amendments": [
+            "(ฉบับที่ 2) พ.ศ. 2560"
+          ],
+          "verified": true,
+          "last_verified": "2026-07-14",
+          "evidence_url": "http://cio.mhesi.go.th/node/695",
+          "evidence_excerpt": "อ่านตัวบทจริง (สำเนาทางการ อว.): \"มาตรา 3 ให้ยกเลิกความในมาตรา 4 แห่งพระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และให้ใช้ความต่อไปนี้แทน\" — ยืนยันว่า ฉบับ พ.ศ. 2560 คือ (ฉบับที่ 2) ที่แก้ไข พ.ร.บ. 2550 | ประกาศเล่ม 134 ตอนที่ 10 ก (24 ม.ค. 2560) ใช้บังคับเมื่อพ้น 120 วัน",
+          "notes": "กับดักที่เจอจริง: ความรู้เดิมเขียน \"พ.ร.บ.คอมพิวเตอร์ พ.ศ. 2560\" ลอยๆ ราวกับเป็นฉบับหลัก — ตัวบทหลักคือ 2550 และที่แก้ไขเพิ่มเติม"
+        }
+      ]
+    },
+    {
+      "family_id": "th-labor-protection-2541",
+      "display": "พ.ร.บ.คุ้มครองแรงงาน พ.ศ. 2541",
+      "match": "คุ้มครองแรงงาน",
+      "org_scope": [
+        "PRIVATE",
+        "SME",
+        "LISTED"
+      ],
+      "editions": [
+        {
+          "version": "2541",
+          "status": "AMENDED",
+          "amendments": [
+            "(ฉบับที่ 7) พ.ศ. 2562",
+            "(ฉบับที่ 8) พ.ศ. 2566 — เพิ่มมาตรา 23/1 (WFH) มีผล 18 เม.ย. 2566"
+          ],
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.sdgmove.com/2023/04/04/new-law-work-from-home/",
+          "evidence_excerpt": "ฉบับที่ 8 พ.ศ. 2566 เพิ่มมาตรา 23/1 รองรับ work from home + สิทธิปฏิเสธการติดต่อหลังเวลางาน มีผล 18 เม.ย. 2566 (ยืนยันตรงกันหลายแหล่ง)",
+          "exception_code": "EX-NOT-FOUND",
+          "open_question": "อ่านตัวบท (ฉบับที่ 8) จากราชกิจจานุเบกษา + รวบรายการฉบับแก้ไขครบถ้วน (2-8) จากกฤษฎีกา",
+          "sla_deadline": "2026-09-12",
+          "notes": "org-scope: เอกชนใช้ฉบับนี้ — SOE ใช้ พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ 2543 (ดู th-labor-soe-2543)"
+        }
+      ]
+    },
+    {
+      "family_id": "th-energy-act-2550",
+      "display": "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550",
+      "match": "การประกอบกิจการพลังงาน",
+      "org_scope": [
+        "UNIVERSAL"
+      ],
+      "editions": [
+        {
+          "version": "2550",
+          "status": "CURRENT",
+          "verified": false,
+          "last_verified": "2026-07-14",
+          "evidence_url": "https://www.eppo.go.th/images/law/PDF/law-2/act5-2550.pdf",
+          "evidence_excerpt": "ประกาศราชกิจจานุเบกษา 10 ธ.ค. 2550 มีผล 11 ธ.ค. 2550 — กฎหมายจัดตั้งระบบกำกับโดย กกพ. (ยืนยันจาก erc.or.th + eppo.go.th แต่ PDF ตัวบท fetch ไม่ได้)",
+          "exception_code": "EX-JS-PAGE",
+          "open_question": "อ่านตัวบทจริง (erc.or.th เป็น JS page, eppo PDF ดึงไม่ได้) + ตรวจว่ามีฉบับแก้ไขหรือไม่",
+          "sla_deadline": "2026-09-12"
         }
       ]
     }
