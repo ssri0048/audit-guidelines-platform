@@ -65,6 +65,26 @@
 | ระเบียบกระทรวงการคลัง 2560 + (ฉบับที่ 2) 2564 | แบบแผนไทยของ AMENDED — สองฉบับอ่านประกอบกัน |
 | ราชกิจจาฯ พ.ร.บ. 2560 เป็นไฟล์สแกน | อ่านตัวบทไม่ได้ → อ้างได้แค่การมีอยู่+วันประกาศ และเขียนข้อจำกัดไว้ตรงๆ (ขั้น 6) |
 
+## Exception Catalog — เหตุการณ์ที่เจอตอนหาข้อมูล + playbook (เพิ่มแถวเมื่อเจอแบบใหม่)
+
+| รหัส | เหตุการณ์ | ทำทันที | state ที่บันทึก | ทางปิด |
+|---|---|---|---|---|
+| EX-WITHDRAWN | แหล่งระบุฉบับถูกยกเลิก | หาฉบับแทน + evidence | SUPERSEDED | อ้างฉบับใหม่ |
+| EX-AMENDED | มี Amd/ฉบับที่ n ต้องอ้างคู่ | อ้างคู่ทั้งสอง | VERIFIED (AMENDED) | — |
+| EX-RENUMBERED | เลข/หมวดถูกจัดใหม่ เนื้อหาเดิม (เคส GOV 9100) | หาเอกสาร restructure ของผู้ออก | VERIFIED (RENUMBERED) | อ้างพร้อมวงเล็บเลขใหม่ |
+| EX-TRANSITION | ช่วงเปลี่ยนผ่านสองฉบับใช้คู่ | จดวันสิ้นสุด | VERIFIED (TRANSITION) | ครบกำหนด → ย้ายฉบับใหม่ |
+| EX-CONFIRMED-OLD | ฉบับเก่าแต่ review ยืนยันแล้ว | เก็บ stage code | VERIFIED (CONFIRMED) | — |
+| EX-SCANNED-PDF | ไฟล์สแกน อ่านตัวบทไม่ได้ (เคสราชกิจจาฯ) | ลดคำอ้างเหลือ "มีอยู่+วันประกาศ" + หาฉบับ text (กฤษฎีกา) | VERIFIED บางส่วน + open_question | เจอฉบับ text → VERIFIED เต็ม |
+| EX-JS-PAGE | หน้าเว็บ render ด้วย JS ดึงไม่ได้ | เปิดผ่าน browser จริง | — | — |
+| EX-PAYWALL | เนื้อหาเต็มต้องซื้อ (ISO body) | ใช้หน้า catalogue (สถานะ/สารบัญ) + ระบุข้อจำกัด | VERIFIED ระดับ metadata | องค์กรจัดซื้อเอกสาร → อ่านเต็ม |
+| EX-CONFLICT | สองแหล่ง official ขัดกัน | บันทึกทั้งคู่ + หาแหล่งที่สาม | UNRESOLVED + SLA | ได้ข้อยุติ → VERIFIED |
+| EX-NOT-FOUND | หาเอกสารที่ถูกอ้างไม่เจอในทะเบียนผู้ออก | สงสัยว่า citation หลอน — ค้นชื่อใกล้เคียง | UNRESOLVED + SLA | ยืนยันไม่มีจริง → RETIRED + แก้ทุกที่ที่อ้าง |
+| EX-TH-ADOPTION | ไม่ชัดว่าไทยรับมาตรฐานนี้ไหม | ตรวจประกาศหน่วยกำกับ/มอก./สมาชิกภาพ | UNRESOLVED + SLA | เจอหลักฐาน → VERIFIED (หรือ PINNED) |
+| EX-WRONG-TOPIC | เลขเอกสารจริงแต่คนละเรื่อง (เคส GOV 9140) | หาเอกสารที่ตรงเรื่องแทน | แก้ citation | — |
+
+## กติกา Boy Scout (บังคับ)
+ทุก batch re-verify: **ปิดธงเก่าจาก Verification Queue อย่างน้อย 2 รายการ** ก่อนจึงเปิดธงใหม่ได้ — ธงใหม่ทุกอันต้องมี exception_code + (ถ้า UNRESOLVED) open_question + sla_deadline
+
 ## Definition of Done (ต่อ 1 topic)
 - [ ] ทุก source มี url + excerpt + retrieved_at + credibility
 - [ ] ≥2 แหล่งอิสระ credibility ≥90 สำหรับ L1

@@ -224,14 +224,33 @@ for (const t of store.topics) {
     hard(id, 'P_HASH', `hash ไม่ตรงเนื้อหา (คาด ${expect.slice(0, 20)}... พบ ${String(t.hash_signature).slice(0, 20)}...)`);
 }
 
-// ── ตรวจความสดของทะเบียนมาตรฐานเอง (registry staleness) ──
+// ══ VERIFICATION QUEUE — Claim Lifecycle lens เดียวของทั้งระบบ ══
+// ทุก claim ที่ไม่อยู่สถานะจบ ต้องโผล่ในคิวนี้ + มี SLA (UNVERIFIED/UNRESOLVED เกิน 60 วัน = block)
+const SLA_DAYS = 60;
+const queue = [];
+function ageDays(d) { return d ? Math.round((NOW_MS - Date.parse(d)) / 86400000) : null; }
+
+// แหล่งที่ 1: ทะเบียนมาตรฐาน (verified:false = UNVERIFIED, verified:true แก่เกิน = STALE)
 for (const fam of REGISTRY.families) {
   for (const ed of fam.editions || []) {
-    if (ed.last_verified) {
-      const ageDays = (NOW_MS - Date.parse(ed.last_verified)) / 86400000;
-      if (ageDays > STALE_DAYS)
-        warnings.push(`[REGISTRY_STALE] ${fam.display} v${ed.version} — ไม่ถูกตรวจซ้ำมา ${Math.round(ageDays)} วัน (เกณฑ์ ${STALE_DAYS}) → คิว re-check`);
+    const age = ageDays(ed.last_verified);
+    if (ed.verified === false) {
+      queue.push({ type: 'registry', ref: `${fam.display} v${ed.version}`, state: 'UNVERIFIED', age,
+        todo: (ed.notes || 'เปิดทะเบียน official ของผู้ออก (ดู Publisher Lookup Table ใน SKL021)').slice(0, 90) });
+      if (age !== null && age > SLA_DAYS)
+        errors.push(`[SLA] ${fam.display} v${ed.version} — UNVERIFIED ค้าง ${age} วัน (เกิน SLA ${SLA_DAYS}) ต้องปิดธงก่อน merge`);
+    } else if (age !== null && age > STALE_DAYS) {
+      queue.push({ type: 'registry', ref: `${fam.display} v${ed.version}`, state: 'STALE', age, todo: 're-check ทะเบียนผู้ออก' });
+      warnings.push(`[REGISTRY_STALE] ${fam.display} v${ed.version} — ไม่ถูกตรวจซ้ำมา ${age} วัน (เกณฑ์ ${STALE_DAYS})`);
     }
+  }
+}
+
+// แหล่งที่ 2: topics ที่ยังไม่ verify (LEGACY_UNVERIFIED)
+for (const t of store.topics) {
+  if (t.approval_status === 'LEGACY_UNVERIFIED') {
+    queue.push({ type: 'topic', ref: `${t.id} ${t.name_th.slice(0, 30)}`, state: 'UNVERIFIED',
+      age: ageDays(t.updated_at), todo: 're-verify ตาม deep-research-protocol' });
   }
 }
 
@@ -246,5 +265,12 @@ console.log(` ❌ Errors:   ${errors.length}`);
 console.log(` ⚠️  Warnings: ${warnings.length}`);
 if (errors.length) { console.log('\n── ERRORS (block merge) ──'); errors.forEach(e => console.log('  ❌ ' + e)); }
 if (warnings.length) { console.log('\n── WARNINGS (ต้องเคลียร์ตอน re-verify) ──'); warnings.slice(0, 40).forEach(w => console.log('  ⚠️  ' + w)); if (warnings.length > 40) console.log(`  ... และอีก ${warnings.length - 40} รายการ`); }
+if (queue.length) {
+  console.log(`\n── VERIFICATION QUEUE (${queue.length} claims เปิดอยู่ | SLA ${SLA_DAYS} วันสำหรับ UNVERIFIED) ──`);
+  queue.sort((a, b) => (b.age || 0) - (a.age || 0)).slice(0, 25).forEach(q =>
+    console.log(`  🏳️  [${q.state}] ${q.ref} (ค้าง ${q.age ?? '?'} วัน) → ${q.todo}`));
+  if (queue.length > 25) console.log(`  ... และอีก ${queue.length - 25} รายการ`);
+  console.log('  กติกา Boy Scout: batch ถัดไปต้องปิดธงจากคิวนี้ ≥2 รายการ (SKL021)');
+}
 console.log('\n' + (errors.length ? '❌ FAILED — แก้ errors ก่อน merge' : '✅ PASSED — merge ได้ (warnings คืองานค้างของ re-verify)'));
 process.exit(errors.length ? 1 : 0);
