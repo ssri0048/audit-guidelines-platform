@@ -56,6 +56,14 @@ jobs:
           node scripts/research_draft.js "${{ steps.topic.outputs.topic }}" /tmp/research_out | tee /tmp/run.log
           if [ -f /tmp/research_out/draft_topic.json ]; then echo "has_draft=true" >> "$GITHUB_OUTPUT"; else echo "has_draft=false" >> "$GITHUB_OUTPUT"; fi
 
+      - name: Upload debug output (ดู raw ได้เสมอแม้ fail)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-out
+          path: /tmp/research_out/
+          if-no-files-found: ignore
+
       - name: Open draft PR
         if: steps.run.outputs.has_draft == 'true'
         env:

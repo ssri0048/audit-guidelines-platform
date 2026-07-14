@@ -56,8 +56,14 @@ async function callClaude(system, user, maxTokens) {
   });
   if (!res.ok) throw new Error(`API ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const data = await res.json();
-  return data.content.map(c => c.text || '').join('');
+  // เอาเฉพาะ text blocks (กันเคสมี block ชนิดอื่นเช่น thinking) + คืน diagnostics ครบ
+  return {
+    text: data.content.filter(c => c.type === 'text').map(c => c.text).join(''),
+    stop: data.stop_reason,
+    types: data.content.map(c => c.type).join(','),
+  };
 }
+function diag(r) { return `stop=${r.stop} blocks=[${r.types}] len=${r.text.length}`; }
 
 (async () => {
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -69,8 +75,11 @@ async function callClaude(system, user, maxTokens) {
     3000
   );
   let wanted;
-  try { wanted = JSON.parse(jsonSlice(manifestRaw, '[', ']')); }
-  catch (e) { console.error('parse manifest ไม่ได้ (' + e.message + '):', manifestRaw.slice(0, 600)); process.exit(1); }
+  try {
+    if (manifestRaw.stop === 'max_tokens') throw new Error('คำตอบถูกตัดที่เพดาน max_tokens');
+    wanted = JSON.parse(jsonSlice(manifestRaw.text, '[', ']'));
+  }
+  catch (e) { console.error('parse manifest ไม่ได้ (' + e.message + ') ' + diag(manifestRaw) + ' head:', manifestRaw.text.slice(0, 600)); process.exit(1); }
 
   const inRegistry = [], missing = [];
   for (const s of wanted) (famFor(s) ? inRegistry : missing).push(s);
@@ -90,11 +99,18 @@ async function callClaude(system, user, maxTokens) {
   const draft = await callClaude(
     `คุณเป็นผู้เชี่ยวชาญตรวจสอบภายในองค์กรด้านไฟฟ้าไทย ปฏิบัติตามโปรโตคอลนี้อย่างเคร่งครัด:\n${skill}\n\nกติกาเหล็ก:\n1. อ้างอิงได้เฉพาะมาตรฐานในรายการ "มีทะเบียนแล้ว" เท่านั้น — ห้ามอ้างชื่ออื่นเด็ดขาด (CI จะ block)\n2. ทุก procedure ใส่ derivation: "PROFESSIONAL_SYNTHESIS" (คุณไม่ได้อ่านแหล่งจริงในโหมดนี้)\n3. approval_status: "DRAFT", knowledge_layer: "L3", version: "0.1.0" — มนุษย์จะ verify ต่อ\n4. ภาษาไทยทั้งหมด ตอบเป็น JSON object เดียว ไม่มีข้อความอื่น\n5. จำนวนจุดควบคุมบกพร่อง (control_failures) ต่อความเสี่ยง = ตามเหตุผลเชิงวิชาชีพ ไม่ใช่โควตา — โดยธรรมชาติความเสี่ยงหนึ่งมักมีจุดที่การควบคุมล้มเหลวได้มากกว่าหนึ่งจุด (สอง สาม หรือมากกว่า) ให้ระบุครบเท่าที่มีจริง แต่ห้ามยัดเพิ่มเพื่อให้ครบจำนวน — หนึ่งข้อก็ถูกต้องถ้าความจริงมีเท่านั้น\n6. วิธีการตรวจและหลักฐานต้องล้อรายจุดควบคุมบกพร่องของมันเอง — ห้ามใช้ชุดเดียวหว่านทุก CF`,
     `หัวข้อ: "${TOPIC_INPUT}"\n\nมาตรฐานที่มีทะเบียนแล้ว (อ้างได้เฉพาะนี้):\n${inRegistry.join('\n')}\n\nสร้าง draft topic JSON: {name_th,name_en,category,category_th,priority,org_applicability,applicable_standards,thailand_applicable,thai_law_refs,risks:[{id,name_th,name_en,level,likelihood,impact,control_failures:[{id,name_th,audit_procedures:[{id,name_th,method,std_refs:[{std,clause,title}],evidence_types(≥4),derivation}]}]}(≥5 risks)]}`,
-    8000
+    20000
   );
   let draftObj;
-  try { draftObj = JSON.parse(jsonSlice(draft, '{', '}')); }
-  catch (e) { fs.writeFileSync(path.join(OUT_DIR, 'draft_raw.txt'), draft); console.error('draft ไม่ใช่ JSON (' + e.message + ') — เก็บ raw ไว้'); process.exit(1); }
+  try {
+    if (draft.stop === 'max_tokens') throw new Error('คำตอบถูกตัดที่เพดาน max_tokens — ต้องเพิ่มเพดานหรือลดขนาดร่าง');
+    draftObj = JSON.parse(jsonSlice(draft.text, '{', '}'));
+  }
+  catch (e) {
+    fs.writeFileSync(path.join(OUT_DIR, 'draft_raw.txt'), draft.text || '(ว่าง)');
+    console.error('draft ไม่ใช่ JSON (' + e.message + ') ' + diag(draft) + ' head:', (draft.text || '(ว่าง)').slice(0, 300));
+    process.exit(1);
+  }
   fs.writeFileSync(path.join(OUT_DIR, 'draft_topic.json'), JSON.stringify(draftObj, null, 2));
 
   console.log(`✅ manifest: มีทะเบียน ${inRegistry.length} / ขาด ${missing.length} | draft: ${(draftObj.risks || []).length} risks → ${OUT_DIR}`);
