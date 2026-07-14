@@ -181,12 +181,16 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .gtable td{padding:14px;vertical-align:top;border-bottom:1px solid var(--border-light)}
 .gtable tr.grp-a td{background:#F7F9FC}
 .gtable tr.grp-b td{background:#fff}
+.gtable tr.grp-first td{border-top:2px solid var(--border)}
 .gt-num{color:var(--text-muted);font-size:13px;width:36px;text-align:center}
 .gt-risk{width:19%}
 .gt-risk .rlv{display:inline-block;font-size:11px;font-weight:800;padding:3px 12px;border-radius:8px;margin-bottom:8px}
+.rlv{background:var(--border-light);color:var(--text-muted);border:1.5px solid var(--border)} /* fallback ค่าที่ไม่รู้จัก */
+.rlv-CRITICAL{background:#FDECEA;color:#C0392B;border:1.5px solid #E6A19A}
 .rlv-HIGH{background:#FEF0E7;color:#C0550A;border:1.5px solid #F0B27A}
 .rlv-MEDIUM{background:#FEF9E7;color:#B7770D;border:1.5px solid #F5D76E}
 .rlv-LOW{background:#EAFAF1;color:#1A7A40;border:1.5px solid #A8E6C2}
+.gt-method .mrow{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .gt-risk .rnm{font-weight:700;line-height:1.45}
 .gt-cf{width:19%;line-height:1.5}
 .gt-proc{width:20%;font-weight:700;color:#1B4C9C;line-height:1.45}
@@ -440,7 +444,8 @@ function stdChip(std){
 
 /* ============ DETAIL — ตารางแนวทางการตรวจ ============ */
 let CUR_TOPIC=null, SEL_RISKS=new Set();
-const LV_TH={HIGH:'สูง',MEDIUM:'ปานกลาง',LOW:'ต่ำ'};
+const LV_TH={CRITICAL:'วิกฤต',HIGH:'สูง',MEDIUM:'ปานกลาง',LOW:'ต่ำ'};
+const LV_ORDER={CRITICAL:0,HIGH:1,MEDIUM:2,LOW:3};
 
 function openTopic(id){
   const t=TOPICS.find(x=>x.id===id);if(!t)return;
@@ -451,7 +456,8 @@ function openTopic(id){
   showDetail();window.scrollTo({top:0,behavior:'smooth'});
 }
 function visRisks(t){
-  return [...(t.risks||[]).filter(r=>orgMatch(riskOrg(t,r)))].sort((a,b)=>(isUni(riskOrg(t,b))-isUni(riskOrg(t,a))));
+  return [...(t.risks||[]).filter(r=>orgMatch(riskOrg(t,r)))]
+    .sort((a,b)=>(isUni(riskOrg(t,b))-isUni(riskOrg(t,a)))||((LV_ORDER[a.level]??9)-(LV_ORDER[b.level]??9)));
 }
 function renderDetail(){
   const t=CUR_TOPIC;if(!t)return;
@@ -516,7 +522,7 @@ function buildGuideTable(t,vis){
     if(row.r!==lastRisk){grpClass=grpClass==='grp-a'?'grp-b':'grp-a';lastRisk=row.r}
     num++;
     const d=row.ap?(DERIV[row.ap.derivation]||DERIV.PROFESSIONAL_SYNTHESIS):null;
-    let h='<tr class="'+grpClass+'">';
+    let h='<tr class="'+grpClass+(row.riskSpan>0?' grp-first':'')+'">';
     h+='<td class="gt-num" data-l="#">'+num+'</td>';
     if(row.riskSpan>0){
       const tags=riskOrg(t,row.r);
@@ -529,8 +535,8 @@ function buildGuideTable(t,vis){
     if(row.ap){
       const stds=(row.ap.std_refs||[]).map(sr=>typeof sr==='string'?sr:sr.std);
       h+='<td class="gt-proc" data-l="ขั้นตอนการตรวจสอบ">'+esc(row.ap.name_th)+'</td>';
-      h+='<td class="gt-method" data-l="วิธีการ"><span class="mchip">'+esc(row.ap.method||'—')+'</span>'
-        +'<span class="dmini" title="ที่มา: '+d.t+' — '+d.tip+(stds.length?' | อ้างอิง: '+esc(stds.join(', ')):'')+'">'+d.i+'</span></td>';
+      h+='<td class="gt-method" data-l="วิธีการ"><div class="mrow"><span class="mchip">'+esc(row.ap.method||'—')+'</span>'
+        +'<span class="dmini" title="ที่มา: '+d.t+' — '+d.tip+(stds.length?' | อ้างอิง: '+esc(stds.join(', ')):'')+'">'+d.i+'</span></div></td>';
       h+='<td class="gt-ev" data-l="หลักฐานที่ต้องการ"><ul>'+(row.ap.evidence_types||[]).map(e=>'<li>'+esc(e)+'</li>').join('')+'</ul></td>';
     }else{
       h+='<td class="gt-proc">—</td><td class="gt-method">—</td><td class="gt-ev">—</td>';
