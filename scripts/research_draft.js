@@ -41,6 +41,13 @@ function famFor(str) {
   return null;
 }
 
+// ดึง JSON ออกจากคำตอบแบบทนทาน: ตัดหน้า-หลังหา [...] หรือ {...} คู่นอกสุด (กัน code fence/ข้อความแถม)
+function jsonSlice(s, open, close) {
+  const a = s.indexOf(open), b = s.lastIndexOf(close);
+  if (a < 0 || b <= a) throw new Error('ไม่พบ ' + open + '...' + close + ' ในคำตอบ (อาจถูกตัดกลางทาง — เช็ค max_tokens)');
+  return s.slice(a, b + 1);
+}
+
 async function callClaude(system, user, maxTokens) {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -57,13 +64,13 @@ async function callClaude(system, user, maxTokens) {
 
   // ── เฟส 1: READING MANIFEST ──
   const manifestRaw = await callClaude(
-    'คุณเป็นผู้เชี่ยวชาญตรวจสอบภายในองค์กรด้านไฟฟ้าไทย ตอบเป็น JSON array ของ string เท่านั้น ไม่มีข้อความอื่น',
-    `หัวข้อตรวจสอบ: "${TOPIC_INPUT}"\n\nจงระบุมาตรฐาน/กฎหมาย/กรอบสากลและไทย "ทุกตัว" ที่หัวข้อนี้ควรอ้างอิง (ชื่อทางการ + ปี/ฉบับถ้ารู้) เป็น JSON array เช่น ["IIA GIAS 2024","พ.ร.บ. ..."]`,
-    1500
+    'คุณเป็นผู้เชี่ยวชาญตรวจสอบภายในองค์กรด้านไฟฟ้าไทย ตอบเป็น JSON array ของ string เท่านั้น ไม่มีข้อความอื่น ไม่มี code fence',
+    `หัวข้อตรวจสอบ: "${TOPIC_INPUT}"\n\nจงระบุมาตรฐาน/กฎหมาย/กรอบสากลและไทยที่หัวข้อนี้ควรอ้างอิง เป็น JSON array ของชื่อสั้นทางการ+ปี (ไม่ใส่คำอธิบายต่อท้าย) ไม่เกิน 18 รายการ เช่น ["IIA GIAS 2024","ISO/IEC 27001:2022","พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562"]`,
+    3000
   );
   let wanted;
-  try { wanted = JSON.parse(manifestRaw.replace(/```json|```/g, '').trim()); }
-  catch (e) { console.error('parse manifest ไม่ได้:', manifestRaw.slice(0, 400)); process.exit(1); }
+  try { wanted = JSON.parse(jsonSlice(manifestRaw, '[', ']')); }
+  catch (e) { console.error('parse manifest ไม่ได้ (' + e.message + '):', manifestRaw.slice(0, 600)); process.exit(1); }
 
   const inRegistry = [], missing = [];
   for (const s of wanted) (famFor(s) ? inRegistry : missing).push(s);
@@ -86,8 +93,8 @@ async function callClaude(system, user, maxTokens) {
     8000
   );
   let draftObj;
-  try { draftObj = JSON.parse(draft.replace(/```json|```/g, '').trim()); }
-  catch (e) { fs.writeFileSync(path.join(OUT_DIR, 'draft_raw.txt'), draft); console.error('draft ไม่ใช่ JSON — เก็บ raw ไว้'); process.exit(1); }
+  try { draftObj = JSON.parse(jsonSlice(draft, '{', '}')); }
+  catch (e) { fs.writeFileSync(path.join(OUT_DIR, 'draft_raw.txt'), draft); console.error('draft ไม่ใช่ JSON (' + e.message + ') — เก็บ raw ไว้'); process.exit(1); }
   fs.writeFileSync(path.join(OUT_DIR, 'draft_topic.json'), JSON.stringify(draftObj, null, 2));
 
   console.log(`✅ manifest: มีทะเบียน ${inRegistry.length} / ขาด ${missing.length} | draft: ${(draftObj.risks || []).length} risks → ${OUT_DIR}`);
