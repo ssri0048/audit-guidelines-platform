@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="ระบบแนวทางการตรวจสอบอัจฉริยะสำหรับองค์กรด้านไฟฟ้า — อ่านอย่างเดียว ความรู้ทุกรายการผ่านการ verify และอนุมัติผ่าน Pull Request">
 <!-- CSP: read-only page — self + fonts เท่านั้น ไม่มี API write path -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data:; object-src 'none'">
+<!-- connect-src เปิด api.github.com เฉพาะสำหรับ Admin Console (สั่ง workflow + ดูสถานะ) — token ใช้ครั้งเดียวทิ้ง ไม่เก็บ; ความรู้ยังเขียนได้ทาง PR เท่านั้น --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'">
 <title>⚡ ระบบแนวทางการตรวจสอบอัจฉริยะ | Intelligent Audit Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -209,6 +209,38 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
   .gtable thead th{background:#14355F!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 
+/* ===== ADMIN CONSOLE ===== */
+.ac-overlay{display:none;position:fixed;inset:0;background:rgba(13,36,68,.55);z-index:50;padding:20px;overflow-y:auto}
+.ac-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.ac-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow-lg);max-width:680px;width:100%;margin-top:4vh;overflow:hidden}
+.ac-head{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center}
+.ac-head h3{font-size:15.5px;font-weight:800}
+.ac-head p{font-size:11px;color:rgba(255,255,255,.65);margin-top:2px}
+.ac-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.ac-body{padding:20px 22px}
+.ac-lbl{font-size:12.5px;font-weight:700;margin:12px 0 5px;display:block}
+.ac-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14px;outline:none}
+.ac-input:focus{border-color:var(--navy-light)}
+.ac-hint{font-size:11px;color:var(--text-muted);margin-top:4px;line-height:1.55}
+.ac-warn{background:var(--gold-light);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:9px 13px;font-size:11.5px;margin-top:12px;line-height:1.6}
+.ac-go{margin-top:16px;width:100%;padding:12px;background:var(--navy-deep);color:#fff;border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.ac-go:hover{background:var(--navy)}
+.ac-go:disabled{opacity:.5;cursor:not-allowed}
+.ac-alt{text-align:center;margin-top:10px;font-size:12px}
+.ac-alt a{color:var(--navy-light)}
+/* สถานะเรียลไทม์ */
+.ac-steps{margin-top:16px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;display:none}
+.ac-step{display:flex;align-items:center;gap:11px;padding:11px 15px;border-bottom:1px solid var(--border-light);font-size:13px}
+.ac-step:last-child{border-bottom:none}
+.ac-ico{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;background:var(--border-light);color:var(--text-light)}
+.ac-step.run .ac-ico{background:#FFF3CC;color:#B7770D;animation:acspin 1s linear infinite}
+.ac-step.ok .ac-ico{background:#EAFAF1;color:#1A7A40}
+.ac-step.fail .ac-ico{background:#FDECEA;color:#C0392B}
+@keyframes acspin{50%{transform:scale(1.15)}}
+.ac-result{margin-top:14px;display:none}
+.ac-result .prov{max-height:300px;overflow-y:auto;white-space:pre-wrap;font-size:12px}
+.ac-prlink{display:inline-block;margin-top:10px;padding:9px 18px;background:var(--gold);color:var(--navy);border-radius:var(--radius-sm);font-weight:800;font-size:13px;text-decoration:none}
+
 /* legend + footer */
 .legend{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 15px;margin-top:16px;font-size:12px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .hidden-note{margin-top:10px;font-size:12.5px;color:var(--text-muted);background:var(--border-light);border-radius:var(--radius-sm);padding:9px 13px;cursor:pointer;border:1px dashed var(--border)}
@@ -295,11 +327,34 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
   <h3>🛡️ ธรรมาภิบาลความรู้ของระบบนี้</h3>
   <p>ทุกหัวข้อผ่านกระบวนการ re-verify จากแหล่งทางการ (มีลิงก์+ข้อความอ้างอิงจริงทุกรายการ) → ตรวจด้วย quality gates อัตโนมัติ (schema, เวอร์ชันมาตรฐานปัจจุบัน, ความใช้ได้ในไทย, กันปีอนาคตปลอม) → มนุษย์อนุมัติผ่าน Pull Request เท่านั้น หน้าเว็บนี้<b>แก้ไขข้อมูลไม่ได้</b> — การเพิ่ม/แก้ความรู้ทำผ่าน GitHub</p>
   <div class="gov-actions">
-    <a class="gov-btn gb-gold" target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform/issues/new?title=%5B%E0%B8%82%E0%B8%AD%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%5D%20&body=%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%3A%0A%E0%B9%80%E0%B8%AB%E0%B8%95%E0%B8%B8%E0%B8%9C%E0%B8%A5%2F%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%9A%E0%B8%97%3A%0A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A0%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%81%E0%B8%A3%3A">➕ ขอเพิ่มหัวข้อใหม่</a>
+    <a class="gov-btn gb-gold" href="javascript:void(0)" onclick="acOpen()">➕ ขอเพิ่มหัวข้อใหม่ (สั่งระบบประมวลผลจากหน้านี้)</a>
     <a class="gov-btn gb-line" target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform/issues/new?title=%5B%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B9%81%E0%B8%81%E0%B9%89%E0%B9%84%E0%B8%82%5D%20">🚩 แจ้งข้อมูลคลาดเคลื่อน</a>
     <a class="gov-btn gb-line" target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform">📂 ดูฐานความรู้บน GitHub</a>
   </div>
 </div></footer>
+
+<!-- ===== ADMIN CONSOLE ===== -->
+<div class="ac-overlay" id="ac">
+  <div class="ac-panel">
+    <div class="ac-head">
+      <div><h3>🤖 สั่งระบบสร้างร่างหัวข้อใหม่</h3>
+      <p>เว็บนี้ยังอ่านอย่างเดียว — คำสั่งนี้แค่สตาร์ท pipeline หลังบ้าน ผลลัพธ์คือ draft PR ที่ต้องผ่านเกต + คนอนุมัติเสมอ</p></div>
+      <button class="ac-close" onclick="acClose()">×</button>
+    </div>
+    <div class="ac-body">
+      <label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>
+      <input class="ac-input" id="ac-topic" placeholder="เช่น การบริหารจัดการเชื้อเพลิงและสัญญาซื้อขายไฟฟ้า (PPA)" autocomplete="off">
+      <label class="ac-lbl">GitHub Token (Fine-grained — ใช้ครั้งเดียวแล้วทิ้งทันที ไม่บันทึกที่ไหน)</label>
+      <input class="ac-input" id="ac-token" type="password" placeholder="github_pat_..." autocomplete="off">
+      <div class="ac-hint">สร้าง token: GitHub → Settings → Developer settings → Fine-grained tokens → เลือกเฉพาะ repo นี้ + Permission เดียว: <b>Actions: Read and write</b> — token นี้สั่งงาน/ดูสถานะได้เท่านั้น เขียนความรู้ไม่ได้</div>
+      <div class="ac-warn">🛡️ ธรรมาภิบาลไม่เปลี่ยน: ระบบจะทำ Reading Manifest (อ้างได้เฉพาะมาตรฐานที่มีทะเบียน) → ร่าง L3 → เปิด PR — ความรู้เข้าระบบจริงต่อเมื่อผ่าน CI และคุณกด merge เท่านั้น</div>
+      <button class="ac-go" id="ac-go" onclick="acRun()">▶ สั่งประมวลผล</button>
+      <div class="ac-alt">ไม่มี token? <a target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform/issues/new?title=%5B%E0%B8%82%E0%B8%AD%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%5D%20">ส่งคำขอผ่าน GitHub Issue แบบเดิม</a></div>
+      <div class="ac-steps" id="ac-steps"></div>
+      <div class="ac-result" id="ac-result"></div>
+    </div>
+  </div>
+</div>
 
 <script>
 'use strict';
@@ -577,6 +632,100 @@ function exportCSV(){
 }
 function showList(){document.getElementById('list-view').style.display='block';document.getElementById('detail-view').style.display='none'}
 function showDetail(){document.getElementById('list-view').style.display='none';document.getElementById('detail-view').style.display='block'}
+
+/* ============ ADMIN CONSOLE ============ */
+const GH_REPO='ssri0048/audit-guidelines-platform';
+const GH_WF='research-pipeline.yml';
+const AC_STEPS=[
+ {key:'dispatch',th:'ส่งคำสั่งเข้า GitHub Actions'},
+ {key:'queue',th:'รอ runner รับงาน'},
+ {key:'manifest',th:'Reading Manifest — เช็คมาตรฐานกับทะเบียน (ratchet)'},
+ {key:'draft',th:'สร้างร่างความเสี่ยง + จุดควบคุมบกพร่อง + วิธีตรวจ'},
+ {key:'pr',th:'เปิด Draft PR รอมนุษย์ตรวจ'}];
+let acPoll=null,acStartTime=null;
+
+function acOpen(){document.getElementById('ac').classList.add('open')}
+function acClose(){document.getElementById('ac').classList.remove('open');if(acPoll){clearInterval(acPoll);acPoll=null}}
+function acRenderSteps(states){ // states: {key:'wait'|'run'|'ok'|'fail'}
+  const el=document.getElementById('ac-steps');el.style.display='block';
+  el.innerHTML=AC_STEPS.map(s=>{
+    const st=states[s.key]||'wait';
+    const ico=st==='ok'?'✓':st==='fail'?'✗':st==='run'?'●':'○';
+    return '<div class="ac-step '+st+'"><div class="ac-ico">'+ico+'</div><div>'+s.th+'</div></div>';
+  }).join('');
+}
+async function gh(pathname,opts){ // public repo: อ่านได้ไม่ต้อง token
+  const r=await fetch('https://api.github.com'+pathname,opts||{});
+  if(!r.ok)throw new Error('GitHub API '+r.status);
+  return r.status===204?null:r.json();
+}
+async function acRun(){
+  const topic=document.getElementById('ac-topic').value.trim();
+  let token=document.getElementById('ac-token').value.trim();
+  const res=document.getElementById('ac-result');res.style.display='none';res.innerHTML='';
+  if(!topic){alert('กรอกหัวข้อก่อน');return}
+  if(!token){alert('กรอก token ก่อน (หรือใช้ลิงก์ GitHub Issue ด้านล่าง)');return}
+  const btn=document.getElementById('ac-go');btn.disabled=true;
+  const states={dispatch:'run'};acRenderSteps(states);
+  acStartTime=Date.now();
+  try{
+    // 1) สั่งงาน — จุดเดียวที่ใช้ token แล้วทิ้งทันที
+    await fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/'+GH_WF+'/dispatches',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({ref:'main',inputs:{topic}})
+    }).then(r=>{if(!r.ok)throw new Error('สั่งงานไม่สำเร็จ ('+r.status+') — เช็ค token permission Actions: Read and write')});
+  }catch(e){
+    states.dispatch='fail';acRenderSteps(states);
+    res.style.display='block';res.innerHTML='<div class="ac-warn">❌ '+esc(e.message)+'</div>';
+    btn.disabled=false;token='';document.getElementById('ac-token').value='';return;
+  }
+  token='';document.getElementById('ac-token').value=''; // ทิ้ง token ทันทีหลังใช้
+  states.dispatch='ok';states.queue='run';acRenderSteps(states);
+  // 2) poll สถานะแบบไม่ใช้ token (repo public) ทุก 10 วิ
+  acPoll=setInterval(async()=>{
+    try{
+      const runs=await gh('/repos/'+GH_REPO+'/actions/workflows/'+GH_WF+'/runs?per_page=1');
+      const run=runs.workflow_runs&&runs.workflow_runs[0];
+      if(!run||Date.parse(run.created_at)<acStartTime-60000)return;
+      if(run.status==='queued'){states.queue='run'}
+      if(run.status==='in_progress'){
+        states.queue='ok';
+        const jobs=await gh('/repos/'+GH_REPO+'/actions/runs/'+run.id+'/jobs');
+        const steps=(jobs.jobs[0]&&jobs.jobs[0].steps)||[];
+        const find=n=>steps.find(s=>s.name.includes(n));
+        const rd=find('Run research draft'),pr=find('Open draft PR');
+        states.manifest=rd?(rd.status==='completed'?(rd.conclusion==='success'?'ok':'fail'):'run'):'wait';
+        states.draft=states.manifest;
+        states.pr=pr?(pr.status==='completed'?(pr.conclusion==='success'?'ok':(pr.conclusion==='skipped'?'fail':'fail')):'run'):'wait';
+      }
+      if(run.status==='completed'){
+        clearInterval(acPoll);acPoll=null;
+        const ok=run.conclusion==='success';
+        states.queue='ok';states.manifest=ok?'ok':'fail';states.draft=ok?'ok':'fail';
+        // 3) หา draft PR ที่เพิ่งเกิด
+        const prs=await gh('/repos/'+GH_REPO+'/pulls?state=open&sort=created&direction=desc&per_page=5');
+        const draftPr=prs.find(p=>p.title.startsWith('🤖 Draft:')&&Date.parse(p.created_at)>=acStartTime-60000);
+        const res=document.getElementById('ac-result');res.style.display='block';
+        if(draftPr){
+          states.pr='ok';
+          res.innerHTML='<div class="prov">'+esc((draftPr.body||'').slice(0,3000))+'</div>'
+            +'<a class="ac-prlink" target="_blank" rel="noopener" href="'+esc(draftPr.html_url)+'">📄 เปิด Draft PR #'+draftPr.number+' — ตรวจและตัดสินใจ</a>';
+        }else{
+          states.pr='fail';
+          res.innerHTML='<div class="ac-warn">'+(ok
+            ?'⏸️ งานจบแต่ไม่มี draft PR — สาเหตุที่พบบ่อย: ยังไม่ได้ตั้ง <b>ANTHROPIC_API_KEY</b> ใน repo Secrets (pipeline ตั้งไว้รอ) — ดูรายละเอียดใน log: <a target="_blank" rel="noopener" href="'+esc(run.html_url)+'">เปิด run บน GitHub</a>'
+            :'❌ pipeline ล้มเหลว — <a target="_blank" rel="noopener" href="'+esc(run.html_url)+'">เปิด log บน GitHub</a>')+'</div>';
+          document.getElementById('ac-go').disabled=false;
+        }
+        acRenderSteps(states);
+        document.getElementById('ac-go').disabled=false;
+        return;
+      }
+      acRenderSteps(states);
+    }catch(e){/* ปล่อยรอบถัดไป */}
+  },10000);
+}
 
 /* ============ WIRE ============ */
 let deb;
