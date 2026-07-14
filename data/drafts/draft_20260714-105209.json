@@ -1,0 +1,1411 @@
+{
+  "name_th": "ความเสี่ยงด้านการควบคุมแอปพลิเคชันในองค์กร",
+  "name_en": "Application Control Risks in Organization",
+  "category": "IT General Controls / Application Controls",
+  "category_th": "การควบคุมด้านเทคโนโลยีสารสนเทศ - การควบคุมระดับแอปพลิเคชัน",
+  "priority": "HIGH",
+  "org_applicability": [
+    "UNIVERSAL",
+    "GOV",
+    "SOE",
+    "LISTED",
+    "PRIVATE",
+    "SME"
+  ],
+  "applicable_standards": [
+    "COBIT 2019",
+    "ISO/IEC 27001:2022",
+    "COSO Internal Control Integrated Framework 2013",
+    "ITIL 4",
+    "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+    "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562"
+  ],
+  "thailand_applicable": true,
+  "thai_law_refs": [
+    "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560 มาตรา 5, 7, 9 (การเข้าถึงระบบ/ข้อมูลโดยมิชอบและการแก้ไขข้อมูลคอมพิวเตอร์)",
+    "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562 หมวด 2 (มาตรการรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคลที่ประมวลผลผ่านแอปพลิเคชัน)"
+  ],
+  "risks": [
+    {
+      "id": "R001",
+      "name_th": "การควบคุมการตรวจสอบความถูกต้องของข้อมูลนำเข้า (Input Validation Control) ไม่เพียงพอ",
+      "name_en": "Inadequate Input Validation Controls",
+      "level": "HIGH",
+      "likelihood": "สูง",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF001-1",
+          "name_th": "ขาดนโยบายและมาตรฐานการออกแบบ Input Validation ที่เป็นทางการในระดับองค์กร",
+          "audit_procedures": [
+            {
+              "id": "AP001-1-1",
+              "name_th": "สอบทานความครบถ้วนของนโยบาย Secure Coding และมาตรฐานการตรวจสอบข้อมูลนำเข้าที่อนุมัติใช้งาน",
+              "method": "สอบทานเอกสาร (Document Review) และสัมภาษณ์ผู้รับผิดชอบพัฒนาระบบ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "APO13.02",
+                  "title": "Define and manage an information security risk treatment plan / Secure development policy"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.28",
+                  "title": "Secure coding"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 12",
+                  "title": "Deploys Control Activities through Policies and Procedures"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารนโยบาย Secure Coding/Input Validation ที่อนุมัติ",
+                "บันทึกการทบทวนและอนุมัตินโยบาย",
+                "บันทึกการสัมภาษณ์ผู้พัฒนาระบบ",
+                "แผนภาพ SDLC ที่ระบุขั้นตอน validation"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF001-2",
+          "name_th": "ขาดการควบคุมทางเทคนิคในการตรวจสอบชนิด รูปแบบ ขอบเขต และความยาวของข้อมูลนำเข้าระดับ Application Code",
+          "audit_procedures": [
+            {
+              "id": "AP001-2-1",
+              "name_th": "ทดสอบเจาะระบบและตรวจสอบซอร์สโค้ดเพื่อหาช่องโหว่จากการขาด Input Validation (SQL Injection, XSS, Command Injection)",
+              "method": "Code Review (SAST) และ Penetration Testing/DAST",
+              "std_refs": [
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 3.5",
+                  "title": "Input validation"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "System and Communications Protection Controls",
+                  "title": "Application-level input validation and boundary protection"
+                },
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 5, มาตรา 7",
+                  "title": "การเข้าถึงระบบคอมพิวเตอร์/ข้อมูลคอมพิวเตอร์โดยมิชอบ"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการตรวจสอบซอร์สโค้ด (SAST)",
+                "รายงานผลการทดสอบเจาะระบบ (Pentest/DAST)",
+                "รายการช่องโหว่ที่พบและสถานะการแก้ไข",
+                "ตัวอย่างโค้ดฟังก์ชัน validation ที่ใช้งานจริง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF001-3",
+          "name_th": "ขาดการทดสอบและการประกันคุณภาพด้าน Input Validation ในกระบวนการ SDLC/Change Management ก่อนนำระบบขึ้นใช้งานจริง",
+          "audit_procedures": [
+            {
+              "id": "AP001-3-1",
+              "name_th": "สุ่มตรวจ Change Request และหลักฐานผลการทดสอบ SIT/UAT ที่ครอบคลุมกรณีทดสอบ Input Validation",
+              "method": "สุ่มตัวอย่างและตรวจสอบเอกสารประกอบ Change Request (Sampling & Document Inspection)",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "BAI07.05",
+                  "title": "Perform acceptance tests / Change Acceptance and Transitioning"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Change Enablement Practice",
+                  "title": "การควบคุมและทดสอบก่อนอนุมัติการเปลี่ยนแปลง"
+                }
+              ],
+              "evidence_types": [
+                "เอกสาร Test Case ด้าน Input Validation",
+                "รายงานผลการทดสอบ SIT/UAT พร้อมลายเซ็นอนุมัติ",
+                "Change Request Ticket และหลักฐานอนุมัติ",
+                "Log การพบข้อผิดพลาดระหว่างการทดสอบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF001-4",
+          "name_th": "ขาดการบันทึกและติดตามเหตุการณ์ข้อมูลนำเข้าที่ไม่ผ่านการตรวจสอบเพื่อตรวจจับความผิดปกติหรือการโจมตี",
+          "audit_procedures": [
+            {
+              "id": "AP001-4-1",
+              "name_th": "ตรวจสอบการตั้งค่า Logging และกลไกแจ้งเตือนสำหรับเหตุการณ์ข้อมูลนำเข้าที่ถูกปฏิเสธ (Rejected Input Events)",
+              "method": "ตรวจสอบการตั้งค่าระบบ (Configuration Review) และสุ่มตรวจ Log/SIEM Alert",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.15",
+                  "title": "Logging"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Monitoring and Anomaly Detection Controls",
+                  "title": "การเฝ้าระวังและตรวจจับความผิดปกติของระบบควบคุม"
+                },
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ.2562",
+                  "clause": "มาตรา 3",
+                  "title": "การป้องกันและรับมือภัยคุกคามทางไซเบอร์"
+                }
+              ],
+              "evidence_types": [
+                "ไฟล์ Log การปฏิเสธข้อมูลนำเข้า",
+                "รายงานการแจ้งเตือนจากระบบ SIEM",
+                "บันทึกเหตุการณ์/Incident Ticket ที่เกี่ยวข้อง",
+                "ภาพหน้าจอ Dashboard การเฝ้าระวัง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R002",
+      "name_th": "การควบคุมสิทธิ์การเข้าถึงและการแบ่งแยกหน้าที่ (Access Control & Segregation of Duties) ในระบบแอปพลิเคชันบกพร่อง",
+      "name_en": "Weak Access Control and Segregation of Duties within Applications",
+      "level": "CRITICAL",
+      "likelihood": "สูง",
+      "impact": "สูงมาก",
+      "control_failures": [
+        {
+          "id": "CF002-1",
+          "name_th": "ขาดกระบวนการขออนุมัติและให้สิทธิ์การเข้าถึงระบบแอปพลิเคชันอย่างเป็นทางการ (User Access Provisioning)",
+          "audit_procedures": [
+            {
+              "id": "CF002-1-AP1",
+              "name_th": "ตรวจสอบผังกระบวนการและเอกสารขออนุมัติสิทธิ์การเข้าถึงระบบ (Walkthrough & Design Assessment)",
+              "method": "สัมภาษณ์เจ้าของระบบ/ผู้ดูแลสิทธิ์ ทวนสอบ workflow การขอ-อนุมัติสิทธิ์ ตรวจสอบว่ามีการกำหนดผู้อนุมัติที่เหมาะสมตามระดับสิทธิ์หรือไม่",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS05.04",
+                  "title": "Manage User Identity and Logical Access"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.15",
+                  "title": "Access Control"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10 - Control Activities",
+                  "title": "Selects and Develops Control Activities"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายและระเบียบปฏิบัติการควบคุมการเข้าถึง",
+                "แบบฟอร์มขออนุมัติสิทธิ์การเข้าถึง (Access Request Form)",
+                "ผังกระบวนการอนุมัติ (Approval Workflow Diagram)",
+                "บันทึกการประชุม/อีเมลอนุมัติสิทธิ์",
+                "รายชื่อผู้มีอำนาจอนุมัติตามระดับสิทธิ์"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-1-AP2",
+              "name_th": "สุ่มตรวจสอบบัญชีผู้ใช้งานที่สร้างใหม่ในรอบปีเทียบกับเอกสารอนุมัติ (Sample Testing of New User Accounts)",
+              "method": "สุ่มตัวอย่างบัญชีผู้ใช้งานใหม่จาก log ระบบ เปรียบเทียบกับแบบฟอร์มขออนุมัติ ตรวจสอบความครบถ้วนของลายเซ็นอนุมัติและระยะเวลาดำเนินการ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.03",
+                  "title": "Manage Roles, Responsibilities, Access Privileges and Levels of Authority"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.16",
+                  "title": "Identity Management"
+                }
+              ],
+              "evidence_types": [
+                "รายงาน User Account Creation Log",
+                "แบบฟอร์มขออนุมัติที่มีลายเซ็นครบถ้วน",
+                "รายงานเปรียบเทียบวันที่ขอ-อนุมัติ-สร้างบัญชี",
+                "หลักฐานการแจ้งเตือนหรือ Ticket ใน IT Service Management"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002-2",
+          "name_th": "ขาดการทบทวนสิทธิ์การเข้าถึงเป็นระยะ (Periodic User Access Recertification)",
+          "audit_procedures": [
+            {
+              "id": "CF002-2-AP1",
+              "name_th": "ตรวจสอบหลักฐานการทบทวนสิทธิ์การเข้าถึงตามรอบที่กำหนด (Access Review Evidence Testing)",
+              "method": "ขอเอกสารรายงานการทบทวนสิทธิ์ย้อนหลัง ตรวจสอบความสม่ำเสมอของรอบทบทวนและการติดตามแก้ไขข้อบกพร่องที่พบ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS05.04",
+                  "title": "Manage User Identity and Logical Access"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.18",
+                  "title": "Access Rights"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 16 - Monitoring Activities",
+                  "title": "Evaluates and Communicates Deficiencies"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการทบทวนสิทธิ์การเข้าถึงย้อนหลัง",
+                "นโยบายกำหนดรอบเวลาทบทวนสิทธิ์",
+                "หลักฐานการติดตามแก้ไขสิทธิ์ที่ไม่เหมาะสม",
+                "อีเมล/บันทึกการอนุมัติผลการทบทวนจากผู้บริหารสายงาน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-2-AP2",
+              "name_th": "เปรียบเทียบรายชื่อผู้ใช้งานในระบบกับฐานข้อมูลบุคลากรปัจจุบัน (User-to-HR Reconciliation)",
+              "method": "ดึงรายชื่อผู้ใช้งานทั้งหมดจากระบบแอปพลิเคชันมาเทียบกับฐานข้อมูล HR เพื่อค้นหาบัญชีที่ไม่ตรงกับสถานะพนักงานปัจจุบัน",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.18",
+                  "title": "Access Rights"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10 - Control Activities",
+                  "title": "Selects and Develops Control Activities"
+                }
+              ],
+              "evidence_types": [
+                "รายงานรายชื่อผู้ใช้งานในระบบ (User Master List)",
+                "ฐานข้อมูลพนักงาน HR ปัจจุบัน",
+                "รายงานผลการกระทบยอด (Reconciliation Report)",
+                "หลักฐานการดำเนินการแก้ไขบัญชีที่พบความคลาดเคลื่อน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002-3",
+          "name_th": "ขาดการควบคุมความขัดแย้งของหน้าที่ (Segregation of Duties Conflict) ในสิทธิ์การเข้าถึงระบบแอปพลิเคชัน",
+          "audit_procedures": [
+            {
+              "id": "CF002-3-AP1",
+              "name_th": "จัดทำและวิเคราะห์ SoD Conflict Matrix เทียบกับสิทธิ์จริงในระบบ (SoD Matrix Analysis)",
+              "method": "จัดทำ SoD matrix ตามฟังก์ชันงานวิกฤต (เช่น การสร้าง-อนุมัติ-เบิกจ่าย) เปรียบเทียบกับสิทธิ์ที่ผู้ใช้งานแต่ละคนมีจริงในระบบเพื่อค้นหาความขัดแย้ง",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "APO01.09",
+                  "title": "Manage Segregation of Duties"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10 - Control Activities",
+                  "title": "Selects and Develops Control Activities"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.3",
+                  "title": "Segregation of Duties"
+                }
+              ],
+              "evidence_types": [
+                "SoD Conflict Matrix ที่ได้รับอนุมัติ",
+                "รายงานสิทธิ์การเข้าถึงจริงของผู้ใช้งานแต่ละราย",
+                "รายงานผลการวิเคราะห์ความขัดแย้งของหน้าที่",
+                "หลักฐานมาตรการชดเชย (Compensating Controls) กรณีที่ไม่สามารถแยกหน้าที่ได้"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-3-AP2",
+              "name_th": "สุ่มตรวจสอบรายการธุรกรรมที่มีความเสี่ยงต่อการขัดแย้งของหน้าที่ (Transaction-Level SoD Testing)",
+              "method": "สุ่มตัวอย่างธุรกรรมสำคัญในระบบ ตรวจสอบว่าผู้ทำรายการและผู้อนุมัติเป็นบุคคลเดียวกันหรือไม่ และมีการหลีกเลี่ยงการควบคุมหรือไม่",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS05.04",
+                  "title": "Manage User Identity and Logical Access"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10 - Control Activities",
+                  "title": "Selects and Develops Control Activities"
+                }
+              ],
+              "evidence_types": [
+                "รายงาน Transaction Log ของธุรกรรมที่สุ่มตรวจ",
+                "รายงานผู้ทำรายการและผู้อนุมัติในแต่ละธุรกรรม",
+                "หลักฐานการตรวจสอบภายในเดิม (ถ้ามี)",
+                "รายงานข้อยกเว้น (Exception Report) จากระบบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002-4",
+          "name_th": "ขาดกระบวนการเพิกถอนสิทธิ์การเข้าถึงเมื่อพนักงานพ้นสภาพหรือโอนย้ายตำแหน่ง (Timely User Deprovisioning)",
+          "audit_procedures": [
+            {
+              "id": "CF002-4-AP1",
+              "name_th": "สุ่มตรวจสอบระยะเวลาการเพิกถอนสิทธิ์เทียบกับวันที่พ้นสภาพ/โอนย้าย (Deprovisioning Timeliness Testing)",
+              "method": "สุ่มรายชื่อพนักงานที่ลาออกหรือโอนย้ายในรอบปี เปรียบเทียบวันที่พ้นสภาพจริงกับวันที่ระบบปิดหรือปรับสิทธิ์บัญชีผู้ใช้งาน",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.18",
+                  "title": "Access Rights"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Access Management Practice",
+                  "title": "Service Value Chain - Access Management"
+                }
+              ],
+              "evidence_types": [
+                "รายงานพนักงานพ้นสภาพ/โอนย้ายจากฝ่ายบุคคล",
+                "รายงานวันที่ปิด/ปรับสิทธิ์บัญชีผู้ใช้งานจากระบบ IT",
+                "SLA กระบวนการเพิกถอนสิทธิ์",
+                "หลักฐาน Ticket หรือคำขอปิดบัญชีในระบบ ITSM"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-4-AP2",
+              "name_th": "ตรวจสอบการเชื่อมโยงกระบวนการ HR และ IT ในการแจ้งเปลี่ยนแปลงสถานะพนักงาน (HR-IT Interface Review)",
+              "method": "ทวนสอบว่ามีกระบวนการแจ้งเตือนอัตโนมัติหรือกำหนดผู้รับผิดชอบชัดเจนระหว่างฝ่ายบุคคลและฝ่าย IT เมื่อมีการเปลี่ยนแปลงสถานะพนักงานหรือไม่ และมีความล่าช้าเกิดขึ้นหรือไม่",
+              "std_refs": [
+                {
+                  "std": "ITIL 4",
+                  "clause": "Service Transition Practice",
+                  "title": "Managing Changes in User Access"
+                },
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 5",
+                  "title": "การเข้าถึงระบบคอมพิวเตอร์โดยมิชอบ"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายเชื่อมโยงกระบวนการ HR-IT",
+                "หลักฐานการแจ้งเตือนอัตโนมัติ (Automated Notification Log)",
+                "รายงานข้อบกพร่องหรือความล่าช้าที่เคยเกิดขึ้น",
+                "บันทึกการประชุมทบทวนกระบวนการระหว่างหน่วยงาน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002-5",
+          "name_th": "ขาดการควบคุมบัญชีสิทธิ์สูง/ผู้ดูแลระบบในแอปพลิเคชัน (Privileged Access Management Deficiency)",
+          "audit_procedures": [
+            {
+              "id": "CF002-5-AP1",
+              "name_th": "ตรวจสอบทะเบียนและการควบคุมบัญชีสิทธิ์สูง (Privileged Account Inventory & Control Review)",
+              "method": "ขอทะเบียนบัญชีสิทธิ์สูงทั้งหมดในระบบ ตรวจสอบว่ามีการอนุมัติ ทบทวน และจำกัดจำนวนผู้ถือสิทธิ์ตามหลัก Least Privilege หรือไม่",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "3.4.5 Access Control for ICS",
+                  "title": "Privileged Account Management"
+                },
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 2.1",
+                  "title": "Authorization Enforcement"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.2",
+                  "title": "Privileged Access Rights"
+                }
+              ],
+              "evidence_types": [
+                "ทะเบียนบัญชีสิทธิ์สูง (Privileged Account Register)",
+                "รายงานการอนุมัติสิทธิ์ผู้ดูแลระบบ",
+                "นโยบาย Least Privilege และการทบทวนสิทธิ์สูง",
+                "รายงานผลการตรวจสอบจำนวนผู้ถือสิทธิ์สูงเทียบกับความจำเป็นทางธุรกิจ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-5-AP2",
+              "name_th": "ตรวจสอบการติดตามและบันทึกกิจกรรมของบัญชีสิทธิ์สูง (Privileged Activity Monitoring Testing)",
+              "method": "ทวนสอบว่ามีการเปิดใช้งาน logging และการตรวจสอบกิจกรรมของบัญชีผู้ดูแลระบบ รวมถึงมาตรการยืนยันตัวตนหลายปัจจัย (MFA) หรือไม่",
+              "std_refs": [
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 1.2",
+                  "title": "Multi-factor Authentication"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "3.4.6 Audit and Accountability",
+                  "title": "Logging and Monitoring of Privileged Access"
+                }
+              ],
+              "evidence_types": [
+                "รายงาน Audit Log กิจกรรมบัญชีสิทธิ์สูง",
+                "หลักฐานการตั้งค่า MFA สำหรับผู้ดูแลระบบ",
+                "รายงานการตรวจสอบ/แจ้งเตือนความผิดปกติ (Anomaly Alert Report)",
+                "นโยบายการจัดเก็บและทบทวน Log กิจกรรมผู้ดูแลระบบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R003",
+      "name_th": "การควบคุมความถูกต้องครบถ้วนของการประมวลผลและผลลัพธ์ (Processing/Output Integrity Control) ไม่รัดกุม",
+      "name_en": "Insufficient Processing and Output Integrity Controls",
+      "level": "HIGH",
+      "likelihood": "ปานกลาง",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF003-1",
+          "name_th": "การควบคุมความถูกต้องของข้อมูลนำเข้า (Input Validation/Edit Check) ไม่เพียงพอ",
+          "audit_procedures": [
+            {
+              "id": "CF003-1-AP1",
+              "name_th": "ทดสอบกฎการตรวจสอบความถูกต้องของข้อมูลนำเข้า (Input Edit Check Testing)",
+              "method": "สุ่มป้อนข้อมูลผิดปกติ (invalid format, out-of-range, duplicate, negative value) เข้าสู่ระบบเพื่อทดสอบว่าระบบมีการปฏิเสธหรือแจ้งเตือนตามกฎที่ออกแบบไว้ (Test of Design & Operating Effectiveness)",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.03",
+                  "title": "Manage Process Controls"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.28",
+                  "title": "Secure Coding"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10-11",
+                  "title": "Control Activities Component"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารกำหนด Business/Validation Rule",
+                "Test Script และผลการทดสอบ",
+                "Screenshot ข้อความแจ้งเตือนข้อผิดพลาด",
+                "Log การปฏิเสธรายการ (Rejected Transaction Log)",
+                "รายงานผลการทดสอบ UAT"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-1-AP2",
+              "name_th": "สอบทานการออกแบบฟิลด์ควบคุม (Mandatory/Format/Range) เทียบกับ Business Requirement",
+              "method": "Design Review เปรียบเทียบ Business Requirement Specification กับ System Configuration จริง",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "BAI03.05",
+                  "title": "Build Solutions"
+                },
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 3.4",
+                  "title": "Software and Information Integrity"
+                }
+              ],
+              "evidence_types": [
+                "Business Requirement Document",
+                "System Configuration Screenshot",
+                "Test Case Matrix",
+                "Sign-off Approval ของ Business Owner"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003-2",
+          "name_th": "ขาดกลไกกระทบยอด (Reconciliation/Control Totals) ระหว่างขั้นตอนการประมวลผล",
+          "audit_procedures": [
+            {
+              "id": "CF003-2-AP1",
+              "name_th": "ทดสอบ Run-to-Run/Batch Control Totals",
+              "method": "สุ่มตัวอย่าง Batch Job ประจำวัน/เดือน เปรียบเทียบ Control Total (Record Count, Hash Total, Amount Total) ระหว่างขั้นตอน Input-Processing-Output",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.03",
+                  "title": "Manage Process Controls"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 12",
+                  "title": "Deploy Through Policies and Procedures"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Monitoring and Event Management",
+                  "title": "Monitoring and Event Management Practice"
+                }
+              ],
+              "evidence_types": [
+                "Batch Control Log",
+                "Reconciliation Report",
+                "Interface Control Report",
+                "Exception/Variance Report",
+                "Sign-off ผู้รับผิดชอบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-2-AP2",
+              "name_th": "ทดสอบกระบวนการกระทบยอดข้อมูลระหว่างระบบ (Interface Reconciliation)",
+              "method": "ตรวจสอบว่ามีการกระทบยอดข้อมูลระหว่างระบบต้นทาง-ปลายทางเป็นประจำ และมีการติดตามผลต่างจนปิดรายการ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.03",
+                  "title": "Manage Process Controls"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.16",
+                  "title": "Monitoring Activities"
+                }
+              ],
+              "evidence_types": [
+                "Interface Reconciliation Log",
+                "Discrepancy Report",
+                "หลักฐานการติดตามแก้ไขผลต่าง",
+                "นโยบาย/ขั้นตอนการกระทบยอดข้อมูล"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003-3",
+          "name_th": "ขาดกลไกจัดการข้อยกเว้น/ข้อผิดพลาดของการประมวลผล (Exception/Error Handling) อย่างเป็นระบบ",
+          "audit_procedures": [
+            {
+              "id": "CF003-3-AP1",
+              "name_th": "สอบทาน Exception Log และการติดตามแก้ไขจนปิดรายการ",
+              "method": "สุ่มตัวอย่างรายการ Exception/Error ตรวจสอบ Aging การวิเคราะห์สาเหตุ (Root Cause) และการอนุมัติปิดรายการ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.04",
+                  "title": "Manage Errors and Exceptions"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Monitoring Activities Component",
+                  "title": "Monitoring Activities"
+                }
+              ],
+              "evidence_types": [
+                "Exception/Error Log",
+                "Aging Report",
+                "หลักฐานการวิเคราะห์สาเหตุ (RCA)",
+                "เอกสารอนุมัติปิดรายการ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-3-AP2",
+              "name_th": "ทดสอบระบบแจ้งเตือนอัตโนมัติเมื่อเกิดข้อผิดพลาดในการประมวลผล",
+              "method": "จำลองสถานการณ์ (Simulation) ให้เกิด Failure ในกระบวนการประมวลผล เพื่อทดสอบว่าระบบแจ้งเตือนผู้เกี่ยวข้องได้ทันเวลาและครบถ้วน",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Anomaly and Integrity Monitoring",
+                  "title": "Monitoring for Data/Process Integrity"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Monitoring and Event Management",
+                  "title": "Monitoring and Event Management Practice"
+                }
+              ],
+              "evidence_types": [
+                "ผลการทดสอบ Simulation",
+                "Alert/Notification Log",
+                "Incident Ticket",
+                "SOP การตอบสนองต่อข้อผิดพลาด"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003-4",
+          "name_th": "ขาดการทบทวน/รับรองความถูกต้องผลลัพธ์ก่อนเผยแพร่ และการควบคุมการเข้าถึงเพื่อป้องกันการแก้ไขผลลัพธ์โดยไม่ได้รับอนุญาต",
+          "audit_procedures": [
+            {
+              "id": "CF003-4-AP1",
+              "name_th": "สอบทานกระบวนการอนุมัติ/รับรองผลลัพธ์ (Output Sign-off) ก่อนเผยแพร่",
+              "method": "สุ่มตัวอย่างรายงาน/ผลลัพธ์สำคัญ ตรวจสอบหลักฐานการทบทวนและอนุมัติจากผู้มีอำนาจก่อนเผยแพร่หรือนำไปใช้",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.05",
+                  "title": "Ensure Traceability and Accountability for Information Events"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.33",
+                  "title": "Protection of Records"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลลัพธ์ (Output Report)",
+                "หลักฐานการอนุมัติ/ลงนาม",
+                "Approval Workflow Log",
+                "Version Control Record"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-4-AP2",
+              "name_th": "ทดสอบการควบคุมการเข้าถึงและป้องกันการแก้ไขผลลัพธ์หลังการประมวลผล",
+              "method": "ทดสอบสิทธิ์การเข้าถึงระบบรายงาน/ฐานข้อมูลผลลัพธ์ และตรวจสอบ Audit Trail การแก้ไขผลลัพธ์ย้อนหลัง",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.3",
+                  "title": "Information Access Restriction"
+                },
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 7",
+                  "title": "การเข้าถึงข้อมูลคอมพิวเตอร์โดยมิชอบ"
+                },
+                {
+                  "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562",
+                  "clause": "มาตรา 37",
+                  "title": "หน้าที่รักษาความถูกต้องของข้อมูลส่วนบุคคล"
+                }
+              ],
+              "evidence_types": [
+                "Access Control Matrix",
+                "Audit Trail/Log การแก้ไขผลลัพธ์",
+                "รายงานสิทธิ์การเข้าถึงระบบ",
+                "นโยบายการควบคุมการเข้าถึงข้อมูลผลลัพธ์"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R004",
+      "name_th": "การบันทึกและติดตามร่องรอยการใช้งาน (Audit Trail/Logging) ในระบบแอปพลิเคชันไม่เพียงพอ",
+      "name_en": "Inadequate Application Audit Trail and Logging",
+      "level": "HIGH",
+      "likelihood": "สูง",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF004-1",
+          "name_th": "นโยบายและมาตรฐานการบันทึกเหตุการณ์ (Logging Policy/Standard) ไม่ครบถ้วนหรือไม่ได้กำหนดขอบเขตเหตุการณ์ที่ต้องบันทึก",
+          "audit_procedures": [
+            {
+              "id": "AP004-1-1",
+              "name_th": "ทบทวนนโยบายและมาตรฐานการบันทึกร่องรอยการใช้งานว่ามีการกำหนดประเภทเหตุการณ์ ระดับความสำคัญ และขอบเขตระบบที่ต้องบันทึกอย่างครบถ้วนหรือไม่",
+              "method": "Document review + Gap analysis เทียบมาตรฐานสากล",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.15",
+                  "title": "Logging"
+                },
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS05.07",
+                  "title": "Manage vulnerabilities and monitor the infrastructure for security-related events"
+                },
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 2.8",
+                  "title": "Auditable events"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารนโยบาย Logging",
+                "มาตรฐานการกำหนดค่าระบบ (Configuration Baseline)",
+                "รายงานผลการวิเคราะห์ช่องว่าง (Gap Analysis)",
+                "บันทึกการอนุมัตินโยบายโดยผู้บริหาร"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP004-1-2",
+              "name_th": "สอบทานการปรับปรุงนโยบายให้สอดคล้องกับข้อกำหนดทางกฎหมายว่าด้วยการเก็บข้อมูลจราจรทางคอมพิวเตอร์",
+              "method": "Compliance review",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 26",
+                  "title": "หน้าที่เก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 12",
+                  "title": "Deploys Control Activities through Policies and Procedures"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารนโยบายฉบับล่าสุด",
+                "บันทึกการทบทวนกฎหมายที่เกี่ยวข้อง",
+                "รายงานการประเมินความสอดคล้อง (Compliance Assessment)",
+                "หลักฐานการสื่อสารนโยบายให้ผู้เกี่ยวข้อง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004-2",
+          "name_th": "การกำหนดค่าระบบแอปพลิเคชันให้บันทึกเหตุการณ์สำคัญด้านความปลอดภัย (Security-relevant Events) ไม่ครอบคลุม",
+          "audit_procedures": [
+            {
+              "id": "AP004-2-1",
+              "name_th": "ทดสอบการตั้งค่าระบบว่ามีการบันทึกเหตุการณ์สำคัญ เช่น การเข้าสู่ระบบ การเปลี่ยนสิทธิ์ การแก้ไขข้อมูลสำคัญ ครบถ้วนหรือไม่",
+              "method": "Technical configuration review + Sampling test",
+              "std_refs": [
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 2.9",
+                  "title": "Audit storage capacity"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6 (Applying Security Controls) - Audit and Accountability",
+                  "title": "Logging of security-relevant events in ICS/Application environment"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการตั้งค่าระบบ (Configuration Report)",
+                "Log samples จากระบบจริง",
+                "รายการเหตุการณ์ที่กำหนดให้ต้องบันทึก (Audit Event List)",
+                "ผลการทดสอบเจาะระบบ (Test Case Results)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP004-2-2",
+              "name_th": "ตรวจสอบว่าฟิลด์ข้อมูลใน log มีความครบถ้วน (Who/What/When/Where) เพียงพอต่อการสืบสวน",
+              "method": "Log content review",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.15",
+                  "title": "Logging"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Monitoring and Event Management Practice",
+                  "title": "การเฝ้าระวังและจัดการเหตุการณ์"
+                }
+              ],
+              "evidence_types": [
+                "ตัวอย่าง Log Record",
+                "มาตรฐานรูปแบบ Log (Log Format Standard)",
+                "รายงานผลการสุ่มตรวจ Log",
+                "เอกสารการออกแบบระบบ (System Design Document)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004-3",
+          "name_th": "ขาดมาตรการป้องกันความถูกต้องครบถ้วนและการเข้าถึง Log โดยไม่ได้รับอนุญาต (Log Integrity & Access Control)",
+          "audit_procedures": [
+            {
+              "id": "AP004-3-1",
+              "name_th": "ตรวจสอบมาตรการป้องกันการแก้ไข/ลบ Log เช่น Write-Once storage, Hashing, การจำกัดสิทธิ์เข้าถึง",
+              "method": "Technical control testing",
+              "std_refs": [
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 2.10",
+                  "title": "Response to audit processing failures / protection of audit information"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.16",
+                  "title": "Monitoring activities"
+                }
+              ],
+              "evidence_types": [
+                "รายงานการตั้งค่าสิทธิ์เข้าถึง Log Server",
+                "ผลการทดสอบ Hash/Checksum ของ Log",
+                "รายชื่อผู้มีสิทธิ์เข้าถึง Log (Access List)",
+                "บันทึกการตรวจสอบความสมบูรณ์ของ Log"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP004-3-2",
+              "name_th": "สอบทานมาตรการรักษาความปลอดภัยของ Log ที่มีข้อมูลส่วนบุคคลตามกฎหมายคุ้มครองข้อมูล",
+              "method": "Compliance and technical review",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562",
+                  "clause": "มาตรา 37",
+                  "title": "มาตรการรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคล"
+                },
+                {
+                  "std": "COBIT 2019",
+                  "clause": "APO13.03",
+                  "title": "Monitor and review the information security management system"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายคุ้มครองข้อมูลส่วนบุคคลใน Log",
+                "รายงานการประเมินความเสี่ยงด้าน PII ใน Log",
+                "หลักฐานการเข้ารหัส/ปกปิดข้อมูล (Masking Evidence)",
+                "บันทึกการอนุมัติสิทธิ์การเข้าถึง Log ที่มี PII"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004-4",
+          "name_th": "ขาดกระบวนการทบทวน วิเคราะห์ และแจ้งเตือนจาก Log อย่างสม่ำเสมอ (Log Review & Monitoring Process)",
+          "audit_procedures": [
+            {
+              "id": "AP004-4-1",
+              "name_th": "ตรวจสอบว่ามีกระบวนการและความถี่ในการทบทวน Log รวมถึงกลไกแจ้งเตือนอัตโนมัติ (Alerting) ที่เหมาะสม",
+              "method": "Process walkthrough + Interview",
+              "std_refs": [
+                {
+                  "std": "ITIL 4",
+                  "clause": "Monitoring and Event Management Practice",
+                  "title": "การเฝ้าระวังและจัดการเหตุการณ์"
+                },
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS05.07",
+                  "title": "Monitor the infrastructure for security-related events"
+                }
+              ],
+              "evidence_types": [
+                "บันทึกการทบทวน Log (Log Review Log)",
+                "รายงานผลการแจ้งเตือนอัตโนมัติ",
+                "เอกสารกระบวนการ SOP การเฝ้าระวัง",
+                "หลักฐานการสัมภาษณ์เจ้าหน้าที่ผู้รับผิดชอบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP004-4-2",
+              "name_th": "ประเมินความเพียงพอของกิจกรรมติดตามภายในองค์กรตามกรอบการควบคุมภายใน",
+              "method": "Control effectiveness assessment",
+              "std_refs": [
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 16-17",
+                  "title": "Monitoring Activities/Evaluations"
+                },
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ.2562",
+                  "clause": "มาตรา 44",
+                  "title": "การเฝ้าระวังภัยคุกคามทางไซเบอร์"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการประเมิน Internal Control",
+                "แผนการเฝ้าระวังภัยคุกคามไซเบอร์",
+                "รายงานเหตุการณ์ผิดปกติที่ตรวจพบ",
+                "หลักฐานการรายงานผลต่อผู้บริหาร"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004-5",
+          "name_th": "การเก็บรักษาข้อมูล Log ไม่เป็นไปตามระยะเวลาที่กฎหมายกำหนด (Log Retention Non-compliance)",
+          "audit_procedures": [
+            {
+              "id": "AP004-5-1",
+              "name_th": "ตรวจสอบระยะเวลาการเก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์เทียบกับข้อกำหนดขั้นต่ำตามกฎหมาย",
+              "method": "Technical inspection + Compliance verification",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 26",
+                  "title": "หน้าที่เก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์ไม่น้อยกว่า 90 วัน"
+                },
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 2.9",
+                  "title": "Audit storage capacity"
+                }
+              ],
+              "evidence_types": [
+                "รายงานการตั้งค่าระยะเวลาจัดเก็บ Log",
+                "ผลการสุ่มตรวจ Log ย้อนหลัง",
+                "นโยบายการจัดเก็บและทำลายข้อมูล (Retention Policy)",
+                "บันทึกความจุพื้นที่จัดเก็บ Log (Storage Capacity Report)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R005",
+      "name_th": "การเปลี่ยนแปลงหรือปรับแต่งค่าคอนฟิกูเรชันแอปพลิเคชันโดยไม่ได้รับอนุญาตหรือไม่ผ่านกระบวนการควบคุมการเปลี่ยนแปลง",
+      "name_en": "Unauthorized or Uncontrolled Application Change/Configuration Management",
+      "level": "CRITICAL",
+      "likelihood": "ปานกลาง",
+      "impact": "สูงมาก",
+      "control_failures": [
+        {
+          "id": "CF005-1",
+          "name_th": "ไม่มีกระบวนการบริหารจัดการการเปลี่ยนแปลง (Change Management) ที่เป็นทางการและบังคับใช้จริงสำหรับการปรับแต่งคอนฟิกูเรชันแอปพลิเคชัน",
+          "audit_procedures": [
+            {
+              "id": "AP005-1-1",
+              "name_th": "สอบทานนโยบายและขั้นตอนปฏิบัติการบริหารจัดการการเปลี่ยนแปลงคอนฟิกูเรชัน",
+              "method": "ตรวจสอบเอกสารนโยบาย ระเบียบปฏิบัติ และผังกระบวนการ Change Management เปรียบเทียบกับแนวปฏิบัติจริงในองค์กร พร้อมสัมภาษณ์ผู้รับผิดชอบระบบและทีม IT Operations",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "BAI06 Managed IT Changes",
+                  "title": "การบริหารจัดการการเปลี่ยนแปลงด้านไอที"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.32",
+                  "title": "Change management"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Change Enablement Practice",
+                  "title": "แนวปฏิบัติการบริหารจัดการการเปลี่ยนแปลงบริการ"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายและระเบียบปฏิบัติ Change Management",
+                "ผังกระบวนการ (Flowchart) การอนุมัติการเปลี่ยนแปลง",
+                "บันทึกการอนุมัติการเปลี่ยนแปลงย้อนหลัง",
+                "รายงานผลการสัมภาษณ์ผู้รับผิดชอบระบบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-1-2",
+              "name_th": "สุ่มตรวจสอบ Change Request เทียบกับ Change Log และการเปลี่ยนแปลงจริงในระบบ",
+              "method": "สุ่มตัวอย่าง Change Request/Ticket เทียบกับ System Change Log เพื่อยืนยันว่าทุกการเปลี่ยนแปลงคอนฟิกูเรชันผ่านการอนุมัติก่อนดำเนินการ และไม่มีการเปลี่ยนแปลงนอกกระบวนการ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "BAI06.01-06.03",
+                  "title": "การประเมิน จัดลำดับความสำคัญ และอนุมัติการเปลี่ยนแปลง"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.2 Configuration/Change Management Controls",
+                  "title": "การควบคุมการบริหารจัดการการเปลี่ยนแปลงคอนฟิกูเรชันในระบบควบคุมอุตสาหกรรม"
+                },
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 26",
+                  "title": "การเก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์"
+                }
+              ],
+              "evidence_types": [
+                "Change Request/Ticket ที่สุ่มตรวจ",
+                "System Change Log/History",
+                "หลักฐานการอนุมัติผ่านระบบหรืออีเมล",
+                "รายงานผลการเปรียบเทียบระหว่าง Request และ Log"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF005-2",
+          "name_th": "การควบคุมสิทธิ์การเข้าถึงและการแบ่งแยกหน้าที่ (Access Control & Segregation of Duties) ในการแก้ไขคอนฟิกูเรชันแอปพลิเคชันไม่รัดกุมเพียงพอ",
+          "audit_procedures": [
+            {
+              "id": "AP005-2-1",
+              "name_th": "ทดสอบสิทธิ์การเข้าถึงระบบคอนฟิกูเรชัน (Privileged Access Review)",
+              "method": "ดึงรายชื่อผู้ใช้ที่มีสิทธิ์แก้ไขคอนฟิกูเรชันแอปพลิเคชันเทียบกับ Authorization Matrix และตำแหน่งงานจริง เพื่อระบุผู้ใช้ที่มีสิทธิ์เกินความจำเป็นหรือไม่ได้รับอนุมัติ",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.2",
+                  "title": "Privileged access rights"
+                },
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 2.1",
+                  "title": "Authorization enforcement"
+                },
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS05.04",
+                  "title": "การบริหารจัดการอัตลักษณ์และสิทธิ์การเข้าถึง"
+                }
+              ],
+              "evidence_types": [
+                "รายชื่อผู้ใช้ที่มีสิทธิ์แก้ไขคอนฟิกูเรชัน",
+                "Authorization Matrix",
+                "บันทึกการอนุมัติสิทธิ์การเข้าถึง",
+                "ผลการเปรียบเทียบสิทธิ์กับตำแหน่งงาน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-2-2",
+              "name_th": "ทดสอบการแบ่งแยกหน้าที่ระหว่างผู้ร้องขอ ผู้อนุมัติ และผู้ปฏิบัติการเปลี่ยนแปลงคอนฟิกูเรชัน",
+              "method": "วิเคราะห์ Segregation of Duties Matrix เทียบกับสิทธิ์จริงในระบบ เพื่อตรวจสอบว่าไม่มีบุคคลใดสามารถร้องขอ อนุมัติ และดำเนินการเปลี่ยนแปลงได้ด้วยตนเองเพียงคนเดียว",
+              "std_refs": [
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10 - Control Activities",
+                  "title": "การเลือกและพัฒนากิจกรรมควบคุม"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.3",
+                  "title": "Segregation of duties"
+                }
+              ],
+              "evidence_types": [
+                "SoD Matrix",
+                "ผังโครงสร้างองค์กรและบทบาทหน้าที่",
+                "สิทธิ์ผู้ใช้งานจริงในระบบ",
+                "รายงานผลการตรวจพบความขัดแย้งของหน้าที่ (Conflict of Duties)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF005-3",
+          "name_th": "ขาดการบันทึกและติดตามตรวจสอบ (Logging & Monitoring) การเปลี่ยนแปลงคอนฟิกูเรชันแอปพลิเคชันอย่างเพียงพอ",
+          "audit_procedures": [
+            {
+              "id": "AP005-3-1",
+              "name_th": "ตรวจสอบความครบถ้วนของ Audit Log สำหรับการเปลี่ยนแปลงคอนฟิกูเรชัน",
+              "method": "สุ่มตรวจสอบ Log การเปลี่ยนแปลงเทียบกับข้อกำหนดว่าครอบคลุมตัวตนผู้กระทำ วันเวลา และรายละเอียดการเปลี่ยนแปลง รวมถึงตรวจสอบระยะเวลาการเก็บรักษา Log",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.15",
+                  "title": "Logging"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.9 Audit and Accountability",
+                  "title": "การควบคุมด้านการบันทึกและความรับผิดชอบตรวจสอบได้"
+                },
+                {
+                  "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ.2560",
+                  "clause": "มาตรา 26",
+                  "title": "การเก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์ไม่น้อยกว่า 90 วัน"
+                }
+              ],
+              "evidence_types": [
+                "Audit Log Files การเปลี่ยนแปลงคอนฟิกูเรชัน",
+                "นโยบายการเก็บรักษา Log (Log Retention Policy)",
+                "ตัวอย่าง Log Entries ที่สุ่มตรวจ",
+                "การตั้งค่า Logging Configuration ของระบบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-3-2",
+              "name_th": "ทดสอบกระบวนการติดตามตรวจสอบและการแจ้งเตือนเมื่อพบการเปลี่ยนแปลงนอกกระบวนการ",
+              "method": "ทำ Walkthrough กระบวนการแจ้งเตือน (Alert) เมื่อพบการเปลี่ยนแปลงคอนฟิกูเรชันที่ไม่ได้รับอนุญาต และตรวจสอบการตั้งค่าเครื่องมือติดตามตรวจสอบ (Monitoring Tool/SIEM)",
+              "std_refs": [
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 6.2",
+                  "title": "Continuous monitoring"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Monitoring and Event Management Practice",
+                  "title": "แนวปฏิบัติการติดตามตรวจสอบและบริหารจัดการเหตุการณ์"
+                }
+              ],
+              "evidence_types": [
+                "การตั้งค่า Monitoring Tool/SIEM",
+                "Alert Log ที่เกี่ยวข้องกับการเปลี่ยนแปลงคอนฟิกูเรชัน",
+                "รายงานเหตุการณ์ (Incident Report)",
+                "SOP การตอบสนองต่อเหตุการณ์ผิดปกติ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF005-4",
+          "name_th": "ไม่มีการกำหนด Configuration Baseline และกระบวนการตรวจจับการเบี่ยงเบนของคอนฟิกูเรชัน (Configuration Drift Detection)",
+          "audit_procedures": [
+            {
+              "id": "AP005-4-1",
+              "name_th": "ตรวจสอบการจัดทำและปรับปรุง Configuration Baseline",
+              "method": "ตรวจสอบเอกสาร Configuration Baseline เทียบกับสภาพจริงของระบบและรายการ Configuration Item ที่บันทึกใน CMDB",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "BAI10 Managed Configuration",
+                  "title": "การบริหารจัดการคอนฟิกูเรชัน"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.2 Configuration Management Family",
+                  "title": "กลุ่มการควบคุมด้านการบริหารจัดการคอนฟิกูเรชัน"
+                },
+                {
+                  "std": "ISA/IEC 62443:2018",
+                  "clause": "SR 7.6",
+                  "title": "Network and security configuration settings"
+                }
+              ],
+              "evidence_types": [
+                "เอกสาร Configuration Baseline",
+                "CMDB Record",
+                "รายการ Configuration Item",
+                "ประวัติการปรับปรุง Baseline"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-4-2",
+              "name_th": "ทดสอบกระบวนการ Reconciliation และตรวจจับการเบี่ยงเบน (Drift Detection) ระหว่าง Baseline กับสภาพจริง",
+              "method": "เปรียบเทียบผลการสแกนคอนฟิกูเรชัน (Configuration Scan) กับ Baseline ที่กำหนดไว้ ตรวจสอบกระบวนการจัดการและแก้ไขส่วนที่เบี่ยงเบน (Deviation)",
+              "std_refs": [
+                {
+                  "std": "ITIL 4",
+                  "clause": "Service Configuration Management Practice",
+                  "title": "แนวปฏิบัติการบริหารจัดการคอนฟิกูเรชันบริการ"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.9",
+                  "title": "Configuration management"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการสแกนคอนฟิกูเรชัน (Config Scan Report)",
+                "รายงานส่วนที่เบี่ยงเบน (Deviation Report)",
+                "บันทึกการแก้ไข (Remediation Record)",
+                "Log การกระทบยอด CMDB (Reconciliation Log)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R006",
+      "name_th": "การกระทบยอดและตรวจสอบความถูกต้องของข้อมูลระหว่างระบบ (Interface/Data Reconciliation Control) ไม่ครบถ้วน",
+      "name_en": "Incomplete Interface and Data Reconciliation Controls",
+      "level": "MEDIUM",
+      "likelihood": "ปานกลาง",
+      "impact": "ปานกลาง",
+      "control_failures": [
+        {
+          "id": "CF006-1",
+          "name_th": "ขาดกระบวนการกระทบยอดข้อมูลระหว่างระบบ (Interface Reconciliation) ที่เป็นทางการและครอบคลุมทุก Interface สำคัญ",
+          "audit_procedures": [
+            {
+              "id": "AP006-1-1",
+              "name_th": "ทวนสอบความครบถ้วนของนโยบายและขอบเขตการกระทบยอดข้อมูลเทียบกับบัญชีรายการ Interface ทั้งหมด",
+              "method": "Document Review และเปรียบเทียบ Interface Inventory กับขอบเขตในนโยบาย/คู่มือปฏิบัติงาน เพื่อหา Interface ที่ตกหล่นจากการควบคุม",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS01.03",
+                  "title": "Manage Operations - Monitor IT Infrastructure"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 10",
+                  "title": "Selects and Develops Control Activities"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.16",
+                  "title": "Monitoring activities"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายและคู่มือการกระทบยอดข้อมูล (Reconciliation Policy/SOP)",
+                "บัญชีรายการ Interface ทั้งหมด (Interface Inventory)",
+                "ผังการไหลของข้อมูลระหว่างระบบ (Data Flow Diagram)",
+                "บันทึกการอนุมัติ/ทบทวนนโยบายโดยผู้บริหาร"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP006-1-2",
+              "name_th": "สุ่มตรวจสอบการปฏิบัติจริงของกระบวนการกระทบยอดในระบบสำคัญ (Walkthrough/Re-performance)",
+              "method": "เลือกตัวอย่าง Interface ที่มีความเสี่ยงสูง ทำการ Re-perform การกระทบยอดย้อนหลัง เปรียบเทียบผลลัพธ์กับรายงานที่ผู้ปฏิบัติงานจัดทำ",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS06.02",
+                  "title": "Control Processing of Business Transactions/Data"
+                },
+                {
+                  "std": "ITIL 4",
+                  "clause": "Service Validation and Testing",
+                  "title": "Practice - Ensuring Data Consistency across Services"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการกระทบยอดข้อมูลย้อนหลัง (Reconciliation Report)",
+                "Log การประมวลผล Interface",
+                "หลักฐานการ Re-performance ของผู้ตรวจสอบ",
+                "ผลเปรียบเทียบข้อมูลต้นทาง-ปลายทาง (Source vs Target Data)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF006-2",
+          "name_th": "ขาดกลไกตรวจจับ ติดตาม และแก้ไขรายการผิดปกติ/ค้างจากการกระทบยอด (Exception Handling & Resolution)",
+          "audit_procedures": [
+            {
+              "id": "AP006-2-1",
+              "name_th": "ตรวจสอบทะเบียนรายการผิดปกติ (Exception Register) และระยะเวลาการแก้ไข",
+              "method": "สุ่มตรวจ Exception Log เปรียบเทียบกับ SLA ที่กำหนด เพื่อประเมินความทันเวลาและความครบถ้วนของการแก้ไข",
+              "std_refs": [
+                {
+                  "std": "ITIL 4",
+                  "clause": "Incident Management Practice",
+                  "title": "Restore Normal Service Operation and Manage Deviations"
+                },
+                {
+                  "std": "COBIT 2019",
+                  "clause": "DSS02.02",
+                  "title": "Manage Service Requests and Incidents"
+                }
+              ],
+              "evidence_types": [
+                "Exception/Discrepancy Register",
+                "SLA การแก้ไขรายการผิดปกติ",
+                "หลักฐานการติดตามและปิดรายการ (Ticket/Case Closure)",
+                "รายงานสถิติ Aging ของรายการค้าง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP006-2-2",
+              "name_th": "ประเมินความเสี่ยงจากรายการผิดปกติที่ไม่ได้รับการแก้ไขต่อความถูกต้องของข้อมูลสำคัญ",
+              "method": "วิเคราะห์ Root Cause ของรายการค้างและประเมินผลกระทบต่อ Data Integrity ของระบบปลายทาง",
+              "std_refs": [
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 16",
+                  "title": "Conducts Ongoing and Separate Evaluations"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.16",
+                  "title": "Monitoring activities"
+                }
+              ],
+              "evidence_types": [
+                "รายงานวิเคราะห์ Root Cause",
+                "หลักฐานผลกระทบต่อรายงานทางการเงิน/ปฏิบัติการ",
+                "บันทึกการยกระดับปัญหา (Escalation Log)",
+                "แผนแก้ไขเชิงป้องกัน (Corrective Action Plan)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF006-3",
+          "name_th": "ขาดการกำหนดบทบาทความรับผิดชอบ การกำกับดูแล และการรายงานผลการกระทบยอดต่อผู้บริหาร (Governance & Reporting)",
+          "audit_procedures": [
+            {
+              "id": "AP006-3-1",
+              "name_th": "ทวนสอบการกำหนดเจ้าของกระบวนการ (Process Owner) และความรับผิดชอบในการกระทบยอดแต่ละ Interface",
+              "method": "ตรวจสอบ RACI Matrix และเอกสารมอบหมายหน้าที่ เทียบกับการปฏิบัติจริง",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "APO01.02",
+                  "title": "Establish Organizational Roles and Responsibilities"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 3",
+                  "title": "Establishes Structure, Authority, and Responsibility"
+                }
+              ],
+              "evidence_types": [
+                "RACI Matrix ของกระบวนการกระทบยอด",
+                "เอกสารมอบหมายหน้าที่ (Job Description/Delegation)",
+                "หลักฐานการอบรมผู้รับผิดชอบ",
+                "Organizational Chart ที่เกี่ยวข้อง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP006-3-2",
+              "name_th": "ตรวจสอบการรายงานผลการกระทบยอดต่อผู้บริหารและคณะกรรมการที่เกี่ยวข้องอย่างสม่ำเสมอ",
+              "method": "ตรวจสอบรายงานสรุปผลการกระทบยอดที่นำเสนอในที่ประชุมบริหาร/คณะกรรมการตรวจสอบ เทียบกับรอบเวลาที่กำหนด",
+              "std_refs": [
+                {
+                  "std": "COBIT 2019",
+                  "clause": "EDM05.02",
+                  "title": "Direct Stakeholder Communication and Reporting"
+                },
+                {
+                  "std": "COSO Internal Control Integrated Framework 2013",
+                  "clause": "Principle 13",
+                  "title": "Uses Relevant Information"
+                }
+              ],
+              "evidence_types": [
+                "รายงานสรุปผลการกระทบยอดเสนอผู้บริหาร",
+                "รายงานการประชุมคณะกรรมการตรวจสอบ/บริหารความเสี่ยง",
+                "ปฏิทินการรายงานตามรอบเวลา",
+                "หลักฐานการติดตามมติที่ประชุม"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "approval_status": "DRAFT",
+  "knowledge_layer": "L3",
+  "version": "0.1.0"
+}
