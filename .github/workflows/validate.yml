@@ -1,16 +1,13 @@
 name: Quality Gates — Knowledge Validation
 
-# รันทุก Pull Request และทุก push เข้า main
-# ถ้า gates ไม่ผ่าน → merge ไม่ได้ (ตั้ง branch protection ชี้มาที่ job นี้)
+# รันทุก Pull Request เสมอ — ห้ามใส่ paths filter:
+# quality-gates เป็น required status ใน branch protection —
+# ถ้า filter ทำให้ไม่รัน สถานะจะค้าง "Expected/Waiting" และ PR นั้น merge ไม่ได้ตลอดกาล
+# (บทเรียนจริง: PR แก้เฉพาะ app/ แล้วค้าง) — รันทุกครั้ง (ไม่กี่วินาที) ถูกกว่าค้างหนึ่งครั้ง
 on:
   pull_request:
-    paths:
-      - 'data/**'
-      - 'scripts/**'
   push:
     branches: [main]
-    paths:
-      - 'data/**'
 
 jobs:
   quality-gates:
