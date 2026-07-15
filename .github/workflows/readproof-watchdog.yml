@@ -1,0 +1,73 @@
+name: readproof-watchdog
+# ตัวเฝ้าลิงก์: รัน readproof (เปิดจริง + อ่านเนื้อ + เทียบ excerpt) กับทุก evidence_url
+# - รายสัปดาห์ (อังคาร 02:30 UTC ~09:30 ไทย) + สั่งมือได้
+# - ADVISORY เท่านั้น: ไม่บล็อก merge — รายงานผลเป็น issue "🔗 Link Health"
+# - ไม่ใช้ secret ใดๆ (readproof เป็น fetch+extract+match ล้วน) จึงรันได้เสมอ
+
+on:
+  schedule:
+    - cron: '30 2 * * 2'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: ติดตั้ง pdf-parse (สำหรับดึงข้อความจาก PDF; ไม่มีก็ยังรันได้ = EXISTENCE_ONLY)
+        run: npm i pdf-parse@1.1.1 --no-save || echo "ข้าม pdf-parse — PDF จะเป็น EXISTENCE_ONLY"
+      - name: รัน readproof (advisory, exit 0 เสมอ)
+        run: |
+          set +e
+          READPROOF_OUT=/tmp/readproof_report.json node scripts/readproof.js > /tmp/readproof.txt 2>&1
+          set -e
+          cat /tmp/readproof.txt
+      - name: Upsert Link Health issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const txt = fs.readFileSync('/tmp/readproof.txt', 'utf8');
+            let rows = [];
+            try { rows = JSON.parse(fs.readFileSync('/tmp/readproof_report.json', 'utf8')); } catch (e) {}
+            const today = new Date().toISOString().slice(0, 10);
+            const by = (s) => rows.filter(r => r.state === s);
+            const dead = by('DEAD'), nomatch = by('ALIVE_NO_MATCH'), exist = by('EXISTENCE_ONLY'), inc = by('INCONCLUSIVE');
+            const fmt = (arr) => arr.length ? arr.map(r => `- \`${r.state}\` ${r.family}@${r.version} (http ${r.http}) — ${r.note}\n  ${r.url}`).join('\n') : '  (ไม่มี)';
+            const summaryLine = (txt.split('\n').find(l => l.startsWith('สรุป:')) || '');
+            const body = [
+              `**readproof-watchdog ${today}** — เปิดจริง+อ่านเนื้อ+เทียบ excerpt ทุก evidence_url บน main`,
+              '',
+              summaryLine ? '`' + summaryLine + '`' : '',
+              '',
+              `## ❌ DEAD (${dead.length}) — ต้องแก้ทุกที่ที่อ้าง (EX-NOT-FOUND)`,
+              fmt(dead),
+              '',
+              `## ⚠️ ALIVE_NO_MATCH (${nomatch.length}) — เปิดได้แต่ไม่พบ excerpt (อาจผิดฝาผิดตัว/ถูกแก้)`,
+              fmt(nomatch),
+              '',
+              `## 📄 EXISTENCE_ONLY (${exist.length}) — อ่านตัวบทไม่ได้ (PDF สแกน/ไม่มี verbatim) ยืนยันได้แค่มีอยู่`,
+              fmt(exist.slice(0, 20)),
+              '',
+              `## 🟡 INCONCLUSIVE (${inc.length}) — anti-bot/timeout/JS ให้คนตรวจ`,
+              fmt(inc.slice(0, 20)),
+              '',
+              '_ADVISORY: workflow นี้ไม่บล็อก merge — เป็นบันได Exception Catalog ของ deep-research-protocol_'
+            ].join('\n');
+            const title = '🔗 Link Health — readproof (เปิดได้จริง + อ่านจริง)';
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'link-health', per_page: 5
+            });
+            if (issues.length > 0) {
+              await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: issues[0].number, title, body });
+            } else {
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['link-health'] });
+            }

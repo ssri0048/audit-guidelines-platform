@@ -37,12 +37,19 @@
 
 **ห้าม**: หยิบชื่อองค์กร + เลขอะไรก็ได้มาประกอบกัน ต้องยืนยันว่าเอกสารเลขนั้น "ว่าด้วยเรื่องนั้นจริง"
 
-### ขั้น 2 — อ่านไส้ในจริง + เก็บหลักฐาน 4 อย่าง
+### ขั้น 2 — อ่านไส้ในจริง + เก็บหลักฐาน 5 อย่าง
 ก่อนอ้างแหล่งใดเป็น source ต้องมีครบ:
-1. `url` — ลิงก์หน้า/ไฟล์ official ที่เปิดได้จริง
+1. `url` — ลิงก์หน้า/ไฟล์ official ที่เปิดได้จริง (ครบ path+ชื่อไฟล์ ห้ามเหลือแค่โฟลเดอร์)
 2. `excerpt` — ข้อความจริงที่คัดจากเนื้อหา (พิสูจน์ว่าอ่านแล้ว ไม่ใช่อ้างลอย)
-3. `retrieved_at` — วันที่อ่าน
-4. `credibility_score` — ตาม Authority Scoring (L0 official ≥90)
+3. `excerpt_verbatim` — วลีสั้นคำต่อคำจากเอกสาร (สมอให้เครื่องเทียบซ้ำได้)
+4. `retrieved_at` — วันที่อ่าน
+5. `credibility_score` — ตาม Authority Scoring (L0 official ≥90)
+
+> **บังคับด้วยโค้ด ไม่ใช่แค่วินัย** — "เปิดได้จริง + อ่านจริง" ถูกทำเป็นฟังก์ชัน `scripts/readproof.js`:
+> - `structuralCheck(url)` = เกต offline ใน `validate.js` (G3_URL_STRUCT) จับ URL ตัด/encode ผิด (เคส pea.co.th)
+> - `readproof(url, excerpt_verbatim)` = เปิดจริง+ดึงเนื้อ+เทียบ verbatim → คืน state: **READ_VERIFIED / ALIVE_NO_MATCH / EXISTENCE_ONLY / DEAD / INCONCLUSIVE** (ผูก 1:1 กับ Exception Catalog ด้านล่าง) เก็บลง `link_status` ของ edition
+> - `readproof-watchdog.yml` รันรายสัปดาห์เอง (ไม่ต้องสั่ง) เปิดธง issue "🔗 Link Health"
+> - **แนบเป็น source L1 ได้เฉพาะ state READ_VERIFIED** ที่เหลือลดชั้น/ติดธงตามบันได EX-*
 
 ### ขั้น 3 — ตรวจวงจรชีวิตเวอร์ชัน (ป้อน standards_registry.json)
 เปิดหน้า lifecycle ของผู้ออกมาตรฐานแล้วจดสถานะจริง — สถานะที่เป็นไปได้มี 8 แบบ (นิยามใน registry):

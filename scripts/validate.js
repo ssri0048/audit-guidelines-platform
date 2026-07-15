@@ -12,6 +12,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
+const { structuralCheck } = require('./readproof.js'); // เช็คโครง URL (offline)
 
 const STORE = process.argv[2] || path.join(__dirname, '..', 'data', 'knowledge_store.json');
 const CURRENT_YEAR = new Date().getFullYear();
@@ -366,6 +367,29 @@ for (const t of store.topics) {
   if (isNewlyVerified && noDeriv > 0)
     warnings.push(`[P_DERIVATION] ${t.id}: ${noDeriv}/${total} procedures ไม่มี derivation label (READ_SOURCE/EXEMPLAR_GROUNDED/PROFESSIONAL_SYNTHESIS)`);
 }
+
+// ── G3_URL_STRUCT: เช็คโครง URL ทุกจุด (offline, deterministic) ──
+// ระยะ transition = WARNING (ไม่บล็อก merge) จับ URL ถูกตัด/encode ผิด เช่นเคส pea.co.th
+// เมื่อ backfill ครบ → ยกเป็น diff-based ERROR (เฉพาะ URL ใหม่/ที่แก้) ใน PR ถัดไป
+(function scanUrlStructure() {
+  const seen = new Set();
+  const flag = (where, url, reason) => {
+    const key = where + '|' + url; if (seen.has(key)) return; seen.add(key);
+    warnings.push(`[G3_URL_STRUCT] ${where}: URL โครงผิด (${reason}) → ${url}`);
+  };
+  for (const fam of REGISTRY.families || [])
+    for (const ed of fam.editions || []) {
+      if (!ed.evidence_url) continue;
+      const c = structuralCheck(ed.evidence_url);
+      if (!c.ok) flag('registry:' + fam.family_id + '@' + ed.version, ed.evidence_url, c.reason);
+    }
+  for (const t of store.topics || [])
+    for (const s of t.source_chain || []) {
+      if (!s.url) continue;
+      const c = structuralCheck(s.url);
+      if (!c.ok) flag(t.id + ':' + (s.source_id || '?'), s.url, c.reason);
+    }
+})();
 
 // ── สรุปผล ──
 const legacy = store.topics.filter(t => t.approval_status === 'LEGACY_UNVERIFIED').length;
