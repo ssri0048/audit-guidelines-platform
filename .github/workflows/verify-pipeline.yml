@@ -1,0 +1,52 @@
+name: verify-pipeline
+# PR-N2: ยกร่าง L3 → L1 อัตโนมัติ — ทริกเกอร์จากปุ่ม 🔬 Verify บนเว็บ (แท็บงานค้าง) หรือสั่งมือ
+# ผลลัพธ์ = PR "✅ Verify:" เสมอ — ความรู้เข้า store จริงต่อเมื่อ CI ผ่าน + คน merge
+# exit 2 จาก script = ESCALATE (เคสเกินโหมดเครื่อง เช่น อ้างมาตรฐานไม่มีทะเบียน) → job แดงพร้อมเหตุผล
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft_file:
+        description: 'ชื่อไฟล์ draft ใน data/drafts/ (เช่น draft_20260714-162255.json)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run auto-verify (canonicalize → source chain → gates)
+        run: |
+          set -o pipefail
+          node scripts/verify_draft.js "${{ github.event.inputs.draft_file }}" | tee /tmp/verify.log
+
+      - name: Upload debug output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-out
+          path: /tmp/verify_summary.md
+          if-no-files-found: ignore
+
+      - name: Open verify PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCH="verify/$(date +%Y%m%d-%H%M%S)"
+          git config user.name "verify-pipeline[bot]"
+          git config user.email "actions@github.com"
+          git checkout -b "$BRANCH"
+          git add data/
+          git commit -m "auto-verify: ${{ github.event.inputs.draft_file }} → topic ใหม่ (L1 PENDING_REVIEW — รอ human merge)"
+          git push -u origin "$BRANCH"
+          TITLE_LINE=$(head -1 /tmp/verify_summary.md | sed 's/^# //')
+          gh pr create --title "$TITLE_LINE" --body-file /tmp/verify_summary.md --base main --head "$BRANCH"
