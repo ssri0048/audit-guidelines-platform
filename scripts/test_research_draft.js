@@ -33,15 +33,22 @@ function apiResp(text, stop) {
   ok('ข้อความแถมหน้าหลัง', JSON.parse(jsonSlice('นี่คือร่าง {"a":1} จบครับ', '{', '}')).a === 1);
   await throws('array โดนตัดกลาง', async () => jsonSlice('```json\n["A","B', '[', ']'), 'ไม่พบ');
 
-  console.log('── ชุด 2: callSafe auto-retry เมื่อโดนตัด (เคสจริง run #3) ──');
-  let calls = 0;
-  const fetchTruncThenOk = async () => { calls++; return calls === 1 ? apiResp('{"บาง', 'max_tokens') : apiResp('{"a":1}', 'end_turn'); };
-  const r1 = await callSafe('k', 's', 'u', 6000, fetchTruncThenOk);
-  ok('retry แล้วได้คำตอบเต็ม', JSON.parse(jsonSlice(r1.text, '{', '}')).a === 1 && calls === 2);
+  console.log('── ชุด 2: บันได retry 3 ขั้น (เคสจริง: 12000 ไม่พอ + thinking กินหมด) ──');
+  let calls = 0, budgets = [], users = [];
+  const mkFetch = plan => async (url, opts) => {
+    const body = JSON.parse(opts.body); calls++; budgets.push(body.max_tokens); users.push(body.messages[0].content);
+    const p = plan[Math.min(calls - 1, plan.length - 1)];
+    return apiResp(p.text, p.stop);
+  };
+  calls = 0; budgets = [];
+  const r1 = await callSafe('k', 's', 'u', 6000, mkFetch([{ text: '{"บาง', stop: 'max_tokens' }, { text: '{"a":1}', stop: 'end_turn' }]));
+  ok('ขั้น 2 กระโดดเต็มเพดาน 20000 (ไม่ใช่ ×2=12000)', budgets[1] === 20000 && JSON.parse(jsonSlice(r1.text, '{', '}')).a === 1);
+  calls = 0; budgets = []; users = [];
+  const r2 = await callSafe('k', 's', 'u', 6000, mkFetch([{ text: '', stop: 'max_tokens' }, { text: '{"บาง', stop: 'max_tokens' }, { text: '{"b":2}', stop: 'end_turn' }]), 'สั้นสุด');
+  ok('ขั้น 3 คงเพดาน + เติมคำสั่งกระชับใน prompt', budgets[2] === 20000 && users[2].includes('กระชับ') && users[2].includes('สั้นสุด') && JSON.parse(jsonSlice(r2.text, '{', '}')).b === 2);
   calls = 0;
-  const fetchAlwaysTrunc = async () => { calls++; return apiResp('{"บาง', 'max_tokens'); };
-  await throws('โดนตัดซ้ำหลัง retry → แจ้งชัด', () => callSafe('k', 's', 'u', 6000, fetchAlwaysTrunc), 'ยังโดนตัดหลัง retry');
-  ok('retry แค่ 1 ครั้ง (ไม่วนไม่รู้จบ)', calls === 2);
+  await throws('พังครบ 3 ขั้น → แจ้งชัด ไม่วนไม่รู้จบ', () => callSafe('k', 's', 'u', 6000, mkFetch([{ text: '{"บาง', stop: 'max_tokens' }])), 'ครบ 3 ขั้น');
+  ok('เรียกพอดี 3 ครั้ง', calls === 3);
 
   console.log('── ชุด 3: parse แจ้ง diagnostics ──');
   await throws('parseObj บอก stop/blocks/head', async () => parseObj({ text: 'ไม่มีเจสัน', stop: 'end_turn', types: 'thinking,text' }, 'ทดสอบ'), 'stop=end_turn');
@@ -55,20 +62,27 @@ function apiResp(text, stop) {
   ] });
   const skeleton = JSON.stringify({ name_th: 'ทดสอบ', name_en: 'Test', category: 'IT', category_th: 'ไอที', priority: 'HIGH',
     org_applicability: ['UNIVERSAL'], applicable_standards: ['IIA GIAS 2024'], thailand_applicable: true, thai_law_refs: ['กฎ ก'],
-    risks: [1, 2, 3, 4, 5].map(i => ({ id: 'R00' + i, name_th: 'เสี่ยง ' + i, name_en: 'Risk ' + i, level: 'HIGH', likelihood: 'สูง', impact: 'สูง' })) });
-  const mockFetch = async () => {
+    risks: [1, 2, 3, 4, 5, 6].map(i => ({ id: 'R00' + i, name_th: 'เสี่ยง ' + i, name_en: 'Risk ' + i, level: 'HIGH', likelihood: 'สูง', impact: 'สูง' })) });
+  let r3Fails = 0; const firstBudget = {};
+  const mockFetch = async (url, opts) => {
     seq++;
-    if (seq === 1) return apiResp('```json\n["IIA GIAS 2024","มาตรฐานที่ไม่มีในทะเบียนแน่ๆ XYZ-999"]\n```');
-    if (seq === 2) return apiResp('นี่คือโครง ' + skeleton);                 // ข้อความแถม
-    if (seq === 3) return apiResp(cfBlock.slice(0, 40), 'max_tokens');       // R001 โดนตัดครั้งแรก → retry
+    const mt = JSON.parse(opts.body).max_tokens;
+    if (seq === 1) { firstBudget.manifest = mt; return apiResp('```json\n["IIA GIAS 2024","มาตรฐานที่ไม่มีในทะเบียนแน่ๆ XYZ-999"]\n```'); }
+    if (seq === 2) { firstBudget.skeleton = mt; return apiResp('นี่คือโครง ' + skeleton); } // ข้อความแถม
+    if (seq === 3) { firstBudget.cf = mt; return apiResp(cfBlock.slice(0, 40), 'max_tokens'); } // R001 โดนตัดครั้งแรก → บันได retry
+    const u = JSON.parse(opts.body).messages[0].content;
+    if (u.includes('เสี่ยง 3')) { r3Fails++; return apiResp('{"พัง', 'max_tokens'); } // R003 พังครบทุกขั้น → ต้องถูกตัดทิ้ง
     return apiResp(cfBlock);
   };
   const draft = await main('หัวข้อทดสอบ', outDir, 'mock-key', mockFetch);
   ok('manifest แยกมี/ขาดทะเบียนถูก', fs.readFileSync(path.join(outDir, 'READING_MANIFEST.md'), 'utf8').includes('XYZ-999'));
   ok('draft ไฟล์เกิดจริง', fs.existsSync(path.join(outDir, 'draft_topic.json')));
-  ok('5 risks × 2 CF ประกอบครบ', draft.risks.length === 5 && draft.risks.every(r => r.control_failures.length === 2));
+  ok('skeleton 6 risks → R003 พังครบ 3 ขั้นถูกตัด เหลือ 5 (≥ floor) งานจบ', draft.risks.length === 5 && r3Fails === 3 && !draft.risks.some(r => r.name_th === 'เสี่ยง 3'));
+  ok('manifest บันทึกความเสี่ยงที่ถูกตัด', fs.readFileSync(path.join(outDir, 'READING_MANIFEST.md'), 'utf8').includes('ความเสี่ยงที่ถูกตัดออก'));
   ok('สถานะ L3/DRAFT/0.1.0 ถูกบังคับ', draft.knowledge_layer === 'L3' && draft.approval_status === 'DRAFT' && draft.version === '0.1.0');
   ok('เคสโดนตัดกลางทางถูก retry อัตโนมัติ (R001)', draft.risks[0].control_failures.length === 2);
+  ok('ROOT-CAUSE FIX: เพดานตั้งต้นกว้างพอ (manifest≥8000, skeleton/CF≥16000) ไม่ใช่ 3000/6000 ที่ทำให้ thinking ตัดคำตอบ',
+    firstBudget.manifest === 8000 && firstBudget.skeleton === 16000 && firstBudget.cf === 16000);
 
   console.log(`\n${fail === 0 ? '✅' : '❌'} ผล: ผ่าน ${pass} / ตก ${fail}`);
   process.exit(fail === 0 ? 0 : 1);
