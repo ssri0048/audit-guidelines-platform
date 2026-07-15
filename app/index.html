@@ -728,14 +728,14 @@ function showDetail(){document.getElementById('list-view').style.display='none';
 const GH_REPO='ssri0048/audit-guidelines-platform';
 const GH_WF='research-pipeline.yml';
 const AC_STEPS_BASE=[
- {key:'dispatch',th:'ส่งคำสั่งเข้าระบบ'},
- {key:'queue',th:'รอเครื่องรับงาน'},
- {key:'manifest',th:'เช็คมาตรฐานกับทะเบียน (Reading Manifest)'},
- {key:'draft',th:'ร่างความเสี่ยง + จุดควบคุมบกพร่อง'}];
-const AC_STEP_DRAFTPR={key:'pr',th:'เปิดใบส่งงานร่าง (L3) รอรับเข้าคลังพัก'};
+ {key:'dispatch',th:'รับคำสั่งแล้ว'},
+ {key:'queue',th:'กำลังเริ่มประมวลผล',sub:'ระบบรับงานเข้าคิวและจัดสรรเครื่องประมวลผล'},
+ {key:'manifest',th:'รวบรวมมาตรฐาน/กฎหมายที่เกี่ยวข้อง',sub:'อ้างเฉพาะที่มีในคลังมาตรฐานที่ผ่านการตรวจสอบแล้ว เพื่อกันการอ้างข้อมูลที่ยังไม่ยืนยัน'},
+ {key:'draft',th:'ร่างเนื้อหาการตรวจสอบ',sub:'สร้างความเสี่ยง จุดควบคุมที่บกพร่อง วิธีตรวจ และหลักฐานที่ต้องใช้'}];
+const AC_STEP_DRAFTPR={key:'pr',th:'เปิดใบส่งร่างเข้าคลังพัก',sub:'ร่างเก็บไว้รอเจ้าหน้าที่สั่งตรวจสอบต่อ'};
 const AC_STEPS_CHAIN=[
- {key:'verify',th:'ตรวจพิสูจน์: แก้เวอร์ชันตาย + ผูกแหล่งจริง + เกต 9 ด่าน'},
- {key:'pr',th:'เปิดใบขออนุมัติ (✅ Verify)'}];
+ {key:'verify',th:'ตรวจสอบและยืนยันความถูกต้อง',sub:'อัปเดตมาตรฐานฉบับที่ถูกยกเลิกให้เป็นฉบับปัจจุบัน แนบแหล่งอ้างอิงที่ตรวจแล้ว ≥2 แหล่ง และผ่านด่านตรวจคุณภาพอัตโนมัติ'},
+ {key:'pr',th:'เปิดใบขออนุมัติ',sub:'ส่งให้หัวหน้างานตรวจและกดอนุมัติก่อนขึ้นเว็บจริง'}];
 let AC_STEPS=AC_STEPS_BASE.concat([AC_STEP_DRAFTPR]);
 let acPoll=null,acStartTime=null;
 
@@ -959,7 +959,7 @@ function acRenderSteps(states){ // states: {key:'wait'|'run'|'ok'|'fail'}
   el.innerHTML=AC_STEPS.map(s=>{
     const st=states[s.key]||'wait';
     const ico=st==='ok'?'✓':st==='fail'?'✗':st==='run'?'●':'○';
-    return '<div class="ac-step '+st+'"><div class="ac-ico">'+ico+'</div><div>'+s.th+'</div></div>';
+    return '<div class="ac-step '+st+'"><div class="ac-ico">'+ico+'</div><div><div>'+s.th+'</div>'+(s.sub?'<div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;line-height:1.55">'+s.sub+'</div>':'')+'</div></div>';
   }).join('');
 }
 async function gh(pathname,opts){ // public repo: อ่านได้ไม่ต้อง token
