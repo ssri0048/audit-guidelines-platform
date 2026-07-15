@@ -29,13 +29,26 @@ function jsonSlice(s, open, close) {
 }
 function diag(r) { return `stop=${r.stop} blocks=[${r.types}] len=${r.text.length}`; }
 
+/* error ระดับร้ายแรงที่ retry/drop ไปก็ไม่ช่วย — ทุก call ที่เหลือจะพังเหมือนกันหมด
+   → ต้อง 'หยุดทันที' ไม่ใช่ตัด risk ทีละตัวจนเหลือ <5 (เจอจริง run #8: เครดิตหมดกลางคัน
+   ตัด R004-R007 แล้วค่อย fail งง). ครอบ: เครดิตหมด, คีย์ผิด/หมดสิทธิ์ (401/403) */
+function isFatalApiError(status, bodyText) {
+  if (status === 401 || status === 403) return true;
+  return /credit balance|purchase credits|Plans & Billing|billing|invalid x-api-key|authentication/i.test(bodyText || '');
+}
+
 async function apiCall(key, system, user, maxTokens, fetchFn) {
   const res = await fetchFn('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({ model: MODEL, max_tokens: maxTokens, system, messages: [{ role: 'user', content: user }] })
   });
-  if (!res.ok) throw new Error(`API ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  if (!res.ok) {
+    const body = (await res.text()).slice(0, 300);
+    const err = new Error(`API ${res.status}: ${body}`);
+    if (isFatalApiError(res.status, body)) err.fatal = true; // ให้ตัวเรียกรู้ว่าห้าม drop/retry
+    throw err;
+  }
   const data = await res.json();
   return {
     text: data.content.filter(c => c.type === 'text').map(c => c.text).join(''),
@@ -141,6 +154,7 @@ async function main(topicInput, outDir, key, fetchFn) {
       r.control_failures = cfObj.control_failures;
       console.log(`✓ ${r.id}: ${r.control_failures.length} CF, ${r.control_failures.reduce((n, c) => n + (c.audit_procedures || []).length, 0)} procedures`);
     } catch (e) {
+      if (e.fatal) throw new Error(`หยุดทันที: API error ร้ายแรง (เครดิตหมด/คีย์ผิด) ที่ ${r.id} — ${e.message}\n→ เติมเครดิตที่ console.anthropic.com → Plans & Billing (หรือแก้ ANTHROPIC_API_KEY) แล้วสั่ง pipeline ใหม่`);
       console.log(`⚠️ ${r.id} พังครบทุกขั้น (${e.message}) — ตัดออกจากร่างนี้`);
       dropped.push(r.id + ' ' + r.name_th);
     }
@@ -162,7 +176,7 @@ async function main(topicInput, outDir, key, fetchFn) {
   return skeleton;
 }
 
-module.exports = { jsonSlice, diag, apiCall, callSafe, parseArr, parseObj, main };
+module.exports = { jsonSlice, diag, isFatalApiError, apiCall, callSafe, parseArr, parseObj, main };
 
 /* ── CLI ── */
 if (require.main === module) {

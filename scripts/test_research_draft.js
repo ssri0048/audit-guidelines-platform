@@ -11,7 +11,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { jsonSlice, callSafe, parseArr, parseObj, main } = require('./research_draft.js');
+const { jsonSlice, isFatalApiError, callSafe, parseArr, parseObj, main } = require('./research_draft.js');
 
 let pass = 0, fail = 0;
 function ok(name, cond) { if (cond) { pass++; console.log('  ✓', name); } else { fail++; console.log('  ✗ FAIL:', name); } }
@@ -26,6 +26,9 @@ function apiResp(text, stop) {
     json: async () => ({ stop_reason: stop || 'end_turn', content: [{ type: 'thinking', thinking: 'คิดๆๆ' }, { type: 'text', text }] })
   };
 }
+// จำลอง error response แบบ API จริง (ok:false + status + body ให้ .text() อ่านได้)
+function apiErr(status, body) { return { ok: false, status, text: async () => body }; }
+const CREDIT_BODY = '{"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits."}}';
 
 (async () => {
   console.log('── ชุด 1: jsonSlice ทนคำตอบสกปรก ──');
@@ -83,6 +86,24 @@ function apiResp(text, stop) {
   ok('เคสโดนตัดกลางทางถูก retry อัตโนมัติ (R001)', draft.risks[0].control_failures.length === 2);
   ok('ROOT-CAUSE FIX: เพดานตั้งต้นกว้างพอ (manifest≥8000, skeleton/CF≥16000) ไม่ใช่ 3000/6000 ที่ทำให้ thinking ตัดคำตอบ',
     firstBudget.manifest === 8000 && firstBudget.skeleton === 16000 && firstBudget.cf === 16000);
+
+  console.log('── ชุด 5: fail-fast เมื่อเจอ error ร้ายแรง (เครดิตหมด/คีย์ผิด — เคสจริง run #8) ──');
+  ok('classify: 400 เครดิตหมด = fatal', isFatalApiError(400, CREDIT_BODY) === true);
+  ok('classify: 401 คีย์ผิด = fatal', isFatalApiError(401, '') === true);
+  ok('classify: 403 หมดสิทธิ์ = fatal', isFatalApiError(403, 'forbidden') === true);
+  ok('classify: 500/429 ไม่ใช่ fatal (ปล่อยให้ retry/drop ตามปกติ)', isFatalApiError(500, 'server error') === false && isFatalApiError(429, 'rate limit') === false);
+
+  let s5 = 0;
+  const outDir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'rdtest2-'));
+  const fetchCredit = async (url, opts) => {
+    s5++;
+    if (s5 === 1) return apiResp('["IIA GIAS 2024"]');                    // manifest ok
+    if (s5 === 2) return apiResp('โครง ' + skeleton);                     // skeleton ok (6 risks)
+    return apiErr(400, CREDIT_BODY);                                      // R001 CF: เครดิตหมด → ต้องหยุดทันที
+  };
+  await throws('เครดิตหมดที่ R001 → หยุดทั้ง run ทันที (ไม่ตัดทีละตัวจนเหลือ <5)',
+    () => main('หัวข้อทดสอบ2', outDir2, 'mock-key', fetchCredit), 'หยุดทันที');
+  ok('หยุดที่ call แรกที่พัง (ไม่ยิงซ้ำเปลืองเครดิตทุก risk)', s5 === 3);
 
   console.log(`\n${fail === 0 ? '✅' : '❌'} ผล: ผ่าน ${pass} / ตก ${fail}`);
   process.exit(fail === 0 ? 0 : 1);
