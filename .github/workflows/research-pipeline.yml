@@ -16,6 +16,11 @@ on:
         description: 'หัวข้อตรวจสอบที่ต้องการร่าง (ภาษาไทย)'
         required: true
         type: string
+      chain:
+        description: 'ตรวจพิสูจน์ต่อทันทีหลังร่างเสร็จ (วิ่งยาวถึงประตูอนุมัติ — เหลือ human click เดียวคือ merge)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -56,16 +61,43 @@ jobs:
           node scripts/research_draft.js "${{ steps.topic.outputs.topic }}" /tmp/research_out | tee /tmp/run.log
           if [ -f /tmp/research_out/draft_topic.json ]; then echo "has_draft=true" >> "$GITHUB_OUTPUT"; else echo "has_draft=false" >> "$GITHUB_OUTPUT"; fi
 
+      # ── โหมด chain: ตรวจพิสูจน์ต่อทันทีจากไฟล์ร่างในเครื่อง (ไม่ผ่านคลังพัก) ──
+      # escalate/ตกเกต → outcome=failure → fallback ไปเปิด draft PR ตามปกติ งานไม่สูญ
+      - name: Auto-verify (chain mode)
+        id: chainverify
+        if: inputs.chain == true && steps.run.outputs.has_draft == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/verify_draft.js /tmp/research_out/draft_topic.json | tee -a /tmp/run.log
+
+      - name: Open verify PR (chain mode)
+        if: inputs.chain == true && steps.chainverify.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCH="verify/$(date +%Y%m%d-%H%M%S)"
+          git config user.name "research-pipeline[bot]"
+          git config user.email "actions@github.com"
+          git checkout -b "$BRANCH"
+          git add data/
+          git commit -m "chain: ร่าง+ตรวจพิสูจน์รวดเดียว '${{ steps.topic.outputs.topic }}' (L1 PENDING_REVIEW — รอ human merge)"
+          git push -u origin "$BRANCH"
+          TITLE_LINE=$(head -1 /tmp/verify_summary.md | sed 's/^# //')
+          gh pr create --title "$TITLE_LINE" --body-file /tmp/verify_summary.md --base main --head "$BRANCH"
+
       - name: Upload debug output (ดู raw ได้เสมอแม้ fail)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: research-out
-          path: /tmp/research_out/
+          path: |
+            /tmp/research_out/
+            /tmp/verify_summary.md
           if-no-files-found: ignore
 
       - name: Open draft PR
-        if: steps.run.outputs.has_draft == 'true'
+        if: steps.run.outputs.has_draft == 'true' && (inputs.chain != true || steps.chainverify.outcome == 'failure')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
