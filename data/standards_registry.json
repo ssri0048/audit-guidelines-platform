@@ -731,8 +731,10 @@
           "status": "CURRENT",
           "verified": true,
           "last_verified": "2026-07-13",
-          "evidence_url": "https://www.pea.co.th/sites/default/files/documents/",
+          "evidence_url": "https://www.pea.co.th/sites/default/files/documents/พรบ.%20กฎระเบียบข้อบังคับ/ด้านทรัพยากรบุคคล/พรบ%20แรงงานรัฐวิสาหกิจสัมพันธ์%20พ.ศ.%202543.pdf",
           "evidence_excerpt": "ประกาศ 7 เม.ย. 2543 ยกเลิก พ.ร.บ.พนักงานรัฐวิสาหกิจสัมพันธ์ 2534 (สำเนาทางการบนเว็บ กฟภ./สนง.สลากฯ/กกท.)",
+          "excerpt_verbatim": "แรงงานรัฐวิสาหกิจสัมพันธ์",
+          "link_status": { "state": "UNCHECKED", "checked_at": null, "note": "กู้ URL เต็มจาก knowledge_store (SRC-T010-01) 2026-07-15 — เดิม evidence_url ถูกตัดเหลือ /documents/ (404); รอ readproof-watchdog ยืนยัน live+อ่านจริง" },
           "notes": "org-scope: SOE ใช้ฉบับนี้ ไม่ใช่ พ.ร.บ.แรงงานสัมพันธ์ 2518 (เอกชน); มี \"และที่แก้ไขเพิ่มเติม\" — รายละเอียดฉบับแก้ไขติดธงตรวจ",
           "exception_code": "EX-AMENDED"
         }
