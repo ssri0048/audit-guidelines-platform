@@ -51,6 +51,17 @@ ok('evidence ถูกเติมครบ ≥4', t.risks.every(r => r.control_
 ok('draft ถูกลบหลังประกอบ', !fs.existsSync(path.join(root, 'data', 'drafts', 'draft_test.json')));
 ok('changelog บันทึกการแก้', t.changelog.some(c => c.change.includes('AUTO-VERIFY')));
 
+console.log('── ชุด 2.5: โหมด chain — draft เป็น path เต็ม (ไม่ผ่านคลังพัก) ──');
+const absDraft = path.join(os.tmpdir(), 'chain_draft_' + Date.now() + '.json');
+const d2 = JSON.parse(JSON.stringify(draft)); d2.name_th = 'หัวข้อทดสอบโหมด chain';
+fs.writeFileSync(absDraft, JSON.stringify(d2));
+const before2 = JSON.parse(fs.readFileSync(path.join(root, 'data', 'knowledge_store.json'), 'utf8')).topics.length;
+const res2 = main(absDraft, root);
+const after2 = JSON.parse(fs.readFileSync(path.join(root, 'data', 'knowledge_store.json'), 'utf8'));
+ok('chain: topic เข้า store (' + res2.tid + ')', after2.topics.length === before2 + 1);
+ok('chain: ไฟล์ draft path เต็มถูกลบ', !fs.existsSync(absDraft));
+ok('chain: changelog ระบุโหมดตรวจต่อทันที', after2.topics.find(x => x.id === res2.tid).changelog[0].change.includes('โหมดตรวจต่อทันที'));
+
 console.log('── ชุด 3: escalate เมื่ออ้างสิ่งไม่มีทะเบียน (ratchet) ──');
 const bad = JSON.parse(JSON.stringify(draft)); bad.applicable_standards.push('มาตรฐานปลอม ABC-999');
 fs.writeFileSync(path.join(root, 'data', 'drafts', 'draft_bad.json'), JSON.stringify(bad));

@@ -67,7 +67,8 @@ function canonicalize(registry, s) {
 
 function main(draftFile, root) {
   root = root || path.join(__dirname, '..');
-  const draftPath = path.join(root, 'data', 'drafts', draftFile);
+  // รองรับ 2 โหมด: ชื่อไฟล์ในคลังพัก (data/drafts/) หรือ path เต็ม (โหมด chain — ตรวจต่อทันทีโดยไม่ผ่านคลังพัก)
+  const draftPath = path.isAbsolute(draftFile) ? draftFile : path.join(root, 'data', 'drafts', draftFile);
   if (!fs.existsSync(draftPath)) { console.error('❌ ไม่พบ draft: ' + draftFile); process.exit(1); }
   const d = JSON.parse(fs.readFileSync(draftPath, 'utf8'));
   const registry = JSON.parse(fs.readFileSync(path.join(root, 'data', 'standards_registry.json'), 'utf8'));
@@ -139,7 +140,7 @@ function main(draftFile, root) {
     quality_gate_status: 'PASS', approval_status: 'PENDING_REVIEW', knowledge_layer: 'L1', approved_by: null,
     created_at: NOW, updated_at: NOW, last_used_at: null, usage_count: 0, related_topics: [],
     changelog: [
-      { version: '0.1.0', date: RETR, change: 'DRAFT จาก research-pipeline (' + draftFile + ')', approved_by: 'draft เท่านั้น' },
+      { version: '0.1.0', date: RETR, change: 'DRAFT จาก research-pipeline (' + path.basename(draftFile) + (path.isAbsolute(draftFile) ? ' — โหมดตรวจต่อทันที' : '') + ')', approved_by: 'draft เท่านั้น' },
       { version: '1.0.0', date: RETR, change: 'AUTO-VERIFY โดย verify-pipeline: ' + (allFixes.length ? allFixes.join(' | ') : 'citations ถูกต้องครบ ไม่มีการแก้') + ' | source_chain ผูกจากทะเบียนที่อ่านแล้วจริง ' + chain.length + ' แหล่ง | หมายเหตุ: โหมดเครื่องไม่อ่านหน้าใหม่ — ดุลยพินิจสุดท้ายอยู่ที่ผู้ merge', approved_by: 'pending PR merge' }
     ],
     source_chain: chain
