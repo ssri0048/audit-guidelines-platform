@@ -240,6 +240,23 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .ac-result{margin-top:14px;display:none}
 .ac-result .prov{max-height:300px;overflow-y:auto;white-space:pre-wrap;font-size:12px}
 .ac-prlink{display:inline-block;margin-top:10px;padding:9px 18px;background:var(--gold);color:var(--navy);border-radius:var(--radius-sm);font-weight:800;font-size:13px;text-decoration:none}
+/* Console tabs + รายการ */
+.ac-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.ac-tab{font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px;border:1.5px solid var(--border);background:#fff;cursor:pointer;color:var(--text-muted)}
+.ac-tab.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.drow{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;font-size:12.5px}
+.drow .dnm{flex:1;font-weight:600;word-break:break-all}
+.drow .dbtn{font-family:inherit;font-size:12px;font-weight:700;padding:7px 13px;border-radius:8px;border:none;background:var(--navy-deep);color:#fff;cursor:pointer;flex-shrink:0}
+.drow .dbtn:hover{background:var(--navy)}
+.drow .dlink{font-size:12px;font-weight:700;padding:7px 13px;border-radius:8px;background:var(--gold);color:var(--navy);text-decoration:none;flex-shrink:0}
+.dstat{font-size:14px;flex-shrink:0}
+.ac-msg{font-size:12px;color:var(--text-muted);margin:8px 0;line-height:1.6}
+.chip-drafts{background:#F5B041;color:#5B2C02;cursor:pointer;display:none}
+.qrow{display:flex;gap:8px;padding:7px 10px;border-bottom:1px dashed var(--border);font-size:12px;align-items:baseline}
+.qrow .qs{font-weight:800;flex-shrink:0;width:92px}
+.qs-UNVERIFIED{color:#B7770D}.qs-UNRESOLVED{color:#C0392B}.qs-STALE{color:#6C3483}.qs-PARKED{color:var(--text-light)}
+.qrow .qr{flex:1}
+.qrow .qa{color:var(--text-light);flex-shrink:0}
 
 /* legend + footer */
 .legend{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 15px;margin-top:16px;font-size:12px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
@@ -286,6 +303,7 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
       <span class="chip chip-gold">🔒 อ่านอย่างเดียว</span>
       <span class="chip chip-green">✓ ความรู้ผ่านการ verify</span>
       <span class="chip chip-outline" id="chip-updated">อัพเดท —</span>
+      <span class="chip chip-drafts" id="chip-drafts" onclick="acOpen();acTab(2)" title="ร่างจาก pipeline ที่รอ verify">⏳ ร่างค้าง —</span>
     </div>
   </div>
   <div class="hdr-stats">
@@ -342,14 +360,40 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
       <button class="ac-close" onclick="acClose()">×</button>
     </div>
     <div class="ac-body">
-      <label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>
-      <input class="ac-input" id="ac-topic" placeholder="เช่น การบริหารจัดการเชื้อเพลิงและสัญญาซื้อขายไฟฟ้า (PPA)" autocomplete="off">
-      <label class="ac-lbl">GitHub Token (Fine-grained — ใช้ครั้งเดียวแล้วทิ้งทันที ไม่บันทึกที่ไหน)</label>
+      <div class="ac-tabs">
+        <button class="ac-tab on" id="ac-tabbtn-1" onclick="acTab(1)">📝 สั่งร่างหัวข้อ</button>
+        <button class="ac-tab" id="ac-tabbtn-2" onclick="acTab(2)">📋 งานค้าง</button>
+        <button class="ac-tab" id="ac-tabbtn-3" onclick="acTab(3)">✅ รออนุมัติ</button>
+        <button class="ac-tab" id="ac-tabbtn-4" onclick="acTab(4)">🏳️ ธง/คิว</button>
+      </div>
+
+      <div id="ac-t1">
+        <label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>
+        <input class="ac-input" id="ac-topic" placeholder="เช่น การบริหารจัดการเชื้อเพลิงและสัญญาซื้อขายไฟฟ้า (PPA)" autocomplete="off">
+        <button class="ac-go" id="ac-go" onclick="acRun()">▶ สั่งประมวลผล (ร่าง L3)</button>
+        <div class="ac-alt">ไม่มี token? <a target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform/issues/new?title=%5B%E0%B8%82%E0%B8%AD%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%5D%20">ส่งคำขอผ่าน GitHub Issue แบบเดิม</a></div>
+      </div>
+
+      <div id="ac-t2" style="display:none">
+        <div class="ac-msg">ร่างจาก pipeline (L3) ที่ merge เข้าคลังพักแล้ว รอสั่ง verify — กด <b>🔬 Verify</b> เพื่อให้ระบบอ่านแหล่ง official แล้วเปิด PR ยกเป็น L1 (ปุ่มใช้ token เหมือนการสั่งร่าง)</div>
+        <div id="ac-drafts">⏳ กำลังโหลด...</div>
+        <div class="ac-msg" id="ac-t2-msg"></div>
+      </div>
+
+      <div id="ac-t3" style="display:none">
+        <div class="ac-msg">PR ที่เปิดอยู่ — ปุ่มพาไปหน้าอนุมัติบน GitHub | 🔐 <b>ใครกด merge ได้?</b> เฉพาะบัญชี GitHub ที่เป็น collaborator ของ repo เท่านั้น (คนทั่วไปเปิดลิงก์ได้แต่ปุ่ม merge จะกดไม่ได้) — สิทธิ์คุมโดยระบบบัญชี GitHub + branch protection ไม่ใช่ตัวเว็บนี้</div>
+        <div id="ac-prs">⏳ กำลังโหลด...</div>
+      </div>
+
+      <div id="ac-t4" style="display:none">
+        <div class="ac-msg">ธงที่ระบบเปิดไว้ (ความไม่แน่ใจที่ประกาศ + เส้นตาย) — ข้อมูลเดียวกับที่ CI ใช้และ watchdog รายงานทุกจันทร์</div>
+        <div id="ac-queue">⏳ กำลังโหลด...</div>
+      </div>
+
+      <label class="ac-lbl">GitHub Token (Fine-grained — ใช้ครั้งเดียวแล้วทิ้งทันที ไม่บันทึกที่ไหน · ใช้กับปุ่มสั่งงานแท็บ ①②)</label>
       <input class="ac-input" id="ac-token" type="password" placeholder="github_pat_..." autocomplete="off">
-      <div class="ac-hint">สร้าง token: GitHub → Settings → Developer settings → Fine-grained tokens → เลือกเฉพาะ repo นี้ + Permission เดียว: <b>Actions: Read and write</b> — token นี้สั่งงาน/ดูสถานะได้เท่านั้น เขียนความรู้ไม่ได้</div>
-      <div class="ac-warn">🛡️ ธรรมาภิบาลไม่เปลี่ยน: ระบบจะทำ Reading Manifest (อ้างได้เฉพาะมาตรฐานที่มีทะเบียน) → ร่าง L3 → เปิด PR — ความรู้เข้าระบบจริงต่อเมื่อผ่าน CI และคุณกด merge เท่านั้น</div>
-      <button class="ac-go" id="ac-go" onclick="acRun()">▶ สั่งประมวลผล</button>
-      <div class="ac-alt">ไม่มี token? <a target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform/issues/new?title=%5B%E0%B8%82%E0%B8%AD%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%5D%20">ส่งคำขอผ่าน GitHub Issue แบบเดิม</a></div>
+      <div class="ac-hint">สร้าง token: GitHub → Settings → Developer settings → Fine-grained tokens → เลือกเฉพาะ repo นี้ + Permission เดียว: <b>Actions: Read and write</b> — token สั่งเครื่องทำงานได้เท่านั้น เขียนความรู้/merge ไม่ได้ | token ของคนที่ไม่ใช่ collaborator จะถูก GitHub ปฏิเสธ</div>
+      <div class="ac-warn">🛡️ ธรรมาภิบาลไม่เปลี่ยน: ทุกผลลัพธ์คือ PR ที่ต้องผ่าน quality gates (CI) + คนกด merge บน GitHub เท่านั้น — เว็บนี้ไม่มีอำนาจเขียนความรู้เอง</div>
       <div class="ac-steps" id="ac-steps"></div>
       <div class="ac-result" id="ac-result"></div>
     </div>
@@ -380,12 +424,18 @@ let TOPICS=[],REGISTRY=null,FLAGS={},activeOrg=null,qText='';
 /* ============ LOAD ============ */
 async function boot(){
   try{
+    const v='?v='+Date.now(); // cache-buster: เห็นความรู้ใหม่ทันทีหลัง merge ไม่รอ CDN
     const [ks,reg,fl]=await Promise.all([
-      fetch('../data/knowledge_store.json').then(r=>{if(!r.ok)throw 0;return r.json()}),
-      fetch('../data/standards_registry.json').then(r=>r.ok?r.json():null).catch(()=>null),
-      fetch('../data/platform_flags.json').then(r=>r.ok?r.json():null).catch(()=>null)
+      fetch('../data/knowledge_store.json'+v).then(r=>{if(!r.ok)throw 0;return r.json()}),
+      fetch('../data/standards_registry.json'+v).then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('../data/platform_flags.json'+v).then(r=>r.ok?r.json():null).catch(()=>null)
     ]);
     TOPICS=ks.topics||[];REGISTRY=reg;FLAGS=(fl&&fl.flags)||{};
+    // แถบร่างค้างบน header (อ่าน public ไม่ใช้ token)
+    gh('/repos/'+GH_REPO+'/contents/data/drafts').then(files=>{
+      const n=(files||[]).filter(f=>f.name.endsWith('.json')).length;
+      if(n>0){const c=document.getElementById('chip-drafts');c.textContent='⏳ ร่างค้าง '+n+' รายการ — กดเพื่อจัดการ';c.style.display='inline-block'}
+    }).catch(()=>{});
     document.getElementById('chip-updated').textContent='อัพเดท '+(ks.metadata&&ks.metadata.last_updated||'—');
     stats();buildOrgChips();render();
     document.getElementById('loading').style.display='none';
@@ -646,6 +696,98 @@ let acPoll=null,acStartTime=null;
 
 function acOpen(){document.getElementById('ac').classList.add('open')}
 function acClose(){document.getElementById('ac').classList.remove('open');if(acPoll){clearInterval(acPoll);acPoll=null}}
+function acTab(n){
+  for(let i=1;i<=4;i++){
+    document.getElementById('ac-t'+i).style.display=i===n?'block':'none';
+    document.getElementById('ac-tabbtn-'+i).classList.toggle('on',i===n);
+  }
+  if(n===2)loadDrafts();if(n===3)loadPRs();if(n===4)loadQueue();
+}
+/* ── แท็บ 2: งานค้าง (drafts ใน main + PR draft ที่ยังเปิด) ── */
+async function loadDrafts(){
+  const el=document.getElementById('ac-drafts');
+  try{
+    const [files,prs]=await Promise.all([
+      gh('/repos/'+GH_REPO+'/contents/data/drafts').catch(()=>[]),
+      gh('/repos/'+GH_REPO+'/pulls?state=open&per_page=20')
+    ]);
+    const drafts=(files||[]).filter(f=>f.name.endsWith('.json'));
+    const draftPrs=prs.filter(p=>p.title.startsWith('🤖'));
+    let h='';
+    drafts.forEach(f=>{
+      h+='<div class="drow"><span class="dstat">📄</span><span class="dnm">'+esc(f.name)+' <small style="color:var(--text-muted)">(ในคลังพัก รอ verify)</small></span>'
+       +'<button class="dbtn" onclick="verifyDraft(\''+esc(f.name)+'\')">🔬 Verify</button>'
+       +'<a class="dlink" target="_blank" rel="noopener" href="'+esc(f.html_url)+'">ดูไฟล์</a></div>';
+    });
+    draftPrs.forEach(p=>{
+      h+='<div class="drow"><span class="dstat">🤖</span><span class="dnm">'+esc(p.title)+' <small style="color:var(--text-muted)">(PR #'+p.number+' ยังไม่ merge)</small></span>'
+       +'<a class="dlink" target="_blank" rel="noopener" href="'+esc(p.html_url)+'">เปิด PR</a></div>';
+    });
+    el.innerHTML=h||'<div class="ac-msg">✅ ไม่มีงานค้าง — ร่างทุกตัวถูก verify หมดแล้ว</div>';
+  }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
+}
+async function verifyDraft(fname){
+  let token=document.getElementById('ac-token').value.trim();
+  const msg=document.getElementById('ac-t2-msg');
+  if(!token){msg.textContent='⚠️ กรอก token ด้านล่างก่อนกดสั่ง';return}
+  msg.textContent='⏳ กำลังส่งคำสั่ง verify: '+fname;
+  try{
+    const r=await fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/verify-pipeline.yml/dispatches',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({ref:'main',inputs:{draft_file:fname}})
+    });
+    token='';document.getElementById('ac-token').value='';
+    if(r.status===404){msg.innerHTML='⏸️ verify-pipeline ยังไม่ติดตั้งบน main (กำลังมาใน PR ถัดไป) — ระหว่างนี้สั่ง verify ผ่าน Cowork ได้';return}
+    if(!r.ok)throw new Error('สั่งไม่สำเร็จ ('+r.status+') — เช็คสิทธิ์ token');
+    msg.innerHTML='✅ ส่งคำสั่งแล้ว — ตามผลได้ที่ <a target="_blank" rel="noopener" href="https://github.com/'+GH_REPO+'/actions">แท็บ Actions</a> เสร็จแล้ว PR "✅ Verify:" จะโผล่ในแท็บรออนุมัติ';
+  }catch(e){msg.textContent='❌ '+e.message}
+}
+/* ── แท็บ 3: PR รออนุมัติ + สถานะ CI ── */
+async function loadPRs(){
+  const el=document.getElementById('ac-prs');
+  try{
+    const prs=await gh('/repos/'+GH_REPO+'/pulls?state=open&per_page=20');
+    if(!prs.length){el.innerHTML='<div class="ac-msg">✅ ไม่มี PR ค้าง</div>';return}
+    const rows=await Promise.all(prs.map(async p=>{
+      let ci='⏳';
+      try{
+        const cr=await gh('/repos/'+GH_REPO+'/commits/'+p.head.sha+'/check-runs');
+        const runs=cr.check_runs||[];
+        if(runs.length){ci=runs.every(r=>r.conclusion==='success')?'✅':(runs.some(r=>r.conclusion&&r.conclusion!=='success')?'❌':'🟡')}
+      }catch(e){}
+      return '<div class="drow"><span class="dstat">'+ci+'</span><span class="dnm">#'+p.number+' '+esc(p.title)+'</span>'
+        +'<a class="dlink" target="_blank" rel="noopener" href="'+esc(p.html_url)+'">เปิดหน้าอนุมัติ</a></div>';
+    }));
+    el.innerHTML=rows.join('')+'<div class="ac-msg">✅=CI ผ่านพร้อม merge · 🟡=กำลังตรวจ · ❌=เกตไม่ผ่าน (merge ไม่ได้จนกว่าจะแก้)</div>';
+  }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
+}
+/* ── แท็บ 4: Verification Queue (logic ย่อจาก validate.js — ข้อมูลชุดเดียวกัน) ── */
+async function loadQueue(){
+  const el=document.getElementById('ac-queue');
+  try{
+    const v='?v='+Date.now();
+    const [uni,glo]=await Promise.all([
+      fetch('../data/source_universe.json'+v).then(r=>r.json()).catch(()=>null),
+      fetch('../data/glossary.json'+v).then(r=>r.json()).catch(()=>null)
+    ]);
+    const q=[];const now=Date.now();
+    const age=d=>d?Math.round((now-Date.parse(d))/86400000):null;
+    (REGISTRY&&REGISTRY.families||[]).forEach(f=>{
+      if(f.visibility==='INTERNAL'){q.push({s:'PARKED',r:f.display,a:null,t:'พักรอเปิดใช้ internal_doc'});return}
+      (f.editions||[]).forEach(ed=>{
+        if(ed.verified===false)q.push({s:'UNVERIFIED',r:f.display+' v'+ed.version,a:age(ed.last_verified),t:ed.open_question||'ตรวจจากผู้ออก'});
+        else if(age(ed.last_verified)>183)q.push({s:'STALE',r:f.display+' v'+ed.version,a:age(ed.last_verified),t:'ตรวจซ้ำตามรอบ'});
+      });
+    });
+    ((uni&&uni.publishers)||[]).forEach(p=>{const c=p._claim||{};if(c.state==='UNVERIFIED'||c.state==='UNRESOLVED')q.push({s:c.state,r:p.name,a:age(c.last_checked),t:c.open_question||'harvest เอกสารหลัก'})});
+    ((glo&&glo.terms)||[]).forEach(t=>{const c=t._claim||{};if(c.state==='UNVERIFIED'||c.state==='UNRESOLVED')q.push({s:c.state,r:'ศัพท์ "'+t.en+'"',a:age(c.last_checked),t:c.open_question||'ยืนยันที่มาศัพท์'})});
+    q.sort((a,b)=>(b.a||0)-(a.a||0));
+    el.innerHTML='<div class="ac-msg"><b>'+q.length+' ธงเปิดอยู่</b> (SLA 60 วันสำหรับ UNVERIFIED/UNRESOLVED — เกินแล้ว CI จะ block) · กติกา Boy Scout: batch ใหม่ปิดธงเก่า ≥2</div>'
+      +q.slice(0,40).map(x=>'<div class="qrow"><span class="qs qs-'+x.s+'">'+x.s+'</span><span class="qr">'+esc(x.r)+' <small style="color:var(--text-muted)">→ '+esc(x.t)+'</small></span><span class="qa">'+(x.a==null?'—':'ค้าง '+x.a+' วัน')+'</span></div>').join('')
+      +(q.length>40?'<div class="ac-msg">... และอีก '+(q.length-40)+' รายการ</div>':'');
+  }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
+}
 function acRenderSteps(states){ // states: {key:'wait'|'run'|'ok'|'fail'}
   const el=document.getElementById('ac-steps');el.style.display='block';
   el.innerHTML=AC_STEPS.map(s=>{
