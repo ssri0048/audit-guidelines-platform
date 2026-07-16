@@ -13159,6 +13159,1408 @@
         }
       ],
       "hash_signature": "sha256:4e74ecb749d8c516b8aa5aaf0b880af7977fe1288f97a11fc40ad6266fd55da6"
+    },
+    {
+      "id": "T023",
+      "name_th": "ความเสี่ยงด้านเทคโนโลยีและปัญญาประดิษฐ์ (AI) ในระบบไฟฟ้า",
+      "name_en": "Technology and Artificial Intelligence (AI) Risk in Power Utility Operations",
+      "category": "Technology & Digital Risk",
+      "category_th": "ความเสี่ยงด้านเทคโนโลยีดิจิทัลและปัญญาประดิษฐ์",
+      "icon": "🧩",
+      "color": "#1F618D",
+      "priority": "CRITICAL",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
+      "applicable_standards": [
+        "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2560",
+        "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+        "ISO/IEC 27001:2022 + Amd 1:2024",
+        "ISO/IEC 27002:2022",
+        "ISO/IEC 42001:2023",
+        "NIST Cybersecurity Framework 2.0",
+        "COBIT 2019",
+        "COSO ERM Framework 2017",
+        "IEC 62443",
+        "ISO 22301:2019 + Amd 1:2024",
+        "PDPA Compliance Guideline สคส. 2562"
+      ],
+      "thailand_applicable": true,
+      "thai_law_refs": [
+        "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2560",
+        "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562"
+      ],
+      "risks": [
+        {
+          "id": "R001",
+          "name_th": "การโจมตีทางไซเบอร์ต่อระบบควบคุมอุตสาหกรรม (OT/SCADA) ของระบบไฟฟ้า",
+          "name_en": "Cyberattack on Industrial Control Systems (OT/SCADA) in Power Grid",
+          "level": "CRITICAL",
+          "likelihood": "สูง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001-1",
+              "name_th": "การขาดการแบ่งแยกเครือข่ายระหว่างระบบ IT และ OT/SCADA อย่างเพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "AP001-1-1",
+                  "name_th": "สอบทานสถาปัตยกรรมเครือข่ายและมาตรการแบ่งแยกโซนตามหลัก Zone and Conduit",
+                  "method": "สัมภาษณ์ผู้ดูแลระบบเครือข่ายและตรวจสอบเอกสารการออกแบบเครือข่ายเทียบกับ Network Diagram จริง",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-3-2",
+                      "title": "Security risk assessment for system design (Zone and Conduit)"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "PR.IR-01",
+                      "title": "Network segmentation is implemented"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.8.22",
+                      "title": "Segregation of networks"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนผังสถาปัตยกรรมเครือข่าย OT/IT",
+                    "เอกสารนโยบายการแบ่งแยกเครือข่าย",
+                    "รายงานผลการตรวจสอบค่าคอนฟิก Firewall/DMZ",
+                    "บันทึกการเปลี่ยนแปลงค่าคอนฟิกเครือข่าย"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP001-1-2",
+                  "name_th": "ทดสอบเจาะระบบและประเมินช่องโหว่การเชื่อมต่อระหว่างเครือข่าย IT และ OT",
+                  "method": "ดำเนินการทดสอบเจาะระบบ (Penetration Test) และสังเกตการณ์การตรวจจับเหตุการณ์ผิดปกติ",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-3-3",
+                      "title": "System security requirements and security levels"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "DE.CM-01",
+                      "title": "Networks are monitored to detect potential cybersecurity events"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการทดสอบเจาะระบบ (Pentest Report)",
+                    "รายงานการประเมินช่องโหว่เครือข่าย",
+                    "บันทึกผลการแก้ไขช่องโหว่ที่พบ",
+                    "หลักฐานการติดตามผลปิดช่องโหว่"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF001-2",
+              "name_th": "การบริหารจัดการช่องโหว่และแพตช์ความปลอดภัยของอุปกรณ์ SCADA/PLC ไม่เพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "AP001-2-1",
+                  "name_th": "สอบทานกระบวนการบริหารจัดการช่องโหว่และทะเบียนสินทรัพย์ OT",
+                  "method": "ตรวจสอบเอกสารนโยบายและสุ่มตรวจทะเบียนสินทรัพย์เทียบกับอุปกรณ์จริงในพื้นที่ปฏิบัติงาน",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-2-1",
+                      "title": "Security program requirements for IACS asset owners"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "8.8",
+                      "title": "Management of technical vulnerabilities"
+                    },
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "BAI10",
+                      "title": "Managed Configuration"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนสินทรัพย์ OT (Asset Inventory)",
+                    "นโยบายบริหารจัดการช่องโหว่",
+                    "รายงานผลการสแกนช่องโหว่",
+                    "แผนการปิดช่องโหว่และหลักฐานการดำเนินการ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP001-2-2",
+                  "name_th": "สุ่มตรวจสอบสถานะแพตช์และการอัปเดตซอฟต์แวร์ของอุปกรณ์ควบคุมที่สำคัญ",
+                  "method": "สุ่มตัวอย่างอุปกรณ์ควบคุมสำคัญเทียบเวอร์ชันซอฟต์แวร์กับมาตรฐาน Baseline และสอบทานหลักฐานการทดสอบก่อนติดตั้ง",
+                  "std_refs": [
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "PR.PS-02",
+                      "title": "Software is maintained, replaced, and removed commensurate with risk"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.8.8",
+                      "title": "Management of technical vulnerabilities"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกประวัติการแพตช์อุปกรณ์",
+                    "รายงานเปรียบเทียบเวอร์ชันซอฟต์แวร์กับ baseline",
+                    "หลักฐานการทดสอบก่อนติดตั้งแพตช์ (Test Environment)",
+                    "รายงานความเสี่ยงจากอุปกรณ์ที่ไม่สามารถแพตช์ได้ (Legacy System)"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF001-3",
+              "name_th": "การขาดแผนตอบสนองและฟื้นฟูจากเหตุการณ์โจมตีทางไซเบอร์เฉพาะระบบ OT/SCADA",
+              "audit_procedures": [
+                {
+                  "id": "AP001-3-1",
+                  "name_th": "สอบทานความครบถ้วนของแผนตอบสนองเหตุการณ์ไซเบอร์และแผนความต่อเนื่องทางธุรกิจสำหรับระบบ OT",
+                  "method": "ตรวจสอบเอกสารแผนที่อนุมัติแล้วและเปรียบเทียบกับข้อกำหนดกฎหมายว่าด้วยโครงสร้างพื้นฐานสำคัญทางสารสนเทศ",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                      "clause": "มาตรา 56",
+                      "title": "การรับมือภัยคุกคามทางไซเบอร์ต่อโครงสร้างพื้นฐานสำคัญทางสารสนเทศ"
+                    },
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "8.4",
+                      "title": "Business continuity plans and procedures"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "RS.MA-01",
+                      "title": "Incident response plan is executed"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนตอบสนองเหตุการณ์ไซเบอร์ (IRP) ฉบับอนุมัติ",
+                    "แผนความต่อเนื่องทางธุรกิจ (BCP) ระบบ OT",
+                    "รายงานผลการทบทวนแผนประจำปี",
+                    "บันทึกการแจ้งเหตุตามกฎหมาย CII"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP001-3-2",
+                  "name_th": "ทดสอบซ้อมแผนรับมือเหตุการณ์จำลองการโจมตีระบบ SCADA",
+                  "method": "สังเกตการณ์การซ้อมแผน (Tabletop/Simulation Exercise) และสอบทานรายงานผลหลังการซ้อม",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-2-1",
+                      "title": "Incident response management"
+                    },
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "8.5",
+                      "title": "Exercising and testing"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการซ้อมแผน (Tabletop/Simulation Report)",
+                    "รายชื่อผู้เข้าร่วมและบทบาทหน้าที่",
+                    "บันทึกข้อบกพร่องที่พบจากการซ้อม",
+                    "แผนการปรับปรุงหลังการซ้อม (After Action Report)"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF001-4",
+              "name_th": "การควบคุมการเข้าถึงระยะไกลและสิทธิ์การใช้งานระบบควบคุม OT ไม่รัดกุม",
+              "audit_procedures": [
+                {
+                  "id": "AP001-4-1",
+                  "name_th": "สอบทานนโยบายและมาตรการควบคุมการเข้าถึงระยะไกลรวมถึงการยืนยันตัวตนหลายปัจจัย",
+                  "method": "ตรวจสอบเอกสารนโยบายและทดสอบการตั้งค่า MFA บนช่องทางการเข้าถึงระยะไกลจริง",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-3-3 SR 1.13",
+                      "title": "Access via untrusted networks"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.8.5",
+                      "title": "Secure authentication"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "PR.AA-03",
+                      "title": "Users, services, and hardware are authenticated"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายการเข้าถึงระยะไกล (Remote Access Policy)",
+                    "หลักฐานการตั้งค่า MFA",
+                    "รายงานการตรวจสอบสิทธิ์ผู้ใช้งานเป็นระยะ",
+                    "บันทึกอนุมัติสิทธิ์การเข้าถึงระบบ OT"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP001-4-2",
+                  "name_th": "ตรวจสอบบันทึกการเข้าถึงและสิทธิ์การใช้งานเทียบกับหลักการสิทธิ์น้อยที่สุด",
+                  "method": "สุ่มตรวจสอบ Access Log และ User Access Matrix เทียบกับบทบาทหน้าที่จริงของผู้ใช้งาน",
+                  "std_refs": [
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "DSS05.04",
+                      "title": "Manage user identity and logical access"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "8.2",
+                      "title": "Privileged access rights"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน Access Log ระบบ SCADA",
+                    "รายการสิทธิ์ผู้ใช้งาน (User Access Matrix)",
+                    "หลักฐานการทบทวนสิทธิ์การเข้าถึงเป็นระยะ",
+                    "บันทึกการเพิกถอนสิทธิ์เมื่อพนักงานพ้นสภาพ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "การรั่วไหลหรือละเมิดข้อมูลส่วนบุคคลของผู้ใช้บริการไฟฟ้า",
+          "name_en": "Data Breach or Unauthorized Disclosure of Customer Personal Data",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002-1",
+              "name_th": "การควบคุมสิทธิ์การเข้าถึงข้อมูลส่วนบุคคลของผู้ใช้บริการไม่รัดกุมเพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "CF002-1-P1",
+                  "name_th": "ตรวจสอบนโยบายและการปฏิบัติจริงด้านการควบคุมสิทธิ์เข้าถึงข้อมูลส่วนบุคคลตามหลัก Need-to-know",
+                  "method": "สอบทานเอกสารนโยบาย สัมภาษณ์ผู้ดูแลระบบ และตรวจสอบบันทึกการทบทวนสิทธิ์ย้อนหลัง",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 37",
+                      "title": "มาตรการรักษาความมั่นคงปลอดภัยข้อมูลส่วนบุคคล"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "5.15",
+                      "title": "Access control"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายควบคุมการเข้าถึงข้อมูลส่วนบุคคล",
+                    "บันทึกการทบทวนสิทธิ์การเข้าถึงรายไตรมาส",
+                    "รายงานการตรวจสอบ Log การเข้าถึงข้อมูล",
+                    "บันทึกผลการสัมภาษณ์เจ้าหน้าที่ผู้ดูแลระบบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF002-1-P2",
+                  "name_th": "สุ่มทดสอบบัญชีผู้ใช้งานที่มีสิทธิ์เข้าถึงข้อมูลส่วนบุคคลเทียบกับหน้าที่งานจริง",
+                  "method": "ทดสอบเชิงเทคนิค (User Access Review) เปรียบเทียบสิทธิ์ในระบบกับใบอนุมัติและหน้าที่งานปัจจุบัน",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "5.18",
+                      "title": "Access rights"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "PR.AA",
+                      "title": "Identity Management, Authentication and Access Control"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายชื่อผู้ใช้งานและสิทธิ์การเข้าถึงปัจจุบัน",
+                    "ผลทดสอบ Segregation of Duties",
+                    "เอกสารขออนุมัติสิทธิ์การเข้าถึงข้อมูล",
+                    "รายงานข้อยกเว้นและการแก้ไขที่พบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF002-2",
+              "name_th": "ขาดมาตรการทางเทคนิคในการเข้ารหัสและป้องกันการรั่วไหลของข้อมูลส่วนบุคคล",
+              "audit_procedures": [
+                {
+                  "id": "CF002-2-P1",
+                  "name_th": "ตรวจสอบมาตรการเข้ารหัสข้อมูลส่วนบุคคลทั้งระหว่างส่งและจัดเก็บ",
+                  "method": "ตรวจสอบเชิงเทคนิคและสอบทานเอกสารมาตรฐานการเข้ารหัสของระบบที่จัดเก็บข้อมูลผู้ใช้บริการ",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 37",
+                      "title": "มาตรการรักษาความมั่นคงปลอดภัยข้อมูลส่วนบุคคล"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "8.24",
+                      "title": "Use of cryptography"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายการเข้ารหัสข้อมูลส่วนบุคคล",
+                    "ผลทดสอบการเข้ารหัสข้อมูล (Encryption Test Report)",
+                    "รายการระบบจัดเก็บข้อมูลและสถานะการเข้ารหัส",
+                    "รายงานตรวจสอบจากผู้เชี่ยวชาญภายนอก"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF002-2-P2",
+                  "name_th": "ประเมินระบบป้องกันการรั่วไหลข้อมูล (DLP) และการเฝ้าระวังการส่งออกข้อมูลผิดปกติ",
+                  "method": "ทดสอบการทำงานของระบบ DLP และสอบทาน Log การแจ้งเตือนเหตุการณ์ผิดปกติย้อนหลัง",
+                  "std_refs": [
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "PR.DS",
+                      "title": "Data Security"
+                    },
+                    {
+                      "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                      "clause": "มาตรา 44",
+                      "title": "มาตรการป้องกันภัยคุกคามทางไซเบอร์"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานการทำงานของระบบ DLP",
+                    "Log การแจ้งเตือนเหตุการณ์ผิดปกติ",
+                    "ผลการทดสอบเจาะระบบ (Penetration Test)",
+                    "นโยบายการจัดการเหตุการณ์ข้อมูลรั่วไหล"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF002-3",
+              "name_th": "ขาดกระบวนการตอบสนองและแจ้งเหตุการละเมิดข้อมูลส่วนบุคคลตามที่กฎหมายกำหนด",
+              "audit_procedures": [
+                {
+                  "id": "CF002-3-P1",
+                  "name_th": "ตรวจสอบแผนและความพร้อมของกระบวนการตอบสนองต่อเหตุการณ์ละเมิดข้อมูลส่วนบุคคล",
+                  "method": "สอบทานแผนรับมือเหตุการณ์และหลักฐานการฝึกซ้อมภายในองค์กร",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 37(4)",
+                      "title": "การแจ้งเหตุการละเมิดข้อมูลส่วนบุคคล"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.5.24",
+                      "title": "Information security incident management planning"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนตอบสนองเหตุการณ์ (Incident Response Plan)",
+                    "บันทึกการฝึกซ้อมแผนรับมือเหตุการณ์",
+                    "เอกสารแต่งตั้งเจ้าหน้าที่คุ้มครองข้อมูล (DPO)",
+                    "รายงานผลการแจ้งเหตุที่ผ่านมา"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF002-3-P2",
+                  "name_th": "ทดสอบระยะเวลาและความครบถ้วนของการแจ้งเหตุละเมิดข้อมูลต่อหน่วยงานกำกับดูแล",
+                  "method": "สุ่มตรวจสอบกรณีเหตุการณ์ (ถ้ามี) เทียบระยะเวลาการแจ้งเหตุกับกรอบเวลาที่กฎหมายกำหนด",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 37(4)",
+                      "title": "การแจ้งเหตุการละเมิดข้อมูลส่วนบุคคลภายใน 72 ชั่วโมง"
+                    },
+                    {
+                      "std": "PDPA Compliance Guideline สคส. 2562",
+                      "clause": "หมวดการแจ้งเหตุละเมิด",
+                      "title": "แนวปฏิบัติการแจ้งเหตุละเมิดข้อมูลส่วนบุคคล"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกเวลาการตรวจพบและแจ้งเหตุ",
+                    "แบบฟอร์มการแจ้งเหตุละเมิดข้อมูลส่วนบุคคล",
+                    "หลักฐานการสื่อสารกับสำนักงาน คปภ./สคส.",
+                    "รายงานสรุปผลหลังเหตุการณ์ (Post-incident Review)"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "ความเสี่ยงจากการนำ AI มาใช้ตัดสินใจโดยขาดความโปร่งใสและอคติในข้อมูล (AI Bias & Governance)",
+          "name_en": "AI Decision-Making Risk from Lack of Transparency and Data Bias",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF003-1",
+              "name_th": "ขาดกรอบธรรมาภิบาลและการกำกับดูแลวงจรชีวิตระบบ AI ที่เป็นทางการ",
+              "audit_procedures": [
+                {
+                  "id": "AP003-1-1",
+                  "name_th": "สอบทานความครบถ้วนของนโยบายและโครงสร้างคณะกรรมการกำกับดูแล AI",
+                  "method": "Document Review & Interview",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "5.2",
+                      "title": "AI Policy"
+                    },
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "APO01",
+                      "title": "Managed I&T Management Framework"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายธรรมาภิบาล AI ที่อนุมัติโดยผู้บริหาร",
+                    "บันทึกการประชุมคณะกรรมการกำกับดูแล AI",
+                    "ผังโครงสร้างบทบาทหน้าที่ผู้รับผิดชอบ AI",
+                    "แผนกลยุทธ์การบริหารความเสี่ยง AI"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP003-1-2",
+                  "name_th": "ทดสอบกระบวนการอนุมัติและทบทวนโมเดล AI ก่อนนำไปใช้งานจริง",
+                  "method": "Walkthrough Testing",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "8.1",
+                      "title": "Operational Planning and Control"
+                    },
+                    {
+                      "std": "COSO ERM Framework 2017",
+                      "clause": "Component 4",
+                      "title": "Performance - Risk Assessment"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารขั้นตอนอนุมัติโมเดล AI (Model Approval Workflow)",
+                    "รายงานผลการทดสอบก่อนใช้งาน (Pre-deployment Test Report)",
+                    "บันทึกการอนุมัติจากผู้มีอำนาจ",
+                    "รายงานการทบทวนวงจรชีวิตโมเดลตามรอบเวลา"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF003-2",
+              "name_th": "ขาดกระบวนการตรวจสอบและบริหารจัดการอคติในชุดข้อมูลและโมเดล AI",
+              "audit_procedures": [
+                {
+                  "id": "AP003-2-1",
+                  "name_th": "ทดสอบชุดข้อมูลฝึกโมเดลและผลลัพธ์เพื่อตรวจหาอคติเชิงสถิติ",
+                  "method": "Substantive Testing",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "6.1.4",
+                      "title": "AI Risk Assessment"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "ID.RA",
+                      "title": "Risk Assessment"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการทดสอบอคติของโมเดล (Bias Test Report)",
+                    "บันทึกแหล่งที่มาและคุณภาพของชุดข้อมูลฝึก (Data Lineage Log)",
+                    "ผลการวิเคราะห์ความเบี่ยงเบนตามกลุ่มประชากร",
+                    "เกณฑ์ยอมรับความเป็นธรรมของโมเดล (Fairness Threshold Criteria)"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP003-2-2",
+                  "name_th": "สอบทานเอกสารประเมินผลกระทบด้านความเป็นธรรมและมาตรการแก้ไขเมื่อพบอคติ",
+                  "method": "Document Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "Annex A.7",
+                      "title": "AI System Impact Assessment"
+                    },
+                    {
+                      "std": "COSO ERM Framework 2017",
+                      "clause": "Component 5",
+                      "title": "Review and Revision"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารการประเมินผลกระทบด้านความเป็นธรรม (Fairness Impact Assessment)",
+                    "รายงานการปรับปรุงโมเดลหลังพบอคติ (Model Remediation Report)",
+                    "บันทึกข้อร้องเรียนจากผู้ได้รับผลกระทบ",
+                    "แผนติดตามผลหลังการแก้ไขโมเดล"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF003-3",
+              "name_th": "ขาดกลไกความโปร่งใสในการอธิบายผลการตัดสินใจ AI และการคุ้มครองข้อมูลส่วนบุคคลที่เกี่ยวข้อง",
+              "audit_procedures": [
+                {
+                  "id": "AP003-3-1",
+                  "name_th": "สอบทานกลไกการอธิบายตรรกะการตัดสินใจของ AI ต่อผู้ใช้งานและเจ้าของข้อมูล",
+                  "method": "Document Review & Interview",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "8.4",
+                      "title": "AI System Transparency and Explainability"
+                    },
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 30",
+                      "title": "สิทธิในการคัดค้านการประมวลผลด้วยระบบอัตโนมัติ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารคำอธิบายตรรกะการตัดสินใจของ AI",
+                    "บันทึกคำขอใช้สิทธิของเจ้าของข้อมูลเกี่ยวกับการตัดสินใจอัตโนมัติ",
+                    "คู่มือการสื่อสารผลลัพธ์ AI แก่ผู้มีส่วนได้เสีย",
+                    "รายงานการตอบสนองต่อคำขอคำอธิบายผล"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP003-3-2",
+                  "name_th": "ทดสอบการปฏิบัติตามฐานทางกฎหมายและการคุ้มครองข้อมูลส่วนบุคคลในการประมวลผลด้วย AI",
+                  "method": "Compliance Testing",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 24",
+                      "title": "ฐานทางกฎหมายในการเก็บรวบรวมข้อมูลส่วนบุคคล"
+                    },
+                    {
+                      "std": "PDPA Compliance Guideline สคส. 2562",
+                      "clause": "ส่วนที่ 4",
+                      "title": "แนวปฏิบัติการประมวลผลอัตโนมัติ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการประเมินผลกระทบด้านการคุ้มครองข้อมูลส่วนบุคคล (DPIA)",
+                    "หลักฐานการขอความยินยอมหรือฐานทางกฎหมายในการประมวลผลข้อมูล",
+                    "บันทึกการตรวจสอบการเข้าถึงข้อมูลที่ใช้ฝึกโมเดล AI",
+                    "แนวปฏิบัติการจัดเก็บและทำลายข้อมูลส่วนบุคคลที่ใช้ในระบบ AI"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ความล้มเหลวของระบบเทคโนโลยีสารสนเทศที่กระทบต่อความต่อเนื่องในการให้บริการไฟฟ้า",
+          "name_en": "IT System Failure Impacting Business Continuity of Electricity Services",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF004-1",
+              "name_th": "การบริหารความต่อเนื่องทางธุรกิจและแผนกู้คืนระบบสารสนเทศไม่เพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "AP004-1-1",
+                  "name_th": "สอบทานความครบถ้วนของแผน BCP/DRP เทียบกับผล Business Impact Analysis ของระบบที่รองรับบริการไฟฟ้า",
+                  "method": "Document Review & Walkthrough",
+                  "std_refs": [
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "8.2",
+                      "title": "Business Impact Analysis and Risk Assessment"
+                    },
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "DSS04",
+                      "title": "Managed Continuity"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารแผน BCP/DRP ฉบับล่าสุด",
+                    "รายงานผล Business Impact Analysis",
+                    "บันทึกการอนุมัติแผนโดยผู้บริหาร",
+                    "แผนภูมิระบบ IT วิกฤต (Critical Systems Inventory)"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP004-1-2",
+                  "name_th": "ทดสอบผลการซ้อมแผนกู้คืนระบบ (DR Drill) เทียบกับเป้าหมาย RTO/RPO ที่กำหนด",
+                  "method": "Re-performance & Evidence Testing",
+                  "std_refs": [
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "8.5",
+                      "title": "Exercise Programme"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "RC.RP",
+                      "title": "Recovery Planning"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการซ้อมแผน DR ล่าสุด",
+                    "ตาราง RTO/RPO ที่กำหนดตามระบบ",
+                    "บันทึกปัญหาที่พบระหว่างการซ้อมและแผนแก้ไข",
+                    "หลักฐานการติดตามปิดประเด็นหลังการซ้อม"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF004-2",
+              "name_th": "โครงสร้างพื้นฐานสารสนเทศขาดความซ้ำซ้อนและกลไก Failover ที่เพียงพอสำหรับระบบวิกฤต",
+              "audit_procedures": [
+                {
+                  "id": "AP004-2-1",
+                  "name_th": "ตรวจสอบสถาปัตยกรรมระบบและการออกแบบ Redundancy/High Availability ของระบบที่มีผลกระทบสูงต่อการให้บริการ",
+                  "method": "Technical Design Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.8.14",
+                      "title": "Redundancy of Information Processing Facilities"
+                    },
+                    {
+                      "std": "IEC 62443",
+                      "clause": "2-1",
+                      "title": "Security Program Requirements for IACS"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารสถาปัตยกรรมระบบ IT/OT",
+                    "แผนผัง Redundancy และ Failover Configuration",
+                    "รายงานผลการประเมินความเสี่ยงโครงสร้างพื้นฐาน",
+                    "สัญญา/SLA กับผู้ให้บริการ Data Center"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP004-2-2",
+                  "name_th": "ทดสอบกระบวนการ Failover และ Backup Restoration จริงพร้อมประเมินระยะเวลาหยุดชะงัก",
+                  "method": "Technical Testing & Simulation",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "8.14",
+                      "title": "Redundancy of Information Processing Facilities"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "RC.RP-01",
+                      "title": "Recovery Plan Execution"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกผลการทดสอบ Failover ล่าสุด",
+                    "รายงานเวลา Downtime ที่เกิดขึ้นจริง",
+                    "หลักฐานการกู้คืนข้อมูลจาก Backup",
+                    "แผนปรับปรุงหลังการทดสอบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF004-3",
+              "name_th": "การเฝ้าระวังและตรวจจับเหตุการณ์ผิดปกติของระบบสารสนเทศไม่เพียงพอต่อการรักษาความต่อเนื่อง",
+              "audit_procedures": [
+                {
+                  "id": "AP004-3-1",
+                  "name_th": "สอบทานระบบ Monitoring/SIEM และเกณฑ์การแจ้งเตือนเหตุการณ์ผิดปกติของระบบวิกฤต",
+                  "method": "System Configuration Review",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.8.16",
+                      "title": "Monitoring Activities"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "DE.CM",
+                      "title": "Continuous Monitoring"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารการตั้งค่าระบบ Monitoring/SIEM",
+                    "รายงาน Log การแจ้งเตือนย้อนหลัง",
+                    "เกณฑ์ Threshold การแจ้งเตือนที่อนุมัติ",
+                    "รายชื่อระบบที่อยู่ภายใต้การเฝ้าระวัง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP004-3-2",
+                  "name_th": "ทดสอบกระบวนการตอบสนองเหตุการณ์ตั้งแต่การแจ้งเตือนจนถึงการแก้ไขปัญหา",
+                  "method": "Incident Response Walkthrough",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "5.26",
+                      "title": "Response to Information Security Incidents"
+                    },
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "DSS02",
+                      "title": "Managed Service Requests and Incidents"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกเหตุการณ์ Incident ย้อนหลัง",
+                    "รายงานระยะเวลาตอบสนองและแก้ไข",
+                    "แผนผังกระบวนการ Incident Response",
+                    "หลักฐานการอบรมทีมตอบสนองเหตุการณ์"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "การเข้าถึงระบบโดยไม่ได้รับอนุญาตผ่านช่องโหว่ของอุปกรณ์ IoT/Smart Grid",
+          "name_en": "Unauthorized Access via IoT/Smart Grid Device Vulnerabilities",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF005-1",
+              "name_th": "ขาดการแบ่งแยกเครือข่าย (Network Segmentation) ระหว่างระบบ IT และอุปกรณ์ IoT/Smart Grid (OT)",
+              "audit_procedures": [
+                {
+                  "id": "CF005-1-AP1",
+                  "name_th": "ทวนสอบสถาปัตยกรรมเครือข่ายและการแบ่งเขต Zone/Conduit ระหว่างเครือข่ายควบคุมกับเครือข่ายทั่วไป",
+                  "method": "ตรวจสอบเอกสารสถาปัตยกรรมเครือข่าย ผังเครือข่าย และ Firewall Rule พร้อมสัมภาษณ์ผู้ดูแลระบบเครือข่าย",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-3-3 SR 5.1",
+                      "title": "Network Segmentation"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "Clause 8.22",
+                      "title": "Segregation of Networks"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผังสถาปัตยกรรมเครือข่าย (Network Diagram)",
+                    "รายการ Firewall Rule/ACL",
+                    "รายงานสัมภาษณ์ผู้ดูแลระบบ",
+                    "บันทึกการทบทวนการแบ่งเขตเครือข่ายล่าสุด"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-1-AP2",
+                  "name_th": "ทดสอบเจาะระบบ (Penetration Test) เพื่อประเมินความสามารถในการเข้าถึงเครือข่าย OT จากเครือข่าย IT",
+                  "method": "ดำเนินการทดสอบเจาะระบบและวิเคราะห์เส้นทางการโจมตี (Attack Path) ระหว่างเครือข่าย",
+                  "std_refs": [
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "DE.CM-01",
+                      "title": "Network Monitoring for Anomalies"
+                    },
+                    {
+                      "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                      "clause": "มาตรา 44",
+                      "title": "มาตรการป้องกันภัยคุกคามทางไซเบอร์"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการทดสอบเจาะระบบ (Pen Test Report)",
+                    "หลักฐานเส้นทางการโจมตีที่พบ (Attack Path Evidence)",
+                    "แผนแก้ไขช่องโหว่ที่พบ",
+                    "บันทึกการอนุมัติขอบเขตการทดสอบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF005-2",
+              "name_th": "ขาดกระบวนการบริหารจัดการช่องโหว่และการปรับปรุงเฟิร์มแวร์อุปกรณ์ IoT/Smart Grid อย่างสม่ำเสมอ",
+              "audit_procedures": [
+                {
+                  "id": "CF005-2-AP1",
+                  "name_th": "สุ่มตรวจทะเบียนอุปกรณ์และสถานะเวอร์ชันเฟิร์มแวร์/แพตช์ความปลอดภัย",
+                  "method": "สุ่มตัวอย่างอุปกรณ์ IoT เทียบกับทะเบียนสินทรัพย์และบันทึกการอัปเดตแพตช์",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-2-3",
+                      "title": "Patch Management for IACS"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "Annex A 8.8",
+                      "title": "Management of Technical Vulnerabilities"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนสินทรัพย์อุปกรณ์ IoT",
+                    "บันทึกประวัติการอัปเดตเฟิร์มแวร์/แพตช์",
+                    "นโยบายการบริหารจัดการช่องโหว่",
+                    "รายงานผลการสุ่มตรวจสอบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-2-AP2",
+                  "name_th": "ทดสอบสแกนช่องโหว่ (Vulnerability Scanning) บนอุปกรณ์ IoT/Smart Grid ที่เชื่อมต่อระบบ",
+                  "method": "ดำเนินการสแกนช่องโหว่ด้วยเครื่องมืออัตโนมัติและวิเคราะห์ผลเทียบกับระดับความเสี่ยง",
+                  "std_refs": [
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "ID.RA-01",
+                      "title": "Vulnerability Identification"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "Clause 8.8",
+                      "title": "Management of Technical Vulnerabilities"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการสแกนช่องโหว่ (Vulnerability Scan Report)",
+                    "รายการช่องโหว่ที่ยังไม่ได้แก้ไข",
+                    "แผนการแก้ไขช่องโหว่พร้อมกำหนดเวลา",
+                    "บันทึกการติดตามผลการแก้ไข"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF005-3",
+              "name_th": "การควบคุมการยืนยันตัวตนของอุปกรณ์ IoT อ่อนแอ รวมถึงการใช้ค่าตั้งต้นจากโรงงาน (Default Credentials)",
+              "audit_procedures": [
+                {
+                  "id": "CF005-3-AP1",
+                  "name_th": "ทวนสอบนโยบายและการตั้งค่าการยืนยันตัวตนของอุปกรณ์ IoT/Smart Grid",
+                  "method": "ตรวจสอบเอกสารนโยบายการตั้งค่าความปลอดภัยและสุ่มตรวจสอบการตั้งค่าจริงบนอุปกรณ์",
+                  "std_refs": [
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-4-2 CR 1.1",
+                      "title": "Human User Identification and Authentication"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "Clause 5.17",
+                      "title": "Authentication Information"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายการยืนยันตัวตนอุปกรณ์",
+                    "รายงานการสุ่มตรวจตั้งค่าอุปกรณ์จริง",
+                    "รายการอุปกรณ์ที่ยังใช้ค่าตั้งต้น",
+                    "หลักฐานการแก้ไขการตั้งค่าที่ไม่ปลอดภัย"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-3-AP2",
+                  "name_th": "ทดสอบการเข้าถึงระบบด้วยบัญชีผู้ใช้และรหัสผ่านค่าตั้งต้นจากโรงงาน (Default Credential Testing)",
+                  "method": "ทดลองเข้าถึงอุปกรณ์ตัวอย่างด้วยข้อมูลบัญชีเริ่มต้นจากคู่มือผู้ผลิตในสภาพแวดล้อมควบคุม",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2560",
+                      "clause": "มาตรา 5",
+                      "title": "การเข้าถึงโดยมิชอบซึ่งระบบคอมพิวเตอร์"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "PR.AA-01",
+                      "title": "Identity and Credential Management"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการทดสอบ Default Credential",
+                    "รายการอุปกรณ์ที่เข้าถึงได้สำเร็จ",
+                    "ภาพหน้าจอ/บันทึกหลักฐานการทดสอบ",
+                    "แผนแก้ไขและกำหนดเปลี่ยนรหัสผ่านเริ่มต้น"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "การไม่ปฏิบัติตามกฎหมายและข้อกำหนดด้านการคุ้มครองข้อมูลส่วนบุคคลและความมั่นคงปลอดภัยไซเบอร์",
+          "name_en": "Non-Compliance with PDPA and Cybersecurity Regulatory Requirements",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006-1",
+              "name_th": "ขาดกระบวนการจัดทำบันทึกรายการประมวลผลและประเมินผลกระทบด้านการคุ้มครองข้อมูลส่วนบุคคล (ROPA/DPIA) สำหรับระบบและโครงการ AI",
+              "audit_procedures": [
+                {
+                  "id": "AP006-1-1",
+                  "name_th": "ตรวจสอบความครบถ้วนของบันทึกรายการประมวลผลข้อมูลส่วนบุคคลและฐานทางกฎหมายเทียบกับกิจกรรมจริง",
+                  "method": "สุ่มตรวจเอกสาร ROPA เทียบกับ Data Flow จริงและสัมภาษณ์เจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (DPO)",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 24",
+                      "title": "ฐานทางกฎหมายในการเก็บรวบรวมข้อมูลส่วนบุคคล"
+                    },
+                    {
+                      "std": "PDPA Compliance Guideline สคส. 2562",
+                      "clause": "แนวปฏิบัติข้อ 3",
+                      "title": "การจัดทำบันทึกรายการประมวลผลข้อมูลส่วนบุคคล (ROPA)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารบันทึกรายการประมวลผลข้อมูล (ROPA)",
+                    "แผนผัง Data Flow ของระบบ",
+                    "บันทึกการสัมภาษณ์ DPO",
+                    "รายงานผลการตรวจสอบความสอดคล้องฐานทางกฎหมาย"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP006-1-2",
+                  "name_th": "ทดสอบกระบวนการประเมินผลกระทบด้านข้อมูลส่วนบุคคลก่อนนำระบบ AI ใหม่เข้าใช้งาน",
+                  "method": "สุ่มตรวจสอบเอกสาร DPIA ของโครงการ AI ที่ผ่านมาและประเมินความครบถ้วนของขั้นตอนอนุมัติ",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "ข้อ 8.2",
+                      "title": "การประเมินผลกระทบของระบบ AI ต่อผู้มีส่วนได้ส่วนเสีย"
+                    },
+                    {
+                      "std": "PDPA Compliance Guideline สคส. 2562",
+                      "clause": "แนวปฏิบัติข้อ 5",
+                      "title": "การประเมินผลกระทบด้านการคุ้มครองข้อมูลส่วนบุคคล (DPIA)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการประเมิน DPIA",
+                    "บันทึกการอนุมัติโครงการ AI ก่อนใช้งานจริง",
+                    "เกณฑ์การคัดกรองโครงการที่ต้องทำ DPIA",
+                    "รายงานการติดตามมาตรการลดความเสี่ยงหลัง DPIA"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF006-2",
+              "name_th": "ขาดมาตรการควบคุมความมั่นคงปลอดภัยไซเบอร์ที่เหมาะสมสำหรับระบบจัดเก็บและประมวลผลข้อมูลส่วนบุคคล",
+              "audit_procedures": [
+                {
+                  "id": "AP006-2-1",
+                  "name_th": "ตรวจสอบการควบคุมการเข้าถึงและการบริหารสิทธิ์ผู้ใช้งานในระบบที่เก็บข้อมูลส่วนบุคคล",
+                  "method": "สุ่มตรวจ Access Right Matrix เทียบกับสิทธิ์การใช้งานจริงในระบบและตรวจสอบการทบทวนสิทธิ์เป็นระยะ",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "Annex A.5.15",
+                      "title": "การควบคุมการเข้าถึงระบบสารสนเทศ"
+                    },
+                    {
+                      "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                      "clause": "มาตรา 56",
+                      "title": "มาตรการป้องกันความเสี่ยงด้านไซเบอร์ของหน่วยงานโครงสร้างพื้นฐานสำคัญ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "Access Right Matrix",
+                    "รายงานการทบทวนสิทธิ์การเข้าถึงระบบ",
+                    "Log การเข้าถึงข้อมูลส่วนบุคคล",
+                    "นโยบายการบริหารจัดการสิทธิ์ผู้ใช้งาน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP006-2-2",
+                  "name_th": "ทดสอบกระบวนการตรวจหาช่องโหว่และการบริหารจัดการแพตช์ของระบบที่เกี่ยวข้องกับข้อมูลส่วนบุคคล",
+                  "method": "ตรวจสอบผลการทำ Vulnerability Assessment/Penetration Test ล่าสุดและติดตามสถานะการแก้ไข",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "ข้อ 8.8",
+                      "title": "การบริหารจัดการช่องโหว่ทางเทคนิค"
+                    },
+                    {
+                      "std": "IEC 62443",
+                      "clause": "62443-2-1",
+                      "title": "ข้อกำหนดโปรแกรมความมั่นคงปลอดภัยสำหรับเจ้าของระบบ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผล Vulnerability Assessment/PT",
+                    "แผนการแก้ไขช่องโหว่ (Remediation Plan)",
+                    "บันทึกการติดตั้ง Patch/Update",
+                    "รายงานสถานะปิดช่องโหว่ที่ค้างอยู่"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF006-3",
+              "name_th": "ขาดกระบวนการตรวจจับ ตอบสนอง และแจ้งเหตุละเมิดข้อมูลส่วนบุคคลภายในกรอบเวลาที่กฎหมายกำหนด",
+              "audit_procedures": [
+                {
+                  "id": "AP006-3-1",
+                  "name_th": "ตรวจสอบแผนตอบสนองเหตุการณ์ละเมิดข้อมูลส่วนบุคคลและบันทึกการแจ้งเหตุที่ผ่านมา",
+                  "method": "สุ่มตรวจกรณีเหตุการณ์ที่เกิดขึ้นจริงเทียบกับกรอบเวลาการแจ้งสำนักงานคุ้มครองข้อมูลส่วนบุคคลตามกฎหมาย",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 37(4)",
+                      "title": "การแจ้งเหตุละเมิดข้อมูลส่วนบุคคลต่อสำนักงานภายใน 72 ชั่วโมง"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "ฟังก์ชัน Respond (RS)",
+                      "title": "กระบวนการตอบสนองต่อเหตุการณ์ด้านความมั่นคงปลอดภัย"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนตอบสนองเหตุการณ์ (Incident Response Plan)",
+                    "บันทึกการแจ้งเหตุละเมิดข้อมูลต่อหน่วยงานกำกับดูแล",
+                    "รายงานสรุปเหตุการณ์ละเมิดข้อมูลย้อนหลัง",
+                    "หลักฐานการแจ้งเจ้าของข้อมูลที่ได้รับผลกระทบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP006-3-2",
+                  "name_th": "ทดสอบการซ้อมแผนรับมือเหตุละเมิดข้อมูลส่วนบุคคลและประเมินความพร้อมของทีมตอบสนอง",
+                  "method": "สังเกตการณ์การซ้อมแผน (Tabletop Exercise) และประเมินผลรายงานหลังการซ้อม",
+                  "std_refs": [
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "ข้อ 8.5",
+                      "title": "การฝึกซ้อมและทดสอบแผนความต่อเนื่องทางธุรกิจ"
+                    },
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "DSS05",
+                      "title": "การบริหารจัดการบริการด้านความมั่นคงปลอดภัย"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนการซ้อมเหตุการณ์ละเมิดข้อมูล",
+                    "รายงานผลการซ้อมแผนและข้อสังเกต",
+                    "บันทึกการปรับปรุงแผนหลังการซ้อม",
+                    "รายชื่อทีมตอบสนองเหตุการณ์และบทบาทหน้าที่"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R007",
+          "name_th": "การพึ่งพาผู้ให้บริการเทคโนโลยีหรือ AI จากภายนอกโดยขาดการควบคุมความเสี่ยงด้านห่วงโซ่อุปทานดิจิทัล",
+          "name_en": "Third-Party/Vendor Dependency Risk in Digital and AI Supply Chain",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF007-1",
+              "name_th": "ขาดกระบวนการประเมินความเสี่ยงผู้ให้บริการเทคโนโลยี/AI ภายนอกก่อนและระหว่างการใช้งาน",
+              "audit_procedures": [
+                {
+                  "id": "AP007-1-1",
+                  "name_th": "สอบทานนโยบายและเกณฑ์การประเมินความเสี่ยงผู้ให้บริการภายนอกด้านเทคโนโลยีและ AI",
+                  "method": "สัมภาษณ์ผู้รับผิดชอบและตรวจสอบเอกสารนโยบาย Third-Party/Vendor Risk Management เทียบกับแนวปฏิบัติที่กำหนด",
+                  "std_refs": [
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.5.19",
+                      "title": "ความมั่นคงปลอดภัยสารสนเทศในความสัมพันธ์กับผู้ให้บริการ"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "5.19",
+                      "title": "Information security in supplier relationships"
+                    },
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "APO10",
+                      "title": "Managed Vendors"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายและขั้นตอนการบริหารความเสี่ยงผู้ให้บริการภายนอก",
+                    "แบบฟอร์ม/เกณฑ์การประเมินความเสี่ยงผู้ให้บริการก่อนคัดเลือก",
+                    "บันทึกการอนุมัตินโยบายโดยผู้บริหาร/คณะกรรมการ",
+                    "ทะเบียนรายชื่อผู้ให้บริการภายนอกพร้อมระดับความเสี่ยง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP007-1-2",
+                  "name_th": "สุ่มตรวจผลการประเมินความเสี่ยงจริงของผู้ให้บริการ AI/เทคโนโลยีที่ใช้งานอยู่ในปัจจุบัน",
+                  "method": "สุ่มตัวอย่างผู้ให้บริการที่มีนัยสำคัญ ตรวจสอบเอกสารประเมินเทียบกับเกณฑ์ที่กำหนดไว้",
+                  "std_refs": [
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "GV.SC-01",
+                      "title": "Cybersecurity supply chain risk management program"
+                    },
+                    {
+                      "std": "ISO/IEC 42001:2023",
+                      "clause": "8.1",
+                      "title": "Operational planning and control for AI-related third parties"
+                    },
+                    {
+                      "std": "COSO ERM Framework 2017",
+                      "clause": "Assessing Severity",
+                      "title": "การประเมินความรุนแรงของความเสี่ยง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการประเมินความเสี่ยงผู้ให้บริการรายตัวที่ใช้งานปัจจุบัน",
+                    "หลักฐานการจัดระดับความเสี่ยง(High/Medium/Low)ของผู้ให้บริการ",
+                    "แผนติดตามผลการประเมินความเสี่ยงตามรอบเวลา",
+                    "หลักฐานการทบทวนผลประเมินเมื่อมีการเปลี่ยนแปลงขอบเขตบริการ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF007-2",
+              "name_th": "ขาดข้อกำหนดสัญญาด้านความมั่นคงปลอดภัยไซเบอร์และการคุ้มครองข้อมูลส่วนบุคคลกับผู้ให้บริการภายนอก",
+              "audit_procedures": [
+                {
+                  "id": "AP007-2-1",
+                  "name_th": "สอบทานสัญญา/ข้อตกลงประมวลผลข้อมูล (DPA) และระดับบริการ (SLA) ว่าครอบคลุมข้อกำหนดความมั่นคงปลอดภัยและคุ้มครองข้อมูล",
+                  "method": "สุ่มตรวจสัญญากับผู้ให้บริการภายนอกเทียบกับข้อกำหนดทางกฎหมายและมาตรฐานที่เกี่ยวข้อง",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                      "clause": "มาตรา 37",
+                      "title": "หน้าที่ของผู้ควบคุมข้อมูลส่วนบุคคลในการจัดให้มีข้อตกลงกับผู้ประมวลผลข้อมูลส่วนบุคคล"
+                    },
+                    {
+                      "std": "PDPA Compliance Guideline สคส. 2562",
+                      "clause": "แนวปฏิบัติสัญญาประมวลผลข้อมูล",
+                      "title": "แนวทางการจัดทำข้อตกลงประมวลผลข้อมูลส่วนบุคคลกับผู้ให้บริการภายนอก"
+                    },
+                    {
+                      "std": "ISO/IEC 27002:2022",
+                      "clause": "5.20",
+                      "title": "Addressing information security within supplier agreements"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สัญญาบริการ (SLA) และข้อตกลงประมวลผลข้อมูล (DPA) กับผู้ให้บริการ",
+                    "รายการข้อกำหนดด้านความมั่นคงปลอดภัยที่ระบุในสัญญา",
+                    "หลักฐานการตรวจสอบทางกฎหมายก่อนลงนามสัญญา",
+                    "รายงานผลการตรวจสอบสัญญาโดยฝ่ายกฎหมาย/คุ้มครองข้อมูล"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP007-2-2",
+                  "name_th": "ตรวจสอบข้อกำหนดสิทธิการตรวจสอบและการแจ้งเหตุการณ์ละเมิดความมั่นคงปลอดภัยจากผู้ให้บริการในสัญญา",
+                  "method": "ตรวจสอบเอกสารสัญญาว่ามีข้อกำหนด Right to Audit และกระบวนการแจ้งเหตุภัยคุกคามตามกรอบเวลาที่กำหนด",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                      "clause": "มาตรา 56",
+                      "title": "การแจ้งเหตุภัยคุกคามทางไซเบอร์ต่อหน่วยงานที่เกี่ยวข้อง"
+                    },
+                    {
+                      "std": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2560",
+                      "clause": "มาตรา 26",
+                      "title": "การเก็บรักษาข้อมูลจราจรทางคอมพิวเตอร์"
+                    },
+                    {
+                      "std": "ISO/IEC 27001:2022 + Amd 1:2024",
+                      "clause": "A.5.20",
+                      "title": "Addressing information security within supplier agreements"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ข้อกำหนดสิทธิการตรวจสอบ(Right to Audit)ในสัญญา",
+                    "บันทึกการแจ้งเหตุการณ์ละเมิดจากผู้ให้บริการย้อนหลัง",
+                    "หลักฐานการตรวจสอบผู้ให้บริการตามสิทธิที่ระบุในสัญญา",
+                    "แนวทาง/ขั้นตอนการรับแจ้งเหตุภัยคุกคามจากผู้ให้บริการภายนอก"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF007-3",
+              "name_th": "ขาดการเฝ้าระวังต่อเนื่องและแผนรองรับความต่อเนื่องทางธุรกิจกรณีผู้ให้บริการเทคโนโลยี/AI ภายนอกเกิดเหตุขัดข้อง",
+              "audit_procedures": [
+                {
+                  "id": "AP007-3-1",
+                  "name_th": "สอบทานกระบวนการติดตามและทบทวนผลการดำเนินงานด้านความมั่นคงปลอดภัยของผู้ให้บริการอย่างสม่ำเสมอ",
+                  "method": "ตรวจสอบรายงานการติดตามผลการดำเนินงานของผู้ให้บริการเทียบกับตัวชี้วัดที่กำหนดตามรอบเวลา",
+                  "std_refs": [
+                    {
+                      "std": "COBIT 2019",
+                      "clause": "APO10.04",
+                      "title": "Manage supplier risk"
+                    },
+                    {
+                      "std": "COSO ERM Framework 2017",
+                      "clause": "Reviewing Risk and Performance",
+                      "title": "การทบทวนความเสี่ยงและผลการดำเนินงาน"
+                    },
+                    {
+                      "std": "NIST Cybersecurity Framework 2.0",
+                      "clause": "GV.SC-06",
+                      "title": "Planning and due diligence for supply chain monitoring"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานติดตามผลการดำเนินงานของผู้ให้บริการตามรอบเวลา",
+                    "ตัวชี้วัดความเสี่ยง(KRI)สำหรับผู้ให้บริการภายนอก",
+                    "บันทึกการประชุมทบทวนความเสี่ยงผู้ให้บริการ",
+                    "หลักฐานการดำเนินการแก้ไขเมื่อพบข้อบกพร่องจากผู้ให้บริการ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP007-3-2",
+                  "name_th": "ตรวจสอบแผนรองรับความต่อเนื่องทางธุรกิจและแผนถอนตัว (Exit Strategy) กรณีเปลี่ยนแปลงหรือยุติผู้ให้บริการ",
+                  "method": "ตรวจสอบเอกสารแผนความต่อเนื่องทางธุรกิจและแผนสำรองที่ครอบคลุมกรณีผู้ให้บริการหลักเกิดเหตุขัดข้อง",
+                  "std_refs": [
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "8.4",
+                      "title": "Business continuity plans and procedures"
+                    },
+                    {
+                      "std": "ISO 22301:2019 + Amd 1:2024",
+                      "clause": "8.2",
+                      "title": "Business impact analysis and risk assessment"
+                    },
+                    {
+                      "std": "IEC 62443",
+                      "clause": "IEC 62443-2-1",
+                      "title": "Security program requirements for IACS asset owners covering supplier dependencies"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แผนความต่อเนื่องทางธุรกิจ(BCP)ที่ครอบคลุมความเสี่ยงผู้ให้บริการภายนอก",
+                    "แผนถอนตัว(Exit Strategy)หรือแผนเปลี่ยนผู้ให้บริการสำรอง",
+                    "ผลการทดสอบแผนความต่อเนื่องทางธุรกิจในสถานการณ์จำลอง",
+                    "รายงานการวิเคราะห์ผลกระทบทางธุรกิจ(BIA)ที่ครอบคลุมผู้ให้บริการหลัก"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "knowledge_id": "KN-T023",
+      "version": "1.0.0",
+      "confidence_score": 80,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
+      "created_at": "2026-07-16T05:41:05Z",
+      "updated_at": "2026-07-16T05:41:05Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [],
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-07-16",
+          "change": "DRAFT จาก research-pipeline (draft_topic.json — โหมดตรวจต่อทันที)",
+          "approved_by": "draft เท่านั้น"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-16",
+          "change": "AUTO-VERIFY โดย verify-pipeline: \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" อ้างฉบับ 2560 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2550 อัตโนมัติ | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2560 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"PDPA Compliance Guideline สคส. 2565\" อ้างฉบับ 2565 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2562 อัตโนมัติ | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" อ้างฉบับ 2560 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2550 อัตโนมัติ | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2560 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"PDPA Compliance Guideline สคส. 2565\" อ้างฉบับ 2565 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2562 อัตโนมัติ | \"PDPA Compliance Guideline สคส. 2565\" อ้างฉบับ 2565 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2562 อัตโนมัติ | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" อ้างฉบับ 2560 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2550 อัตโนมัติ | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2560 | \"PDPA Compliance Guideline สคส. 2565\" อ้างฉบับ 2565 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2562 อัตโนมัติ | \"PDPA Compliance Guideline สคส. 2565\" อ้างฉบับ 2565 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2562 อัตโนมัติ | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"PDPA Compliance Guideline สคส. 2565\" อ้างฉบับ 2565 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2562 อัตโนมัติ | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" อ้างฉบับ 2560 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2550 อัตโนมัติ | \"พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2560 | \"ISO/IEC 27001:2022\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | \"ISO 22301:2019\" มีฉบับแก้ไข → พ่วง Amd 1:2024 | source_chain ผูกจากทะเบียนที่อ่านแล้วจริง 3 แหล่ง | หมายเหตุ: โหมดเครื่องไม่อ่านหน้าใหม่ — ดุลยพินิจสุดท้ายอยู่ที่ผู้ merge",
+          "approved_by": "pending PR merge"
+        }
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC-AUTO-th-pdpa-2562",
+          "source_type": "registry_verified_source",
+          "publisher": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+          "title": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) (v2562)",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0052.PDF",
+          "retrieved_at": "2026-07-14",
+          "credibility_score": 95,
+          "excerpt": "ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก (27 พ.ค. 2562) — มาตรา 2: ใช้บังคับวันถัดจากประกาศ เว้นแต่หมวด 2,3,5,6,7 และมาตรา 95,96 ใช้บังคับเมื่อพ้น 1 ปี (บังคับแบบแบ่งเฟส) | เอกสารทางการยืนยันซ้ำที่ law.prd.go.th (กปส.) [อ่านจริงและบันทึกในทะเบียนเมื่อ 2026-07-14 — auto-verify ผูกให้]"
+        },
+        {
+          "source_id": "SRC-AUTO-th-computer-crime",
+          "source_type": "registry_verified_source",
+          "publisher": "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์",
+          "title": "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ (v2550)",
+          "url": "http://cio.mhesi.go.th/node/695",
+          "retrieved_at": "2026-07-14",
+          "credibility_score": 95,
+          "excerpt": "อ่านตัวบทจริง (สำเนาทางการ อว.): \"มาตรา 3 ให้ยกเลิกความในมาตรา 4 แห่งพระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และให้ใช้ความต่อไปนี้แทน\" — ยืนยันว่า ฉบับ พ.ศ. 2560 คือ (ฉบับที่ 2) ที่แก้ไข พ.ร.บ. 2550 | ประกาศเล่ม 134 ตอนที่ 10 ก (24 ม.ค. 2560) ใช้บังคับเมื่อพ้น 120 วัน [อ่านจริงและบันทึกในทะเบียนเมื่อ 2026-07-14 — auto-verify ผูกให้]"
+        },
+        {
+          "source_id": "SRC-AUTO-th-cyber-act-2562",
+          "source_type": "registry_verified_source",
+          "publisher": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+          "title": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562 (v2562)",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0020.PDF",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 95,
+          "excerpt": "ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก, 27 พ.ค. 2562 [อ่านจริงและบันทึกในทะเบียนเมื่อ 2026-07-13 — auto-verify ผูกให้]"
+        }
+      ],
+      "hash_signature": "sha256:1352342cfe5c57fd028e5ce27b0db6ef7bb2702f2ec6f491b795764df5774c02"
     }
   ],
   "skills_registry": {
