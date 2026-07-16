@@ -49,17 +49,31 @@ function canonicalize(registry, s) {
   if (!fam) return { str: s, fixes, unregistered: true };
   let out = s;
   let ed = edFor(fam, s);
-  // AUTO-NORMALIZE: อ้างปี ค.ศ. ที่ "ไม่มีในทะเบียนเลย" (เช่น IIA 2017, NIST 2018) → ปรับเป็นฉบับปัจจุบัน
-  // เงื่อนไขปลอดภัย: เป็นปี ค.ศ. 2000..ปีปัจจุบัน (กันเลขมาตรฐาน 9001/27001/IEEE 2030 และปี พ.ศ. 2562)
-  // และไม่ตรงกับเวอร์ชันที่ทะเบียนรู้จัก → ระบบรู้ฉบับปัจจุบันอยู่แล้ว จึงแก้เองได้พร้อมแจ้ง fix
+  // PINNED_BY_THAI_LAW: กฎหมายไทยตรึงให้ใช้ฉบับนี้ → ห้ามอัปเดต/สลับอัตโนมัติ คงไว้ตามกฎหมาย
+  if (ed && ed.status === 'PINNED_BY_THAI_LAW') {
+    fixes.push(`"${s}" — กฎหมายไทยกำหนดให้ใช้ฉบับนี้ (ตรึงไว้ ไม่อัปเดตเป็นฉบับสากลใหม่)`);
+    return { str: out, fixes };
+  }
+  // AUTO-HEAL เวอร์ชันล้าสมัย/สับสน (ค.ศ. หรือ พ.ศ.) → ฉบับปัจจุบันในทะเบียน + แจ้ง fix
+  // ปลอดภัย: แตะเฉพาะเลข 4 หลักในช่วงปีจริง (ค.ศ. 2000..ปีนี้ / พ.ศ. 2400-2569) ที่ไม่ตรงทะเบียน
+  //   → กันเลขมาตรฐาน (ISO 9001, 27001, IEEE 2030/1366) เพราะอยู่นอกช่วงหรือไม่ใช่ 4 หลัก
+  // และแทนเฉพาะ "ส่วนหัว" (ก่อน 'และที่แก้ไข'/'(ฉบับที่') เพื่อไม่แตะปีของฉบับแก้ไข (เคส พ.ร.บ.ไทย)
   {
-    const known = (fam.editions || []).map(e => String(e.version));
-    const CUR_YEAR = new Date().getFullYear();
-    const cur = (fam.editions || []).find(e => e.status === 'CURRENT') || (fam.editions || [])[(fam.editions || []).length - 1];
-    const stray = (out.match(/\b(20[0-2]\d)\b/g) || []).find(y => Number(y) <= CUR_YEAR && !known.includes(y));
-    if (stray && cur && String(cur.version) !== stray) {
-      out = out.replace(new RegExp('\\b' + stray + '\\b', 'g'), String(cur.version));
-      fixes.push(`"${s}" อ้างฉบับ ${stray} ที่ไม่มีในทะเบียน → ปรับเป็นฉบับปัจจุบัน ${cur.version} อัตโนมัติ`);
+    const eds = fam.editions || [];
+    const known = eds.map(e => String(e.version));
+    const auth = eds.find(e => e.status === 'CURRENT')
+      || eds.find(e => ['AMENDED', 'CONFIRMED', 'PINNED_BY_THAI_LAW', 'TRANSITION'].includes(e.status))
+      || eds[eds.length - 1];
+    const CE = new Date().getFullYear();
+    const mk = out.search(/และที่แก้ไข|\(ฉบับที่|แก้ไขเพิ่มเติม|\bAmd\b/);
+    const head = mk >= 0 ? out.slice(0, mk) : out;
+    const stray = (head.match(/\b(\d{4})\b/g) || []).find(y => {
+      const n = Number(y);
+      return !known.includes(y) && ((n >= 2000 && n <= CE) || (n >= 2400 && n <= 2569));
+    });
+    if (stray && auth && String(auth.version) !== stray) {
+      out = head.replace(new RegExp('\\b' + stray + '\\b'), String(auth.version)) + (mk >= 0 ? out.slice(mk) : '');
+      fixes.push(`"${s}" อ้างฉบับ ${stray} ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน ${auth.version} อัตโนมัติ`);
       ed = edFor(fam, out) || ed;
     }
   }
@@ -93,15 +107,16 @@ function extractGateErrors(stdout) {
   return gLines.length ? gLines.join('\n') : (s.trim().slice(-800) || '(ไม่มีรายละเอียดเกต)');
 }
 
-/* รายงานตกเกตสำหรับใส่ใน draft PR — คนเปิดมาเห็นทันทีว่าต้องแก้เกตไหน */
-function gateFailReport(tid, name, errBlock) {
-  return ['# ⚠️ Auto-verify ตกเกตคุณภาพ: ' + name + ' → ' + tid, '',
-    'ร่างสร้างสำเร็จ แต่ **ไม่ผ่านเกตคุณภาพอัตโนมัติ** — ต้องแก้ก่อนยกเป็นความรู้จริง (L1)', '',
-    '## เกตที่ไม่ผ่าน', '```', errBlock, '```', '',
-    '## ต้องทำต่อ',
-    '1. แก้ตามเกตด้านบน (ใน Cowork ตาม deep-research-protocol)',
-    '2. re-verify แล้วยกเป็น L1',
-    '', '**ห้าม merge เข้า store จนกว่าเกตจะผ่าน**'].join('\n');
+/* รายงานสำหรับใส่ใน draft PR — ใช้ถ้อยคำ "โปรดตรวจสอบ" ไม่ใช่ "ผิด" (รอบคอบ+เป็นมิตร) */
+function gateFailReport(tid, name, errBlock, reuseNote) {
+  return ['# 🔎 โปรดตรวจสอบก่อนยืนยัน: ' + name + ' → ' + tid, '',
+    'ระบบร่างหัวข้อนี้สำเร็จแล้ว และมี **บางรายการที่ควรทบทวนให้แน่ใจ** ก่อนยกเป็นความรู้จริง (L1) — ไม่ใช่ข้อผิดพลาด แต่ขอให้ตรวจความถูกต้องอีกครั้งเพื่อความรอบคอบ',
+    '', '## รายการที่ควรตรวจ', '```', errBlock, '```', '',
+    '## แนวทางตรวจ',
+    '1. ตรวจว่าเป็น **ฉบับปัจจุบัน** หรือมี **กฎหมายไทยกำหนดให้ใช้ฉบับใดฉบับหนึ่ง** (กรณีตรึงไว้)',
+    '2. ' + (reuseNote || 'หากมาตรฐานเดียวกันถูกอ้างในหัวข้ออื่น ควรทบทวนให้ตรงกันทั้งหมด'),
+    '3. ปรับแล้ว re-verify อีกครั้ง',
+    '', '_ระบบเก็บร่างไว้ให้แล้ว — ยังไม่นำเข้าคลังจนกว่าจะทบทวนเสร็จ_'].join('\n');
 }
 
 function main(draftFile, root) {
@@ -198,8 +213,16 @@ function main(draftFile, root) {
     execFileSync('node', [path.join(root, 'scripts', 'validate.js'), path.join(root, 'data', 'knowledge_store.json')], { stdio: 'pipe' });
   } catch (e) {
     const errBlock = extractGateErrors(e.stdout);
-    fs.writeFileSync(SUMMARY_OUT, gateFailReport(tid, d.name_th, errBlock)); // report ให้ draft PR
-    console.error('❌ เกตไม่ผ่านหลังประกอบ — เก็บ draft ไว้ให้ตรวจต่อ (ไม่ลบไฟล์)\n' + errBlock);
+    // นับว่ามาตรฐานในหัวข้อนี้ถูกอ้างในหัวข้ออื่นในคลังกี่เรื่อง → ให้ผู้ตรวจไล่ดูประกอบกัน
+    const famsHere = new Set((d.applicable_standards || []).map(x => (famFor(registry, x) || {}).family_id).filter(Boolean));
+    let reuse = 0;
+    for (const t of store.topics) {
+      if (t.id === tid) continue;
+      if ((t.applicable_standards || []).some(x => famsHere.has((famFor(registry, x) || {}).family_id))) reuse++;
+    }
+    const reuseNote = reuse ? `มาตรฐานในหัวข้อนี้ถูกอ้างในอีก ${reuse} หัวข้อในคลัง — แนะนำไล่ตรวจให้ตรงกันประกอบ` : null;
+    fs.writeFileSync(SUMMARY_OUT, gateFailReport(tid, d.name_th, errBlock, reuseNote));
+    console.error('🔎 โปรดตรวจสอบก่อนยืนยัน — เก็บ draft ไว้ให้ตรวจต่อ (ไม่ลบไฟล์)\n' + errBlock);
     process.exit(1); // fallback ใน workflow จะเปิด draft PR พร้อม report นี้ (งานไม่สูญ)
   }
 

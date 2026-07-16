@@ -38,6 +38,11 @@ const c6 = canonicalize(registry, 'IEEE 2030 Smart Grid');
 ok('ไม่แตะเลขมาตรฐาน/ปีอนาคต (IEEE 2030 คงเดิม)', c6.str.includes('2030') && !c6.fixes.some(f => f.includes('ปัจจุบัน')));
 const { famFor } = require('./verify_draft.js');
 ok('regression: "IIA International Standards 2017" → iia-gias (ไม่ทับ iippf เก่า)', famFor(registry, 'IIA International Standards 2017').family_id === 'iia-gias');
+const c7 = canonicalize(registry, 'พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2560');
+ok('auto-heal ไทย: ปีฐาน 2560→2550 (คงฉบับแก้ไข 2560 ในหาง)', c7.str.includes('พ.ศ. 2550') && c7.str.includes('(ฉบับที่ 2)') && c7.fixes.some(f => f.includes('2550')));
+const pinReg = { families: [{ family_id: 'x-pin', display: 'มาตรฐาน X (ตรึง)', match: 'มาตรฐาน X', editions: [{ version: '2013', status: 'PINNED_BY_THAI_LAW', superseded_by: '2022' }, { version: '2022', status: 'CURRENT' }] }] };
+const cp = canonicalize(pinReg, 'มาตรฐาน X 2013');
+ok('PINNED กฎหมายไทย: คงฉบับ 2013 ไม่อัปเดตเป็น 2022 + แจ้งเหตุ', cp.str.includes('2013') && !cp.str.includes('2022') && cp.fixes.some(f => f.includes('กฎหมายไทย')));
 
 console.log('── ชุด 2: main ครบวงจรบนสำเนา repo (จบด้วย validate.js จริง) ──');
 const draft = {
@@ -106,7 +111,8 @@ try {
   ok('ตกเกต exit 1 (ไม่ใช่ crash อื่น)', e.status === 1);
   ok('stderr โชว์เกตที่ fail จริง [G...] (ไม่ใช่หาง queue)', /\[G[0-9A-Za-z_]+\]/.test(err));
   ok('draft ไม่ถูกลบ → fallback เปิด draft PR ได้ (งานไม่สูญ)', fs.existsSync(path.join(root, 'data', 'drafts', 'draft_gatefail.json')));
-  ok('เขียน gate-report ให้ draft PR (บอกว่าต้องแก้เกตไหน)', fs.existsSync(reportPath) && fs.readFileSync(reportPath, 'utf8').includes('ตกเกต'));
+  const rep = fs.existsSync(reportPath) ? fs.readFileSync(reportPath, 'utf8') : '';
+  ok('report ใช้ถ้อยคำ "โปรดตรวจสอบ" (รอบคอบ ไม่ใช่หัวเรื่อง "ตกเกต")', rep.includes('โปรดตรวจสอบก่อนยืนยัน') && rep.includes('รายการที่ควรตรวจ') && !rep.includes('ตกเกตคุณภาพ'));
 }
 
 console.log(`\n${fail === 0 ? '✅' : '❌'} ผล: ผ่าน ${pass} / ตก ${fail}`);
