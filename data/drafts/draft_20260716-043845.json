@@ -1,0 +1,1530 @@
+{
+  "name_th": "ความมั่นคงปลอดภัยไซเบอร์ของโครงสร้างพื้นฐานสำคัญด้านไฟฟ้า",
+  "name_en": "Cybersecurity of Critical Electrical Infrastructure",
+  "category": "Cybersecurity & Critical Infrastructure Protection",
+  "category_th": "ความมั่นคงปลอดภัยไซเบอร์และการป้องกันโครงสร้างพื้นฐานสำคัญ",
+  "priority": "CRITICAL",
+  "org_applicability": [
+    "GOV",
+    "SOE",
+    "LISTED",
+    "PRIVATE"
+  ],
+  "applicable_standards": [
+    "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+    "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+    "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
+    "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+    "IEC 62443 Series",
+    "ISO/IEC 27001:2022",
+    "ISO/IEC 27002:2022",
+    "NIST Cybersecurity Framework (CSF) 2.0",
+    "NIST SP 800-82 Rev.3",
+    "NIST SP 800-53 Rev.5",
+    "NERC CIP Standards",
+    "IEC 62351 Series"
+  ],
+  "thailand_applicable": true,
+  "thai_law_refs": [
+    "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+    "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+    "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560",
+    "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)"
+  ],
+  "risks": [
+    {
+      "id": "R001",
+      "name_th": "การโจมตีระบบควบคุมอุตสาหกรรม (ICS/SCADA) ทำให้เกิดไฟฟ้าดับเป็นวงกว้าง",
+      "name_en": "ICS/SCADA Attack Causing Widespread Power Outage",
+      "level": "CRITICAL",
+      "likelihood": "ปานกลาง",
+      "impact": "สูงมาก",
+      "control_failures": [
+        {
+          "id": "CF001",
+          "name_th": "การแบ่งแยกเครือข่าย IT/OT และการควบคุมเขตแดนเครือข่าย (Network Segmentation) ไม่เพียงพอ",
+          "audit_procedures": [
+            {
+              "id": "CF001-1",
+              "name_th": "ตรวจสอบสถาปัตยกรรมเครือข่ายและเอกสารการแบ่ง Zone/Conduit เทียบกับมาตรฐานที่กำหนด",
+              "method": "ตรวจสอบเอกสารสถาปัตยกรรมเครือข่ายและเดินสำรวจ (walkthrough) จุดเชื่อมต่อระหว่างเครือข่าย IT และ OT",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-3-3 SR 5.1-5.2",
+                  "title": "Network Segmentation"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 5.5",
+                  "title": "Network Architecture for ICS"
+                },
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-005-6 R1",
+                  "title": "Electronic Security Perimeter"
+                }
+              ],
+              "evidence_types": [
+                "แผนผังเครือข่าย (Network Diagram) ฉบับล่าสุด",
+                "เอกสารนโยบายการแบ่งแยกเครือข่าย IT/OT",
+                "รายงานผลการตรวจสอบ Firewall Rule ระหว่าง Zone",
+                "บันทึกการเดินสำรวจจุดเชื่อมต่อเครือข่ายจริง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF001-2",
+              "name_th": "ทดสอบเจาะระบบ (Penetration Test) เพื่อยืนยันประสิทธิผลการแบ่งแยกเครือข่าย IT/OT จริง",
+              "method": "ทดสอบเจาะระบบทางเทคนิคแบบควบคุมความเสี่ยงระหว่างเครือข่าย IT และ OT",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "8.22",
+                  "title": "Segregation of Networks"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-3-3 SR 3.1",
+                  "title": "Communication Integrity"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "มาตรการด้านเทคนิคสำหรับ CII",
+                  "title": "มาตรฐานการป้องกันโครงสร้างพื้นฐานสำคัญทางสารสนเทศ"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการทดสอบเจาะระบบ (Pentest Report)",
+                "หลักฐานการอนุมัติขอบเขตการทดสอบ",
+                "รายการช่องโหว่ที่พบและแผนแก้ไข",
+                "หลักฐานการปิดช่องโหว่ (Remediation Evidence)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002",
+          "name_th": "การบริหารจัดการช่องโหว่และการปรับปรุงซอฟต์แวร์ (Patch/Vulnerability Management) ของระบบ ICS/SCADA ไม่เพียงพอ",
+          "audit_procedures": [
+            {
+              "id": "CF002-1",
+              "name_th": "สุ่มตรวจสอบทะเบียนสินทรัพย์ ICS และสถานะการประเมินช่องโหว่/แพตช์เทียบกับรอบเวลาที่กำหนด",
+              "method": "สุ่มตัวอย่างสินทรัพย์และเปรียบเทียบกับทะเบียนช่องโหว่และสถานะแพตช์",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.2",
+                  "title": "Vulnerability and Patch Management"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "RA-5",
+                  "title": "Vulnerability Monitoring and Scanning"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-2-3",
+                  "title": "Patch Management in the IACS Environment"
+                }
+              ],
+              "evidence_types": [
+                "ทะเบียนสินทรัพย์ ICS/SCADA (Asset Inventory)",
+                "รายงานผลการสแกนช่องโหว่ล่าสุด",
+                "บันทึกสถานะการติดตั้งแพตช์รายอุปกรณ์",
+                "แผนงานการบริหารจัดการแพตช์ประจำปี"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-2",
+              "name_th": "ตรวจสอบกระบวนการประเมินความเสี่ยงและทดสอบก่อนติดตั้งแพตช์บนระบบ Production",
+              "method": "ทวนสอบขั้นตอนปฏิบัติงาน (SOP) และสัมภาษณ์ผู้รับผิดชอบการติดตั้งแพตช์",
+              "std_refs": [
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "แนวปฏิบัติการบริหารความเสี่ยงไซเบอร์",
+                  "title": "มาตรฐานการรักษาความมั่นคงปลอดภัยไซเบอร์สำหรับ CII"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SI-2",
+                  "title": "Flaw Remediation"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-2-1",
+                  "title": "Security Program Requirements for IACS"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารขั้นตอนปฏิบัติงาน (SOP) การติดตั้งแพตช์",
+                "บันทึกผลการทดสอบแพตช์ในสภาพแวดล้อมจำลอง (Test Environment)",
+                "รายงานการประเมินความเสี่ยงก่อนติดตั้งแพตช์",
+                "บันทึกอนุมัติการเปลี่ยนแปลง (Change Approval Record)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003",
+          "name_th": "การควบคุมการเข้าถึงระยะไกลและสิทธิ์การเข้าถึงระบบควบคุม (Remote Access & Privileged Access) ไม่รัดกุม",
+          "audit_procedures": [
+            {
+              "id": "CF003-1",
+              "name_th": "ตรวจสอบบัญชีผู้ใช้ระยะไกลและการบังคับใช้การยืนยันตัวตนหลายปัจจัย (MFA)",
+              "method": "ตรวจสอบการตั้งค่าระบบและนโยบายการเข้าถึงระยะไกล",
+              "std_refs": [
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-005-6 R2",
+                  "title": "Interactive Remote Access Controls"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-3-3 SR 1.1-1.2",
+                  "title": "Identification and Authentication Control"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "AC-17",
+                  "title": "Remote Access"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายการเข้าถึงระยะไกล (Remote Access Policy)",
+                "รายการบัญชีผู้ใช้ที่ได้รับสิทธิ์เข้าถึงระยะไกล",
+                "หลักฐานการตั้งค่า MFA บนระบบเข้าถึงระยะไกล",
+                "รายงานผลการทบทวนสิทธิ์การเข้าถึงประจำงวด"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-2",
+              "name_th": "ทดสอบสอบทานบันทึก (Log) การเข้าถึงระยะไกลย้อนหลังเทียบกับรายชื่อผู้ได้รับอนุญาต",
+              "method": "สุ่มตรวจสอบ Log การเข้าถึงระยะไกลเทียบกับรายชื่อผู้มีสิทธิ์และช่วงเวลาที่ได้รับอนุมัติ",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "8.5",
+                  "title": "Secure Authentication"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "Part 8",
+                  "title": "Role-Based Access Control"
+                },
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "PR.AA",
+                  "title": "Identity Management, Authentication and Access Control"
+                }
+              ],
+              "evidence_types": [
+                "บันทึก Log การเข้าถึงระยะไกลย้อนหลัง 3 เดือน",
+                "รายชื่อผู้ได้รับอนุญาตเข้าถึงระยะไกลที่เป็นปัจจุบัน",
+                "รายงานผลการตรวจพบการเข้าถึงผิดปกติ (Anomaly Report)",
+                "หลักฐานการยกเลิกสิทธิ์ผู้ใช้ที่พ้นสภาพ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004",
+          "name_th": "การเฝ้าระวังและตรวจจับภัยคุกคามทางไซเบอร์ในระบบ OT (OT Security Monitoring) ไม่ต่อเนื่องและไม่ครอบคลุม",
+          "audit_procedures": [
+            {
+              "id": "CF004-1",
+              "name_th": "ตรวจสอบการติดตั้งระบบตรวจจับ (IDS/IPS) เฉพาะทาง OT และการทำ Log Correlation กับศูนย์เฝ้าระวัง",
+              "method": "ตรวจสอบทางเทคนิคของอุปกรณ์ตรวจจับและการเชื่อมโยงข้อมูลเข้าศูนย์เฝ้าระวังภัยคุกคาม (SOC)",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-3-3 SR 6.1-6.2",
+                  "title": "Security Monitoring"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.6",
+                  "title": "Intrusion Detection for ICS"
+                },
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "DE.CM",
+                  "title": "Continuous Monitoring"
+                }
+              ],
+              "evidence_types": [
+                "สถาปัตยกรรมระบบตรวจจับภัยคุกคาม OT (IDS/IPS Architecture)",
+                "รายงานการเชื่อมโยง Log เข้าสู่ศูนย์ SOC",
+                "รายการ Use Case/Rule สำหรับตรวจจับภัยคุกคาม ICS",
+                "รายงานผลการทดสอบประสิทธิภาพการตรวจจับ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF004-2",
+              "name_th": "ทดสอบซ้อมสถานการณ์จำลอง (Tabletop Exercise) การโจมตี SCADA และประเมินความสามารถตรวจจับ/ตอบสนอง",
+              "method": "ทบทวนบันทึกและผลลัพธ์การซ้อมสถานการณ์จำลองเหตุการณ์โจมตีระบบควบคุม",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 3",
+                  "title": "การป้องกันภัยคุกคามทางไซเบอร์ต่อโครงสร้างพื้นฐานสำคัญ"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "แนวปฏิบัติการรับมือภัยคุกคาม",
+                  "title": "มาตรฐานการเฝ้าระวังภัยคุกคามไซเบอร์"
+                }
+              ],
+              "evidence_types": [
+                "แผนการซ้อมสถานการณ์จำลอง (Tabletop Exercise Plan)",
+                "รายงานผลการซ้อมและข้อบกพร่องที่พบ",
+                "รายชื่อผู้เข้าร่วมการซ้อมและบทบาทหน้าที่",
+                "แผนปรับปรุงหลังการซ้อม (After Action Report)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF005",
+          "name_th": "แผนตอบสนองเหตุการณ์และแผนความต่อเนื่องทางธุรกิจ (IR/BCP) สำหรับเหตุการณ์ไฟฟ้าดับจากไซเบอร์ไม่ครอบคลุมและไม่ผ่านการทดสอบ",
+          "audit_procedures": [
+            {
+              "id": "CF005-1",
+              "name_th": "ทวนสอบแผน IR/DR ว่าครอบคลุมสถานการณ์ ICS ถูกโจมตีและขั้นตอนกู้คืนแบบ Manual/Failover",
+              "method": "ทบทวนเอกสารแผนตอบสนองเหตุการณ์และแผนกู้คืนระบบเทียบกับสถานการณ์จำลองการโจมตี ICS",
+              "std_refs": [
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-009-6",
+                  "title": "Recovery Plans for BES Cyber Systems"
+                },
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "RC.RP",
+                  "title": "Recovery Planning"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.30",
+                  "title": "ICT Readiness for Business Continuity"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารแผนตอบสนองเหตุการณ์ (Incident Response Plan)",
+                "แผนกู้คืนระบบ (Disaster Recovery Plan) ที่ครอบคลุม ICS",
+                "ขั้นตอนการเปลี่ยนโหมดควบคุมแบบ Manual/Failover",
+                "รายงานผลการทบทวนแผนประจำปี"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF005-2",
+              "name_th": "ตรวจสอบบันทึกผลการฝึกซ้อมแผนตอบสนองเหตุการณ์ย้อนหลังและการปรับปรุงหลังการฝึกซ้อม",
+              "method": "ตรวจสอบบันทึกการฝึกซ้อมและการรายงานเหตุการณ์ตามข้อกำหนดทางกฎหมาย",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 51",
+                  "title": "การรายงานเหตุภัยคุกคามทางไซเบอร์"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "Clause 9.1",
+                  "title": "Monitoring, Measurement, Analysis and Evaluation"
+                }
+              ],
+              "evidence_types": [
+                "บันทึกผลการฝึกซ้อมแผน IR ย้อนหลัง",
+                "รายงานการแจ้งเหตุต่อ สกมช. ตามกฎหมาย",
+                "รายการข้อบกพร่องและแผนปรับปรุงหลังการฝึกซ้อม",
+                "หลักฐานการติดตามปิดข้อบกพร่องจากการฝึกซ้อมครั้งก่อน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R002",
+      "name_th": "ขาดการแบ่งแยกเครือข่ายระหว่างระบบ IT และ OT อย่างเพียงพอ",
+      "name_en": "Insufficient IT/OT Network Segmentation",
+      "level": "HIGH",
+      "likelihood": "สูง",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF002-1",
+          "name_th": "ขาดการออกแบบสถาปัตยกรรมเครือข่ายแบบแบ่งโซนและช่องทางเชื่อมต่อ (Zone/Conduit) ตามหลักการที่เหมาะสม",
+          "audit_procedures": [
+            {
+              "id": "CF002-1-P1",
+              "name_th": "ตรวจสอบเอกสารสถาปัตยกรรมเครือข่ายและการกำหนด Zone/Conduit ระหว่างระบบ IT และ OT",
+              "method": "สัมภาษณ์ผู้ดูแลระบบเครือข่ายและตรวจสอบเอกสาร Network Architecture Diagram, Zone Segmentation Design เทียบกับสถานะการใช้งานจริงในระบบ",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "62443-3-2",
+                  "title": "Security risk assessment and system partitioning"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "62443-3-3 FR3",
+                  "title": "System security requirements and security levels"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 5.5",
+                  "title": "Network segmentation and architecture for ICS"
+                }
+              ],
+              "evidence_types": [
+                "เอกสาร Network Architecture Diagram ฉบับล่าสุด",
+                "รายงานผลการประเมิน Zone/Conduit ตาม IEC 62443",
+                "บันทึกการสัมภาษณ์ผู้ดูแลระบบเครือข่าย",
+                "ผลการเปรียบเทียบสถาปัตยกรรมที่ออกแบบกับการใช้งานจริง (Gap Analysis)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-1-P2",
+              "name_th": "ตรวจสอบความครบถ้วนและความเป็นปัจจุบันของ Asset Inventory ที่ระบุตำแหน่งอุปกรณ์ IT/OT",
+              "method": "สุ่มตรวจสอบ Asset Register เทียบกับการสำรวจอุปกรณ์จริงในพื้นที่ (Physical Verification) เพื่อยืนยันการจำแนกโซนของอุปกรณ์",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.9",
+                  "title": "Inventory of information and other associated assets"
+                },
+                {
+                  "std": "NIST CSF 2.0",
+                  "clause": "ID.AM-01/02",
+                  "title": "Asset management identification"
+                }
+              ],
+              "evidence_types": [
+                "รายการ Asset Inventory ของอุปกรณ์ IT และ OT",
+                "รายงานผลการสำรวจอุปกรณ์จริง (Physical Verification Report)",
+                "ผลการสุ่มตรวจสอบความสอดคล้องของข้อมูล",
+                "เอกสารการจำแนกประเภทอุปกรณ์ตามโซนเครือข่าย"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002-2",
+          "name_th": "ขาดกลไกควบคุมการเข้าถึงและป้องกันการเชื่อมต่อโดยตรงระหว่างเครือข่าย IT และ OT",
+          "audit_procedures": [
+            {
+              "id": "CF002-2-P1",
+              "name_th": "ทดสอบกฎ Firewall และ Access Control List ที่ควบคุมการสื่อสารระหว่างเครือข่าย IT และ OT",
+              "method": "ตรวจสอบ Firewall Rule Base และทำการทดสอบเจาะระบบ (Penetration Test) เพื่อยืนยันว่าไม่มีเส้นทางเชื่อมต่อที่ไม่ได้รับอนุญาตระหว่างโซน",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "62443-3-3 SR5.1-5.3",
+                  "title": "Network segmentation and access control"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SC-7",
+                  "title": "Boundary Protection"
+                },
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-005-7",
+                  "title": "Electronic Security Perimeter(s)"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผล Firewall Rule Review",
+                "ผลการทดสอบ Penetration Test ระหว่างโซน IT-OT",
+                "เอกสารนโยบายการควบคุมการเข้าถึงเครือข่าย",
+                "บันทึกการอนุมัติ Change Request สำหรับ Firewall Rule"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-2-P2",
+              "name_th": "ตรวจสอบการติดตั้งและประสิทธิผลของ DMZ หรือ Unidirectional Gateway ระหว่างเครือข่าย IT และ OT",
+              "method": "ตรวจสอบแผนผังการติดตั้งอุปกรณ์ DMZ/Gateway และทดสอบการทำงานจริงว่าสามารถป้องกันการเชื่อมต่อโดยตรงได้ตามที่ออกแบบ",
+              "std_refs": [
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "มาตรฐานขั้นต่ำด้านการป้องกันเครือข่าย",
+                  "title": "แนวปฏิบัติการป้องกันโครงสร้างพื้นฐานสำคัญทางสารสนเทศ"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "62351-3",
+                  "title": "Security for profiles including TCP/IP"
+                }
+              ],
+              "evidence_types": [
+                "แผนผังการติดตั้ง DMZ/Unidirectional Gateway",
+                "รายงานผลการทดสอบการทำงานของอุปกรณ์ Gateway",
+                "เอกสาร Configuration ของอุปกรณ์ DMZ",
+                "บันทึกผลการตรวจสอบตามประกาศ สกมช."
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF002-3",
+          "name_th": "ขาดการเฝ้าระวังและตรวจจับการรับส่งข้อมูลผิดปกติที่ข้ามโซนระหว่าง IT และ OT",
+          "audit_procedures": [
+            {
+              "id": "CF002-3-P1",
+              "name_th": "ตรวจสอบระบบ Log/SIEM ว่าครอบคลุมการเฝ้าระวังการสื่อสารข้ามโซน IT-OT อย่างต่อเนื่อง",
+              "method": "ตรวจสอบการตั้งค่า Log Source, Correlation Rule ใน SIEM และทดสอบ Use Case การแจ้งเตือนเมื่อมีการสื่อสารผิดปกติข้ามโซน",
+              "std_refs": [
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "DE.CM-01/03",
+                  "title": "Continuous monitoring of networks and systems"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "62351-7",
+                  "title": "Network and system management (NSM) for power system operations"
+                },
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "8.16",
+                  "title": "Monitoring activities"
+                }
+              ],
+              "evidence_types": [
+                "เอกสาร Configuration ของระบบ SIEM/Log Management",
+                "รายงานผลการทดสอบ Use Case การแจ้งเตือน",
+                "ตัวอย่าง Log การสื่อสารข้ามโซน IT-OT",
+                "รายงานสรุปการเฝ้าระวังเครือข่ายรายเดือน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF002-3-P2",
+              "name_th": "ตรวจสอบกระบวนการตอบสนองต่อเหตุการณ์เมื่อพบการเชื่อมต่อผิดปกติระหว่าง IT และ OT",
+              "method": "สอบทานแผน Incident Response และตรวจสอบบันทึกเหตุการณ์ในอดีตว่ามีการดำเนินการและรายงานตามกรอบเวลาที่กำหนด",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 57",
+                  "title": "การแจ้งเหตุภัยคุกคามทางไซเบอร์ต่อโครงสร้างพื้นฐานสำคัญ"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.4",
+                  "title": "Incident response for ICS environments"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารแผน Incident Response สำหรับเหตุการณ์ IT-OT",
+                "บันทึกเหตุการณ์และรายงานผลการตอบสนองในอดีต",
+                "หลักฐานการแจ้งเหตุต่อหน่วยงานกำกับดูแลตามกำหนดเวลา",
+                "รายงานผลการซ้อมแผนรับมือเหตุการณ์ (Tabletop Exercise)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R003",
+      "name_th": "การโจมตีด้วย Ransomware ต่อระบบปฏิบัติการและระบบสนับสนุนธุรกิจ",
+      "name_en": "Ransomware Attack on Operational and Business Support Systems",
+      "level": "CRITICAL",
+      "likelihood": "สูง",
+      "impact": "สูงมาก",
+      "control_failures": [
+        {
+          "id": "CF003-1",
+          "name_th": "การแบ่งแยกเครือข่าย IT/OT ไม่รัดกุมเพียงพอต่อการสกัดกั้นการแพร่กระจายของ Ransomware",
+          "audit_procedures": [
+            {
+              "id": "CF003-1-AP1",
+              "name_th": "ตรวจสอบสถาปัตยกรรมเครือข่ายและการควบคุม Zone/Conduit ระหว่างระบบ IT และ OT",
+              "method": "ตรวจสอบเอกสารสถาปัตยกรรมเครือข่าย ทดสอบ Firewall Rule และสัมภาษณ์ผู้ดูแลระบบ",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-3-3 SR 5.1",
+                  "title": "Network segmentation"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.2",
+                  "title": "Network Architecture Segmentation"
+                }
+              ],
+              "evidence_types": [
+                "แผนผังสถาปัตยกรรมเครือข่าย",
+                "รายงานผลการทดสอบ Firewall Rule",
+                "บันทึกการสัมภาษณ์ผู้ดูแลระบบ",
+                "รายการ Access Control List ของอุปกรณ์ Network"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-1-AP2",
+              "name_th": "ประเมินการควบคุมช่องทางเชื่อมต่อระยะไกลและบัญชีผู้ใช้ที่เข้าถึงระบบ OT",
+              "method": "สุ่มตรวจสอบ Remote Access Log และนโยบายการจัดการสิทธิ์การเข้าถึง",
+              "std_refs": [
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-005",
+                  "title": "Electronic Security Perimeter"
+                },
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "Clause 8.20",
+                  "title": "Networks security"
+                }
+              ],
+              "evidence_types": [
+                "Log การเข้าถึงระยะไกล",
+                "นโยบายควบคุมสิทธิ์การเข้าถึง",
+                "รายชื่อบัญชีผู้ใช้ที่ได้รับอนุญาต",
+                "รายงานผลการทบทวนสิทธิ์การเข้าถึงประจำงวด"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003-2",
+          "name_th": "กระบวนการสำรองข้อมูลและแผนกู้คืนระบบไม่เพียงพอต่อการรับมือ Ransomware",
+          "audit_procedures": [
+            {
+              "id": "CF003-2-AP1",
+              "name_th": "ตรวจสอบความครบถ้วนและการแยก Backup ออกจากเครือข่ายหลัก",
+              "method": "ตรวจสอบนโยบายสำรองข้อมูล ทดสอบการกู้คืนจริง และตรวจสอบตำแหน่งจัดเก็บ Offline Backup",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "Clause 8.13",
+                  "title": "Information backup"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "CP-9",
+                  "title": "System Backup"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายและแผนสำรองข้อมูล",
+                "รายงานผลการทดสอบกู้คืนระบบ",
+                "หลักฐานการจัดเก็บ Backup แบบ Offline/Air-gapped",
+                "บันทึกตารางเวลาการสำรองข้อมูล"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-2-AP2",
+              "name_th": "ประเมินแผนความต่อเนื่องทางธุรกิจและแผนกู้คืนจากภัยพิบัติสำหรับระบบสำคัญ",
+              "method": "ทบทวนเอกสาร BCP/DRP และตรวจสอบผลการซ้อมแผนล่าสุด",
+              "std_refs": [
+                {
+                  "std": "NIST CSF 2.0",
+                  "clause": "RC.RP-01",
+                  "title": "Recovery Plan Execution"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-2-1 A.3.4.3",
+                  "title": "Business continuity plan"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารแผนความต่อเนื่องทางธุรกิจ",
+                "รายงานผลการซ้อมแผนกู้คืนระบบ",
+                "บันทึกระยะเวลากู้คืนเป้าหมาย (RTO/RPO)",
+                "รายงานการปรับปรุงแผนหลังการซ้อม"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003-3",
+          "name_th": "การบริหารจัดการช่องโหว่และการอัปเดตแพตช์ในระบบปฏิบัติการและ OT ไม่ทันเวลา",
+          "audit_procedures": [
+            {
+              "id": "CF003-3-AP1",
+              "name_th": "ตรวจสอบกระบวนการประเมินและจัดลำดับความสำคัญของช่องโหว่ในระบบ IT/OT",
+              "method": "สุ่มตรวจสอบรายงานผลการสแกนช่องโหว่และรอบเวลาการปิดช่องโหว่ตามความเสี่ยง",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6.4",
+                  "title": "Vulnerability Management for ICS"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "Annex A 8.8",
+                  "title": "Management of technical vulnerabilities"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการสแกนช่องโหว่",
+                "นโยบายบริหารจัดการช่องโหว่",
+                "บันทึกระยะเวลาปิดช่องโหว่ตามระดับความเสี่ยง",
+                "รายการ CVE ที่อยู่ระหว่างดำเนินการ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-3-AP2",
+              "name_th": "ประเมินกระบวนการทดสอบและติดตั้งแพตช์บนระบบควบคุมอุตสาหกรรมโดยไม่กระทบการผลิต",
+              "method": "ตรวจสอบ Patch Management Procedure และหลักฐานการทดสอบใน Test Environment ก่อนใช้งานจริง",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-2-3",
+                  "title": "Patch management in the IACS environment"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SI-2",
+                  "title": "Flaw Remediation"
+                }
+              ],
+              "evidence_types": [
+                "ขั้นตอนปฏิบัติการบริหารจัดการแพตช์",
+                "บันทึกผลการทดสอบแพตช์ในสภาพแวดล้อมทดสอบ",
+                "ตารางเวลาติดตั้งแพตช์ระบบ OT",
+                "รายงานเหตุขัดข้องหลังการติดตั้งแพตช์"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF003-4",
+          "name_th": "ขีดความสามารถในการตรวจจับและตอบสนองต่อเหตุการณ์ไซเบอร์ล่าช้าไม่ทันการแพร่กระจายของ Ransomware",
+          "audit_procedures": [
+            {
+              "id": "CF003-4-AP1",
+              "name_th": "ตรวจสอบระบบเฝ้าระวังภัยคุกคามและกระบวนการแจ้งเตือนเหตุการณ์ผิดปกติแบบเรียลไทม์",
+              "method": "ทดสอบการทำงานของ SIEM/IDS และสุ่มตรวจสอบ Alert Log ย้อนหลัง",
+              "std_refs": [
+                {
+                  "std": "NIST CSF 2.0",
+                  "clause": "DE.CM-01",
+                  "title": "Continuous Monitoring"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "IEC 62351-7",
+                  "title": "Network and system management monitoring"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการทดสอบระบบ SIEM/IDS",
+                "บันทึก Alert Log ย้อนหลัง",
+                "นโยบายการเฝ้าระวังภัยคุกคาม",
+                "รายชื่อผู้รับผิดชอบเฝ้าระวังตลอด 24 ชั่วโมง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF003-4-AP2",
+              "name_th": "ประเมินแผนตอบสนองเหตุการณ์และการรายงานต่อหน่วยงานกำกับดูแลตามกฎหมาย",
+              "method": "ทบทวนแผน Incident Response และตรวจสอบหลักฐานการแจ้งเหตุต่อ สกมช. ตามกรอบเวลาที่กำหนด",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 57",
+                  "title": "การแจ้งเหตุภัยคุกคามทางไซเบอร์"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "ประกาศว่าด้วยการแจ้งเหตุ",
+                  "title": "หลักเกณฑ์การแจ้งเหตุภัยคุกคามไซเบอร์"
+                }
+              ],
+              "evidence_types": [
+                "แผนตอบสนองต่อเหตุการณ์ไซเบอร์",
+                "บันทึกการแจ้งเหตุต่อ สกมช.",
+                "รายงานผลการซักซ้อมแผนตอบสนองเหตุการณ์",
+                "หลักฐานระยะเวลาที่ใช้ในการแจ้งเหตุ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R004",
+      "name_th": "ช่องโหว่จากอุปกรณ์ Legacy และระบบที่ไม่ได้รับการอัปเดตแพตช์ความปลอดภัย",
+      "name_en": "Vulnerabilities from Legacy Devices and Unpatched Systems",
+      "level": "HIGH",
+      "likelihood": "สูง",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF004-1",
+          "name_th": "ขาดการจัดทำทะเบียนสินทรัพย์และประเมินความเสี่ยงอุปกรณ์ Legacy อย่างครบถ้วนและเป็นปัจจุบัน",
+          "audit_procedures": [
+            {
+              "id": "AP-CF004-1-01",
+              "name_th": "สุ่มตรวจสอบทะเบียนสินทรัพย์ IT/OT เทียบกับอุปกรณ์จริงหน้างานเพื่อยืนยันความครบถ้วนและความถูกต้อง",
+              "method": "สุ่มตัวอย่างอุปกรณ์ในพื้นที่ควบคุมเทียบกับ Asset Register แล้วสัมภาษณ์ผู้รับผิดชอบเรื่องการปรับปรุงข้อมูล",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.9",
+                  "title": "Inventory of information and other associated assets"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "CM-8",
+                  "title": "System Component Inventory"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "6.2 Asset Management",
+                  "title": "OT Asset Inventory Management"
+                }
+              ],
+              "evidence_types": [
+                "ทะเบียนสินทรัพย์ IT/OT ฉบับล่าสุด",
+                "ภาพถ่าย/รายการอุปกรณ์จากการสุ่มตรวจหน้างาน",
+                "บันทึกการปรับปรุงทะเบียนสินทรัพย์ย้อนหลัง",
+                "บันทึกสัมภาษณ์ผู้รับผิดชอบด้านสินทรัพย์"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP-CF004-1-02",
+              "name_th": "ตรวจสอบผลการประเมินความเสี่ยงเฉพาะอุปกรณ์ Legacy ที่ไม่รองรับการอัปเดตแพตช์",
+              "method": "ทวนสอบรายงานประเมินความเสี่ยงและเกณฑ์การจัดลำดับความสำคัญของอุปกรณ์ Legacy ที่ End-of-Life/End-of-Support",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "62443-2-1",
+                  "title": "Security Program Requirements - Risk Assessment"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "ข้อกำหนดการประเมินความเสี่ยงไซเบอร์",
+                  "title": "แนวปฏิบัติการประเมินความเสี่ยงโครงสร้างพื้นฐานสำคัญ"
+                },
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "ID.RA-01",
+                  "title": "Asset Vulnerabilities Identification"
+                }
+              ],
+              "evidence_types": [
+                "รายงานประเมินความเสี่ยงอุปกรณ์ Legacy",
+                "รายการอุปกรณ์ End-of-Life/End-of-Support",
+                "เกณฑ์จัดลำดับความสำคัญความเสี่ยง",
+                "แผนบริหารความเสี่ยงที่อนุมัติแล้ว"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004-2",
+          "name_th": "ขาดกระบวนการบริหารจัดการแพตช์ความปลอดภัยที่เป็นระบบและมีการทดสอบก่อนติดตั้ง",
+          "audit_procedures": [
+            {
+              "id": "AP-CF004-2-01",
+              "name_th": "ตรวจสอบนโยบายและบันทึกการบริหารจัดการแพตช์รวมถึงรอบเวลาการประเมินและติดตั้ง",
+              "method": "ทวนสอบเอกสารนโยบาย Patch Management และบันทึกการดำเนินการติดตั้งแพตช์ย้อนหลัง 12 เดือน",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SI-2",
+                  "title": "Flaw Remediation"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "62443-2-3",
+                  "title": "Patch Management in the IACS Environment"
+                },
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-007-6 R2",
+                  "title": "Security Patch Management"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายและขั้นตอนการบริหารจัดการแพตช์",
+                "บันทึกการติดตั้งแพตช์ย้อนหลัง",
+                "รายงานผลการประเมินแพตช์ที่ยังไม่ได้ติดตั้ง",
+                "แผนการติดตั้งแพตช์ที่ได้รับอนุมัติ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP-CF004-2-02",
+              "name_th": "สุ่มตรวจสถานะแพตช์ปัจจุบันของระบบเทียบกับประกาศช่องโหว่ล่าสุดจากผู้ผลิต",
+              "method": "ใช้เครื่องมือสแกนช่องโหว่หรือรายงานเทียบเวอร์ชันแพตช์กับ Vendor Security Advisory ที่เกี่ยวข้อง",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "8.8",
+                  "title": "Management of Technical Vulnerabilities"
+                },
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "6.3 Vulnerability Management",
+                  "title": "OT Vulnerability and Patch Management"
+                }
+              ],
+              "evidence_types": [
+                "ผลการสแกนช่องโหว่ล่าสุด",
+                "รายชื่อ Vendor Security Advisory ที่เกี่ยวข้อง",
+                "รายงานเปรียบเทียบเวอร์ชันแพตช์ปัจจุบันกับล่าสุด",
+                "บันทึกการดำเนินการแก้ไขช่องโหว่ที่พบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF004-3",
+          "name_th": "ขาดมาตรการชดเชยและการแบ่งแยกเครือข่ายที่เพียงพอสำหรับระบบ Legacy ที่ไม่สามารถอัปเดตแพตช์ได้",
+          "audit_procedures": [
+            {
+              "id": "AP-CF004-3-01",
+              "name_th": "ตรวจสอบสถาปัตยกรรมเครือข่ายและการแบ่ง Zone/Conduit สำหรับอุปกรณ์ Legacy",
+              "method": "ทวนสอบ Network Diagram และการตั้งค่า Firewall/Segmentation เทียบกับหลักการ Zone and Conduit",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "62443-3-3",
+                  "title": "System Security Requirements and Security Levels"
+                },
+                {
+                  "std": "NERC CIP Standards",
+                  "clause": "CIP-005-7",
+                  "title": "Electronic Security Perimeter"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "62351-3",
+                  "title": "Communication Network and System Security - Profiles including TCP/IP"
+                }
+              ],
+              "evidence_types": [
+                "แผนผังเครือข่าย (Network Diagram) ปัจจุบัน",
+                "การตั้งค่า Firewall Rule ระหว่าง Zone",
+                "เอกสารการออกแบบ Zone และ Conduit",
+                "รายงานผลการตรวจสอบการแบ่งแยกเครือข่ายล่าสุด"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP-CF004-3-02",
+              "name_th": "ตรวจสอบเอกสารและการติดตั้งมาตรการชดเชยสำหรับระบบที่ไม่สามารถแพตช์ได้",
+              "method": "ทวนสอบมาตรการ Compensating Controls เช่น IDS/IPS การเฝ้าระวังเฉพาะจุด และการจำกัดสิทธิ์เข้าถึง",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "RA-5",
+                  "title": "Vulnerability Monitoring and Scanning"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.9",
+                  "title": "Configuration Management"
+                }
+              ],
+              "evidence_types": [
+                "เอกสารมาตรการชดเชยที่ได้รับอนุมัติ",
+                "รายงานการเฝ้าระวังจาก IDS/IPS เฉพาะจุด",
+                "บันทึกการจำกัดสิทธิ์การเข้าถึงอุปกรณ์ Legacy",
+                "ผลการทดสอบประสิทธิผลมาตรการชดเชย"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R005",
+      "name_th": "ความเสี่ยงจากห่วงโซ่อุปทาน (Supply Chain) รวมถึงซอฟต์แวร์และฮาร์ดแวร์จากผู้ผลิตภายนอก",
+      "name_en": "Supply Chain Risk from Third-Party Software and Hardware",
+      "level": "HIGH",
+      "likelihood": "ปานกลาง",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF005-1",
+          "name_th": "ขาดกระบวนการบริหารความเสี่ยงห่วงโซ่อุปทาน (Supply Chain Risk Management) สำหรับผู้ผลิตและผู้จำหน่ายภายนอก",
+          "audit_procedures": [
+            {
+              "id": "AP005-1-1",
+              "name_th": "ตรวจสอบนโยบายและขั้นตอนประเมินความเสี่ยงผู้ผลิต/ผู้จำหน่ายก่อนอนุมัติเข้าสู่บัญชีผู้ขาย",
+              "method": "สอบทานเอกสารนโยบาย สุ่มตรวจแบบประเมินความเสี่ยงผู้ขายจริง และสัมภาษณ์ผู้รับผิดชอบจัดซื้อ",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SR-2, SR-5",
+                  "title": "Supply Chain Risk Management Plan / Supplier Assessment"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-2-1",
+                  "title": "Security Program Requirements including Vendor Risk"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "ประกาศว่าด้วยการประเมินความเสี่ยงไซเบอร์",
+                  "title": "แนวปฏิบัติการประเมินความเสี่ยงหน่วยงานโครงสร้างพื้นฐานสำคัญ"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายบริหารความเสี่ยงห่วงโซ่อุปทานฉบับล่าสุด",
+                "แบบประเมินความเสี่ยงผู้ผลิต/ผู้จำหน่ายที่กรอกจริง",
+                "บัญชีรายชื่อผู้ขายพร้อมระดับความเสี่ยงที่จัดประเภท",
+                "บันทึกการประชุมอนุมัติผู้ขายรายใหม่"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-1-2",
+              "name_th": "ตรวจสอบการจัดทำทะเบียนความเสี่ยงห่วงโซ่อุปทานและการติดตามผลอย่างต่อเนื่อง",
+              "method": "สอบทานทะเบียนความเสี่ยง เปรียบเทียบรอบการติดตามกับแผนที่กำหนด และตรวจสอบการปิดประเด็นความเสี่ยงที่พบ",
+              "std_refs": [
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "GV.SC-01 ถึง GV.SC-10",
+                  "title": "Cybersecurity Supply Chain Risk Management"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.19-5.23",
+                  "title": "Information Security in Supplier Relationships"
+                }
+              ],
+              "evidence_types": [
+                "ทะเบียนความเสี่ยงห่วงโซ่อุปทานฉบับปัจจุบัน",
+                "รายงานผลการติดตามความเสี่ยงรอบล่าสุด",
+                "หลักฐานการปิดประเด็นความเสี่ยงที่ค้างอยู่",
+                "แผนการทบทวนความเสี่ยงประจำปี"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF005-2",
+          "name_th": "ขาดการตรวจสอบความสมบูรณ์และแหล่งที่มาของซอฟต์แวร์/ฮาร์ดแวร์จากผู้ผลิตภายนอกก่อนนำไปใช้งานจริง",
+          "audit_procedures": [
+            {
+              "id": "AP005-2-1",
+              "name_th": "ตรวจสอบกระบวนการยืนยันแหล่งที่มาและความสมบูรณ์ของซอฟต์แวร์ด้วย digital signature หรือ checksum",
+              "method": "สุ่มตรวจไฟล์ติดตั้งซอฟต์แวร์ล่าสุด เปรียบเทียบ hash/signature กับที่ผู้ผลิตประกาศ และสอบทานขั้นตอนปฏิบัติงาน",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-4-1 SM-9",
+                  "title": "Secure Product Development - Component Integrity"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SR-3, SR-10",
+                  "title": "Supply Chain Controls and Processes / Inspection of Systems or Components"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "IEC 62351-8",
+                  "title": "Role-Based Access Control และการยืนยันความถูกต้องของข้อมูล/ซอฟต์แวร์"
+                }
+              ],
+              "evidence_types": [
+                "บันทึกการตรวจสอบ hash/signature ของไฟล์ติดตั้ง",
+                "ขั้นตอนปฏิบัติงานการยืนยันแหล่งที่มาซอฟต์แวร์",
+                "ตัวอย่างรายงานผลตรวจไม่ตรงกันและการดำเนินการแก้ไข",
+                "ใบรับรองความสมบูรณ์ (Certificate of Conformance) จากผู้ผลิต"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-2-2",
+              "name_th": "ตรวจสอบการทดสอบความปลอดภัยของอุปกรณ์และซอฟต์แวร์ก่อนติดตั้งเข้าสู่ระบบควบคุมอุตสาหกรรม (OT)",
+              "method": "สอบทานรายงานผลทดสอบด้านความปลอดภัยก่อนใช้งาน และตรวจสอบสภาพแวดล้อมทดสอบแยกจากระบบผลิตจริง",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "Section 6 Applying Security Controls",
+                  "title": "Guide to OT Security - Pre-deployment Testing"
+                },
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "IEC 62443-3-3",
+                  "title": "System Security Requirements and Security Levels"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลทดสอบความปลอดภัยก่อนติดตั้งอุปกรณ์/ซอฟต์แวร์ใหม่",
+                "แผนผังสภาพแวดล้อมทดสอบ (Test Bed) แยกจากระบบผลิตจริง",
+                "บันทึกอนุมัตินำอุปกรณ์เข้าสู่ระบบผลิตหลังผ่านการทดสอบ",
+                "รายการช่องโหว่ที่พบระหว่างทดสอบและสถานะการแก้ไข"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF005-3",
+          "name_th": "ขาดข้อกำหนดด้านความมั่นคงปลอดภัยไซเบอร์และการคุ้มครองข้อมูลส่วนบุคคลในสัญญาจัดซื้อกับผู้ผลิต/ผู้ให้บริการภายนอก",
+          "audit_procedures": [
+            {
+              "id": "AP005-3-1",
+              "name_th": "ตรวจสอบสัญญาจัดซื้อว่ามีข้อกำหนดด้านความมั่นคงปลอดภัยไซเบอร์ การแจ้งเหตุ และสิทธิตรวจสอบผู้ขาย",
+              "method": "สุ่มตรวจสัญญาจัดซื้อที่มีผลบังคับใช้ เปรียบเทียบเงื่อนไขกับแนวปฏิบัติที่กำหนด และสัมภาษณ์ฝ่ายกฎหมาย/จัดซื้อ",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 44-46",
+                  "title": "หน้าที่ของหน่วยงานโครงสร้างพื้นฐานสำคัญทางสารสนเทศ"
+                },
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "5.20, 5.21, 5.22",
+                  "title": "Addressing Security within Supplier Agreements และ Monitoring of Supplier Services"
+                }
+              ],
+              "evidence_types": [
+                "ตัวอย่างสัญญาจัดซื้อที่มีข้อกำหนดความมั่นคงปลอดภัยไซเบอร์",
+                "เงื่อนไขสิทธิตรวจสอบ (Audit Rights) ที่ระบุในสัญญา",
+                "บันทึกการแจ้งเหตุการณ์ด้านความมั่นคงปลอดภัยจากผู้ขาย",
+                "แบบฟอร์มตรวจสอบสัญญาก่อนลงนามโดยฝ่ายกฎหมาย"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP005-3-2",
+              "name_th": "ตรวจสอบการปฏิบัติตามข้อกำหนดคุ้มครองข้อมูลส่วนบุคคลของผู้ให้บริการภายนอกที่เข้าถึงหรือประมวลผลข้อมูล",
+              "method": "สอบทานข้อตกลงประมวลผลข้อมูลส่วนบุคคล (DPA) กับผู้ให้บริการ และตรวจสอบบันทึกการเข้าถึงข้อมูลของบุคคลภายนอก",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+                  "clause": "มาตรา 37, 40",
+                  "title": "หน้าที่ผู้ควบคุมข้อมูลและผู้ประมวลผลข้อมูลส่วนบุคคล"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "SR-6",
+                  "title": "Supplier Assessments and Reviews"
+                }
+              ],
+              "evidence_types": [
+                "ข้อตกลงประมวลผลข้อมูลส่วนบุคคล (Data Processing Agreement)",
+                "บันทึกการเข้าถึงข้อมูลส่วนบุคคลโดยผู้ให้บริการภายนอก",
+                "รายงานผลการตรวจสอบผู้ประมวลผลข้อมูลประจำปี",
+                "หลักฐานการแจ้งเหตุละเมิดข้อมูลส่วนบุคคล (ถ้ามี)"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R006",
+      "name_th": "ภัยคุกคามจากบุคคลภายใน (Insider Threat) ที่มีสิทธิ์เข้าถึงระบบควบคุมสำคัญ",
+      "name_en": "Insider Threat with Access to Critical Control Systems",
+      "level": "MEDIUM",
+      "likelihood": "ต่ำ",
+      "impact": "สูง",
+      "control_failures": [
+        {
+          "id": "CF006-1",
+          "name_th": "การบริหารจัดการสิทธิ์การเข้าถึงระบบควบคุมสำคัญไม่เป็นไปตามหลัก Least Privilege และ Separation of Duties",
+          "audit_procedures": [
+            {
+              "id": "AP006-1-1",
+              "name_th": "ตรวจสอบนโยบายและเมทริกซ์สิทธิ์การเข้าถึงระบบ SCADA/ICS ว่ากำหนดตามหลักสิทธิ์น้อยที่สุดและแบ่งแยกหน้าที่หรือไม่",
+              "method": "สุ่มตรวจบัญชีผู้ใช้สิทธิ์สูงเทียบกับหน้าที่งานจริง และสัมภาษณ์ผู้ดูแลระบบ",
+              "std_refs": [
+                {
+                  "std": "IEC 62443 Series",
+                  "clause": "3-3 SR 2.1",
+                  "title": "Authorization Enforcement"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.15",
+                  "title": "Access control"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "AC-6",
+                  "title": "Least Privilege"
+                }
+              ],
+              "evidence_types": [
+                "เมทริกซ์สิทธิ์การเข้าถึงระบบควบคุม",
+                "นโยบาย Access Control ที่ลงนามอนุมัติ",
+                "รายชื่อผู้ใช้สิทธิ์สูงพร้อมบทบาทหน้าที่",
+                "บันทึกการสัมภาษณ์ผู้ดูแลระบบ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP006-1-2",
+              "name_th": "ตรวจสอบรอบการทบทวนสิทธิ์การเข้าถึงระบบควบคุมว่าดำเนินการตามกำหนดและมีการเพิกถอนสิทธิ์ที่ไม่จำเป็น",
+              "method": "ตรวจสอบบันทึกผลการทบทวนสิทธิ์ (Access Review) ย้อนหลังและเปรียบเทียบกับสถานะปัจจุบัน",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "5.18",
+                  "title": "Access rights"
+                },
+                {
+                  "std": "NIST CSF 2.0",
+                  "clause": "PR.AA-01",
+                  "title": "Identities and credentials are managed"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลการทบทวนสิทธิ์ล่าสุด",
+                "บันทึกการเพิกถอนสิทธิ์ที่ไม่จำเป็น",
+                "ตารางกำหนดรอบการทบทวนสิทธิ์",
+                "อีเมล/เอกสารอนุมัติผลการทบทวน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF006-2",
+          "name_th": "การเฝ้าระวังและบันทึกกิจกรรมของผู้ใช้ภายในที่มีสิทธิ์สูงบนระบบควบคุมไม่เพียงพอ",
+          "audit_procedures": [
+            {
+              "id": "AP006-2-1",
+              "name_th": "ตรวจสอบระบบบันทึกและติดตามกิจกรรม (Logging/SIEM) ของผู้ใช้สิทธิ์สูงบนระบบควบคุมอุตสาหกรรม",
+              "method": "ตรวจสอบการตั้งค่า log ระดับ audit ของระบบ ICS/SCADA และทดสอบการแจ้งเตือนเมื่อมีกิจกรรมผิดปกติ",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-82 Rev.3",
+                  "clause": "6.2 Logging and Monitoring",
+                  "title": "ICS Monitoring Controls"
+                },
+                {
+                  "std": "IEC 62351 Series",
+                  "clause": "Part 7",
+                  "title": "Security through network and system management"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "AU-6",
+                  "title": "Audit Record Review, Analysis, and Reporting"
+                }
+              ],
+              "evidence_types": [
+                "รายงานการตั้งค่า audit log ของระบบควบคุม",
+                "ตัวอย่าง log กิจกรรมผู้ใช้สิทธิ์สูง",
+                "ผลทดสอบการแจ้งเตือนเหตุการณ์ผิดปกติ",
+                "รายงานการทบทวน log ประจำเดือน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP006-2-2",
+              "name_th": "ตรวจสอบกระบวนการวิเคราะห์พฤติกรรมผิดปกติของผู้ใช้ภายในเพื่อตรวจจับสัญญาณภัยคุกคาม",
+              "method": "สอบทานเกณฑ์และผลลัพธ์การวิเคราะห์ Anomaly/UEBA ย้อนหลังพร้อมประเมินการตอบสนองต่อเหตุการณ์",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.8.15",
+                  "title": "Logging"
+                },
+                {
+                  "std": "NIST CSF 2.0",
+                  "clause": "DE.CM-03",
+                  "title": "Personnel activity monitored"
+                }
+              ],
+              "evidence_types": [
+                "รายงานผลวิเคราะห์พฤติกรรมผิดปกติ",
+                "เกณฑ์การตรวจจับความผิดปกติ",
+                "บันทึกการตอบสนองต่อเหตุการณ์ที่ตรวจพบ",
+                "รายชื่อเครื่องมือ UEBA/SIEM ที่ใช้งาน"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF006-3",
+          "name_th": "กระบวนการคัดกรองบุคคลก่อนเข้าถึงระบบควบคุมและการเพิกถอนสิทธิ์เมื่อพ้นสภาพการทำงานไม่รัดกุม",
+          "audit_procedures": [
+            {
+              "id": "AP006-3-1",
+              "name_th": "ตรวจสอบนโยบายและหลักฐานการตรวจสอบประวัติบุคคล (Background Check) ก่อนอนุญาตเข้าถึงระบบควบคุมสำคัญ",
+              "method": "สุ่มตรวจแฟ้มประวัติพนักงานที่มีสิทธิ์เข้าถึงระบบควบคุมเทียบกับนโยบายที่กำหนด",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "6.1",
+                  "title": "Screening"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "PS-3",
+                  "title": "Personnel Screening"
+                },
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 55",
+                  "title": "มาตรการด้านบุคลากรของโครงสร้างพื้นฐานสำคัญ"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายการคัดกรองบุคคลก่อนเข้าถึงระบบควบคุม",
+                "แฟ้มประวัติการตรวจสอบพนักงานตัวอย่าง",
+                "สัญญารักษาความลับ/ข้อตกลงการใช้งานระบบ",
+                "รายงานผลการตรวจสอบภูมิหลังบุคคล"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "AP006-3-2",
+              "name_th": "ตรวจสอบกระบวนการเพิกถอนสิทธิ์การเข้าถึงระบบควบคุมทันทีเมื่อพนักงานพ้นสภาพหรือเปลี่ยนหน้าที่",
+              "method": "สุ่มตรวจกรณีพนักงานพ้นสภาพย้อนหลังเทียบกับเวลาที่เพิกถอนสิทธิ์จริงในระบบ",
+              "std_refs": [
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "PS-4",
+                  "title": "Personnel Termination"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "ข้อกำหนดการบริหารบุคลากรที่เข้าถึงระบบสำคัญ",
+                  "title": "มาตรการด้านบุคลากรสำหรับโครงสร้างพื้นฐานสำคัญ"
+                }
+              ],
+              "evidence_types": [
+                "รายชื่อพนักงานพ้นสภาพย้อนหลัง",
+                "บันทึกเวลาการเพิกถอนสิทธิ์เทียบกับวันพ้นสภาพ",
+                "แบบฟอร์ม Offboarding ที่ลงนามครบถ้วน",
+                "รายงานการตรวจสอบสิทธิ์ค้างของพนักงานที่พ้นสภาพ"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R007",
+      "name_th": "การไม่ปฏิบัติตามข้อกำหนดการแจ้งเหตุและรายงานเหตุการณ์ไซเบอร์ตามกฎหมาย",
+      "name_en": "Non-Compliance with Cyber Incident Notification and Reporting Requirements",
+      "level": "MEDIUM",
+      "likelihood": "ปานกลาง",
+      "impact": "ปานกลาง",
+      "control_failures": [
+        {
+          "id": "CF007-1",
+          "name_th": "ขาดนโยบายและกระบวนการแจ้งเหตุ/รายงานเหตุการณ์ไซเบอร์ที่สอดคล้องกับข้อกำหนดทางกฎหมาย",
+          "audit_procedures": [
+            {
+              "id": "CF007-1-P1",
+              "name_th": "ตรวจสอบเอกสารนโยบายและขั้นตอนการแจ้งเหตุไซเบอร์เทียบกับข้อกำหนดตามกฎหมายและประกาศที่เกี่ยวข้อง",
+              "method": "Document Review",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 43-46",
+                  "title": "การแจ้งเหตุการณ์ที่กระทบต่อโครงสร้างพื้นฐานสำคัญทางสารสนเทศ"
+                },
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "หลักเกณฑ์การแจ้งเหตุ",
+                  "title": "แนวทางและระยะเวลาการแจ้งเหตุการณ์ไซเบอร์"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.24",
+                  "title": "Information security incident management planning and preparation"
+                }
+              ],
+              "evidence_types": [
+                "นโยบายการแจ้งเหตุการณ์ไซเบอร์ที่อนุมัติใช้งาน",
+                "ขั้นตอนปฏิบัติ (SOP) การรายงานเหตุตามกฎหมาย",
+                "ผังโครงสร้างผู้รับผิดชอบและอำนาจอนุมัติการแจ้งเหตุ",
+                "บันทึกการทบทวนนโยบายให้ทันต่อการเปลี่ยนแปลงกฎหมาย"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF007-1-P2",
+              "name_th": "สัมภาษณ์ผู้รับผิดชอบและตรวจสอบช่องทางประสานงานกับหน่วยงานกำกับดูแลตามกฎหมาย",
+              "method": "Interview & Walkthrough",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 44",
+                  "title": "หน้าที่ของหน่วยงานโครงสร้างพื้นฐานสำคัญทางสารสนเทศ"
+                },
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "RS.CO-01",
+                  "title": "Incident response coordination and communication"
+                },
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "5.24",
+                  "title": "Information security incident management planning"
+                }
+              ],
+              "evidence_types": [
+                "บันทึกการสัมภาษณ์ผู้รับผิดชอบด้านการแจ้งเหตุ",
+                "รายชื่อและข้อมูลติดต่อหน่วยงานกำกับดูแลที่ต้องรายงาน",
+                "หลักฐานการซักซ้อมช่องทางการประสานงาน",
+                "อีเมล/เอกสารการติดต่อสื่อสารกับ สกมช. ในอดีต"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF007-2",
+          "name_th": "ขาดกลไกจำแนกระดับความรุนแรงและควบคุมกรอบเวลาการแจ้งเหตุตามที่กฎหมายกำหนด",
+          "audit_procedures": [
+            {
+              "id": "CF007-2-P1",
+              "name_th": "ทดสอบ walkthrough การจำแนกประเภทเหตุการณ์และการนับระยะเวลาก่อนแจ้งเหตุ",
+              "method": "Walkthrough Testing",
+              "std_refs": [
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "เกณฑ์ระดับความรุนแรงของเหตุการณ์",
+                  "title": "การจำแนกระดับเหตุการณ์ไซเบอร์"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "IR-6",
+                  "title": "Incident Reporting"
+                },
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.25",
+                  "title": "Assessment and decision on information security events"
+                }
+              ],
+              "evidence_types": [
+                "เกณฑ์การจำแนกระดับความรุนแรงเหตุการณ์",
+                "บันทึกผลการทดสอบ walkthrough",
+                "แบบฟอร์มประเมินเหตุการณ์พร้อมเวลาบันทึก",
+                "รายงานผลการประเมินเทียบกรอบเวลาตามกฎหมาย"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF007-2-P2",
+              "name_th": "สุ่มตรวจบันทึกเหตุการณ์ในอดีตเทียบกับระยะเวลาการแจ้งเหตุจริงตามข้อกำหนดกฎหมาย",
+              "method": "Sampling & Log Review",
+              "std_refs": [
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 45",
+                  "title": "กรอบเวลาการแจ้งเหตุการณ์"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "IR-6(1)",
+                  "title": "Automated Reporting"
+                },
+                {
+                  "std": "ISO/IEC 27002:2022",
+                  "clause": "5.26",
+                  "title": "Response to information security incidents"
+                }
+              ],
+              "evidence_types": [
+                "บันทึกเหตุการณ์ไซเบอร์ในอดีตพร้อมเวลาตรวจพบ",
+                "หลักฐานการแจ้งเหตุจริงถึงหน่วยงานกำกับดูแล",
+                "ผลการเปรียบเทียบเวลาที่ใช้กับเกณฑ์กฎหมาย",
+                "รายงานข้อบกพร่องและแผนแก้ไขที่เกี่ยวข้อง"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        },
+        {
+          "id": "CF007-3",
+          "name_th": "ขาดการซ้อมแผนและติดตามผลการรายงานเหตุการณ์ไซเบอร์ต่อหน่วยงานกำกับดูแลอย่างต่อเนื่อง",
+          "audit_procedures": [
+            {
+              "id": "CF007-3-P1",
+              "name_th": "ตรวจสอบบันทึกการซ้อมแผนรับมือและรายงานเหตุการณ์ (tabletop exercise) ประจำปี",
+              "method": "Document Review",
+              "std_refs": [
+                {
+                  "std": "ISO/IEC 27001:2022",
+                  "clause": "A.5.24",
+                  "title": "Incident management planning and preparation"
+                },
+                {
+                  "std": "NIST Cybersecurity Framework (CSF) 2.0",
+                  "clause": "RS.MA-01",
+                  "title": "Incident response plan execution and testing"
+                },
+                {
+                  "std": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
+                  "clause": "มาตรา 46",
+                  "title": "การเตรียมความพร้อมรับมือภัยคุกคามไซเบอร์"
+                }
+              ],
+              "evidence_types": [
+                "แผนการซ้อมรับมือเหตุการณ์ไซเบอร์ประจำปี",
+                "รายงานผลการซ้อมแผน (After Action Report)",
+                "รายชื่อผู้เข้าร่วมและบทบาทในการซ้อม",
+                "แผนปรับปรุงจากข้อบกพร่องที่พบระหว่างการซ้อม"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            },
+            {
+              "id": "CF007-3-P2",
+              "name_th": "ตรวจสอบการติดตามและปิดประเด็นจากผลการรายงานเหตุการณ์ต่อหน่วยงานกำกับดูแลในรอบที่ผ่านมา",
+              "method": "Follow-up Review",
+              "std_refs": [
+                {
+                  "std": "ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)",
+                  "clause": "การติดตามผลการแจ้งเหตุ",
+                  "title": "การติดตามการดำเนินการหลังรายงานเหตุการณ์"
+                },
+                {
+                  "std": "NIST SP 800-53 Rev.5",
+                  "clause": "IR-4",
+                  "title": "Incident Handling"
+                }
+              ],
+              "evidence_types": [
+                "รายงานเหตุการณ์ที่ส่งหน่วยงานกำกับดูแลในรอบที่ผ่านมา",
+                "หลักฐานการติดตามความคืบหน้าข้อเสนอแนะ",
+                "บันทึกการปิดประเด็นและอนุมัติจากผู้บริหาร",
+                "รายงานสรุปสถานะการปฏิบัติตามข้อกำหนดกฎหมายประจำปี"
+              ],
+              "derivation": "PROFESSIONAL_SYNTHESIS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "approval_status": "DRAFT",
+  "knowledge_layer": "L3",
+  "version": "0.1.0"
+}

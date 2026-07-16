@@ -1,27 +1,27 @@
-# Reading Manifest — ความเสี่ยงเรื่อง Customer Churn
+# Reading Manifest — ความมั่นคงปลอดภัยไซเบอร์ของโครงสร้างพื้นฐานสำคัญด้านไฟฟ้า
 
 สร้างอัตโนมัติโดย research-pipeline (2026-07-16) ตาม SKILL ขั้น 1.5 sources-first
 
-## ✅ มีทะเบียนแล้ว อ้างได้ (11)
-- ISO 31000:2018
-- ISO 9001:2015
-- COSO ERM 2017
-- PDPA พ.ศ. 2562
+## ✅ มีทะเบียนแล้ว อ้างได้ (12)
+- พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562
+- พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+- พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2560
+- ประกาศคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ (สกมช.)
+- IEC 62443 Series
 - ISO/IEC 27001:2022
-- ISO 22301:2019
-- พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550
-- IIA International Standards 2017
-- ISO 55000:2014
-- NIST Cybersecurity Framework 2018
-- พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+- ISO/IEC 27002:2022
+- NIST Cybersecurity Framework (CSF) 2.0
+- NIST SP 800-82 Rev.3
+- NIST SP 800-53 Rev.5
+- NERC CIP Standards
+- IEC 62351 Series
 
-## 🚫 ยังไม่มีทะเบียน — RATCHET ห้ามอ้างจนกว่าจะอ่านเข้าทะเบียน (7)
-- [ ] ISO 10002:2018 → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
-- [ ] ISO 10004:2018 → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
-- [ ] ISO 20000-1:2018 → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
-- [ ] เกณฑ์ SEPA → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
-- [ ] หลักเกณฑ์ธรรมาภิบาลรัฐวิสาหกิจ → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
-- [ ] Balanced Scorecard → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
-- [ ] TQM Framework → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
+## 🚫 ยังไม่มีทะเบียน — RATCHET ห้ามอ้างจนกว่าจะอ่านเข้าทะเบียน (6)
+- [ ] กรอบมาตรฐานการกำกับดูแลโครงสร้างพื้นฐานสำคัญทางสารสนเทศ (CII) พ.ศ. 2564 → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
+- [ ] ISO/IEC 27019:2017 → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
+- [ ] IEEE 1686-2013 → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
+- [ ] แนวปฏิบัติด้านความมั่นคงปลอดภัยไซเบอร์ การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย (กฟผ.) → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
+- [ ] แนวปฏิบัติด้านความมั่นคงปลอดภัยไซเบอร์ การไฟฟ้าส่วนภูมิภาค (กฟภ.) → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
+- [ ] แนวปฏิบัติด้านความมั่นคงปลอดภัยไซเบอร์ การไฟฟ้านครหลวง (กฟน.) → อ่านหน้า official → เพิ่ม family เข้า standards_registry.json ก่อน
 
 > ร่างด้านล่างอ้างเฉพาะกลุ่ม ✅
