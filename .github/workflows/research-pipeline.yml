@@ -74,11 +74,12 @@ jobs:
       - name: Open verify PR (chain mode)
         if: inputs.chain == true && steps.chainverify.outcome == 'success'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
         run: |
           BRANCH="verify/$(date +%Y%m%d-%H%M%S)"
           git config user.name "research-pipeline[bot]"
           git config user.email "actions@github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git checkout -b "$BRANCH"
           git add data/
           git commit -m "chain: ร่าง+ตรวจพิสูจน์รวดเดียว '${{ steps.topic.outputs.topic }}' (L1 PENDING_REVIEW — รอ human merge)"
@@ -99,11 +100,12 @@ jobs:
       - name: Open draft PR
         if: steps.run.outputs.has_draft == 'true' && (inputs.chain != true || steps.chainverify.outcome == 'failure')
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
         run: |
           BRANCH="draft/$(date +%Y%m%d-%H%M%S)"
           git config user.name "research-pipeline[bot]"
           git config user.email "actions@github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git checkout -b "$BRANCH"
           mkdir -p data/drafts
           cp /tmp/research_out/draft_topic.json "data/drafts/draft_$(date +%Y%m%d-%H%M%S).json"

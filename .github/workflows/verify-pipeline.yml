@@ -39,11 +39,12 @@ jobs:
 
       - name: Open verify PR
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
         run: |
           BRANCH="verify/$(date +%Y%m%d-%H%M%S)"
           git config user.name "verify-pipeline[bot]"
           git config user.email "actions@github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git checkout -b "$BRANCH"
           git add data/
           git commit -m "auto-verify: ${{ github.event.inputs.draft_file }} → topic ใหม่ (L1 PENDING_REVIEW — รอ human merge)"
