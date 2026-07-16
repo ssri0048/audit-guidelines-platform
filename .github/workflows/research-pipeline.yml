@@ -121,6 +121,8 @@ jobs:
             echo "ขั้นต่อไป: ทำ verification ตาม deep-research-protocol (อ่านแหล่งจริง + excerpt) ใน Cowork แล้วยกเป็น L1 ก่อนเข้า knowledge_store"
             echo "**ห้าม merge PR นี้เข้า store โดยตรง**"
           } >> /tmp/pr_body.md
+          # ถ้า chain-verify ตกเกต → แนบรายงานเกตที่ fail ให้คนเห็นทันทีว่าต้องแก้อะไร
+          if [ -f /tmp/verify_summary.md ]; then { echo ""; echo "***"; cat /tmp/verify_summary.md; } >> /tmp/pr_body.md; fi
           gh pr create --title "🤖 Draft: ${{ steps.topic.outputs.topic }}" \
             --body-file /tmp/pr_body.md --base main --head "$BRANCH"
 

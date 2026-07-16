@@ -65,6 +65,31 @@ function canonicalize(registry, s) {
   return { str: out, fixes };
 }
 
+/* ดึงเฉพาะส่วน ERRORS ของ validate (ไม่ใช่หาง queue) — บั๊กเดิม slice(-1200) โชว์คิวไม่โชว์เกตที่ fail */
+function extractGateErrors(stdout) {
+  const s = String(stdout || '');
+  const i = s.indexOf('── ERRORS');
+  if (i >= 0) {
+    const rest = s.slice(i);
+    const j = rest.indexOf('── WARNINGS');
+    const block = (j >= 0 ? rest.slice(0, j) : rest).trim();
+    if (block) return block;
+  }
+  const gLines = s.split('\n').filter(l => /\[G[0-9A-Za-z_]+\]/.test(l));
+  return gLines.length ? gLines.join('\n') : (s.trim().slice(-800) || '(ไม่มีรายละเอียดเกต)');
+}
+
+/* รายงานตกเกตสำหรับใส่ใน draft PR — คนเปิดมาเห็นทันทีว่าต้องแก้เกตไหน */
+function gateFailReport(tid, name, errBlock) {
+  return ['# ⚠️ Auto-verify ตกเกตคุณภาพ: ' + name + ' → ' + tid, '',
+    'ร่างสร้างสำเร็จ แต่ **ไม่ผ่านเกตคุณภาพอัตโนมัติ** — ต้องแก้ก่อนยกเป็นความรู้จริง (L1)', '',
+    '## เกตที่ไม่ผ่าน', '```', errBlock, '```', '',
+    '## ต้องทำต่อ',
+    '1. แก้ตามเกตด้านบน (ใน Cowork ตาม deep-research-protocol)',
+    '2. re-verify แล้วยกเป็น L1',
+    '', '**ห้าม merge เข้า store จนกว่าเกตจะผ่าน**'].join('\n');
+}
+
 function main(draftFile, root) {
   root = root || path.join(__dirname, '..');
   // รองรับ 2 โหมด: ชื่อไฟล์ในคลังพัก (data/drafts/) หรือ path เต็ม (โหมด chain — ตรวจต่อทันทีโดยไม่ผ่านคลังพัก)
@@ -149,22 +174,29 @@ function main(draftFile, root) {
   store.topics.push(topic);
   store.metadata.last_updated = RETR;
   fs.writeFileSync(path.join(root, 'data', 'knowledge_store.json'), JSON.stringify(store, null, 2));
-  fs.unlinkSync(draftPath);
   const mPath = path.join(root, 'data', 'drafts', 'READING_MANIFEST.md');
-  if (fs.existsSync(mPath)) fs.unlinkSync(mPath);
+  const SUMMARY_OUT = process.env.VERIFY_SUMMARY_OUT || '/tmp/verify_summary.md';
 
   // ── 4) เกตจริงต้องผ่านก่อนปล่อย ──
+  // บั๊กเดิม 2 จุด: (1) ลบ draft ก่อนเกต → ตกเกตแล้ว fallback หาไฟล์ไม่เจอ (cp error)
+  //               (2) โชว์ slice(-1200) = หาง queue ไม่ใช่เกตที่ fail → วินิจฉัยไม่ได้
   try {
     execFileSync('node', [path.join(root, 'scripts', 'validate.js'), path.join(root, 'data', 'knowledge_store.json')], { stdio: 'pipe' });
   } catch (e) {
-    console.error('❌ เกตไม่ผ่านหลังประกอบ — ยกเลิก\n' + String(e.stdout || '').slice(-1200));
-    process.exit(1);
+    const errBlock = extractGateErrors(e.stdout);
+    fs.writeFileSync(SUMMARY_OUT, gateFailReport(tid, d.name_th, errBlock)); // report ให้ draft PR
+    console.error('❌ เกตไม่ผ่านหลังประกอบ — เก็บ draft ไว้ให้ตรวจต่อ (ไม่ลบไฟล์)\n' + errBlock);
+    process.exit(1); // fallback ใน workflow จะเปิด draft PR พร้อม report นี้ (งานไม่สูญ)
   }
+
+  // เกตผ่านแล้วค่อยลบ draft ทิ้ง (ปลอดภัยแล้ว)
+  fs.unlinkSync(draftPath);
+  if (fs.existsSync(mPath)) fs.unlinkSync(mPath);
   const summary = ['# ✅ Auto-Verify: ' + d.name_th + ' → ' + tid, '',
     '## การแก้ไขโดยระบบ (' + allFixes.length + ')', ...(allFixes.length ? allFixes.map(f => '- ' + f) : ['- ไม่มี — citations ถูกต้องครบ']), '',
     '## แหล่งอ้างอิง (ผูกจากทะเบียนที่อ่านแล้วจริง)', ...chain.map(c => '- ' + c.title + ' — ' + c.url), '',
     '⚠️ auto-verify ไม่อ่านหน้าใหม่ — โปรดรีวิวเนื้อหาเชิงวิชาชีพก่อน merge (ดุลยพินิจสุดท้ายอยู่ที่คุณ)'].join('\n');
-  fs.writeFileSync('/tmp/verify_summary.md', summary);
+  fs.writeFileSync(SUMMARY_OUT, summary);
   console.log('✅ ' + tid + ' พร้อม: ' + d.risks.length + ' risks | แก้ ' + allFixes.length + ' จุด | เกตผ่าน');
   return { tid, fixes: allFixes, topic };
 }
