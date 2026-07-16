@@ -49,6 +49,20 @@ function canonicalize(registry, s) {
   if (!fam) return { str: s, fixes, unregistered: true };
   let out = s;
   let ed = edFor(fam, s);
+  // AUTO-NORMALIZE: อ้างปี ค.ศ. ที่ "ไม่มีในทะเบียนเลย" (เช่น IIA 2017, NIST 2018) → ปรับเป็นฉบับปัจจุบัน
+  // เงื่อนไขปลอดภัย: เป็นปี ค.ศ. 2000..ปีปัจจุบัน (กันเลขมาตรฐาน 9001/27001/IEEE 2030 และปี พ.ศ. 2562)
+  // และไม่ตรงกับเวอร์ชันที่ทะเบียนรู้จัก → ระบบรู้ฉบับปัจจุบันอยู่แล้ว จึงแก้เองได้พร้อมแจ้ง fix
+  {
+    const known = (fam.editions || []).map(e => String(e.version));
+    const CUR_YEAR = new Date().getFullYear();
+    const cur = (fam.editions || []).find(e => e.status === 'CURRENT') || (fam.editions || [])[(fam.editions || []).length - 1];
+    const stray = (out.match(/\b(20[0-2]\d)\b/g) || []).find(y => Number(y) <= CUR_YEAR && !known.includes(y));
+    if (stray && cur && String(cur.version) !== stray) {
+      out = out.replace(new RegExp('\\b' + stray + '\\b', 'g'), String(cur.version));
+      fixes.push(`"${s}" อ้างฉบับ ${stray} ที่ไม่มีในทะเบียน → ปรับเป็นฉบับปัจจุบัน ${cur.version} อัตโนมัติ`);
+      ed = edFor(fam, out) || ed;
+    }
+  }
   if (ed && ed.status === 'WITHDRAWN' && ed.superseded_by) {
     out = out.split(String(ed.version)).join(String(ed.superseded_by));
     fixes.push(`"${s}" อ้างฉบับถูกถอน (${ed.version}) → สลับเป็น ${ed.superseded_by}`);

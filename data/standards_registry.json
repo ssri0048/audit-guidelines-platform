@@ -70,12 +70,12 @@
     {
       "family_id": "iia-ippf",
       "display": "IIA IPPF Standards (ฉบับก่อน GIAS)",
-      "match": "IPPF|IIA Standard\\s+\\d{4}|IIA International Standards|Global Internal Audit",
+      "match": "IPPF|IIA Standard\\s+\\d{4}",
       "editions": [
         {
           "version": "2017",
           "status": "WITHDRAWN",
-          "superseded_by": "GIAS 2024 (มีผล 9 ม.ค. 2025)",
+          "superseded_by": "IIA GIAS 2024",
           "notes": "",
           "evidence_url": "https://www.theiia.org/en/content/communications/press-releases/2025/january/the-iia-celebrates-the-effective-date-of-the-global-internal-audit-standards/",
           "evidence_excerpt": "IIA Press Room: GIAS released 9 Jan 2024, effective 9 Jan 2025 — \"incorporate all the mandatory elements of the 2017 IPPF\" | เลข clause 4 หลัก (2130, 2030, 2400) ต้อง map ไปเลข GIAS ใหม่",
