@@ -204,7 +204,7 @@ for (const t of store.topics) {
         // มี token ที่ "หน้าตาเป็นเวอร์ชัน" จริงไหม (ปี ค.ศ./พ.ศ. หรือ x.y) — เลขมาตรฐานอย่าง 5280 ไม่นับ
         const hasVersionToken = extractYears(std).length > 0 || /\d+\.\d+/.test(std);
         if (hasVersionToken) {
-          report(isLegacy, id, 'G5_VERSION', `"${std}" เวอร์ชันไม่อยู่ในทะเบียน ${fam.display} (ที่รู้จัก: ${(fam.editions || []).map(e => e.version).join('/')})`);
+          report(isLegacy, id, 'G5_VERSION', `โปรดตรวจสอบฉบับของ "${std}" — ฉบับที่ทะเบียนรับรองคือ ${(fam.editions || []).map(e => e.version).join('/')} (${fam.display}) · อาจต้องใช้ฉบับปัจจุบัน หรือระบุว่ากฎหมายไทยกำหนดให้ใช้ฉบับใดไว้`);
           continue;
         }
         // อ้างระดับตระกูลโดยไม่ระบุเวอร์ชัน — ถ้าทะเบียนมี edition เดียว ใช้ตัวนั้นประเมิน
