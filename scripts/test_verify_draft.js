@@ -30,6 +30,14 @@ const c2 = canonicalize(registry, 'มาตรฐานสมมุติที
 ok('ไม่มีทะเบียน → ธง unregistered (ratchet)', c2.unregistered === true);
 const c3 = canonicalize(registry, 'ISO 22301:2019');
 ok('AMENDED → พ่วงฉบับแก้ไข (Amd 1:2024)', c3.str.includes('Amd 1:2024'));
+const c4 = canonicalize(registry, 'IIA International Standards 2017');
+ok('auto-heal: IIA 2017 (ไม่รู้จัก) → ฉบับปัจจุบัน 2024 + แจ้ง fix', c4.str.includes('2024') && c4.fixes.some(f => f.includes('ปัจจุบัน')));
+const c5 = canonicalize(registry, 'NIST Cybersecurity Framework 2018');
+ok('auto-heal: NIST 2018 → 2.0', c5.str.includes('2.0') && c5.fixes.length >= 1);
+const c6 = canonicalize(registry, 'IEEE 2030 Smart Grid');
+ok('ไม่แตะเลขมาตรฐาน/ปีอนาคต (IEEE 2030 คงเดิม)', c6.str.includes('2030') && !c6.fixes.some(f => f.includes('ปัจจุบัน')));
+const { famFor } = require('./verify_draft.js');
+ok('regression: "IIA International Standards 2017" → iia-gias (ไม่ทับ iippf เก่า)', famFor(registry, 'IIA International Standards 2017').family_id === 'iia-gias');
 
 console.log('── ชุด 2: main ครบวงจรบนสำเนา repo (จบด้วย validate.js จริง) ──');
 const draft = {
@@ -63,6 +71,19 @@ const after2 = JSON.parse(fs.readFileSync(path.join(root, 'data', 'knowledge_sto
 ok('chain: topic เข้า store (' + res2.tid + ')', after2.topics.length === before2 + 1);
 ok('chain: ไฟล์ draft path เต็มถูกลบ', !fs.existsSync(absDraft));
 ok('chain: changelog ระบุโหมดตรวจต่อทันที', after2.topics.find(x => x.id === res2.tid).changelog[0].change.includes('โหมดตรวจต่อทันที'));
+
+console.log('── ชุด 2.6: หัวข้ออ้างฉบับล้าสมัย (IIA 2017/NIST 2018) → ระบบแก้เอง + ผ่านเกต ──');
+const od = JSON.parse(JSON.stringify(draft));
+od.name_th = 'หัวข้ออ้างฉบับเก่า auto-heal';
+od.applicable_standards = ['IIA International Standards 2017', 'NIST Cybersecurity Framework 2018', 'ISO/IEC 27001:2013 Information Security', 'พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)'];
+od.thai_law_refs = ['พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)'];
+fs.writeFileSync(path.join(root, 'data', 'drafts', 'draft_old.json'), JSON.stringify(od));
+const resO = main('draft_old.json', root);
+const tO = JSON.parse(fs.readFileSync(path.join(root, 'data', 'knowledge_store.json'), 'utf8')).topics.find(x => x.id === resO.tid);
+ok('auto-heal: IIA 2017 → 2024 ใน store จริง', tO.applicable_standards.some(s => s.includes('IIA') && s.includes('2024')));
+ok('auto-heal: NIST 2018 → 2.0 ใน store จริง', tO.applicable_standards.some(s => s.includes('NIST') && s.includes('2.0')));
+ok('changelog ระบุการแก้ฉบับล้าสมัยอัตโนมัติ', tO.changelog.some(c => c.change.includes('ปัจจุบัน')));
+ok('ผ่านเกตได้ (ไม่ตก G5 อีก — main return ไม่ exit)', !!resO.tid);
 
 console.log('── ชุด 3: escalate เมื่ออ้างสิ่งไม่มีทะเบียน (ratchet) ──');
 const bad = JSON.parse(JSON.stringify(draft)); bad.applicable_standards.push('มาตรฐานปลอม ABC-999');
