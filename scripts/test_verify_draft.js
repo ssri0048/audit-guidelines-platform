@@ -62,6 +62,7 @@ ok('topic ใหม่เข้า store (' + res.tid + ')', after.topics.length
 const t = after.topics.find(x => x.id === res.tid);
 ok('27001:2013 ถูกแก้เป็น 2022 ใน store จริง', t.applicable_standards.some(s => s.includes('27001:2022')));
 ok('source_chain ≥2 จากทะเบียนที่อ่านแล้ว', t.source_chain.length >= 2 && t.source_chain.every(s => s.excerpt && s.url));
+ok('ชื่อแหล่งอ้างอิง = citation ในมาตรฐานที่ใช้ (ตรงกันเป๊ะ ไม่ใช่ (vXXXX))', t.source_chain.every(sc => t.applicable_standards.includes(sc.title)) && !t.source_chain.some(sc => /\(v\d/.test(sc.title)));
 ok('evidence ถูกเติมครบ ≥4', t.risks.every(r => r.control_failures.every(cf => cf.audit_procedures.every(ap => ap.evidence_types.length >= 4))));
 ok('draft ถูกลบหลังประกอบ', !fs.existsSync(path.join(root, 'data', 'drafts', 'draft_test.json')));
 ok('changelog บันทึกการแก้', t.changelog.some(c => c.change.includes('AUTO-VERIFY')));
