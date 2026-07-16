@@ -168,7 +168,9 @@ function main(draftFile, root) {
     seen.add(fam.family_id);
     chain.push({
       source_id: 'SRC-AUTO-' + fam.family_id, source_type: 'registry_verified_source',
-      publisher: fam.display, title: fam.display + ' (v' + ed.version + ')',
+      // ชื่อแหล่ง = citation ที่ canonical แล้ว (s) → ตรงกับส่วน "มาตรฐานที่ใช้" เป๊ะ
+      //   (เดิมใช้ display+(vXXXX) ทำให้กฎหมายไทยที่แก้ไขเพิ่มเติมโชว์แค่ปีฐาน ไม่ครบ)
+      publisher: fam.display, title: s,
       url: ed.evidence_url, retrieved_at: ed.last_verified || RETR,
       credibility_score: /\.go\.th|ratchakitcha/.test(ed.evidence_url) ? 95 : 92,
       excerpt: ed.evidence_excerpt + ' [อ่านจริงและบันทึกในทะเบียนเมื่อ ' + (ed.last_verified || '?') + ' — auto-verify ผูกให้]'
