@@ -1,0 +1,58 @@
+name: flag-resolver
+# Route 🔬 "ให้ระบบตรวจให้" จากหน้าเว็บ: เปิดอ่านหน้า official + พิสูจน์ข้อความ (readproof)
+# สำเร็จ → เปิด PR ปิดธง (PIPELINE_PAT → เกตรันเอง, human merge = การอนุมัติ)
+# ไม่สำเร็จ → เปิด issue รายงานเหตุ + แนะนำทาง ✍️ — ไม่แตะไฟล์ใดๆ (ระบบเดิมสมบูรณ์)
+
+on:
+  workflow_dispatch:
+    inputs:
+      family_id:
+        description: 'family_id ในทะเบียน เช่น iso-42001'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: ติดตั้ง pdf-parse (ไม่มีก็รันได้ — PDF จะเป็น EXISTENCE_ONLY)
+        run: npm i pdf-parse@1.1.1 --no-save || true
+      - name: Run flag resolver (readproof)
+        id: run
+        run: |
+          set +e
+          node scripts/flag_resolve.js "${{ inputs.family_id }}" 2>&1 | tee /tmp/flag.log
+          echo "code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          set -e
+      - name: Open PR (ปิดธงสำเร็จ)
+        if: steps.run.outputs.code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
+        run: |
+          if git diff --quiet; then echo "ไม่มีการแก้ไฟล์ (ธงถูกปิดไปแล้ว) — จบ"; exit 0; fi
+          BRANCH="flag/$(date +%Y%m%d-%H%M%S)"
+          git config user.name "flag-resolver[bot]"
+          git config user.email "actions@github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git checkout -b "$BRANCH"
+          git add data/
+          git commit -m "ปิดธง: ${{ inputs.family_id }} — verified จากการอ่านจริง (flag-resolver)"
+          git push -u origin "$BRANCH"
+          { echo "## 🔬 ปิดธงอัตโนมัติ: ${{ inputs.family_id }}"; echo; echo '```'; cat /tmp/flag.log; echo '```'; echo; echo "เปิดอ่านหน้า official และพิสูจน์ข้อความจริงแล้ว (READ_VERIFIED) — โปรดรีวิวแล้ว merge เพื่อปิดธงถาวร"; } > /tmp/pr.md
+          gh pr create --title "ปิดธง: ${{ inputs.family_id }} (อ่านจริง READ_VERIFIED)" --body-file /tmp/pr.md --base main --head "$BRANCH"
+      - name: Open issue (ปิดอัตโนมัติไม่ได้)
+        if: steps.run.outputs.code == '3'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          { echo "ระบบพยายามปิดธง \`${{ inputs.family_id }}\` อัตโนมัติแต่ไม่สำเร็จ — ไม่มีการแก้ไฟล์ใดๆ"; echo; echo '```'; cat /tmp/flag.log; echo '```'; } > /tmp/issue.md
+          gh issue create --title "🔎 ธง ${{ inputs.family_id }} ปิดอัตโนมัติไม่ได้ — โปรดตรวจเอง" --body-file /tmp/issue.md --label "flag-task" || gh issue create --title "🔎 ธง ${{ inputs.family_id }} ปิดอัตโนมัติไม่ได้ — โปรดตรวจเอง" --body-file /tmp/issue.md
