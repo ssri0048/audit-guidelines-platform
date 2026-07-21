@@ -994,8 +994,10 @@ function acTab(n){
     document.getElementById('ac-tabbtn-'+i).classList.toggle('on',i===n);
   }
   // [ปรับปรุง 2026-07-21] เดิม: if(n===2){loadPRs();loadDrafts();loadQueue()}
-  // ใหม่: loadWork() เรียก loadPRs+loadQueue ให้แล้ว · loadDrafts ยังเรียกไว้เพื่อให้ #ac-drafts (ที่ซ่อนอยู่) ตรงกับของจริง
-  if(n===2){loadWork();loadDrafts()}
+  // ใหม่: loadWork() เรียก loadPRs+loadQueue ให้แล้ว
+  // ไม่เรียก loadDrafts() ซ้ำ เพราะ loadWork ดึงข้อมูลชุดเดียวกันอยู่แล้ว และผลของ loadDrafts ถูกซ่อนไว้
+  // การเรียกซ้ำเปลืองโควตา GitHub เท่าตัวโดยไม่ได้อะไร (ฟังก์ชันยังอยู่ครบ เรียกจากที่อื่นได้เหมือนเดิม)
+  if(n===2){loadWork()}
 }
 async function readRepoJson(pathStr){
   const meta=await gh('/repos/'+GH_REPO+'/contents/'+pathStr);
@@ -1459,9 +1461,34 @@ function acRenderSteps(states){ // states: {key:'wait'|'run'|'ok'|'fail'}
     return '<div class="ac-step '+st+'"><div class="ac-ico">'+ico+'</div><div><div>'+s.th+'</div>'+(s.sub?'<div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;line-height:1.55">'+s.sub+'</div>':'')+'</div></div>';
   }).join('');
 }
-async function gh(pathname,opts){ // public repo: อ่านได้ไม่ต้อง token
-  const r=await fetch('https://api.github.com'+pathname,opts||{});
-  if(!r.ok)throw new Error('GitHub API '+r.status);
+/* [ปรับปรุง 2026-07-21 — แก้ 403 ตอนเปิดคิวงาน]
+   เดิม: const r=await fetch('https://api.github.com'+pathname,opts||{});  // ไม่แนบรหัสเลย
+   ปัญหาจริง: GitHub จำกัดการเรียกแบบไม่ระบุตัวตนไว้ 60 ครั้ง/ชั่วโมง/IP
+   แต่เปิดคิวงาน 1 ครั้งยิงหลายสิบครั้ง (รายการ PR + เช็คผลเกตรายใบ + อ่านชื่อร่างรายไฟล์)
+   เปิดซ้ำไม่กี่รอบก็เต็มโควตา → ขึ้น 403 ทั้งที่รหัสถูกต้อง
+   ใหม่: ถ้าเข้าสู่ระบบแล้ว แนบรหัสเดิมที่ใช้อยู่ไปด้วย โควตาขึ้นเป็น 5,000 ครั้ง/ชั่วโมง
+         (ส่งไปที่ api.github.com เท่านั้น ปลายทางเดียวกับที่ใช้ merge/dispatch อยู่แล้ว)
+   ผู้ใช้ทั่วไปที่ยังไม่ล็อกอินยังอ่านได้เหมือนเดิม — แค่ใช้โควตาสาธารณะ */
+async function gh(pathname,opts){
+  opts=Object.assign({},opts||{});
+  let k='';try{k=getAdminKey()||''}catch(e){}
+  if(k)opts.headers=Object.assign({'Authorization':'Bearer '+k,'Accept':'application/vnd.github+json'},opts.headers||{});
+  const r=await fetch('https://api.github.com'+pathname,opts);
+  if(!r.ok){
+    // แปลรหัสข้อผิดพลาดเป็นภาษาที่บอกได้ว่าต้องทำอะไรต่อ
+    if(r.status===403||r.status===429){
+      const left=r.headers.get('x-ratelimit-remaining'),rst=r.headers.get('x-ratelimit-reset');
+      if(left==='0'){
+        const mins=rst?Math.max(1,Math.ceil((rst*1000-Date.now())/60000)):null;
+        throw new Error('เรียกข้อมูลจาก GitHub บ่อยเกินโควตา'+(k?'':' (ยังไม่ได้เข้าสู่ระบบ จึงใช้โควตาสาธารณะ 60 ครั้ง/ชม.)')
+          +(mins?' — โควตาจะรีเซ็ตในอีกราว '+mins+' นาที':'')+(k?'':' · เข้าสู่ระบบแล้วโควตาจะเพิ่มเป็น 5,000 ครั้ง/ชม.'));
+      }
+      throw new Error('รหัสนี้ไม่มีสิทธิ์อ่านข้อมูลส่วนนี้ (403) — ต้องเป็นรหัสของผู้ร่วมพัฒนา repo');
+    }
+    if(r.status===401)throw new Error('รหัสไม่ถูกต้องหรือหมดอายุ (401) — ออกจากระบบแล้วเข้าใหม่');
+    if(r.status===404)throw new Error('ไม่พบข้อมูลที่ขอ (404) — อาจถูกลบหรือ branch ถูกปิดไปแล้ว');
+    throw new Error('GitHub API '+r.status);
+  }
   return r.status===204?null:r.json();
 }
 async function acRun(){
