@@ -360,23 +360,50 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
       <button class="ac-close" onclick="acClose()">×</button>
     </div>
     <div class="ac-body">
-      <div class="ac-tabs">
-        <button class="ac-tab on" id="ac-tabbtn-1" onclick="acTab(1)">📝 สั่งจัดทำ</button>
-        <button class="ac-tab" id="ac-tabbtn-2" onclick="acTab(2)">📥 คิวงาน</button>
+
+      <!-- เลเยอร์ 1: เลือกประเภทผู้ใช้ -->
+      <div id="ac-role">
+        <label class="ac-lbl" style="margin-top:0">คุณคือใคร</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px">
+          <button class="ac-tab" onclick="acView('user')" style="text-align:left;padding:16px 18px"><b style="font-size:15px">👤 ผู้ใช้ทั่วไป</b><div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-weight:400">ขอแนวทางตรวจสอบเรื่องที่ต้องการ — ไม่ต้องใช้รหัสใดๆ</div></button>
+          <button class="ac-tab" onclick="acView('login')" style="text-align:left;padding:16px 18px"><b style="font-size:15px">🛡 ผู้ดูแลระบบ</b><div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-weight:400">สั่งจัดทำ · ดูคิวงาน · อนุมัติขึ้นเว็บ (ต้องเข้าสู่ระบบ)</div></button>
+        </div>
       </div>
 
+      <!-- เลเยอร์ 2a: ผู้ใช้ทั่วไป -->
+      <div id="ac-user" style="display:none">
+        <button class="ac-tab" onclick="acView('role')" style="margin-bottom:12px;font-size:12px">← เปลี่ยนประเภทผู้ใช้</button>
+        <label class="ac-lbl" style="margin-top:0">อยากให้มีแนวทางการตรวจสอบเรื่องอะไร?</label>
+        <input class="ac-input" id="ac-gtopic" placeholder="พิมพ์เรื่องที่อยากได้ พร้อมเหตุผลสั้นๆ" autocomplete="off">
+        <button class="ac-go" style="background:var(--navy)" onclick="gReq()">📨 ส่งคำขอถึงทีมดูแล</button>
+        <div class="ac-hint">คำขอจะถูกส่งให้ทีมดูแลพิจารณา — เมื่อหัวข้อพร้อมใช้จะปรากฏบนเว็บนี้อัตโนมัติ (ไม่ต้องมีรหัสใดๆ)</div>
+      </div>
+
+      <!-- เลเยอร์ 2b: ประตูเข้าสู่ระบบผู้ดูแล -->
+      <div id="ac-login" style="display:none">
+        <button class="ac-tab" onclick="acView('role')" style="margin-bottom:12px;font-size:12px">← เปลี่ยนประเภทผู้ใช้</button>
+        <div style="max-width:430px;margin:8px auto 0;text-align:center">
+          <div style="font-size:30px">🔒</div>
+          <div style="font-size:16px;font-weight:700;color:var(--navy);margin-top:6px">เข้าสู่ระบบผู้ดูแล</div>
+          <div style="font-size:12.5px;color:var(--text-muted);margin:6px 0 12px;line-height:1.7">ใส่รหัสประจำตัว <b>ครั้งเดียว</b> ใช้ได้ตลอดการทำงานครั้งนี้<br>(สั่งจัดทำ · อนุมัติ · ส่งกลับ — ไม่ต้องใส่ซ้ำ)</div>
+          <input class="ac-input" id="ac-token" type="password" placeholder="วางรหัสของคุณ (ขึ้นต้น github_pat_...)" autocomplete="off" style="text-align:center">
+          <button class="ac-go" id="ac-login-btn" onclick="acLogin()">เข้าสู่ระบบ</button>
+          <div class="ac-msg" id="ac-login-msg" style="margin-top:8px"></div>
+          <div class="ac-hint" style="text-align:left">ปิด/รีเฟรชหน้า หรือกดออกจากระบบ = รหัสหายทันที ไม่บันทึกลงเครื่อง · <a href="javascript:void(0)" onclick="acTgl('ac-help')" style="color:var(--navy-light)">ยังไม่มีรหัส? วิธีสร้าง ▾</a></div>
+          <div id="ac-help" style="display:none;margin-top:7px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7;text-align:left"><b>สร้างได้ใน 1 นาที</b><br>1. GitHub → Settings → Developer settings → Fine-grained tokens<br>2. เลือกเฉพาะ repo นี้ · สิทธิ์: <b>Actions + Contents + Pull requests = Read and write</b><br>3. คัดลอกมาวางช่องบน — รหัสเดียวใช้ได้ทั้งสั่งจัดทำและอนุมัติ</div>
+        </div>
+      </div>
+
+      <!-- เลเยอร์ 3: พื้นที่ผู้ดูแล (เข้าได้หลัง login เท่านั้น) -->
+      <div id="ac-admin" style="display:none">
+        <div id="ac-sess" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:9px 12px;background:var(--navy);border-radius:8px;font-size:12.5px;color:#fff">🛡 ผู้ดูแลระบบ · เข้าสู่ระบบแล้ว — ทุกปุ่มใช้รหัสนี้อัตโนมัติ<button onclick="acLogout()" style="margin-left:auto;border:1px solid rgba(255,255,255,.4);background:transparent;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:11.5px;color:#fff">ออกจากระบบ</button></div>
+        <div class="ac-tabs">
+          <button class="ac-tab on" id="ac-tabbtn-1" onclick="acTab(1)">📝 สั่งจัดทำ</button>
+          <button class="ac-tab" id="ac-tabbtn-2" onclick="acTab(2)">📥 คิวงาน</button>
+        </div>
+
       <div id="ac-t1">
-        <div style="display:flex;gap:8px;margin-bottom:13px">
-          <button class="ac-tab" id="ac-mode-g" onclick="acMode('g')">👤 ผู้ใช้ทั่วไป — ส่งคำขอ</button>
-          <button class="ac-tab" id="ac-mode-s" onclick="acMode('s')">🛠 เจ้าหน้าที่ — สั่งสร้างเอง</button>
-        </div>
-        <div id="ac-pane-g">
-          <label class="ac-lbl">อยากให้มีแนวทางการตรวจสอบเรื่องอะไร?</label>
-          <input class="ac-input" id="ac-gtopic" placeholder="พิมพ์เรื่องที่อยากได้ พร้อมเหตุผลสั้นๆ" autocomplete="off">
-          <button class="ac-go" style="background:var(--navy)" onclick="gReq()">📨 ส่งคำขอถึงทีมดูแล</button>
-          <div class="ac-hint">คำขอจะถูกส่งให้ทีมดูแลพิจารณา — เมื่อหัวข้อพร้อมใช้จะปรากฏบนเว็บนี้อัตโนมัติ (ไม่ต้องมีรหัสใดๆ)</div>
-        </div>
-        <div id="ac-pane-s" style="display:none">
+        <div id="ac-pane-s">
           <label class="ac-lbl" style="margin-top:0">ต้องการทำอะไร</label>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
             <button class="ac-tab" id="ac-md-new" onclick="acReqSet('new')" style="text-align:left;padding:11px 13px"><b>หัวข้อใหม่</b><div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400">สร้างเรื่องใหม่ทั้งชุด พร้อมความเสี่ยงและวิธีตรวจ</div></button>
@@ -437,22 +464,12 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
         <div id="ac-queue">⏳ กำลังโหลด...</div>
       </div>
 
-      <div id="ac-keyblock">
-      <div id="ac-sess" style="display:none;align-items:center;gap:8px;margin-top:6px;padding:9px 12px;background:var(--low-bg);border:1px solid var(--low-bd);border-radius:8px;font-size:12.5px;color:var(--low)">✓ เข้าสู่ระบบแล้ว — ทุกปุ่มใช้รหัสนี้อัตโนมัติ ไม่ต้องใส่ซ้ำ<button onclick="acLogout()" style="margin-left:auto;border:1px solid var(--low-bd);background:#fff;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:11.5px;color:var(--low)">ออกจากระบบ</button></div>
-      <div id="ac-keyinner">
-      <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-        <label class="ac-lbl" style="margin:0">🔑 รหัสประจำตัวผู้ดูแล (ใส่ครั้งเดียว ใช้ได้ทั้งหน้า)</label>
-        <button onclick="acTgl('ac-help')" title="วิธีสร้างรหัส" style="width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:var(--border-light);cursor:pointer;font-size:11px;color:var(--text-muted);line-height:1">?</button>
-      </div>
-      <input class="ac-input" id="ac-token" type="password" placeholder="วางรหัสของคุณที่นี่ (ขึ้นต้น github_pat_...)" autocomplete="off">
-      <div class="ac-hint">ระบบจำรหัสไว้ในหน้านี้จนกว่าจะปิด/รีเฟรช หรือกดออกจากระบบ — ไม่บันทึกลงเครื่อง · รหัสของคนนอกทีมถูกปฏิเสธอัตโนมัติ</div>
-      <div id="ac-help" style="display:none;margin-top:7px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7"><b>ยังไม่มีรหัส? สร้างได้ใน 1 นาที</b><br>1. GitHub → Settings → Developer settings → Fine-grained tokens<br>2. เลือกเฉพาะ repo นี้ · สิทธิ์: <b>Actions + Contents + Pull requests = Read and write</b><br>3. คัดลอกมาวางช่องบน — รหัสเดียวใช้ได้ทั้งสั่งจัดทำและอนุมัติ</div>
-      </div>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-top:10px;font-size:11.5px;color:var(--text-muted)"><span>🛡️</span><span>ปลอดภัยเสมอ: ระบบแค่ "เสนอ" ความรู้ — ต้องผ่านด่านตรวจอัตโนมัติ 9 ด่าน และหัวหน้างานกดอนุมัติ ก่อนขึ้นเว็บจริง</span><a href="javascript:void(0)" onclick="acTgl('ac-gov')" style="color:var(--navy-light);white-space:nowrap">รายละเอียด ▾</a></div>
-      <div id="ac-gov" style="display:none;margin-top:6px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7">ระบบทำ Reading Manifest (อ้างได้เฉพาะมาตรฐานที่มีทะเบียนตรวจแล้ว — กติกา ratchet) → ร่างชั้น L3 → ตรวจพิสูจน์: แก้เวอร์ชันที่ถูกยกเลิก/พ่วงฉบับแก้ไข/ผูกแหล่งที่อ่านจริง → รันเกตอัตโนมัติ 9 ด่าน → เปิดใบขออนุมัติ — เว็บนี้ไม่มีอำนาจเขียนความรู้เอง การอนุมัติผูกกับบัญชีผู้กดเสมอ ตรวจย้อนได้</div>
       <div class="ac-steps" id="ac-steps"></div>
       <div class="ac-result" id="ac-result"></div>
+      </div><!-- /ac-admin -->
+
+      <div style="display:flex;align-items:baseline;gap:6px;margin-top:10px;font-size:11.5px;color:var(--text-muted)"><span>🛡️</span><span>ปลอดภัยเสมอ: ระบบแค่ "เสนอ" ความรู้ — ต้องผ่านด่านตรวจอัตโนมัติ 9 ด่าน และหัวหน้างานกดอนุมัติ ก่อนขึ้นเว็บจริง</span><a href="javascript:void(0)" onclick="acTgl('ac-gov')" style="color:var(--navy-light);white-space:nowrap">รายละเอียด ▾</a></div>
+      <div id="ac-gov" style="display:none;margin-top:6px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7">ระบบทำ Reading Manifest (อ้างได้เฉพาะมาตรฐานที่มีทะเบียนตรวจแล้ว — กติกา ratchet) → ร่างชั้น L3 → ตรวจพิสูจน์: แก้เวอร์ชันที่ถูกยกเลิก/พ่วงฉบับแก้ไข/ผูกแหล่งที่อ่านจริง → รันเกตอัตโนมัติ 9 ด่าน → เปิดใบขออนุมัติ — เว็บนี้ไม่มีอำนาจเขียนความรู้เอง การอนุมัติผูกกับบัญชีผู้กดเสมอ ตรวจย้อนได้</div>
     </div>
   </div>
 </div>
@@ -759,8 +776,8 @@ let acPoll=null,acStartTime=null;
 let SESSION_KEY='';
 function getAdminKey(){const el=document.getElementById('ac-token');const v=el?el.value.trim():'';return v||SESSION_KEY}
 function setAdminKey(k){if(k)SESSION_KEY=k;const el=document.getElementById('ac-token');if(el)el.value='';const a=document.getElementById('ac-akey');if(a)a.value='';acSessBadge()}
-function acLogout(){SESSION_KEY='';acSessBadge()}
-function acSessBadge(){const b=document.getElementById('ac-sess');if(b)b.style.display=SESSION_KEY?'flex':'none';const kb=document.getElementById('ac-keyinner');if(kb)kb.style.display=SESSION_KEY?'none':'block'}
+function acLogout(){SESSION_KEY='';acSessBadge();acView('role')}
+function acSessBadge(){const b=document.getElementById('ac-sess');if(b)b.style.display=SESSION_KEY?'flex':'none'}
 
 /* ── ฟอร์มสั่งจัดทำ: เลือกก่อน (new/add) แล้วช่องที่เกี่ยวค่อยโผล่ ── */
 let acReqMode='';
@@ -790,17 +807,28 @@ function updateAddNote(){
   n.textContent='ผลลัพธ์: เพิ่มความเสี่ยงต่อท้าย '+t.id+' (เริ่มที่ R'+String((t.risks||[]).length+1).padStart(3,'0')+') · เวอร์ชันขยับเป็นรุ่นถัดไป · ไม่สร้างหัวข้อซ้ำ';
 }
 
-function acOpen(){document.getElementById('ac').classList.add('open');acMode(acModeCur)}
+function acOpen(){document.getElementById('ac').classList.add('open');acView(SESSION_KEY?'admin':'role')}
 function acClose(){document.getElementById('ac').classList.remove('open');if(acPoll){clearInterval(acPoll);acPoll=null}}
 function acTgl(id){const e=document.getElementById(id);e.style.display=e.style.display==='none'?'block':'none'}
-let acModeCur='g';
-function acMode(m){
-  acModeCur=m;
-  document.getElementById('ac-pane-g').style.display=m==='g'?'block':'none';
-  document.getElementById('ac-pane-s').style.display=m==='s'?'block':'none';
-  document.getElementById('ac-keyblock').style.display=m==='s'?'block':'none';
-  document.getElementById('ac-mode-g').classList.toggle('on',m==='g');
-  document.getElementById('ac-mode-s').classList.toggle('on',m==='s');
+/* เลเยอร์: role (เลือกประเภท) → user (ผู้ใช้ทั่วไป) | login (ประตูผู้ดูแล) → admin (หลัง login) */
+function acView(v){
+  ['ac-role','ac-user','ac-login','ac-admin'].forEach(id=>{
+    const e=document.getElementById(id);if(e)e.style.display=(id==='ac-'+v)?'block':'none';
+  });
+  if(v==='admin')acTab(1);
+}
+async function acLogin(){
+  const inp=document.getElementById('ac-token'),msg=document.getElementById('ac-login-msg'),btn=document.getElementById('ac-login-btn');
+  const token=inp.value.trim();
+  if(!token){msg.textContent='วางรหัสก่อน (ปุ่ม "วิธีสร้าง" ด้านล่างถ้ายังไม่มี)';return}
+  btn.disabled=true;msg.textContent='⏳ กำลังตรวจสอบรหัส...';
+  try{
+    const r=await fetch('https://api.github.com/repos/'+GH_REPO,{headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});
+    if(r.status===401){msg.textContent='⛔ รหัสไม่ถูกต้องหรือหมดอายุ — ตรวจแล้ววางใหม่';btn.disabled=false;return}
+    if(!r.ok){msg.textContent='⛔ ตรวจรหัสไม่สำเร็จ ('+r.status+') — ลองอีกครั้ง';btn.disabled=false;return}
+    setAdminKey(token);inp.value='';msg.textContent='';btn.disabled=false;
+    acView('admin');
+  }catch(e){msg.textContent='⛔ '+e.message;btn.disabled=false}
 }
 function gReq(){
   const t=document.getElementById('ac-gtopic').value.trim();
@@ -812,8 +840,6 @@ function acTab(n){
     document.getElementById('ac-t'+i).style.display=i===n?'block':'none';
     document.getElementById('ac-tabbtn-'+i).classList.toggle('on',i===n);
   }
-  document.getElementById('ac-keyblock').style.display=((n===1&&acModeCur==='s')||n===2)?'block':'none';
-  acSessBadge();
   if(n===2){loadPRs();loadDrafts();loadQueue()}
 }
 async function readRepoJson(pathStr){
