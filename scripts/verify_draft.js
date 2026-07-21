@@ -248,7 +248,14 @@ function main(draftFile, root) {
   if (chain.length < 2) { console.error('⛔ ESCALATE: แหล่งอ่านแล้วในทะเบียนที่ตรงหัวข้อ < 2 — ต้องอ่านแหล่งใหม่ใน Cowork'); process.exit(2); }
 
   // ── 3) โครงบังคับ ──
-  const maxId = Math.max(...store.topics.map(t => parseInt(t.id.slice(1), 10)));
+  // [ปรับปรุง 2026-07-21 — กันรหัสหัวข้อวนกลับมาใช้ซ้ำ]
+  // เดิม: const maxId = Math.max(...store.topics.map(t => parseInt(t.id.slice(1), 10)));
+  // ปัญหา: ถ้าเอาหัวข้อท้ายๆ ออกจากเว็บ maxId จะลดลง → หัวข้อใหม่ได้รหัสเดิมซ้ำ
+  //        รหัสเดียวชี้ไปสองเรื่องคนละเรื่องกัน ทั้งใน git history ใบงานที่ merge แล้ว และรายงานที่พิมพ์ไปแล้ว
+  // ใหม่: เทียบกับ "รหัสสูงสุดที่เคยใช้" ที่ retire_topics.js จองไว้ใน metadata.last_topic_id ด้วย
+  const inStore = store.topics.map(t => parseInt(String(t.id).slice(1), 10) || 0);
+  const reserved = parseInt(String((store.metadata || {}).last_topic_id || '').replace(/\D/g, ''), 10) || 0;
+  const maxId = Math.max(0, ...inStore, reserved);
   const tid = 'T' + String(maxId + 1).padStart(3, '0');
   const NOW = new Date().toISOString().slice(0, 19) + 'Z';
   const topic = {
@@ -272,6 +279,9 @@ function main(draftFile, root) {
   topic.hash_signature = sha256Of(topic);
   store.topics.push(topic);
   store.metadata.last_updated = RETR;
+  // เลื่อนเพดานรหัสขึ้นทุกครั้งที่ออกรหัสใหม่ — ทำให้ last_topic_id เป็น "รหัสสูงสุดที่เคยใช้" เสมอ
+  // แม้หัวข้อนั้นจะถูกเอาออกจากเว็บทีหลัง รหัสก็ยังถูกจองไว้ ไม่ถูกนำกลับมาใช้ซ้ำ
+  store.metadata.last_topic_id = tid;
   fs.writeFileSync(path.join(root, 'data', 'knowledge_store.json'), JSON.stringify(store, null, 2));
   const mPath = path.join(root, 'data', 'drafts', 'READING_MANIFEST.md');
   const SUMMARY_OUT = process.env.VERIFY_SUMMARY_OUT || '/tmp/verify_summary.md';

@@ -147,6 +147,13 @@ for (const t of store.topics) {
   // ── G2: DEDUP (HARD เสมอ) ──
   if (seenIds.has(t.id)) hard(id, 'G2_DEDUP', 'id ซ้ำ');
   seenIds.add(t.id);
+  // [เพิ่ม 2026-07-21] รหัสห้ามเกินเพดานที่จองไว้ — จับกรณีรหัสวนกลับมาใช้ซ้ำหลังเอาหัวข้อออก
+  {
+    const n = parseInt(String(t.id).slice(1), 10) || 0;
+    const cap = parseInt(String((store.metadata || {}).last_topic_id || '').replace(/\D/g, ''), 10) || 0;
+    if (cap && n > cap)
+      hard(id, 'G2_ID_CAP', `รหัส ${t.id} เกินเพดานที่จองไว้ (${(store.metadata || {}).last_topic_id}) — metadata.last_topic_id ถอยหลัง เสี่ยงออกรหัสซ้ำกับหัวข้อที่เคยเผยแพร่`);
+  }
   const nameKey = (t.name_th || '').trim();
   if (seenNames.has(nameKey)) hard(id, 'G2_DEDUP', 'name_th ซ้ำ');
   seenNames.add(nameKey);
@@ -281,6 +288,18 @@ for (const t of store.topics) {
   const expect = sha256Of(t);
   if (t.hash_signature !== expect)
     hard(id, 'P_HASH', `hash ไม่ตรงเนื้อหา (คาด ${expect.slice(0, 20)}... พบ ${String(t.hash_signature).slice(0, 20)}...)`);
+}
+
+// ══ [เพิ่ม 2026-07-21] ความสมบูรณ์ของการอ้างถึงหัวข้อ + เพดานรหัส ══
+// related_topics ที่ชี้ไปหัวข้อที่ไม่มีอยู่ = ลิงก์ตายเงียบๆ (เกิดได้เมื่อเอาหัวข้อออกโดยไม่ตัดการอ้าง)
+// เป็นคำเตือน ไม่ใช่ error เพราะไม่กระทบความถูกต้องของความรู้ที่แสดงอยู่ แต่ต้องไม่เงียบหาย
+{
+  const liveIds = new Set(store.topics.map(t => t.id));
+  for (const t of store.topics) {
+    const dead = (t.related_topics || []).filter(r => !liveIds.has(r));
+    if (dead.length)
+      warnings.push(`[REL_DANGLING] ${t.id}: related_topics ชี้ไปหัวข้อที่ไม่มีอยู่แล้ว (${dead.join(', ')}) — ใช้ retire_topics.js เพื่อตัดให้อัตโนมัติ`);
+  }
 }
 
 // ══ VERIFICATION QUEUE — Claim Lifecycle lens เดียวของทั้งระบบ ══

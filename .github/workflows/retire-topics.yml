@@ -1,0 +1,88 @@
+name: retire-topics
+# เอาหัวข้อออกจากเว็บ — สั่งจากหน้าผู้ดูแล แล้วจบเป็น "ใบงาน" ให้คนอนุมัติเสมอ
+# เว็บเขียน main ตรงๆ ไม่ได้เด็ดขาด เหมือนทุกเส้นทางในระบบนี้
+# ไม่ใช่การลบ: หัวข้อถูกย้ายไป data/retired_topics.json (กู้คืนได้ · รหัสถูกจองไว้ไม่ให้ใช้ซ้ำ)
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic_ids:
+        description: 'รหัสหัวข้อ คั่นด้วยจุลภาค เช่น T019,T020 (สูงสุด 15 ต่อครั้ง)'
+        required: true
+        type: string
+      reason:
+        description: 'เหตุผลที่เอาออก (อย่างน้อย 10 ตัวอักษร — บันทึกไว้ให้ตรวจย้อนได้)'
+        required: true
+        type: string
+      requested_by:
+        description: 'ชื่อผู้สั่ง (ไม่บังคับ)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  retire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: เอาหัวข้อออก + รันเกต
+        id: run
+        run: |
+          set +e
+          node scripts/retire_topics.js "${{ inputs.topic_ids }}" \
+            --reason "${{ inputs.reason }}" \
+            --by "${{ inputs.requested_by }}" 2>&1 | tee /tmp/retire.log
+          echo "code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          set -e
+          exit 0
+
+      - name: เปิดใบงานให้อนุมัติ
+        if: steps.run.outputs.code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
+        run: |
+          if git diff --quiet; then echo "ไม่มีไฟล์เปลี่ยน — อาจถูกเอาออกไปแล้ว จบงาน"; exit 0; fi
+          BRANCH="retire/$(date +%Y%m%d-%H%M%S)"
+          git config user.name "retire-topics[bot]"
+          git config user.email "actions@github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git checkout -b "$BRANCH"
+          git add data/
+          git commit -m "retire: เอาหัวข้อ ${{ inputs.topic_ids }} ออกจากเว็บ (ย้ายเข้าคลังเก็บถาวร)"
+          git push -u origin "$BRANCH"
+          {
+            echo "## 🗄️ ขอเอาหัวข้อออกจากเว็บ"
+            echo ""
+            echo "**หัวข้อ:** \`${{ inputs.topic_ids }}\`"
+            echo "**เหตุผล:** ${{ inputs.reason }}"
+            echo "**ผู้สั่ง:** ${{ inputs.requested_by }}"
+            echo ""
+            echo '```'
+            cat /tmp/retire.log
+            echo '```'
+            echo ""
+            echo "### สิ่งที่เกิดขึ้นเมื่ออนุมัติ"
+            echo "- หัวข้อหายจากหน้าเว็บทันที (ย้ายไป \`data/retired_topics.json\`)"
+            echo "- **ไม่ได้ลบทิ้ง** — เนื้อหาเก็บไว้ครบ ย้ายกลับได้ด้วย \`retire_topics.js --restore\`"
+            echo "- รหัสถูกจองไว้ถาวร หัวข้อใหม่จะไม่ได้รหัสซ้ำกับที่เอาออก"
+            echo "- \`related_topics\` ของหัวข้ออื่นที่ชี้มา ถูกตัดและบันทึกใน changelog แล้ว"
+          } > /tmp/pr.md
+          gh pr create --title "🗄️ เอาหัวข้อออกจากเว็บ: ${{ inputs.topic_ids }}" \
+            --body-file /tmp/pr.md --base main --head "$BRANCH"
+
+      - name: แจ้งเมื่อทำไม่ได้
+        if: steps.run.outputs.code != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          { echo "คำสั่งเอาหัวข้อ \`${{ inputs.topic_ids }}\` ออกจากเว็บทำไม่สำเร็จ — **ไม่มีไฟล์ใดถูกแก้**"; echo;
+            echo '```'; cat /tmp/retire.log; echo '```'; } > /tmp/issue.md
+          gh issue create --title "🗄️ เอาหัวข้อออกไม่สำเร็จ: ${{ inputs.topic_ids }}" --body-file /tmp/issue.md
