@@ -57,7 +57,9 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 
 /* ===== SEARCH ===== */
 /* [ปรับความกว้าง 2026-07-21 — เดิมล็อก 1180px ทำให้แคบกว่า header] เดิม: .search-wrap{max-width:1180px;margin:-1px auto 0;padding:20px 20px 0} */
-.search-wrap{margin:-1px auto 0;padding:20px 28px 0}
+/* [ปรับ 2026-07-21 — กล่อง search ติดกับ header (ตัดช่องว่างบน 20px)] เดิม: padding:20px 28px 0 */
+.search-wrap{margin:-1px auto 0;padding:0 28px 0}
+.search-card{border-top-left-radius:0;border-top-right-radius:0}
 .search-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px}
 .search-row{display:flex;gap:10px;align-items:center}
 .search-input{flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14.5px;outline:none;transition:border var(--transition)}
@@ -279,15 +281,24 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .hidden-note:hover{border-color:var(--navy-light);color:var(--navy)}
 /* [ปรับความกว้าง 2026-07-21] เดิม: .footer{max-width:1180px;margin:0 auto;padding:0 20px 50px} */
 .footer{margin:0 auto;padding:0 28px 50px}
+/* [ออกแบบใหม่ 2026-07-21 — gov-card เดิมพื้นขาวเหมือนการ์ดหัวข้อ ทำให้กลืนกับเนื้อหา]
+   ใหม่: ใช้ชั้นอัตลักษณ์ระบบ (navy gradient + ปุ่มทอง เดียวกับ header) แยกจากการ์ดความรู้ชัดเจน
+   เดิม (เปิดคืน: สลับ comment):
 .gov-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1.5px solid var(--border);padding:18px 20px}
 .gov-card h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
 .gov-card p{font-size:12.5px;color:var(--text-muted);line-height:1.7}
-.gov-actions{display:flex;gap:9px;margin-top:12px;flex-wrap:wrap}
-.gov-btn{display:inline-block;padding:8px 16px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:700;text-decoration:none;transition:all var(--transition)}
-.gb-gold{background:var(--gold);color:var(--navy)}
-.gb-gold:hover{background:var(--gold-dark)}
 .gb-line{border:1.5px solid var(--border);color:var(--navy)}
 .gb-line:hover{border-color:var(--navy-light);background:#F5F8FF}
+*/
+.gov-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px}
+.gov-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.gov-card p{font-size:13px;color:rgba(255,255,255,.88);line-height:1.7}
+.gov-actions{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
+.gov-btn{display:inline-block;padding:9px 17px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;text-decoration:none;transition:all var(--transition)}
+.gb-gold{background:var(--gold);color:var(--navy-deep)}
+.gb-gold:hover{background:var(--gold-dark)}
+.gb-line{border:1.5px solid rgba(255,255,255,.45);color:#fff}
+.gb-line:hover{border-color:#fff;background:rgba(255,255,255,.12)}
 
 @media(max-width:640px){
   .hdr-stats{grid-template-columns:repeat(3,1fr)}
