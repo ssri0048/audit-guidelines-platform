@@ -60,6 +60,11 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 /* [ปรับ 2026-07-21 — กล่อง search ติดกับ header + พื้นหลังกว้างเต็มจอเท่ากล่อง header] เดิม: padding:0 28px 0 + radius บนเป็น 0 */
 .search-wrap{margin:-1px auto 0;padding:0}
 .search-card{border-radius:0;padding:16px 28px}
+/* [ปรับ 2026-07-21 — ช่องค้นหาเป็นสี่เหลี่ยมผืนผ้า + pills อยู่แถวเดียวกับช่องค้น] เดิม: input radius-sm, cat-row แถวแยก margin-top:11px */
+.search-box .search-input{border-radius:0}
+.search-row{flex-wrap:wrap}
+.search-box{min-width:280px}
+.search-row .cat-row{margin-top:0;flex:1;align-items:center}
 .search-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px}
 .search-row{display:flex;gap:10px;align-items:center}
 .search-input{flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14.5px;outline:none;transition:border var(--transition)}
@@ -290,15 +295,24 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .gb-line{border:1.5px solid var(--border);color:var(--navy)}
 .gb-line:hover{border-color:var(--navy-light);background:#F5F8FF}
 */
+/* [ออกแบบใหม่รอบ 2 2026-07-21 — เวอร์ชัน navy gradient ทำให้ชนกับ header (navy ซ้ำ 2 ก้อน)]
+   ใหม่: การ์ดฟ้าน้ำเงินอ่อน (โทนเดียวกับ badge อัพเดทล่าสุด) — แยกจากการ์ดขาวและไม่ชน header
+   เดิม navy (เปิดคืน: สลับ comment):
 .gov-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px}
 .gov-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
 .gov-card p{font-size:13px;color:rgba(255,255,255,.88);line-height:1.7}
-.gov-actions{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
-.gov-btn{display:inline-block;padding:9px 17px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;text-decoration:none;transition:all var(--transition)}
-.gb-gold{background:var(--gold);color:var(--navy-deep)}
-.gb-gold:hover{background:var(--gold-dark)}
 .gb-line{border:1.5px solid rgba(255,255,255,.45);color:#fff}
 .gb-line:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+*/
+.gov-card{background:#E8F0FE;border:1px solid #C4D7F5;border-radius:var(--radius);padding:15px 18px}
+.gov-card h3{font-size:14px;font-weight:700;color:var(--navy-deep);margin-bottom:4px}
+.gov-card p{font-size:12px;color:#1B4C9C;line-height:1.7}
+.gov-actions{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+.gov-btn{display:inline-block;padding:8px 15px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:700;text-decoration:none;transition:all var(--transition)}
+.gb-gold{background:var(--gold);color:var(--navy-deep)}
+.gb-gold:hover{background:var(--gold-dark)}
+.gb-line{border:1.5px solid #1B4C9C;color:#1B4C9C}
+.gb-line:hover{background:rgba(27,76,156,.08)}
 
 @media(max-width:640px){
   .hdr-stats{grid-template-columns:repeat(3,1fr)}
@@ -348,8 +362,9 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <input class="search-input" id="q" placeholder="ค้นหาหัวข้อ เช่น จัดซื้อ, ไซเบอร์, สัญญา, สวัสดิการ..." autocomplete="off">
     </div>
+    <!-- [ย้าย 2026-07-21 — cat-row มาอยู่แถวเดียวกับช่องค้นหา (เดิมอยู่บรรทัดแยกใต้ search-row)] -->
+    <div class="cat-row" id="cat-row"></div>
   </div>
-  <div class="cat-row" id="cat-row"></div>
   <!-- [ปิดการแสดงผลชั่วคราว 2026-07-21 — แถบเลือกประเภทองค์กร] logic กรองยังอยู่ครบใน JS (ORG_TAGS/orgMatch)
        เปิดคืน: ลบ comment ครอบบล็อกนี้ + เปิด buildOrgChips และส่วนตีความคำค้นใน parseQuery
   <div class="org-row" id="org-row">
