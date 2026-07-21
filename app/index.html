@@ -500,8 +500,22 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
             <button class="ac-tab" id="ac-md-new" onclick="acReqSet('new')" style="text-align:left;padding:11px 13px"><b>หัวข้อใหม่</b><div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400">สร้างเรื่องใหม่ทั้งชุด พร้อมความเสี่ยงและวิธีตรวจ</div></button>
             <button class="ac-tab" id="ac-md-add" onclick="acReqSet('add')" style="text-align:left;padding:11px 13px"><b>เพิ่มความเสี่ยงในเรื่องที่มีอยู่</b><div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400">เสริมประเด็นใหม่เข้าเรื่องเดิม ไม่สร้างซ้ำ</div></button>
+            <!-- [เพิ่ม 2026-07-21] ทางที่ 3: เอาหัวข้อออกจากเว็บ (ย้ายเข้าคลังเก็บถาวร ไม่ใช่ลบทิ้ง) -->
+            <button class="ac-tab" id="ac-md-retire" onclick="acReqSet('retire')" style="text-align:left;padding:11px 13px;grid-column:1/-1"><b>เอาหัวข้อออกจากเว็บ</b><div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400">ย้ายเข้าคลังเก็บถาวร — ไม่ใช่การลบ กู้คืนได้ รหัสถูกจองไว้ไม่ให้ใช้ซ้ำ</div></button>
           </div>
           <div id="ac-blk-hint" class="ac-hint" style="margin-top:10px">เลือกอย่างใดอย่างหนึ่งด้านบนก่อน แล้วช่องกรอกจะปรากฏ</div>
+          <div id="ac-blk-retire" style="display:none">
+            <label class="ac-lbl">เลือกหัวข้อที่ต้องการเอาออก <span style="font-weight:400;color:var(--text-muted)">(สูงสุด 15 ต่อครั้ง)</span></label>
+            <div id="ac-rt-list" style="max-height:260px;overflow:auto;border:1px solid var(--border);border-radius:8px;padding:6px 10px;background:#fff"></div>
+            <label class="ac-lbl">เหตุผลที่เอาออก <span style="color:var(--crit)">*</span></label>
+            <input class="ac-input" id="ac-rt-reason" placeholder="เช่น ทดสอบระบบ ไม่ใช่ความรู้จริง (อย่างน้อย 10 ตัวอักษร)" autocomplete="off" oninput="acRtCheck()">
+            <label class="ac-lbl">พิมพ์ยืนยันจำนวนที่เลือก <span style="color:var(--crit)">*</span></label>
+            <input class="ac-input" id="ac-rt-confirm" placeholder="พิมพ์ตัวเลขให้ตรงกับจำนวนที่ติ๊กไว้" autocomplete="off" inputmode="numeric" oninput="acRtCheck()">
+            <div class="ac-hint" id="ac-rt-tag"></div>
+            <button class="ac-go" id="ac-rt-go" disabled style="opacity:.45;background:#8A3226" onclick="acRtRun()">🗄️ ส่งคำขอเอาออก</button>
+            <div class="ac-hint">คำขอจะกลายเป็นใบงานให้คุณอนุมัติในคิวงาน — กดปุ่มนี้แล้วยังไม่มีอะไรหายจากเว็บ</div>
+            <div class="ac-msg" id="ac-rt-msg"></div>
+          </div>
           <div id="ac-blk-new" style="display:none">
             <label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>
             <input class="ac-input" id="ac-topic" placeholder="เช่น การบริหารจัดการเชื้อเพลิงและสัญญาซื้อขายไฟฟ้า (PPA)" autocomplete="off">
@@ -938,10 +952,14 @@ function acReqSet(m){
   acReqMode=m;
   document.getElementById('ac-md-new').classList.toggle('on',m==='new');
   document.getElementById('ac-md-add').classList.toggle('on',m==='add');
+  document.getElementById('ac-md-retire').classList.toggle('on',m==='retire');
   document.getElementById('ac-blk-hint').style.display='none';
   document.getElementById('ac-blk-new').style.display=m==='new'?'block':'none';
   document.getElementById('ac-blk-add').style.display=m==='add'?'block':'none';
-  document.getElementById('ac-blk-go').style.display='block';
+  // โหมดเอาออกมีปุ่มส่งของตัวเอง จึงซ่อนปุ่ม "เริ่มจัดทำ" เพื่อไม่ให้กดผิดปุ่ม
+  document.getElementById('ac-blk-retire').style.display=m==='retire'?'block':'none';
+  document.getElementById('ac-blk-go').style.display=m==='retire'?'none':'block';
+  if(m==='retire')acRtFill();
   if(m==='add')acFillTargets();
 }
 function acFillTargets(){
@@ -960,6 +978,59 @@ function updateAddNote(){
   n.textContent='ผลลัพธ์: เพิ่มความเสี่ยงต่อท้าย '+t.id+' (เริ่มที่ R'+String((t.risks||[]).length+1).padStart(3,'0')+') · เวอร์ชันขยับเป็นรุ่นถัดไป · ไม่สร้างหัวข้อซ้ำ';
 }
 
+/* ── [เพิ่ม 2026-07-21] เอาหัวข้อออกจากเว็บ ──
+   ไม่ใช่การลบ: workflow จะย้ายหัวข้อไป data/retired_topics.json แล้วเปิดใบงานให้อนุมัติ
+   เว็บเขียน main ตรงๆ ไม่ได้ — กดปุ่มนี้แล้วยังไม่มีอะไรหายจนกว่าจะ merge
+   ตัวกันพลาด 3 ชั้น: เหตุผลบังคับ · พิมพ์ยืนยันจำนวน · จำกัด 15 ต่อครั้ง (ตรงกับ MAX_PER_RUN ในสคริปต์) */
+const AC_RT_MAX=15;
+function acRtFill(){
+  const el=document.getElementById('ac-rt-list');if(!el)return;
+  if(!TOPICS.length){el.innerHTML='<div class="ac-msg">ยังโหลดรายการหัวข้อไม่เสร็จ — ปิดแล้วเปิดใหม่อีกครั้ง</div>';return}
+  el.innerHTML=TOPICS.map(t=>
+    '<label style="display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--border-light);font-size:12.5px;cursor:pointer">'
+    +'<input type="checkbox" class="ac-rt-ck" value="'+esc(t.id)+'" onchange="acRtCheck()" style="margin-top:2px;width:15px;height:15px;flex-shrink:0">'
+    +'<span><b>'+esc(t.id)+'</b> '+esc(t.name_th||'')
+    +'<small style="display:block;color:var(--text-muted)">'+((t.risks||[]).length)+' ความเสี่ยง · '+esc(t.approval_status||'')+'</small></span></label>').join('');
+  document.getElementById('ac-rt-reason').value='';
+  document.getElementById('ac-rt-confirm').value='';
+  document.getElementById('ac-rt-msg').textContent='';
+  acRtCheck();
+}
+function acRtPicked(){return [...document.querySelectorAll('.ac-rt-ck')].filter(b=>b.checked).map(b=>b.value)}
+function acRtCheck(){
+  const ids=acRtPicked();
+  const reason=(document.getElementById('ac-rt-reason').value||'').trim();
+  const conf=(document.getElementById('ac-rt-confirm').value||'').trim();
+  const tag=document.getElementById('ac-rt-tag');
+  let msg='',ready=false;
+  if(!ids.length)msg='ยังไม่ได้เลือกหัวข้อ';
+  else if(ids.length>AC_RT_MAX)msg='เลือก '+ids.length+' หัวข้อ — เกินครั้งละ '+AC_RT_MAX+' หัวข้อ กรุณาแบ่งเป็นหลายรอบ';
+  else if(reason.length<10)msg='เลือกไว้ '+ids.length+' หัวข้อ — กรอกเหตุผลอย่างน้อย 10 ตัวอักษร (ตอนนี้ '+reason.length+')';
+  else if(conf!==String(ids.length))msg='เลือกไว้ '+ids.length+' หัวข้อ — พิมพ์เลข '+ids.length+' ในช่องยืนยันเพื่อปลดล็อกปุ่ม';
+  else{msg='พร้อมส่ง — '+ids.length+' หัวข้อ: '+ids.join(', ');ready=true}
+  tag.textContent=msg;tag.style.color=ready?'var(--low)':'var(--text-muted)';
+  const b=document.getElementById('ac-rt-go');b.disabled=!ready;b.style.opacity=ready?1:.45;
+}
+async function acRtRun(){
+  const ids=acRtPicked(),reason=document.getElementById('ac-rt-reason').value.trim();
+  const msg=document.getElementById('ac-rt-msg');
+  const token=getAdminKey();
+  if(!token){msg.textContent='⚠️ ยังไม่ได้เข้าสู่ระบบ';return}
+  msg.textContent='⏳ กำลังส่งคำขอ...';
+  try{
+    const r=await fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/retire-topics.yml/dispatches',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({ref:'main',inputs:{topic_ids:ids.join(','),reason:reason,requested_by:'หน้าผู้ดูแล'}})
+    });
+    if(r.status===404){msg.innerHTML='⏸️ ยังไม่ได้ติดตั้ง retire-topics บน main — จะใช้ได้หลัง merge ใบงานที่เพิ่มความสามารถนี้';return}
+    if(!r.ok)throw new Error('ส่งไม่สำเร็จ ('+r.status+') — เช็คสิทธิ์รหัส');
+    msg.innerHTML='✅ ส่งคำขอแล้ว — อีกสักครู่จะมีใบงาน “🗄️ เอาหัวข้อออกจากเว็บ” โผล่ในคิวงาน <b>ยังไม่มีอะไรหายจากเว็บจนกว่าคุณจะอนุมัติ</b>';
+    document.querySelectorAll('.ac-rt-ck').forEach(b=>b.checked=false);
+    document.getElementById('ac-rt-confirm').value='';
+    acRtCheck();
+  }catch(e){msg.textContent='❌ '+e.message}
+}
 function acOpen(){document.getElementById('ac').classList.add('open');acView(SESSION_KEY?'admin':'role')}
 function acClose(){document.getElementById('ac').classList.remove('open');if(acPoll){clearInterval(acPoll);acPoll=null}}
 function acTgl(id){const e=document.getElementById(id);e.style.display=e.style.display==='none'?'block':'none'}
