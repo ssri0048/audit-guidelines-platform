@@ -94,10 +94,23 @@ function parseObj(r, label) {
   catch (e) { throw new Error(`parse ${label} ไม่ได้ (${e.message}) ${diag(r)} head: ${r.text.slice(0, 300)}`); }
 }
 
-/* ── งานหลัก (รับ deps เพื่อ test ได้) ── */
-async function main(topicInput, outDir, key, fetchFn) {
+/* ── งานหลัก (รับ deps เพื่อ test ได้) ──
+   opts (ทางเลือก): { target:'T005', focus:'ประเด็นเน้น' } = โหมดเพิ่มความเสี่ยงเข้าหัวข้อเดิม
+   ไม่ส่ง opts = โหมดสร้างหัวข้อใหม่ (โค้ดเดิมทุกบรรทัด) */
+async function main(topicInput, outDir, key, fetchFn, opts) {
+  opts = opts || {};
+  const APPEND = !!opts.target;
   fs.mkdirSync(outDir, { recursive: true });
   const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'standards_registry.json'), 'utf8'));
+
+  // โหมด append: โหลดหัวข้อแม่จากคลังจริง — ไม่พบ = escalate ชัดเจน (exit 2 ที่ CLI)
+  let parent = null;
+  if (APPEND) {
+    const store = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'knowledge_store.json'), 'utf8'));
+    parent = (store.topics || []).find(t => t.id === opts.target);
+    if (!parent) { const e = new Error('ไม่พบหัวข้อ ' + opts.target + ' ในคลัง — ตรวจรหัสหัวข้อแล้วสั่งใหม่'); e.escalate = true; throw e; }
+    topicInput = parent.name_th + (opts.focus ? ' — ประเด็นที่เน้น: ' + opts.focus : '');
+  }
   function famFor(str) {
     for (const f of registry.families) {
       try { if (new RegExp(f.match, 'i').test(str)) return f; } catch (e) {}
@@ -131,12 +144,25 @@ async function main(topicInput, outDir, key, fetchFn) {
   const CF_RULES = 'กติกาจำนวนจุดควบคุมบกพร่อง: ตามเหตุผลเชิงวิชาชีพ ไม่ใช่โควตา — โดยธรรมชาติความเสี่ยงหนึ่งมักมีหลายจุด (สอง สาม หรือมากกว่า) ระบุครบเท่าที่มีจริง ห้ามยัดเพิ่มเพื่อให้ครบจำนวน หนึ่งข้อก็ถูกต้องถ้าความจริงมีเท่านั้น | วิธีตรวจ+หลักฐานล้อราย CF ห้ามชุดเดียวหว่านทุก CF';
   const SYS = `คุณเป็นผู้เชี่ยวชาญตรวจสอบภายในองค์กรด้านไฟฟ้าไทย\nกติกาเหล็ก: (1) อ้างอิงได้เฉพาะมาตรฐานในรายการที่ให้เท่านั้น (2) ภาษาไทย (3) ตอบเป็น JSON เดียว ไม่มีข้อความอื่น ไม่มี code fence\n${CF_RULES}`;
 
-  const skRes = await callSafe(key, SYS,
-    `หัวข้อ: "${topicInput}"\nมาตรฐานที่อ้างได้: ${inRegistry.join(' | ')}\n\nสร้างโครงหัวข้อเป็น JSON object: {name_th,name_en,category,category_th,priority(CRITICAL/HIGH/MEDIUM),org_applicability(array จาก UNIVERSAL/GOV/SOE/LISTED/PRIVATE/SME/LOCAL_GOV/COOP_COMMUNITY),applicable_standards(เลือกจากรายการที่อ้างได้),thailand_applicable(bool),thai_law_refs(array),risks:[{id:"R001"...,name_th,name_en,level(CRITICAL/HIGH/MEDIUM/LOW),likelihood(สูง/ปานกลาง/ต่ำ),impact(สูงมาก/สูง/ปานกลาง)} × 6-7 รายการ]} — ยังไม่ต้องใส่ control_failures`,
-    DRAFT_CAP, fetchFn);
-  const skeleton = parseObj(skRes, 'skeleton');
-  if (!Array.isArray(skeleton.risks) || skeleton.risks.length < 5) throw new Error('โครงหัวข้อมี risks < 5');
-  console.log(`✓ skeleton: ${skeleton.risks.length} risks`);
+  let skeleton;
+  if (APPEND) {
+    // โหมด append: ขอเฉพาะความเสี่ยงใหม่ 2-3 ข้อ ห้ามซ้ำกับที่หัวข้อแม่มีอยู่แล้ว
+    const existingNames = (parent.risks || []).map(r => r.name_th).join(' | ');
+    const skRes = await callSafe(key, SYS,
+      `หัวข้อเดิม: "${parent.name_th}"\nความเสี่ยงที่มีอยู่แล้ว (ห้ามซ้ำหรือใกล้เคียง): ${existingNames}\n${opts.focus ? 'ประเด็นที่ผู้ใช้อยากเน้น: ' + opts.focus + '\n' : ''}มาตรฐานที่อ้างได้: ${inRegistry.join(' | ')}\n\nสร้าง JSON object: {risks:[{id:"R001"...,name_th,name_en,level(CRITICAL/HIGH/MEDIUM/LOW),likelihood(สูง/ปานกลาง/ต่ำ),impact(สูงมาก/สูง/ปานกลาง)} × 2-3 รายการ]} — เฉพาะประเด็นใหม่ที่หัวข้อนี้ยังขาดจริง ยังไม่ต้องใส่ control_failures`,
+      DRAFT_CAP, fetchFn);
+    const sk = parseObj(skRes, 'skeleton(append)');
+    if (!Array.isArray(sk.risks) || sk.risks.length < 1) throw new Error('โหมดเพิ่มความเสี่ยง: ไม่ได้ความเสี่ยงใหม่เลย');
+    skeleton = { mode: 'append', target: parent.id, name_th: parent.name_th, risks: sk.risks };
+    console.log(`✓ skeleton(append→${parent.id}): ${skeleton.risks.length} risks ใหม่`);
+  } else {
+    const skRes = await callSafe(key, SYS,
+      `หัวข้อ: "${topicInput}"\nมาตรฐานที่อ้างได้: ${inRegistry.join(' | ')}\n\nสร้างโครงหัวข้อเป็น JSON object: {name_th,name_en,category,category_th,priority(CRITICAL/HIGH/MEDIUM),org_applicability(array จาก UNIVERSAL/GOV/SOE/LISTED/PRIVATE/SME/LOCAL_GOV/COOP_COMMUNITY),applicable_standards(เลือกจากรายการที่อ้างได้),thailand_applicable(bool),thai_law_refs(array),risks:[{id:"R001"...,name_th,name_en,level(CRITICAL/HIGH/MEDIUM/LOW),likelihood(สูง/ปานกลาง/ต่ำ),impact(สูงมาก/สูง/ปานกลาง)} × 6-7 รายการ]} — ยังไม่ต้องใส่ control_failures`,
+      DRAFT_CAP, fetchFn);
+    skeleton = parseObj(skRes, 'skeleton');
+    if (!Array.isArray(skeleton.risks) || skeleton.risks.length < 5) throw new Error('โครงหัวข้อมี risks < 5');
+    console.log(`✓ skeleton: ${skeleton.risks.length} risks`);
+  }
 
   // ── เฟส 2b: เติม CF + procedures ทีละความเสี่ยง ──
   // ตาข่ายสุดท้าย: ความเสี่ยงตัวไหนพังครบ 3 ขั้น → ตัดทิ้งแล้วไปต่อ (ห้ามแต่งข้อมูล)
@@ -160,8 +186,9 @@ async function main(topicInput, outDir, key, fetchFn) {
     }
   }
   skeleton.risks = skeleton.risks.filter(r => Array.isArray(r.control_failures));
-  if (skeleton.risks.length < 5)
-    throw new Error(`เหลือ ${skeleton.risks.length} risks (<5) หลังตัดตัวที่พัง — งานนี้ต้องสั่งใหม่`);
+  const FLOOR = APPEND ? 1 : 5; // append เพิ่มทีละ 2-3 ข้อ — floor 1 พอ (หัวข้อรวมโตอยู่แล้ว)
+  if (skeleton.risks.length < FLOOR)
+    throw new Error(`เหลือ ${skeleton.risks.length} risks (<${FLOOR}) หลังตัดตัวที่พัง — งานนี้ต้องสั่งใหม่`);
   if (dropped.length) {
     fs.appendFileSync(path.join(outDir, 'READING_MANIFEST.md'),
       '\n\n## ⚠️ ความเสี่ยงที่ถูกตัดออก (สร้างไม่สำเร็จหลัง retry 3 ขั้น — สั่งเพิ่มภายหลังได้)\n' + dropped.map(d => '- ' + d).join('\n'));
@@ -183,11 +210,14 @@ if (require.main === module) {
   const TOPIC_INPUT = process.argv[2] || '';
   const OUT_DIR = process.argv[3] || '/tmp/research_out';
   const KEY = process.env.ANTHROPIC_API_KEY;
-  if (!TOPIC_INPUT.trim()) { console.error('❌ ไม่มีหัวข้อ — ใส่หัวข้อเป็น argument แรก'); process.exit(1); }
+  const TARGET = (process.env.TARGET_TOPIC || '').trim(); // โหมดเพิ่มความเสี่ยง: รหัสหัวข้อเดิม เช่น T005
+  const FOCUS = (process.env.FOCUS || '').trim();
+  if (!TOPIC_INPUT.trim() && !TARGET) { console.error('❌ ไม่มีหัวข้อ — ใส่หัวข้อ หรือระบุ TARGET_TOPIC สำหรับโหมดเพิ่มความเสี่ยง'); process.exit(1); }
   if (!KEY) {
     console.log('⏸️ ยังไม่ได้ตั้ง ANTHROPIC_API_KEY ใน repo Secrets — pipeline นี้ตั้งไว้รอ');
     console.log('   วิธีเปิดใช้: Settings → Secrets and variables → Actions → New repository secret → ANTHROPIC_API_KEY');
     process.exit(0);
   }
-  main(TOPIC_INPUT, OUT_DIR, KEY, fetch).catch(e => { console.error('❌', e.message); process.exit(1); });
+  main(TOPIC_INPUT, OUT_DIR, KEY, fetch, TARGET ? { target: TARGET, focus: FOCUS } : undefined)
+    .catch(e => { console.error('❌', e.message); process.exit(e.escalate ? 2 : 1); });
 }

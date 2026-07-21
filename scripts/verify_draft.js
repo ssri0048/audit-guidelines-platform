@@ -156,7 +156,75 @@ function main(draftFile, root) {
     console.error('⛔ ESCALATE ไป Cowork — ' + escalate.length + ' รายการอ้างสิ่งที่ไม่มีทะเบียน:\n' + escalate.map(x => '  - ' + x).join('\n'));
     process.exit(2);
   }
-  if ((d.risks || []).length < 5) { console.error('❌ risks < 5'); process.exit(1); }
+  const APPEND = d.mode === 'append';
+  if (!APPEND && (d.risks || []).length < 5) { console.error('❌ risks < 5'); process.exit(1); }
+  if (APPEND && (d.risks || []).length < 1) { console.error('❌ โหมดเพิ่มความเสี่ยง: ไม่มีความเสี่ยงใหม่ในร่าง'); process.exit(1); }
+
+  // ── โหมด APPEND: ต่อความเสี่ยงเข้าหัวข้อเดิม (ทางแยกชัดเจน — ไม่แตะทางสร้างหัวข้อใหม่) ──
+  if (APPEND) {
+    const parent = (store.topics || []).find(t => t.id === d.target);
+    if (!parent) { console.error('⛔ ESCALATE: ไม่พบหัวข้อ ' + d.target + ' ในคลัง — ตรวจรหัสหัวข้อแล้วสั่งใหม่'); process.exit(2); }
+    const RETR2 = new Date().toISOString().slice(0, 10);
+
+    // 1) ไล่เลข R/CF/AP ต่อจากของเดิม — กัน id ซ้ำเด็ดขาด
+    let num = (parent.risks || []).length;
+    for (const r of d.risks) {
+      num++;
+      r.id = 'R' + String(num).padStart(3, '0');
+      (r.control_failures || []).forEach((cf, ci) => {
+        cf.id = 'CF' + num + '-' + (ci + 1);
+        (cf.audit_procedures || []).forEach((ap, ai) => { ap.id = 'AP' + num + '-' + (ci + 1) + '.' + (ai + 1); });
+      });
+    }
+
+    // 2) union มาตรฐานใหม่จาก std_refs ของความเสี่ยงที่เพิ่ม เข้า applicable_standards ของแม่
+    const famsInParent = new Set((parent.applicable_standards || []).map(x => (famFor(registry, x) || {}).family_id).filter(Boolean));
+    const newStds = [];
+    for (const r of d.risks) for (const cf of r.control_failures || []) for (const ap of cf.audit_procedures || [])
+      for (const sr of ap.std_refs || []) {
+        if (!sr || !sr.std) continue;
+        const f = famFor(registry, sr.std);
+        if (f && !famsInParent.has(f.family_id)) { famsInParent.add(f.family_id); newStds.push(sr.std); }
+      }
+    parent.applicable_standards = (parent.applicable_standards || []).concat(newStds);
+
+    // 3) ต่อ risks + bump minor version + changelog + hash ใหม่
+    parent.risks = (parent.risks || []).concat(d.risks);
+    const v = String(parent.version || '1.0.0').split('.').map(x => parseInt(x, 10) || 0);
+    parent.version = v[0] + '.' + (v[1] + 1) + '.0';
+    parent.updated_at = new Date().toISOString().slice(0, 19) + 'Z';
+    parent.changelog = (parent.changelog || []).concat([{
+      version: parent.version, date: RETR2,
+      change: 'เพิ่มความเสี่ยงใหม่ ' + d.risks.length + ' รายการ (' + d.risks.map(r => r.id).join(', ') + ') โดย research-pipeline โหมดเพิ่มความเสี่ยง'
+        + (allFixes.length ? ' | การแก้ไขโดยระบบ: ' + allFixes.join(' | ') : '')
+        + (newStds.length ? ' | มาตรฐานเพิ่ม: ' + newStds.join(', ') : ''),
+      approved_by: 'pending PR merge'
+    }]);
+    parent.hash_signature = sha256Of(parent);
+    fs.writeFileSync(path.join(root, 'data', 'knowledge_store.json'), JSON.stringify(store, null, 2));
+
+    const SUM2 = process.env.VERIFY_SUMMARY_OUT || '/tmp/verify_summary.md';
+    // 4) เกตจริงต้องผ่านก่อนปล่อย — พังแล้วไฟล์ draft ยังอยู่ (ลงจอดนุ่มแบบเดียวกับโหมดปกติ)
+    try {
+      execFileSync('node', [path.join(root, 'scripts', 'validate.js'), path.join(root, 'data', 'knowledge_store.json')], { stdio: 'pipe' });
+    } catch (e) {
+      const errBlock = extractGateErrors(e.stdout);
+      fs.writeFileSync(SUM2, gateFailReport(parent.id, parent.name_th + ' (เพิ่มความเสี่ยง)', errBlock, null));
+      console.error('🔎 โปรดตรวจสอบก่อนยืนยัน — เก็บ draft ไว้ให้ตรวจต่อ (ไม่ลบไฟล์)\n' + errBlock);
+      process.exit(1);
+    }
+    fs.unlinkSync(draftPath);
+    const mP2 = path.join(root, 'data', 'drafts', 'READING_MANIFEST.md');
+    if (fs.existsSync(mP2)) fs.unlinkSync(mP2);
+    const summary2 = ['# ✅ Auto-Verify: เพิ่มความเสี่ยงใน ' + parent.name_th + ' → ' + parent.id + ' (v' + parent.version + ')', '',
+      '## ความเสี่ยงที่เพิ่ม (' + d.risks.length + ')', ...d.risks.map(r => '- ' + r.id + ' ' + r.name_th), '',
+      '## การแก้ไขโดยระบบ (' + allFixes.length + ')', ...(allFixes.length ? allFixes.map(f => '- ' + f) : ['- ไม่มี — citations ถูกต้องครบ']), '',
+      (newStds.length ? '## มาตรฐานที่เพิ่มเข้าหัวข้อ\n' + newStds.map(s => '- ' + s).join('\n') + '\n' : ''),
+      '⚠️ auto-verify ไม่อ่านหน้าใหม่ — โปรดรีวิวเนื้อหาเชิงวิชาชีพก่อน merge (ดุลยพินิจสุดท้ายอยู่ที่คุณ)'].join('\n');
+    fs.writeFileSync(SUM2, summary2);
+    console.log('✅ ' + parent.id + ' เพิ่ม ' + d.risks.length + ' ความเสี่ยง (รวม ' + parent.risks.length + ') → v' + parent.version + ' | เกตผ่าน');
+    return { tid: parent.id, fixes: allFixes, topic: parent, appended: d.risks.length };
+  }
 
   // ── 2) source_chain จากทะเบียนที่อ่านแล้วจริง ──
   const RETR = new Date().toISOString().slice(0, 10);
