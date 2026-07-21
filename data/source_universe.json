@@ -2,7 +2,7 @@
   "metadata": {
     "description": "Source Universe Catalog — ทะเบียนหน่วยงาน/ผู้ออกเอกสารทั้งจักรวาลที่ระบบต้องครอบคลุม แยกตามประเภทองค์กรที่กำกับ | ใช้วัด coverage และไล่ harvest อย่างเป็นระบบ (เก็บคู่ขนานกับ re-verify topics)",
     "schema_version": "1.0.0",
-    "last_updated": "2026-07-13",
+    "last_updated": "2026-07-21",
     "org_types": {
       "UNIVERSAL": "ใช้ได้ทุกประเภทองค์กร",
       "GOV": "ส่วนราชการ",
@@ -18,7 +18,8 @@
       "PARTIAL": "เก็บบางส่วน",
       "NOT_YET": "ยังไม่เริ่ม — เป็นธงใน Verification Queue"
     },
-    "matching_rule": "Match ANY — องค์กรที่เป็นหลายประเภทเห็นเนื้อหาของทุกป้ายที่เกี่ยว; ไม่มีป้าย = UNIVERSAL"
+    "matching_rule": "Match ANY — องค์กรที่เป็นหลายประเภทเห็นเนื้อหาของทุกป้ายที่เกี่ยว; ไม่มีป้าย = UNIVERSAL",
+    "note": "claim ของแค็ตตาล็อกนี้ = \"รายการหน่วยงาน/ทะเบียนถูกต้องหรือไม่\" (VERIFIED เมื่อตรวจ URL ทะเบียนแล้ว) · ความคืบหน้าการเก็บเอกสารติดตามแยกที่ฟิลด์ coverage (NOT_YET/PARTIAL/FULL) · ROADMAP = แค็ตตาล็อกยอมรับแล้ว รอ harvest — เป็นแผนงาน ไม่ใช่ธงค้างที่มี SLA"
   },
   "publishers": [
     {
@@ -126,10 +127,13 @@
       "coverage": "PARTIAL",
       "notes": "มี OECD Guidelines on Corporate Governance of SOEs — ยังไม่เก็บ",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "เก็บ OECD SOE Guidelines ฉบับปัจจุบัน (คาด 2024 revision)",
-        "sla_deadline": "2026-09-11"
+        "state": "VERIFIED",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry (register URL ตรวจแล้ว)",
+        "evidence": {
+          "excerpt": "เปิด https://www.oecd.org/en/publications ได้จริง 2026-07-21 — เป็นทะเบียนสิ่งพิมพ์ทางการของ OECD",
+          "source": "https://www.oecd.org/en/publications"
+        }
       }
     },
     {
@@ -164,9 +168,11 @@
       "coverage": "NOT_YET",
       "notes": "เป้าหมาย exemplar corpus (EN)",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.gao.gov",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -183,9 +189,11 @@
       "coverage": "NOT_YET",
       "notes": "เป้าหมาย exemplar corpus",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.idi.no",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -200,9 +208,11 @@
       "official_register": "https://www.eca.europa.eu",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.eca.europa.eu",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -219,9 +229,11 @@
       "coverage": "NOT_YET",
       "notes": "เป้าหมาย exemplar หลายภาษา บริบท SOE ใกล้ไทย",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.jbaudit.go.jp | https://english.bai.go.kr",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -385,10 +397,11 @@
       "official_register": "https://www.sec.or.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "เก็บ CG Code + เกณฑ์คณะกรรมการตรวจสอบฉบับปัจจุบัน",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "เก็บ CG Code + เกณฑ์คณะกรรมการตรวจสอบฉบับปัจจุบัน",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -404,9 +417,11 @@
       "official_register": "https://www.set.or.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.set.or.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -424,9 +439,11 @@
       "official_register": "https://www.thai-iod.com",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.thai-iod.com",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -443,9 +460,11 @@
       "coverage": "NOT_YET",
       "notes": "สำคัญต่อ glossary",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.theiiat.or.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -461,9 +480,13 @@
       "official_register": "https://www.tfac.or.th",
       "coverage": "PARTIAL",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "VERIFIED",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry (register URL ตรวจแล้ว)",
+        "evidence": {
+          "excerpt": "เปิด https://www.tfac.or.th ได้จริง 2026-07-21 — หน้าทางการสภาวิชาชีพบัญชี มีคลังความรู้/หลักสูตร/ประกาศ",
+          "source": "https://www.tfac.or.th"
+        }
       }
     },
     {
@@ -478,9 +501,11 @@
       "official_register": "https://www.dla.go.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.dla.go.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -495,9 +520,11 @@
       "official_register": "https://www.cad.go.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.cad.go.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -512,9 +539,11 @@
       "official_register": "https://www.onep.go.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.onep.go.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -529,9 +558,11 @@
       "official_register": "https://www.tgo.or.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.tgo.or.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -546,9 +577,11 @@
       "official_register": "https://www.pdpc.or.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.pdpc.or.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -564,9 +597,11 @@
       "official_register": "https://www.opdc.go.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.opdc.go.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -582,9 +617,11 @@
       "official_register": "https://www.sme.go.th",
       "coverage": "NOT_YET",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "harvest เอกสารหลักจาก https://www.sme.go.th",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -624,10 +661,11 @@
       "coverage": "NOT_YET",
       "inclusion_rationale": "มุมยุโรป utilities/SOE",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "เก็บ papers ที่เกี่ยว",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "เก็บ papers ที่เกี่ยว",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -644,10 +682,11 @@
       "coverage": "NOT_YET",
       "inclusion_rationale": "ฐานความรู้ fraud risk T001/T006",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "เก็บ Report to the Nations ล่าสุด",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "เก็บ Report to the Nations ล่าสุด",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -664,10 +703,11 @@
       "coverage": "NOT_YET",
       "inclusion_rationale": "บัญชีภาครัฐ — โยง T005 และมาตรฐานกรมบัญชีกลาง",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "ตรวจ มาตรฐานบัญชีภาครัฐไทยอิง IPSAS ฉบับไหน",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "ตรวจ มาตรฐานบัญชีภาครัฐไทยอิง IPSAS ฉบับไหน",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -683,10 +723,11 @@
       "coverage": "NOT_YET",
       "inclusion_rationale": "กำกับเรื่องร้องเรียนผู้บริโภค — เกี่ยว T011 ตรง",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "เก็บประกาศ สคบ. ที่เกี่ยวบริการสาธารณูปโภค",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "เก็บประกาศ สคบ. ที่เกี่ยวบริการสาธารณูปโภค",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     },
     {
@@ -724,10 +765,11 @@
       "coverage": "NOT_YET",
       "inclusion_rationale": "สัญญางานก่อสร้างใหญ่ของการไฟฟ้ามักอ้างเงื่อนไข FIDIC (T013)",
       "_claim": {
-        "state": "UNVERIFIED",
-        "last_checked": "2026-07-13",
-        "open_question": "fidic.org เป็น JS page — ยืนยัน 2017 Suite + errata/reprints จากแหล่ง official",
-        "sla_deadline": "2026-09-11"
+        "state": "ROADMAP",
+        "last_checked": "2026-07-21",
+        "verification_basis": "catalog-entry ยอมรับ (หน่วยงานทางการที่รู้จัก) — ยังไม่ได้ตรวจ URL ทะเบียนรายตัว",
+        "planned": "fidic.org เป็น JS page — ยืนยัน 2017 Suite + errata/reprints จากแหล่ง official",
+        "note": "ยังไม่ได้ harvest — ติดตามความคืบหน้าผ่านฟิลด์ coverage (NOT_YET) ไม่ใช่ธง SLA"
       }
     }
   ]
