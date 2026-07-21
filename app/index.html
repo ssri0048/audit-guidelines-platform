@@ -69,6 +69,10 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .pill:hover{border-color:var(--navy-light);color:var(--navy)}
 .pill.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .pill-n{opacity:.75;font-size:11px}
+/* tooltip ของชื่อ feature กล่องใต้ search (hover/โฟกัสคีย์บอร์ดได้) */
+.ginf{position:relative;cursor:help;font-size:13px;margin-left:6px}
+.gtip{display:none;position:absolute;left:0;top:140%;width:300px;background:#fff;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;font-weight:400;line-height:1.7;box-shadow:var(--shadow-lg);z-index:30;text-align:left}
+.ginf:hover .gtip,.ginf:focus .gtip{display:block}
 .org-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px;align-items:center}
 .org-lbl{font-size:11.5px;color:var(--text-muted);font-weight:600;margin-right:2px}
 .org-chip{padding:5px 12px;border-radius:18px;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:#fff;cursor:pointer;transition:all var(--transition);color:var(--text-muted)}
@@ -344,8 +348,12 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 
 <!-- [ย้ายมาจาก footer 2026-07-21 — เดิมชื่อ "ธรรมาภิบาลความรู้ของระบบนี้" ต้นฉบับเก็บใน comment ที่ตำแหน่ง footer] -->
 <div class="footer" style="padding-bottom:0;margin-top:14px"><div class="gov-card">
+  <!-- [เวอร์ชันก่อนหน้า 2026-07-21 — ชื่อ "ฟีเจอร์ของระบบนี้" + ย่อหน้าอธิบาย] เปิดคืน: สลับ comment กับบล็อกใหม่ด้านล่าง
   <h3>✨ ฟีเจอร์ของระบบนี้</h3>
   <p>ไม่พบเรื่องที่ต้องการ? <b>ขอหัวข้อตรวจสอบใหม่</b>ได้เลย ระบบจะค้นคว้าและจัดทำแนวทางให้ · เจอข้อมูลที่ไม่ถูกต้อง? <b>แจ้ง</b>ให้ทีมดูแลตรวจสอบได้ทันที · ทุกหัวข้อบนเว็บนี้ตรวจจากแหล่งทางการจริง และผ่านการอนุมัติจากผู้ดูแลก่อนเผยแพร่เสมอ</p>
+  -->
+  <h3 style="display:flex;align-items:center;flex-wrap:wrap;gap:2px">🙋 หาเรื่องที่ต้องการไม่เจอ หรือเจอข้อมูลคลาดเคลื่อน? เราช่วยได้<span class="ginf" tabindex="0">ℹ️<span class="gtip"><b>ระบบนี้ทำงานอย่างไร</b><br>• ขอหัวข้อใหม่: ระบบค้นคว้าจากแหล่งทางการจริง จัดทำความเสี่ยง วิธีตรวจ และหลักฐานให้ครบ<br>• แจ้งข้อมูลคลาดเคลื่อน: ส่งเป็นใบงานให้ทีมดูแลตรวจกับแหล่งทางการแล้วแก้ไขให้<br>• ทุกหัวข้อผ่านด่านตรวจอัตโนมัติ 9 ด่าน และผู้ดูแลอนุมัติก่อนขึ้นเว็บเสมอ</span></span></h3>
+  <p>ขอหัวข้อใหม่หรือแจ้งแก้ไขได้ในคลิกเดียว — ระบบดูแลต่อให้จนจบ</p>
   <div class="gov-actions">
     <a class="gov-btn gb-gold" href="javascript:void(0)" onclick="acOpen()">➕ ขอหัวข้อตรวจสอบใหม่</a>
     <a class="gov-btn gb-line" target="_blank" rel="noopener" href="https://github.com/ssri0048/audit-guidelines-platform/issues/new?title=%5B%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B9%81%E0%B8%81%E0%B9%89%E0%B9%84%E0%B8%82%5D%20">🚩 แจ้งข้อมูลคลาดเคลื่อน</a>
