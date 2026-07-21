@@ -72,30 +72,59 @@ jobs:
           if [ -f /tmp/research_out/draft_topic.json ]; then echo "has_draft=true" >> "$GITHUB_OUTPUT"; else echo "has_draft=false" >> "$GITHUB_OUTPUT"; fi
 
       # ── โหมด chain: ตรวจพิสูจน์ต่อทันทีจากไฟล์ร่างในเครื่อง (ไม่ผ่านคลังพัก) ──
-      # escalate/ตกเกต → outcome=failure → fallback ไปเปิด draft PR ตามปกติ งานไม่สูญ
+      # [ปรับปรุง 2026-07-21 — "1 หัวข้อ = 1 ใบงาน"]
+      # เดิม: ตกเกต → outcome=failure → ถอยไปเปิด draft PR (คนต้อง merge 2 ครั้ง + กดปุ่มกลาง)
+      # ใหม่: แยก exit code ออกจากกัน เพราะความหมายต่างกันมาก
+      #   code 0 = ผ่านหมด            → ใบงาน "พร้อมอนุมัติ"
+      #   code 1 = ตกเกต แต่ผลงานเขียนลง data/ แล้ว → ใบงานเดิม ติดป้าย "ต้องแก้ก่อน" (เกตแดง = merge ไม่ได้อยู่แล้ว)
+      #   code 2 = escalate (แหล่งไม่พอ/ไม่พบหัวข้อแม่) → ผลงานใช้เป็นความรู้ไม่ได้ → คงทางเดิม เปิด draft PR เก็บร่างไว้
       - name: Auto-verify (chain mode)
         id: chainverify
         if: inputs.chain == true && steps.run.outputs.has_draft == 'true'
         continue-on-error: true
         run: |
+          set +e
           set -o pipefail
           node scripts/verify_draft.js /tmp/research_out/draft_topic.json | tee -a /tmp/run.log
+          CODE=${PIPESTATUS[0]}
+          echo "code=$CODE" >> "$GITHUB_OUTPUT"
+          set -e
+          exit 0   # ไม่ให้ step แดง — ตัดสินใจด้วย outputs.code แทน
 
-      - name: Open verify PR (chain mode)
-        if: inputs.chain == true && steps.chainverify.outcome == 'success'
+      - name: Open ticket (chain mode — ผ่านหรือตกเกตก็ใบเดียว)
+        if: inputs.chain == true && (steps.chainverify.outputs.code == '0' || steps.chainverify.outputs.code == '1')
         env:
           GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
+          CODE: ${{ steps.chainverify.outputs.code }}
         run: |
           BRANCH="verify/$(date +%Y%m%d-%H%M%S)"
           git config user.name "research-pipeline[bot]"
           git config user.email "actions@github.com"
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git checkout -b "$BRANCH"
+          # กันงานสูญ: ถ้าไม่มีอะไรเปลี่ยนใน data/ ให้เก็บไฟล์ร่างไว้แทน จะได้ไม่ commit เปล่า
+          if git diff --quiet -- data/; then
+            mkdir -p data/drafts
+            cp /tmp/research_out/draft_topic.json "data/drafts/draft_$(date +%Y%m%d-%H%M%S).json" || true
+            cp /tmp/research_out/READING_MANIFEST.md data/drafts/ 2>/dev/null || true
+          fi
           git add data/
-          git commit -m "chain: ร่าง+ตรวจพิสูจน์รวดเดียว '${{ steps.topic.outputs.topic }}' (L1 PENDING_REVIEW — รอ human merge)"
+          if [ "$CODE" = "1" ]; then
+            git commit -m "chain: '${{ steps.topic.outputs.topic }}' — ตกเกตคุณภาพ ต้องแก้ก่อนอนุมัติ (งานที่ทำไปแล้วเก็บไว้ครบ)"
+          else
+            git commit -m "chain: ร่าง+ตรวจพิสูจน์รวดเดียว '${{ steps.topic.outputs.topic }}' (L1 PENDING_REVIEW — รอ human merge)"
+          fi
           git push -u origin "$BRANCH"
-          TITLE_LINE=$(head -1 /tmp/verify_summary.md | sed 's/^# //')
-          gh pr create --title "$TITLE_LINE" --body-file /tmp/verify_summary.md --base main --head "$BRANCH"
+          TITLE_LINE=$(head -1 /tmp/verify_summary.md 2>/dev/null | sed 's/^# //')
+          [ -z "$TITLE_LINE" ] && TITLE_LINE="ตรวจแล้ว: ${{ steps.topic.outputs.topic }}"
+          if [ "$CODE" = "1" ]; then TITLE_LINE="🔴 ต้องแก้ก่อน — $TITLE_LINE"; fi
+          cp /tmp/verify_summary.md /tmp/ticket.md 2>/dev/null || echo "(ไม่มีรายงานสรุป)" > /tmp/ticket.md
+          if [ "$CODE" = "1" ]; then
+            { echo ""; echo "***"; echo "### ⛔ ใบงานนี้ยังอนุมัติไม่ได้";
+              echo "เกตคุณภาพยังไม่เขียว — ปุ่มอนุมัติบนเว็บถูกล็อกไว้อัตโนมัติ";
+              echo "**งานที่ทำไปแล้วไม่หาย** ผลค้นคว้าและลิงก์ที่ตรวจแล้วอยู่ใน commit นี้ครบ แก้เฉพาะจุดที่แจ้งข้างบนแล้วเวียนกลับมาได้เลย"; } >> /tmp/ticket.md
+          fi
+          gh pr create --title "$TITLE_LINE" --body-file /tmp/ticket.md --base main --head "$BRANCH"
 
       - name: Upload debug output (ดู raw ได้เสมอแม้ fail)
         if: always()
@@ -107,8 +136,13 @@ jobs:
             /tmp/verify_summary.md
           if-no-files-found: ignore
 
+      # [ปรับปรุง 2026-07-21] เดิม: if: ... (inputs.chain != true || steps.chainverify.outcome == 'failure')
+      # เดิมจะวิ่งทุกครั้งที่ chain ตกเกต ทำให้เกิดใบงานซ้อน 2 ใบต่อ 1 หัวข้อ
+      # ใหม่: เหลือเฉพาะ 2 กรณีที่ยังต้องใช้ทางนี้จริง — ไม่ได้ติ๊ก chain, หรือ escalate (code 2) ที่ผลงานใช้เป็นความรู้ไม่ได้
+      # เงื่อนไขเขียนแบบ "ไม่ใช่ 0 และไม่ใช่ 1" แทนการระบุ '2' ตรงๆ — กันเคสที่ step ตายก่อนเขียน output
+      # (code ว่าง / 127 / อื่นๆ) ซึ่งถ้าระบุ '2' ตรงๆ จะไม่มีใบงานเปิดเลยและงานหายเงียบ
       - name: Open draft PR
-        if: steps.run.outputs.has_draft == 'true' && (inputs.chain != true || steps.chainverify.outcome == 'failure')
+        if: steps.run.outputs.has_draft == 'true' && (inputs.chain != true || (steps.chainverify.outputs.code != '0' && steps.chainverify.outputs.code != '1'))
         env:
           GH_TOKEN: ${{ secrets.PIPELINE_PAT || github.token }}
         run: |
@@ -133,7 +167,11 @@ jobs:
           } >> /tmp/pr_body.md
           # ถ้า chain-verify ตกเกต → แนบรายงานเกตที่ fail ให้คนเห็นทันทีว่าต้องแก้อะไร
           if [ -f /tmp/verify_summary.md ]; then { echo ""; echo "***"; cat /tmp/verify_summary.md; } >> /tmp/pr_body.md; fi
-          gh pr create --title "🤖 Draft: ${{ steps.topic.outputs.topic }}" \
+          # [ปรับปรุง 2026-07-21] เดิม: --title "🤖 Draft: ${{ steps.topic.outputs.topic }}"
+          # ถ้า topic ว่าง ชื่อใบงานจะเหลือแค่ "🤖 Draft:" ทำให้ในคิวงานไม่รู้ว่าเรื่องอะไร (เจอจริงที่ PR #97)
+          DTOPIC="${{ steps.topic.outputs.topic }}"
+          [ -z "$DTOPIC" ] && DTOPIC="(ไม่ระบุชื่อหัวข้อ — ดูรายละเอียดในใบงาน)"
+          gh pr create --title "🤖 ร่างรอตรวจ: $DTOPIC" \
             --body-file /tmp/pr_body.md --base main --head "$BRANCH"
 
       - name: Comment result on issue
