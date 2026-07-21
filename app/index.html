@@ -1172,19 +1172,48 @@ async function apOpen(i){
       document.getElementById('ac-rv-sub').textContent=newT.id+' · '+newT.risks.length+' ความเสี่ยง · '
         +newT.risks.reduce((n,r)=>n+(r.control_failures||[]).length,0)+' จุดควบคุมบกพร่อง · แหล่งอ้างอิง '+(newT.source_chain||[]).length
         +' · เกต: '+(p._ci||'⏳');
+      /* [ปรับปรุง 2026-07-21 — ลดจำนวนช่องติ๊กโดยไม่ลดสาระ]
+         เดิม: (last.change||'').split(' | ')... .forEach(f=>items.push({t:'🔧 '+f}));
+         ปัญหาจริง: changelog บันทึกทุกครั้งที่ระบบแก้การอ้างอิง มาตรฐานเดียวถูกอ้างใน 12 ขั้นตอนตรวจ
+         ก็บันทึก 12 บรรทัด → T020 มี 52 ช่องติ๊ก ทั้งที่ข้อความไม่ซ้ำมีแค่ 8 (ซ้ำ 73%)
+         ใหม่: ตัดข้อความซ้ำ แล้วรวมรายการ "เชิงกลไก" (พ่วงฉบับแก้ไข / หมายเหตุระบบ) เป็นกลุ่มละ 1 ช่อง
+               พร้อมกางดูรายการเต็มได้ — แต่ "สลับฉบับที่ถูกถอน" ยังแยกช่องรายมาตรฐาน
+               เพราะเปลี่ยนว่าอ้างฉบับไหน ต้องใช้ดุลยพินิจจริง ไม่ควรรวบ
+         ข้อความต้นฉบับยังอยู่ครบใน changelog — ตรวจย้อนได้เหมือนเดิม */
       const last=(newT.changelog||[]).slice(-1)[0];
-      if(last)(last.change||'').split(' | ').filter(x=>x.length>8).forEach(f=>items.push({t:'🔧 '+f}));
+      const raw=last?(last.change||'').split(' | ').filter(x=>x.length>8):[];
+      const uniq=[...new Set(raw)];                       // ตัดข้อความซ้ำ (52 → 8)
+      const swaps=[],amds=[],notes=[],others=[];
+      uniq.forEach(f=>{
+        if(/ถูกถอน|สลับเป็น/.test(f))swaps.push(f);
+        else if(/มีฉบับแก้ไข|พ่วง/.test(f))amds.push(f);
+        else if(/source_chain|หมายเหตุ|AUTO-VERIFY/.test(f))notes.push(f);
+        else others.push(f);
+      });
+      swaps.forEach(f=>items.push({t:'🔁 '+f}));           // แยกช่อง — ต้องดูรายตัว
+      others.forEach(f=>items.push({t:'🔧 '+f}));
+      if(amds.length)items.push({t:'➕ ระบบพ่วงฉบับแก้ไขเพิ่มเติมให้ '+amds.length+' มาตรฐาน (ตามที่ทะเบียนระบุ)',d:amds});
+      if(notes.length)items.push({t:'📎 หมายเหตุการทำงานของระบบ '+notes.length+' รายการ',d:notes});
+      const life=[];
       (newT.applicable_standards||[]).forEach(s=>{
         const m=stdStatus(s);if(!m)return;
-        if(m.ed.status==='TO_BE_REVISED')items.push({t:'⏳ '+s+' — ผู้ออกกำลังจะออกฉบับใหม่ (อยู่ในรายการติดตามแล้ว)'});
-        if(m.ed.status==='TRANSITION')items.push({t:'🔄 '+s+' — อยู่ช่วงเปลี่ยนผ่านเวอร์ชัน'});
+        if(m.ed.status==='TO_BE_REVISED')life.push(s+' — ผู้ออกกำลังจะออกฉบับใหม่ (อยู่ในรายการติดตามแล้ว)');
+        if(m.ed.status==='TRANSITION')life.push(s+' — อยู่ช่วงเปลี่ยนผ่านเวอร์ชัน');
       });
+      if(life.length===1)items.push({t:'⏳ '+life[0]});
+      else if(life.length)items.push({t:'⏳ มาตรฐานที่กำลังจะเปลี่ยนฉบับ '+life.length+' รายการ (ติดตามอยู่แล้ว ไม่กระทบการใช้งานตอนนี้)',d:life});
     }else{
       document.getElementById('ac-rv-sub').textContent='ใบงานนี้ไม่ใช่ความรู้ใหม่ (แก้ระบบ/เอกสาร) — รีวิว diff บน GitHub แล้วกลับมาอนุมัติได้';
     }
     if(!items.length)items.push({t:'ไม่มีรายการต้องรับทราบเป็นพิเศษ — ติ๊กยืนยันว่าได้อ่านสรุปแล้ว'});
+    // <details> ต้องอยู่นอก <label> — ถ้าอยู่ใน กดกางรายการจะไปติ๊ก checkbox โดยไม่ตั้งใจ
     document.getElementById('ac-rv-items').innerHTML=items.map((x,j)=>
-      '<label style="display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--border-light);font-size:12.5px;cursor:pointer"><input type="checkbox" class="ac-ack" onchange="apCheck()" style="margin-top:2px;width:15px;height:15px;flex-shrink:0"><span>'+esc(x.t)+'</span></label>').join('');
+      '<div style="border-bottom:1px dashed var(--border-light)">'
+      +'<label style="display:flex;gap:8px;align-items:flex-start;padding:7px 0;font-size:12.5px;cursor:pointer"><input type="checkbox" class="ac-ack" onchange="apCheck()" style="margin-top:2px;width:15px;height:15px;flex-shrink:0"><span>'+esc(x.t)+'</span></label>'
+      +(x.d&&x.d.length?'<details style="margin:0 0 7px 23px"><summary style="font-size:11.5px;color:var(--navy-light);cursor:pointer">ดูรายการทั้ง '+x.d.length+' รายการ</summary>'
+        +'<ul style="margin:5px 0 0;padding-left:17px;font-size:11.5px;color:var(--text-muted);line-height:1.65">'
+        +x.d.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></details>':'')
+      +'</div>').join('');
     apCheck();
     rv.scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(e){document.getElementById('ac-rv-sub').textContent='โหลดรายละเอียดไม่ได้: '+e.message}
