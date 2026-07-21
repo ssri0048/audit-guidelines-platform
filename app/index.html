@@ -61,10 +61,10 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .search-wrap{margin:-1px auto 0;padding:0}
 .search-card{border-radius:0;padding:16px 28px}
 /* [ปรับ 2026-07-21 — ช่องค้นหาเป็นสี่เหลี่ยมผืนผ้า + pills อยู่แถวเดียวกับช่องค้น] เดิม: input radius-sm, cat-row แถวแยก margin-top:11px */
-.search-box .search-input{border-radius:0}
+/* [ปรับ 2026-07-21 รอบ 2 — ช่องค้นหาแคบลง 320px + มุมโค้งมน (เดิม 400px มุมเหลี่ยม border-radius:0)] */
+.search-box .search-input{border-radius:22px}
 .search-row{flex-wrap:wrap}
-/* [ปรับ 2026-07-21 — ตรึงช่องค้นหา 400px ให้ pills มีที่พออยู่บรรทัดเดียว] เดิม: .search-box{min-width:280px} (flex:1 ยืดเต็ม) */
-.search-box{flex:none;width:400px;max-width:100%}
+.search-box{flex:none;width:320px;max-width:100%}
 .search-row .cat-row{margin-top:0;flex:1;align-items:center}
 .search-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px}
 .search-row{display:flex;gap:10px;align-items:center}
@@ -80,7 +80,7 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .pill-n{opacity:.75;font-size:11px}
 /* tooltip ของชื่อ feature กล่องใต้ search (hover/โฟกัสคีย์บอร์ดได้) */
 .ginf{position:relative;cursor:help;font-size:13px;margin-left:6px}
-.gtip{display:none;position:absolute;left:0;top:140%;width:300px;background:#fff;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;font-weight:400;line-height:1.7;box-shadow:var(--shadow-lg);z-index:30;text-align:left}
+.gtip{display:none;position:absolute;left:50%;transform:translateX(-50%);top:150%;width:300px;background:#fff;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;font-weight:400;line-height:1.7;box-shadow:var(--shadow-lg);z-index:30;text-align:left}
 .ginf:hover .gtip,.ginf:focus .gtip{display:block}
 .org-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px;align-items:center}
 .org-lbl{font-size:11.5px;color:var(--text-muted);font-weight:600;margin-right:2px}
@@ -314,15 +314,25 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .gb-line{border:1.5px solid #1B4C9C;color:#1B4C9C}
 .gb-line:hover{background:rgba(27,76,156,.08)}
 */
+/* [ปรับรอบ 4 2026-07-21 — กล่อง CTA หลักของผู้ใช้: เต็มความกว้างเท่ากริดการ์ด + จัดกึ่งกลาง + ขยายฟอนต์/ปุ่ม]
+   เดิม การ์ดแคบชิดซ้าย (เปิดคืน: สลับ comment):
 .gov-card{max-width:640px;background:#FFFBF0;border:1px solid #EADFC0;border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:13px 16px}
 .gov-card h3{font-size:13.5px;font-weight:700;color:#4A3A0C;margin-bottom:3px;line-height:1.6}
 .gov-card p{font-size:11.5px;color:#7A6420;line-height:1.7}
 .gov-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .gov-btn{display:inline-block;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:700;text-decoration:none;transition:all var(--transition)}
-.gb-gold{background:var(--gold);color:var(--navy-deep)}
-.gb-gold:hover{background:var(--gold-dark)}
 .gb-line{border:1.5px solid #A88A2E;color:#6B5310;font-weight:600}
-.gb-line:hover{background:rgba(168,138,46,.1)}
+*/
+.gov-card{background:#FFFBF0;border:1px solid #EADFC0;border-top:3px solid var(--gold);border-radius:0;padding:22px 26px;text-align:center}
+.gov-card h3{font-size:17px;font-weight:700;color:#4A3A0C;margin-bottom:0;line-height:1.55;justify-content:center}
+.gov-card p{font-size:13.5px;color:#7A6420;line-height:1.7;margin-top:7px}
+.gov-actions{display:flex;gap:11px;margin-top:15px;flex-wrap:wrap;justify-content:center}
+.gov-btn{display:inline-block;padding:11px 24px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;text-decoration:none;transition:all var(--transition)}
+.gb-gold{background:var(--gold);color:var(--navy-deep);box-shadow:0 2px 8px rgba(201,160,58,.35)}
+.gb-gold:hover{background:var(--gold-dark)}
+.gb-line{border:2px solid #A88A2E;color:#5C4708;background:rgba(255,255,255,.55)}
+.gb-line:hover{background:#fff}
+.ginf{font-size:14px;font-weight:400;opacity:.55}
 
 @media(max-width:640px){
   .hdr-stats{grid-template-columns:repeat(3,1fr)}
@@ -391,7 +401,7 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
   <h3>✨ ฟีเจอร์ของระบบนี้</h3>
   <p>ไม่พบเรื่องที่ต้องการ? <b>ขอหัวข้อตรวจสอบใหม่</b>ได้เลย ระบบจะค้นคว้าและจัดทำแนวทางให้ · เจอข้อมูลที่ไม่ถูกต้อง? <b>แจ้ง</b>ให้ทีมดูแลตรวจสอบได้ทันที · ทุกหัวข้อบนเว็บนี้ตรวจจากแหล่งทางการจริง และผ่านการอนุมัติจากผู้ดูแลก่อนเผยแพร่เสมอ</p>
   -->
-  <h3 style="display:flex;align-items:center;flex-wrap:wrap;gap:2px">🙋 หาเรื่องที่ต้องการไม่เจอ หรือเจอข้อมูลคลาดเคลื่อน? เราช่วยได้<span class="ginf" tabindex="0">ℹ️<span class="gtip"><b>ระบบนี้ทำงานอย่างไร</b><br>• ขอหัวข้อใหม่: ระบบค้นคว้าจากแหล่งทางการจริง จัดทำความเสี่ยง วิธีตรวจ และหลักฐานให้ครบ<br>• แจ้งข้อมูลคลาดเคลื่อน: ส่งเป็นใบงานให้ทีมดูแลตรวจกับแหล่งทางการแล้วแก้ไขให้<br>• ทุกหัวข้อผ่านด่านตรวจอัตโนมัติ 9 ด่าน และผู้ดูแลอนุมัติก่อนขึ้นเว็บเสมอ</span></span></h3>
+  <h3 style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:center">🙋 หาเรื่องที่ต้องการไม่เจอ หรือเจอข้อมูลคลาดเคลื่อน? เราช่วยได้<span class="ginf" tabindex="0">ℹ️<span class="gtip"><b>ระบบนี้ทำงานอย่างไร</b><br>• ขอหัวข้อใหม่: ระบบค้นคว้าจากแหล่งทางการจริง จัดทำความเสี่ยง วิธีตรวจ และหลักฐานให้ครบ<br>• แจ้งข้อมูลคลาดเคลื่อน: ส่งเป็นใบงานให้ทีมดูแลตรวจกับแหล่งทางการแล้วแก้ไขให้<br>• ทุกหัวข้อผ่านด่านตรวจอัตโนมัติ 9 ด่าน และผู้ดูแลอนุมัติก่อนขึ้นเว็บเสมอ</span></span></h3>
   <!-- <p>ขอหัวข้อใหม่หรือแจ้งแก้ไขได้ในคลิกเดียว — ระบบดูแลต่อให้จนจบ</p> -->
   <div class="gov-actions">
     <a class="gov-btn gb-gold" href="javascript:void(0)" onclick="acOpen()">➕ ขอหัวข้อตรวจสอบใหม่</a>
