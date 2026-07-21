@@ -514,8 +514,14 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
             <div class="ac-hint" id="ac-add-note"></div>
           </div>
           <div id="ac-blk-go" style="display:none">
+            <!-- [ซ่อน 2026-07-21 — ตัวเลือก chain สร้างความสับสน ระบบส่ง chain=true เสมอ (ร่าง→ตรวจพิสูจน์รวดเดียว)]
+                 backend ไม่แตะ: โหมดไม่ติ๊กยังสั่งได้จาก GitHub Actions โดยตรง
+                 เปิดคืน: ลบ comment ครอบ label นี้ แล้วลบ hidden input ด้านล่าง
             <label style="display:flex;align-items:center;gap:8px;margin-top:11px;font-size:13px;cursor:pointer"><input type="checkbox" id="ac-chain" checked style="width:16px;height:16px"> ตรวจพิสูจน์ต่อทันทีหลังร่างเสร็จ <span style="color:var(--text-muted);font-size:11.5px">(วิ่งยาวถึงหน้าประตูอนุมัติ — เหลือกดครั้งเดียว)</span></label>
+            -->
+            <input type="checkbox" id="ac-chain" checked hidden>
             <button class="ac-go" id="ac-go" onclick="acRun()">🚀 เริ่มจัดทำ</button>
+            <div class="ac-hint">ระบบจะร่าง + ตรวจพิสูจน์รวดเดียว (~9 นาที) แล้วส่งเข้าคิวรออนุมัติให้อัตโนมัติ</div>
           </div>
         </div>
       </div>
@@ -557,6 +563,7 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
       </div>
 
       <div class="ac-steps" id="ac-steps"></div>
+      <div id="ac-prog" style="display:none;margin-top:10px"></div>
       <div class="ac-result" id="ac-result"></div>
       </div><!-- /ac-admin -->
 
@@ -1033,6 +1040,7 @@ async function loadPRs(){
   document.getElementById('ac-review').style.display='none';
   try{
     AP_PRS=await gh('/repos/'+GH_REPO+'/pulls?state=open&per_page=20');
+    acBadge(AP_PRS.length); // badge จำนวนใบงานรออนุมัติบนแท็บคิวงาน
     if(!AP_PRS.length){el.innerHTML='<div class="ac-msg">✅ ไม่มีใบงานค้าง</div>';return}
     const rows=await Promise.all(AP_PRS.map(async(p,i)=>{
       let ci='⏳';
@@ -1289,6 +1297,40 @@ async function flAct(a,i){
       msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — merge แล้วธงหายถาวร';loadPRs();return}
   }catch(e){if(msg())msg().textContent='⛔ '+e.message}
 }
+/* ── ตัวบอกความคืบหน้า: นาฬิกาเดินจริง + แถบคาดการณ์ + คำแนะนำว่าปิดหน้าได้ ── */
+const AC_ETA_SEC=540; // ~9 นาที (ร่าง+ตรวจพิสูจน์รวดเดียว) — ใช้คาดการณ์เท่านั้น ไม่ตัดการทำงาน
+let acTick=null;
+function acProgStart(){
+  acProgStop();
+  const box=document.getElementById('ac-prog');if(!box)return;
+  box.style.display='block';
+  acTick=setInterval(acProgPaint,1000);acProgPaint();
+}
+function acProgPaint(){
+  const box=document.getElementById('ac-prog');if(!box||!acStartTime)return;
+  const sec=Math.floor((Date.now()-acStartTime)/1000);
+  const mm=String(Math.floor(sec/60)).padStart(2,'0'),ss=String(sec%60).padStart(2,'0');
+  const pct=Math.min(96,Math.round(sec/AC_ETA_SEC*100)); // ไม่ถึง 100 จนกว่างานจบจริง
+  box.innerHTML='<div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-muted)"><span>⏳ ระบบกำลังทำงานบนเซิร์ฟเวอร์ '+mm+':'+ss+'</span><span>ปกติใช้ ~9 นาที</span></div>'
+   +'<div style="height:6px;background:var(--border-light);border-radius:3px;margin-top:5px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:var(--navy-light);transition:width 1s linear"></div></div>'
+   +'<div style="margin-top:7px;font-size:11.5px;color:var(--navy-light);background:#EEF4FF;border:1px solid #D5E3F8;border-radius:6px;padding:7px 10px;line-height:1.7">💡 <b>ปิดหน้านี้ได้เลย</b> — งานทำต่อบนเซิร์ฟเวอร์ กลับมาดูผลที่แท็บ <b>คิวงาน</b> ภายหลัง หรือรอรับแจ้งเตือนเมื่อพร้อมอนุมัติ</div>';
+}
+function acProgStop(){if(acTick){clearInterval(acTick);acTick=null}const b=document.getElementById('ac-prog');if(b)b.style.display='none'}
+/* ── แจ้งเตือนเมื่องานเสร็จ (เบราว์เซอร์ + badge + title) ── */
+function acNotify(title,body){
+  try{
+    document.title='✅ เสร็จแล้ว — รออนุมัติ · ' + (AC_BASE_TITLE||document.title);
+    if('Notification' in window){
+      if(Notification.permission==='granted')new Notification(title,{body:body});
+      else if(Notification.permission!=='denied')Notification.requestPermission().then(p=>{if(p==='granted')new Notification(title,{body:body})});
+    }
+  }catch(e){}
+}
+let AC_BASE_TITLE='';
+function acBadge(n){
+  const b=document.getElementById('ac-tabbtn-2');if(!b)return;
+  b.innerHTML='📥 คิวงาน'+(n>0?' <span style="background:var(--crit);color:#fff;border-radius:10px;padding:0 6px;font-size:10.5px;margin-left:3px">'+n+'</span>':'');
+}
 function acRenderSteps(states){ // states: {key:'wait'|'run'|'ok'|'fail'}
   const el=document.getElementById('ac-steps');el.style.display='block';
   el.innerHTML=AC_STEPS.map(s=>{
@@ -1332,6 +1374,8 @@ async function acRun(){
     btn.disabled=false;document.getElementById('ac-token').value='';return;
   }
   setAdminKey(token);token=''; // จำไว้ใช้ทั้ง session (in-memory) — ช่องกรอกถูกล้าง
+  if(!AC_BASE_TITLE)AC_BASE_TITLE=document.title;
+  acProgStart(); // นาฬิกา+แถบคืบหน้า+คำแนะนำว่าปิดหน้าได้
   states.dispatch='ok';states.queue='run';acRenderSteps(states);
   // 2) poll สถานะแบบไม่ใช้ token (repo public) ทุก 10 วิ
   acPoll=setInterval(async()=>{
@@ -1353,7 +1397,7 @@ async function acRun(){
         states.pr=st(prStep);
       }
       if(run.status==='completed'){
-        clearInterval(acPoll);acPoll=null;
+        clearInterval(acPoll);acPoll=null;acProgStop();
         const ok=run.conclusion==='success';
         states.queue='ok';states.manifest=ok?'ok':'fail';states.draft=ok?'ok':'fail';
         if('verify' in states||AC_STEPS.some(s=>s.key==='verify'))states.verify=ok?'ok':'fail';
@@ -1364,6 +1408,8 @@ async function acRun(){
         if(draftPr){
           states.pr='ok';
           const isVerify=draftPr.title.startsWith('✅');
+          acNotify(isVerify?'✅ พร้อมอนุมัติขึ้นเว็บแล้ว':'📄 ร่างเสร็จแล้ว',(draftPr.title||'').slice(0,90));
+          acBadge(1);
           res.innerHTML='<div class="prov">'+esc((draftPr.body||'').slice(0,3000))+'</div>'
             +(isVerify
               ?'<div class="ac-msg">🎉 ร่าง+ตรวจพิสูจน์เสร็จรวดเดียว — เหลือขั้นเดียว: ไปแท็บ <b>คิวงาน</b> ติ๊กยืนยันแล้วกดอนุมัติ</div><a class="ac-prlink" href="javascript:void(0)" onclick="acTab(2)">✔ ไปที่คิวงานเลย</a>'
