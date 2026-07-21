@@ -288,6 +288,7 @@ for (const t of store.topics) {
 const SLA_DAYS = 60;
 const queue = [];
 let snoozedCount = 0; // ธงที่ถูกเลื่อนกำหนด (snooze_until ยังไม่ถึง) — พักจากคิว/SLA แต่ไม่ปลดล็อกการอ้างอิง
+let roadmapCount = 0; // แผนเก็บเพิ่ม (ROADMAP) — แค็ตตาล็อกถูกแล้ว รอ harvest ติดตามผ่าน coverage ไม่ใช่ธง
 function ageDays(d) { return d ? Math.round((NOW_MS - Date.parse(d)) / 86400000) : null; }
 function isSnoozed(o) { return o && o.snooze_until && NOW_MS < Date.parse(o.snooze_until); }
 
@@ -344,6 +345,8 @@ function loadClaimFile(fname, listKey, refFn, todoFn) {
   for (const item of data[listKey] || []) {
     const c = item._claim || {};
     if (c.state === 'RETIRED') continue;
+    // ROADMAP = รายการแค็ตตาล็อกถูกต้องแล้ว แต่ยังไม่ได้ harvest — เป็นแผนงาน (ติดตามผ่าน coverage) ไม่ใช่ claim ค้าง จึงไม่มี SLA
+    if (c.state === 'ROADMAP') { roadmapCount++; continue; }
     if (isSnoozed(c)) { snoozedCount++; continue; }
     if (c.state === 'UNVERIFIED' || c.state === 'UNRESOLVED') {
       const age = ageDays(c.last_checked);
@@ -412,7 +415,7 @@ console.log(` ⚠️  Warnings: ${warnings.length}`);
 if (errors.length) { console.log('\n── ERRORS (block merge) ──'); errors.forEach(e => console.log('  ❌ ' + e)); }
 if (warnings.length) { console.log('\n── WARNINGS (ต้องเคลียร์ตอน re-verify) ──'); warnings.slice(0, 40).forEach(w => console.log('  ⚠️  ' + w)); if (warnings.length > 40) console.log(`  ... และอีก ${warnings.length - 40} รายการ`); }
 if (queue.length) {
-  console.log(`\n── VERIFICATION QUEUE (${queue.length} claims เปิดอยู่${snoozedCount ? ' | พักไว้ ' + snoozedCount + ' (snooze — กลับมาเองเมื่อถึงกำหนด)' : ''} | SLA ${SLA_DAYS} วันสำหรับ UNVERIFIED) ──`);
+  console.log(`\n── VERIFICATION QUEUE (${queue.length} claims เปิดอยู่${snoozedCount ? ' | พักไว้ ' + snoozedCount + ' (snooze)' : ''}${roadmapCount ? ' | แผนเก็บเพิ่ม ' + roadmapCount + ' (ROADMAP — ติดตามผ่าน coverage ไม่มี SLA)' : ''} | SLA ${SLA_DAYS} วันสำหรับ UNVERIFIED) ──`);
   queue.sort((a, b) => (b.age || 0) - (a.age || 0)).slice(0, 25).forEach(q =>
     console.log(`  🏳️  [${q.state}] ${q.ref} (ค้าง ${q.age ?? '?'} วัน) → ${q.todo}`));
   if (queue.length > 25) console.log(`  ... และอีก ${queue.length - 25} รายการ`);

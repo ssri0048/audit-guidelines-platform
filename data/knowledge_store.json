@@ -3723,7 +3723,7 @@
         "GRI Standards 2021",
         "IFRS S1/S2 (ISSB)",
         "COSO ICSR 2023",
-        "ISO 14001:2015",
+        "ISO 14001:2026",
         "Thailand NDC / แผน PDP"
       ],
       "thailand_applicable": true,
@@ -4025,6 +4025,12 @@
           "date": "2026-07-14",
           "change": "ยกสถานะ APPROVED — ทุก batch ผ่าน quality gates + human merge ครบแล้ว (PR #1-#15)",
           "approved_by": "sasi"
+        },
+        {
+          "version": "2.1.0",
+          "date": "2026-07-21",
+          "change": "อัปเดตการอ้าง ISO 14001:2015 → 2026 (ฉบับ 2015 ถูกถอน 95.99 เมื่อ 2026-04-15 ตามหน้า iso.org)",
+          "approved_by": "pending PR merge"
         }
       ],
       "source_chain": [
@@ -15005,7 +15011,7 @@
           "source_id": "SRC-AUTO-th-pdpa-2562",
           "source_type": "registry_verified_source",
           "publisher": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
-          "title": "พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) (v2562)",
+          "title": "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
           "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0052.PDF",
           "retrieved_at": "2026-07-14",
           "credibility_score": 95,
@@ -15015,7 +15021,7 @@
           "source_id": "SRC-AUTO-th-computer-crime",
           "source_type": "registry_verified_source",
           "publisher": "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์",
-          "title": "พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ (v2550)",
+          "title": "พระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ศ. 2550 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2560",
           "url": "http://cio.mhesi.go.th/node/695",
           "retrieved_at": "2026-07-14",
           "credibility_score": 95,
@@ -15025,7 +15031,7 @@
           "source_id": "SRC-AUTO-th-cyber-act-2562",
           "source_type": "registry_verified_source",
           "publisher": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
-          "title": "พ.ร.บ.การรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562 (v2562)",
+          "title": "พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562",
           "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0020.PDF",
           "retrieved_at": "2026-07-13",
           "credibility_score": 95,

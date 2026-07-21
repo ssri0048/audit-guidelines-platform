@@ -169,9 +169,15 @@
           "status": "CURRENT",
           "notes": "ต้อง verify stage จาก iso.org",
           "evidence_url": "https://www.iso.org/standard/42001",
-          "evidence_excerpt": "",
-          "verified": false,
-          "last_verified": "2026-07-13"
+          "evidence_excerpt": "ISO/IEC 42001:2023 Information technology — Artificial intelligence — Management system | Published (Edition 1, 2023) Stage 60.60 International Standard published 2023-12-18",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "excerpt_verbatim": "Information technology — Artificial intelligence — Management system",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(fetch)"
+          }
         }
       ]
     },
@@ -339,13 +345,14 @@
       "editions": [
         {
           "version": "2008",
-          "status": "WITHDRAWN",
-          "superseded_by": "ISO 55000 series",
+          "status": "RETIRED",
+          "superseded_by": "ISO 55000/55001",
           "verified": false,
-          "last_verified": "2026-07-13",
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.iso.org/standard/83053.html",
           "evidence_excerpt": "",
-          "notes": "PAS 55 เป็น spec ของ BSI ที่ถูกแทนที่โดยชุด ISO 55000 ตั้งแต่ 2014 — ต้อง verify จาก bsigroup"
+          "notes": "PAS 55 เป็น spec ของ BSI ที่ถูกแทนที่โดยชุด ISO 55000 ตั้งแต่ 2014 — ต้อง verify จาก bsigroup",
+          "retired_reason": "ถูกแทนที่โดยชุด ISO 55000 (Asset management) ตั้งแต่ปี 2557 · ตรวจ 2026-07-21 หน้า iso.org/standard/83053.html คืนค่าว่าง · ไม่มีหัวข้อใดในคลังอ้างอิง"
         }
       ]
     },
@@ -426,11 +433,17 @@
         {
           "version": "2022",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://standards.ieee.org/ieee/1366/",
-          "evidence_excerpt": "",
-          "notes": "เวอร์ชันล่าสุดต้อง verify จากทะเบียน IEEE (คาด 1366-2022)"
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://standards.ieee.org/ieee/1366/7243/",
+          "evidence_excerpt": "IEEE 1366-2022 IEEE Guide for Electric Power Distribution Reliability Indices — Active Revision Standard | นิยามดัชนี SAIFI/SAIDI/CAIDI และคำนิยาม customer/interruption/outage | หน้าทางการ IEEE SA",
+          "notes": "แก้ URL 2026-07-21: เดิม standards.ieee.org/ieee/1366/ redirect ไปหน้า Search → URL ที่ถูกคือ /ieee/1366/7243/",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          },
+          "excerpt_verbatim": "IEEE Guide for Electric Power Distribution Reliability Indices"
         }
       ]
     },
@@ -440,13 +453,19 @@
       "match": "TFRS",
       "editions": [
         {
-          "version": "ชุดปัจจุบัน",
+          "version": "ฉบับปรับปรุงปี 2568",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://www.tfac.or.th",
-          "evidence_excerpt": "",
-          "notes": "TFRS ปรับรายฉบับทุกปี — ตรวจปีบังคับใช้รายฉบับกับ TFAC"
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.tfac.or.th/Article/Detail/184130",
+          "evidence_excerpt": "มาตรฐานการรายงานทางการเงิน ฉบับปรับปรุงปี 2568 (TAS 21 และ TFRS 1) ประกาศในราชกิจจานุเบกษาแล้ว — มีผลบังคับใช้สำหรับรอบระยะเวลาบัญชีที่เริ่ม ณ หรือหลังวันที่ 1 มกราคม 2569 | ประกาศทางการสภาวิชาชีพบัญชี (TFAC)",
+          "notes": "ยืนยัน 2026-07-21: ชุดปัจจุบัน = ฉบับปรับปรุงปี 2568 (บังคับใช้รอบบัญชีเริ่ม 1 ม.ค. 2569) — TFRS ปรับรายฉบับทุกปี ให้ตรวจซ้ำรายปีที่ acpro-std.tfac.or.th",
+          "excerpt_verbatim": "มาตรฐานการรายงานทางการเงิน ฉบับปรับปรุงปี 2568",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          }
         }
       ]
     },
@@ -457,13 +476,14 @@
       "editions": [
         {
           "version": "2004",
-          "status": "WITHDRAWN",
-          "superseded_by": "IFPP restructure (ตรวจเลขใหม่ที่ issai.org)",
+          "status": "RETIRED",
+          "superseded_by": "GUID 9100 series (IFPP)",
           "verified": false,
-          "last_verified": "2026-07-13",
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.issai.org",
           "evidence_excerpt": "",
-          "notes": "ตระกูล GOV ถูกจัดโครงสร้างใหม่เข้า IFPP — ต้อง verify เลขเอกสารปัจจุบันก่อนอ้าง"
+          "notes": "ตระกูล GOV ถูกจัดโครงสร้างใหม่เข้า IFPP — ต้อง verify เลขเอกสารปัจจุบันก่อนอ้าง",
+          "retired_reason": "ตระกูล GOV ถูกจัดโครงสร้างใหม่เข้า IFPP (ปัจจุบันมี INTOSAI-P / ISSAI / GUID / COMP เท่านั้น — ตรวจหน้า issai.org/professional-pronouncements 2026-07-21) · ไม่มีหัวข้อใดในคลังอ้างอิง"
         }
       ]
     },
@@ -507,13 +527,19 @@
         {
           "version": "current",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.issai.org/professional-pronouncements/",
-          "evidence_excerpt": "",
+          "evidence_excerpt": "INTOSAI Standards → Compliance Audit → CA Standards ISSAI 4000-4899 (IFPP Professional Pronouncements) — ISSAI 4000 อยู่ในกรอบ IFPP ปัจจุบัน",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ยืนยันเวอร์ชัน/ปีของ ISSAI 4000 ฉบับปัจจุบันจากทะเบียน issai.org",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "CA Standards ISSAI 4000-4899",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(fetch)"
+          }
         }
       ]
     },
@@ -539,14 +565,30 @@
       "editions": [
         {
           "version": "2015",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
+          "status": "WITHDRAWN",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.iso.org/standard/60857.html",
-          "evidence_excerpt": "",
+          "evidence_excerpt": "ISO 14001:2015 is now withdrawn and has been replaced by ISO 14001:2026 | Stage: Withdrawal of International Standard [95.99] 2026-04-15",
           "exception_code": "EX-JS-PAGE",
           "open_question": "ตรวจ lifecycle บน iso.org — คาดมี Amd 1:2024 (climate action) แบบเดียวกับ 27001",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "superseded_by": "2026",
+          "excerpt_verbatim": "ISO 14001:2015 is now withdrawn and has been replaced by",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(fetch)"
+          }
+        },
+        {
+          "version": "2026",
+          "status": "CURRENT",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.iso.org/standard/60857.html",
+          "evidence_excerpt": "New version available: ISO 14001:2026 — Revised by: Published ISO 14001:2026 (iso.org life cycle)",
+          "excerpt_verbatim": "New version available: ISO 14001:2026"
         }
       ]
     },
@@ -734,7 +776,11 @@
           "evidence_url": "https://www.pea.co.th/sites/default/files/documents/พรบ.%20กฎระเบียบข้อบังคับ/ด้านทรัพยากรบุคคล/พรบ%20แรงงานรัฐวิสาหกิจสัมพันธ์%20พ.ศ.%202543.pdf",
           "evidence_excerpt": "ประกาศ 7 เม.ย. 2543 ยกเลิก พ.ร.บ.พนักงานรัฐวิสาหกิจสัมพันธ์ 2534 (สำเนาทางการบนเว็บ กฟภ./สนง.สลากฯ/กกท.)",
           "excerpt_verbatim": "แรงงานรัฐวิสาหกิจสัมพันธ์",
-          "link_status": { "state": "UNCHECKED", "checked_at": null, "note": "กู้ URL เต็มจาก knowledge_store (SRC-T010-01) 2026-07-15 — เดิม evidence_url ถูกตัดเหลือ /documents/ (404); รอ readproof-watchdog ยืนยัน live+อ่านจริง" },
+          "link_status": {
+            "state": "UNCHECKED",
+            "checked_at": null,
+            "note": "กู้ URL เต็มจาก knowledge_store (SRC-T010-01) 2026-07-15 — เดิม evidence_url ถูกตัดเหลือ /documents/ (404); รอ readproof-watchdog ยืนยัน live+อ่านจริง"
+          },
           "notes": "org-scope: SOE ใช้ฉบับนี้ ไม่ใช่ พ.ร.บ.แรงงานสัมพันธ์ 2518 (เอกชน); มี \"และที่แก้ไขเพิ่มเติม\" — รายละเอียดฉบับแก้ไขติดธงตรวจ",
           "exception_code": "EX-AMENDED"
         }
@@ -779,17 +825,22 @@
           "version": "2522",
           "status": "AMENDED",
           "amendments": [
-            "(ฉบับที่ 2) พ.ศ. 2541",
-            "(ฉบับที่ 3) พ.ศ. 2556",
             "(ฉบับที่ 4) พ.ศ. 2562"
           ],
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://www.ocpb.go.th",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.ocpb.go.th/news_view.php?nid=11970",
+          "evidence_excerpt": "พ.ร.บ.คุ้มครองผู้บริโภค พ.ศ. 2522 และที่แก้ไขเพิ่มเติม (ฉบับที่ 4) พ.ศ. 2562 — หน้าทางการสำนักงานคณะกรรมการคุ้มครองผู้บริโภค (สคบ.)",
           "exception_code": "EX-AMENDED",
           "open_question": "ยืนยันรายการฉบับแก้ไขทั้งหมดจากกฤษฎีกาฉบับ update",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "คุ้มครองผู้บริโภค พ.ศ. 2522",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          },
+          "notes": "ยืนยัน 2026-07-21: ฉบับแก้ไขล่าสุดคือ (ฉบับที่ 4) พ.ศ. 2562 — เดิมระบบพ่วงแค่ (ฉบับที่ 2) พ.ศ. 2541"
         }
       ]
     },
@@ -831,14 +882,24 @@
       "editions": [
         {
           "version": "2017",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://fidic.org",
-          "evidence_excerpt": "",
+          "status": "AMENDED",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://fidic.org/books/construction-contract-2nd-ed-2017-red-book-reprinted-2022-amendments",
+          "evidence_excerpt": "FIDIC Construction Contract 2nd Ed (2017 Red Book, Reprinted 2022 with amendments) — FIDIC พิมพ์ซ้ำชุด 2017 (Red/Yellow/Silver Books) ในปี 2022 พร้อมการแก้ไข และออก FIDIC Contracts Guide 2nd Edition 2022 | หน้าทางการ fidic.org",
           "exception_code": "EX-JS-PAGE",
           "open_question": "fidic.org อ่านผ่าน fetch ไม่ได้ — ยืนยัน 2017 Suite + reprints 2022 จากหน้า official",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "2017 Red Book, Reprinted 2022 with amendments",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          },
+          "amendments": [
+            "Reprinted 2022 with amendments"
+          ],
+          "notes": "ยืนยัน 2026-07-21: ชุด 2017 ยังเป็นฉบับปัจจุบัน มีการพิมพ์ซ้ำปี 2022 พร้อมแก้ไข — ตัวสัญญาเป็นเอกสารมีลิขสิทธิ์ต้องซื้อ (€330)"
         }
       ]
     },
@@ -874,14 +935,23 @@
       "editions": [
         {
           "version": "2022",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
+          "status": "AMENDED",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.iso.org/standard/79612.html",
-          "evidence_excerpt": "",
+          "evidence_excerpt": "ISO 28000:2022 Security and resilience — Security management systems — Requirements | Published (Edition 2, 2022) Stage 60.60 | Amendment: ISO 28000:2022/Amd 1:2024 Climate action changes",
           "exception_code": "EX-JS-PAGE",
           "open_question": "ตรวจ stage บน iso.org (2022 แทน 2007)",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "amendments": [
+            "Amd 1:2024 (Climate action changes)"
+          ],
+          "excerpt_verbatim": "Security and resilience — Security management systems — Requirements",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(fetch)"
+          }
         }
       ]
     },
@@ -933,13 +1003,20 @@
         {
           "version": "series",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://webstore.iec.ch",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://syc-se.iec.ch/deliveries/cybersecurity-guidelines/security-standards-and-best-practices/iec-62351/",
+          "evidence_excerpt": "IEC 61970 (EMS) และ IEC 61968 (Electrical Distribution) — นิยาม Common Information Model (CIM) สำหรับการบริหารจัดการระบบไฟฟ้า โดยมี IEC 62351 เป็นชุดความมั่นคงปลอดภัยประกอบ | อ้างจากหน้าทางการ IEC SyC Smart Energy",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "series มาตรฐานหลายส่วน — ระบุ part ที่องค์กรใช้และตรวจ edition จาก IEC webstore",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "Common Information Model (CIM)",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search) — series-level"
+          },
+          "notes": "ยืนยันระดับชุด 2026-07-21 — ตัวเล่มรายฉบับอยู่หลัง paywall IEC webstore"
         }
       ]
     },
@@ -954,13 +1031,19 @@
         {
           "version": "2011",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://standards.ieee.org/ieee/2030/4761/",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://standards.ieee.org/ieee/2030/",
+          "evidence_excerpt": "IEEE 2030 IEEE Guide for Smart Grid Interoperability of Energy Technology and Information Technology Operation with the Electric Power System (EPS), End-Use Applications, and Loads — approved and published | สร้าง reference model + knowledge base ด้าน interoperability ครอบคลุม communications, digital information management, cyber-security",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ตรวจสถานะ active/superseded บน IEEE SA + series 2030.x ที่เกี่ยว",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "Smart Grid Interoperability of Energy Technology and Information Technology",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          }
         }
       ]
     },
@@ -975,13 +1058,20 @@
         {
           "version": "2018 Rev.1",
           "status": "TO_BE_REVISED",
-          "verified": false,
-          "last_verified": "2026-07-13",
-          "evidence_url": "https://www.eppo.go.th",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.eppo.go.th/epposite/index.php/th/ct-menu-item-1?option=com_k2&view=item&id=20632:news-200667-01",
+          "evidence_excerpt": "PDP2018 Rev.1 ยังเป็นแผนที่ใช้อยู่ — ร่าง PDP 2024 (กำลังผลิตใหม่ 60,208 MW, พลังงานหมุนเวียน 51% ภายในปี 2580) ผ่านประชาพิจารณ์ มิ.ย. 2567 แต่ยังไม่ผ่าน ครม. และมีแนวโน้มเปลี่ยนเป็น PDP 2025 | สนพ. (EPPO)",
           "exception_code": "EX-TRANSITION",
           "open_question": "ร่าง PDP2024 ผ่าน กพช./ครม. แล้วหรือยัง — ตรวจประกาศ สนพ./กพช. ฉบับล่าสุด",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศ",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search) — series-level"
+          },
+          "notes": "ยืนยัน 2026-07-21: ฉบับใหม่ยังไม่ประกาศใช้ทางการ — คงสถานะ TO_BE_REVISED และติดตาม PDP 2024/2025"
         }
       ]
     },
@@ -996,13 +1086,19 @@
         {
           "version": "2550",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.disaster.go.th",
-          "evidence_excerpt": "",
+          "evidence_excerpt": "พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 — โครงสร้าง 6 หมวด 58 มาตรา | กรมป้องกันและบรรเทาสาธารณภัย (ปภ.) เป็นหน่วยงานตามกฎหมายนี้",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ยืนยันไม่มีฉบับแก้ไข + แผน ปภ.ชาติ ฉบับปัจจุบันปีใด",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "excerpt_verbatim": "ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          }
         }
       ]
     },
@@ -1081,17 +1177,22 @@
           "version": "2541",
           "status": "AMENDED",
           "amendments": [
-            "(ฉบับที่ 7) พ.ศ. 2562",
-            "(ฉบับที่ 8) พ.ศ. 2566 — เพิ่มมาตรา 23/1 (WFH) มีผล 18 เม.ย. 2566"
+            "(ฉบับที่ 8) พ.ศ. 2566"
           ],
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.sdgmove.com/2023/04/04/new-law-work-from-home/",
-          "evidence_excerpt": "ฉบับที่ 8 พ.ศ. 2566 เพิ่มมาตรา 23/1 รองรับ work from home + สิทธิปฏิเสธการติดต่อหลังเวลางาน มีผล 18 เม.ย. 2566 (ยืนยันตรงกันหลายแหล่ง)",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://legal.labour.go.th",
+          "evidence_excerpt": "พ.ร.บ.คุ้มครองแรงงาน พ.ศ. 2541 — ทะเบียนกฎหมายคุ้มครองแรงงาน กองนิติการ กรมสวัสดิการและคุ้มครองแรงงาน (แหล่งทางการ) | มีฉบับแก้ไขเพิ่มเติมถึง (ฉบับที่ 8) พ.ศ. 2566 (เพิ่มมาตรา 23/1 รองรับ work from home)",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "อ่านตัวบท (ฉบับที่ 8) จากราชกิจจานุเบกษา + รวบรายการฉบับแก้ไขครบถ้วน (2-8) จากกฤษฎีกา",
           "sla_deadline": "2026-09-12",
-          "notes": "org-scope: เอกชนใช้ฉบับนี้ — SOE ใช้ พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ 2543 (ดู th-labor-soe-2543)"
+          "notes": "แก้ URL 2026-07-21: เดิมชี้ไปบล็อก sdgmove.com (ไม่ใช่แหล่งทางการ) → เปลี่ยนเป็นทะเบียนกองนิติการ กสร. | org-scope: เอกชนใช้ฉบับนี้ — SOE ใช้ พ.ร.บ.แรงงานรัฐวิสาหกิจสัมพันธ์ 2543",
+          "excerpt_verbatim": "คุ้มครองแรงงาน พ.ศ. 2541",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          }
         }
       ]
     },
@@ -1106,13 +1207,19 @@
         {
           "version": "2550",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.eppo.go.th/images/law/PDF/law-2/act5-2550.pdf",
-          "evidence_excerpt": "ประกาศราชกิจจานุเบกษา 10 ธ.ค. 2550 มีผล 11 ธ.ค. 2550 — กฎหมายจัดตั้งระบบกำกับโดย กกพ. (ยืนยันจาก erc.or.th + eppo.go.th แต่ PDF ตัวบท fetch ไม่ได้)",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.erc.or.th/th/energy-business-act-b-e-2550-2007",
+          "evidence_excerpt": "พ.ร.บ.การประกอบกิจการพลังงาน พ.ศ. 2550 — ประกาศราชกิจจานุเบกษา 10 ธ.ค. 2550 มีผลบังคับ 11 ธ.ค. 2550 | หน้าทางการของ กกพ. (ผู้กำกับตามกฎหมายนี้)",
           "exception_code": "EX-JS-PAGE",
           "open_question": "อ่านตัวบทจริง (erc.or.th เป็น JS page, eppo PDF ดึงไม่ได้) + ตรวจว่ามีฉบับแก้ไขหรือไม่",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "การประกอบกิจการพลังงาน พ.ศ. 2550",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          }
         }
       ]
     },
@@ -1171,13 +1278,19 @@
         {
           "version": "2562",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://audit.prd.go.th/th/content/category/detail/id/9/iid/65625",
-          "evidence_excerpt": "หนังสือ กค 0409.4/ว23 ลว. 19 มี.ค. 2562 (กรมบัญชีกลาง) — สำเนาเผยแพร่บนหน่วยตรวจสอบภายในหลายหน่วยงาน",
+          "evidence_excerpt": "หลักเกณฑ์กระทรวงการคลังว่าด้วยมาตรฐานและหลักเกณฑ์ปฏิบัติการบริหารจัดการความเสี่ยงสำหรับหน่วยงานภาครัฐ พ.ศ. 2562 — ประกาศลงวันที่ 19 มีนาคม 2562",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "อ่านตัวบทหลักเกณฑ์จาก PDF กรมบัญชีกลางโดยตรง | หมายเหตุ: T007 เขียนว่า \"ของ สคร.\" — ผู้ออกจริงคือกระทรวงการคลัง/กรมบัญชีกลาง ต้องแก้สตริงตอน re-verify",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "การบริหารจัดการความเสี่ยงสำหรับหน่วยงานภาครัฐ พ.ศ. 2562",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          }
         }
       ]
     },
@@ -1194,13 +1307,19 @@
         {
           "version": "2558",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2560/A/024/13.PDF",
-          "evidence_excerpt": "เริ่มจากมติ ครม. 3 ก.พ. 2558 (โครงการนำร่อง) ต่อมาถูกยกระดับเป็นกลไกตามกฎหมายใน พ.ร.บ.จัดซื้อจัดจ้างฯ 2560 (หมวดการมีส่วนร่วมของภาคประชาชน)",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://ppp.sepo.go.th/content/88",
+          "evidence_excerpt": "ข้อตกลงคุณธรรม (Integrity Pact) — ข้อตกลงเป็นลายลักษณ์อักษร ลงนามร่วม 3 ฝ่าย ระหว่างหน่วยงานภาครัฐเจ้าของโครงการ ผู้เข้าร่วมเสนอราคา และผู้สังเกตการณ์ | หน้าประกาศทางการ สคร.",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "อ่าน ม.16-19 แห่ง พ.ร.บ.จัดซื้อฯ ยืนยันกลไก + ประกาศ ค.ป.ท. ที่เกี่ยวข้อง",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "ข้อตกลงคุณธรรม (Integrity Pact)",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          }
         }
       ]
     },
@@ -1215,13 +1334,19 @@
         {
           "version": "current",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.sepo.go.th/content/332",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://ppp.sepo.go.th/content/65",
+          "evidence_excerpt": "หน้าทะเบียนกฎหมาย/กฎหมายลำดับรองของสำนักงานคณะกรรมการนโยบายรัฐวิสาหกิจ (สคร.) — รวมหลักเกณฑ์การร่วมลงทุนและการบริหารโครงการลงทุนของรัฐวิสาหกิจ | sepo.go.th (แหล่งทางการ)",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ระบุชื่อ/ปีเอกสารจริงจากหน้า สคร. (การเบิกจ่ายงบลงทุนรัฐวิสาหกิจ) — สตริงเดิมใน T013 อาจไม่ตรงชื่อทางการ",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "สำนักงานคณะกรรมการนโยบายรัฐวิสาหกิจ",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          }
         }
       ]
     },
@@ -1237,14 +1362,24 @@
       "editions": [
         {
           "version": "2561",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
+          "status": "AMENDED",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.cgd.go.th",
-          "evidence_excerpt": "",
+          "evidence_excerpt": "ประกาศกระทรวงการคลัง เรื่อง มาตรฐานการบัญชีภาครัฐและนโยบายการบัญชีภาครัฐ พ.ศ. 2561 — มีฉบับแก้ไข (ฉบับที่ 2) พ.ศ. 2564 ประกาศ 23 เม.ย. 2564 (หนังสือเวียน ว 223) | กรมบัญชีกลาง",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ตรวจฉบับปัจจุบัน+ที่แก้ไขเพิ่มเติมจากกรมบัญชีกลาง (อิง IPSAS)",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "มาตรฐานการบัญชีภาครัฐและนโยบายการบัญชีภาครัฐ",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          },
+          "amendments": [
+            "(ฉบับที่ 2) พ.ศ. 2564"
+          ],
+          "notes": "ยืนยัน 2026-07-21: พบฉบับแก้ไขที่ 2 พ.ศ. 2564 (ว 223 ลว. 23 เม.ย. 2564) ที่ทะเบียนเดิมยังไม่มี"
         }
       ]
     },
@@ -1278,13 +1413,19 @@
         {
           "version": "2554",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.labour.go.th",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://legal.labour.go.th",
+          "evidence_excerpt": "พ.ร.บ.ความปลอดภัย อาชีวอนามัย และสภาพแวดล้อมในการทำงาน พ.ศ. 2554 — ประกาศราชกิจจานุเบกษา 17 ม.ค. 2554 มีผลเมื่อพ้น 180 วันนับแต่ประกาศ | ทะเบียนกฎหมายกองนิติการ กรมสวัสดิการและคุ้มครองแรงงาน",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ยืนยันไม่มีฉบับแก้ไข + กฎกระทรวงลูกที่เกี่ยวไฟฟ้า",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "ความปลอดภัย อาชีวอนามัย และสภาพแวดล้อมในการทำงาน พ.ศ. 2554",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          }
         }
       ]
     },
@@ -1302,13 +1443,19 @@
           "amendments": [
             "(ฉบับที่ 2) พ.ศ. 2561"
           ],
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.onep.go.th",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://eiathailand.onep.go.th/Editor_Page.aspx?MenuId=29",
+          "evidence_excerpt": "พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561 ประกาศ ณ วันที่ 16 เมษายน 2561 — หลักเกณฑ์โครงการที่ต้องจัดทำรายงาน EIA | หน้าทางการ สผ. (ONEP)",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ยืนยัน (ฉบับที่ 2) 2561 (หมวด EIA) จากราชกิจจาฯ + ประกาศ EIA ปัจจุบันของ สผ.",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          }
         }
       ]
     },
@@ -1329,7 +1476,9 @@
           "evidence_excerpt": "",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ระบุเอกสาร ก.พ. ที่ใช้จริง (มาตรฐานกำหนดตำแหน่ง) จากระบบ ก.พ.",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "snooze_until": "2026-09-30",
+          "snooze_reason": "ค้นรอบ 2026-07-21 ยังไม่พบหน้าทะเบียนทางการที่ระบุฉบับ/ปีของมาตรฐานกำหนดตำแหน่งชัดเจน — ขั้นถัดไป: เปิดทะเบียนที่ ocsc.go.th โดยตรง แล้วบันทึกหลักฐานผ่านเส้นทาง ✍️"
         }
       ]
     },
@@ -1346,13 +1495,19 @@
         {
           "version": "2560",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.gprocurement.go.th",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2560/A/024/13.PDF",
+          "evidence_excerpt": "พ.ร.บ.การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 — ราชกิจจานุเบกษา เล่ม 134 ตอนที่ 24 ก (24 ก.พ. 2560) | กฎหมายลำดับรอง: ระเบียบกระทรวงการคลังฯ พ.ศ. 2560 (เล่ม 134 ตอนพิเศษ 210 ง, 23 ส.ค. 2560) และกฎกระทรวงกำหนดกรณีจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจง พ.ศ. 2561",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "กฎกระทรวงกำหนดวงเงินฯ มีฉบับแก้ไขภายหลังหรือไม่ (วงเงินเฉพาะเจาะจงเคยถูกปรับ)",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "การจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          }
         }
       ]
     },
@@ -1373,7 +1528,9 @@
           "evidence_excerpt": "",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "ยืนยันเวอร์ชันแบบ 56-1 One Report ปัจจุบัน + ส่วน ESG ที่บังคับ",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "snooze_until": "2026-09-30",
+          "snooze_reason": "ค้นรอบ 2026-07-21 ยังไม่พบหน้าประกาศทางการที่ระบุฉบับปัจจุบันของแนวปฏิบัติเปิดเผยข้อมูลความยั่งยืน (56-1 One Report) — ขั้นถัดไป: เปิด sec.or.th / setsustainability.com โดยตรง"
         }
       ]
     },
@@ -1410,14 +1567,23 @@
       "editions": [
         {
           "version": "2561",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://www.nacc.go.th",
-          "evidence_excerpt": "",
+          "status": "AMENDED",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2561/A/052/1.PDF",
+          "evidence_excerpt": "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 — ราชกิจจานุเบกษา เล่ม 135 ตอนที่ 52 ก | มีฉบับแก้ไข (ฉบับที่ 2) พ.ศ. 2561 (ทะเบียน ป.ป.ช.)",
           "exception_code": "EX-NOT-FOUND",
           "open_question": "อ่านตัวบทจากราชกิจจาฯ (เล่ม 135) — โดยเฉพาะหมวดขัดกันแห่งผลประโยชน์ (ม.126-128) ที่ T006 ใช้",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "การป้องกันและปราบปรามการทุจริต พ.ศ. 2561",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search+fetch)"
+          },
+          "amendments": [
+            "(ฉบับที่ 2) พ.ศ. 2561"
+          ]
         }
       ]
     },
@@ -1501,13 +1667,20 @@
         {
           "version": "series",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://webstore.iec.ch",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://syc-se.iec.ch/deliveries/cybersecurity-guidelines/security-standards-and-best-practices/iec-62443/",
+          "evidence_excerpt": "IEC 62443 — ชุดมาตรฐานสากลที่ IEC พัฒนาร่วมกับ ISA99 ว่าด้วยความมั่นคงปลอดภัยไซเบอร์ของระบบอัตโนมัติและควบคุมอุตสาหกรรม (IACS) ครอบคลุมทั้งด้านองค์กรและเทคนิคตลอดวงจรชีวิต — ภาคพลังงานรับไปใช้ด้วย | หน้าทางการ IEC SyC Smart Energy",
           "exception_code": "EX-PAYWALL",
           "open_question": "ชุดมาตรฐานหลาย parts (ISA/IEC ร่วม) — ระบุ part ที่องค์กรใช้ (เช่น 62443-2-1, 62443-3-3) และตรวจ edition จาก IEC webstore",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "Industrial Automation and Control Systems",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search) — series-level"
+          },
+          "notes": "ยืนยันระดับชุด (series) 2026-07-21 — ตัวเล่มรายฉบับอยู่หลัง paywall IEC webstore ต้องซื้อจึงอ่านตัวบทได้"
         }
       ]
     },
@@ -1522,13 +1695,20 @@
         {
           "version": "series",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://webstore.iec.ch",
-          "evidence_excerpt": "",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://syc-se.iec.ch/deliveries/cybersecurity-guidelines/security-standards-and-best-practices/iec-62351/",
+          "evidence_excerpt": "IEC 62351 — พัฒนาโดย WG15 ของ IEC TC57 สำหรับความมั่นคงปลอดภัยของโปรโตคอลชุด TC57 (IEC 60870-5, 60870-6, 61850, 61970 EMS, 61968 Distribution) | หน้าทางการ IEC SyC Smart Energy",
           "exception_code": "EX-PAYWALL",
           "open_question": "ชุดหลาย parts (security ของ 61850/CIM protocols) — ตรวจ part+edition จาก IEC webstore",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "Power Systems Communication Security",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search) — series-level"
+          },
+          "notes": "ยืนยันระดับชุด 2026-07-21 — ตัวเล่มรายฉบับอยู่หลัง paywall IEC webstore"
         }
       ]
     },
@@ -1549,7 +1729,9 @@
           "evidence_excerpt": "",
           "exception_code": "EX-PAYWALL",
           "open_question": "ตรวจ 60300-1 edition ปัจจุบันจาก IEC webstore",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "snooze_until": "2026-09-30",
+          "snooze_reason": "ค้นรอบ 2026-07-21 ยังไม่พบ metadata ชุด IEC 60300 (Dependability Management) จากทะเบียนทางการ — ขั้นถัดไป: เปิด webstore.iec.ch ค้นชุด 60300 โดยตรง"
         }
       ]
     },
@@ -1563,14 +1745,24 @@
       "editions": [
         {
           "version": "series",
-          "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-14",
-          "evidence_url": "https://webstore.iec.ch",
-          "evidence_excerpt": "",
+          "status": "AMENDED",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "evidence_url": "https://webstore.iec.ch/en/publication/153",
+          "evidence_excerpt": "IEC 60038:2009 IEC standard voltages Edition 7.0 — กำหนดค่าแรงดันมาตรฐานสำหรับระบบไฟฟ้าแรงต่ำและแรงสูง ทั้ง AC และ DC ใช้เป็นค่าอ้างอิงในการออกแบบระบบและอุปกรณ์ | มี AMD1:2021 (Edition 7.0 2021-12) | IEC Webstore ทางการ",
           "exception_code": "EX-PAYWALL",
           "open_question": "ตรวจ edition ปัจจุบัน (2009+AMD?) จาก IEC webstore",
-          "sla_deadline": "2026-09-12"
+          "sla_deadline": "2026-09-12",
+          "excerpt_verbatim": "IEC standard voltages",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(search)"
+          },
+          "amendments": [
+            "AMD1:2021"
+          ],
+          "notes": "ยืนยัน 2026-07-21 ระดับ metadata จาก IEC Webstore — ตัวเล่มอยู่หลัง paywall"
         }
       ]
     },
