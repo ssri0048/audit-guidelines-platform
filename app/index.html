@@ -527,10 +527,19 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
       </div>
 
       <div id="ac-t2" style="display:none">
-        <div class="ac-msg">คิวงานทั้งหมดในหน้าเดียว — รออนุมัติ · กำลังจัดทำ/ร่าง · รายการติดตาม <button onclick="loadPRs();loadDrafts();loadQueue()" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:2px 9px;cursor:pointer;font-size:11px">↻ รีเฟรช</button></div>
+        <!-- [ปรับปรุง 2026-07-21 — คิวงานรวมศูนย์]
+             เดิม: 3 หัวข้อแยกตามแหล่งข้อมูล (PR / ไฟล์ร่าง / ธง) ทำให้ใบงานเดียวโผล่ 2 ที่
+             (loadPRs ดึง PR ทั้งหมด + loadDrafts ดึงชุดเดียวกันแล้วกรอง 🤖 → ซ้ำโดยโครงสร้าง)
+             ใหม่: loadWork() รวมทุกอย่างเป็นรายการเดียว dedup ตามเลข PR แล้วจัดกลุ่มตาม "ใครต้องขยับ"
+             ฟังก์ชันเดิม (loadPRs/loadDrafts/loadQueue) ยังอยู่ครบและยังถูกเรียก เพราะที่อื่นพึ่งพาอยู่
+             (apOpen ใช้ AP_PRS · flPR เรียก loadPRs · acBadge นับจาก loadPRs) — แค่ซ่อนการแสดงผลเดิมไว้ -->
+        <div class="ac-msg">งานทั้งหมดในหน้าเดียว — เรียงตามสิ่งที่ต้องลงมือก่อน <button onclick="loadWork()" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:2px 9px;cursor:pointer;font-size:11px">↻ รีเฟรช</button></div>
+        <div id="ac-work">⏳ กำลังโหลด...</div>
 
-        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:12px 0 6px">✅ รออนุมัติขึ้นเว็บ</div>
-        <div id="ac-prs">⏳ กำลังโหลด...</div>
+        <!-- [ปิดการแสดงผลชั่วคราว 2026-07-21 — ย้ายไปแสดงรวมใน #ac-work ด้านบน]
+             ห้ามลบ: loadPRs() ยังเขียนผลลง #ac-prs และ AP_PRS ที่ apOpen() ใช้ -->
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:12px 0 6px;display:none">✅ รออนุมัติขึ้นเว็บ</div>
+        <div id="ac-prs" style="display:none">⏳ กำลังโหลด...</div>
         <div id="ac-review" style="display:none;margin-top:10px;border:1.5px solid var(--border);border-radius:10px;overflow:hidden">
           <div style="padding:10px 14px;background:#FBFCFE;border-bottom:1px solid var(--border)">
             <div style="font-size:13.5px;font-weight:700" id="ac-rv-title"></div>
@@ -554,11 +563,15 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
           </div>
         </div>
 
-        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:16px 0 6px">📋 ร่างรอตรวจ</div>
-        <div id="ac-drafts">⏳ กำลังโหลด...</div>
+        <!-- [ปิดการแสดงผลชั่วคราว 2026-07-21 — ย้ายไปแสดงรวมใน #ac-work ด้านบน]
+             ห้ามลบ: verifyDraft() เขียนข้อความสถานะลง #ac-t2-msg · flRender() เขียนลง #ac-queue -->
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:16px 0 6px;display:none">📋 ร่างรอตรวจ</div>
+        <div id="ac-drafts" style="display:none">⏳ กำลังโหลด...</div>
         <div class="ac-msg" id="ac-t2-msg"></div>
 
-        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:16px 0 6px">🏳️ รายการติดตาม</div>
+        <!-- คิวธงยังเรนเดอร์ที่ #ac-queue เหมือนเดิมทุกประการ — flRender/flAct/flForm เรียกซ้ำที่ id นี้
+             ถ้าย้าย container จะพังทั้งชุด จึงคงไว้ที่เดิม เปลี่ยนเฉพาะหัวข้อให้สื่อว่า "ไม่บล็อกงานใหม่" -->
+        <div style="font-size:11px;font-weight:800;color:var(--text-muted);letter-spacing:.3px;margin:18px 0 7px">ค้างเพราะยังหาหลักฐานไม่ได้ — ไม่บล็อกการอนุมัติหัวข้อใหม่</div>
         <div id="ac-queue">⏳ กำลังโหลด...</div>
       </div>
 
@@ -980,7 +993,9 @@ function acTab(n){
     document.getElementById('ac-t'+i).style.display=i===n?'block':'none';
     document.getElementById('ac-tabbtn-'+i).classList.toggle('on',i===n);
   }
-  if(n===2){loadPRs();loadDrafts();loadQueue()}
+  // [ปรับปรุง 2026-07-21] เดิม: if(n===2){loadPRs();loadDrafts();loadQueue()}
+  // ใหม่: loadWork() เรียก loadPRs+loadQueue ให้แล้ว · loadDrafts ยังเรียกไว้เพื่อให้ #ac-drafts (ที่ซ่อนอยู่) ตรงกับของจริง
+  if(n===2){loadWork();loadDrafts()}
 }
 async function readRepoJson(pathStr){
   const meta=await gh('/repos/'+GH_REPO+'/contents/'+pathStr);
@@ -1016,6 +1031,82 @@ async function loadDrafts(){
     el.innerHTML=h||'<div class="ac-msg">✅ ไม่มีงานค้าง — ร่างทุกตัวถูก verify หมดแล้ว</div>';
   }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
 }
+/* ── [เพิ่ม 2026-07-21] loadWork() — คิวงานรวมศูนย์ ──
+   ทำไม: เดิมใบงานเดียวโผล่ 2 ที่ (loadPRs ดึง PR ทั้งหมด · loadDrafts ดึงชุดเดียวกันแล้วกรอง 🤖)
+   ทำอะไร: รวมผลเป็นรายการเดียว dedup ตามเลข PR แล้วจัดกลุ่มตาม "ใครต้องขยับ" ไม่ใช่ "ข้อมูลมาจากไหน"
+   ไม่แตะ: loadPRs/loadDrafts/loadQueue/apOpen/verifyDraft ทำงานเหมือนเดิมทุกบรรทัด
+           (loadWork เรียก loadPRs ก่อนเพื่อให้ AP_PRS + _ci พร้อม แล้วอ่านต่อ) */
+function wkGroup(title, n, quiet){
+  return '<div style="font-size:10.5px;font-weight:800;color:var(--text-muted);letter-spacing:.3px;margin:15px 0 7px;display:flex;align-items:center;gap:7px'+(quiet?';opacity:.62':'')+'">'
+    +esc(title)+'<b style="background:var(--border-light);color:var(--navy);border-radius:99px;padding:1px 8px;font-size:10px">'+n+'</b>'
+    +'<i style="flex:1;height:1px;background:var(--border-light)"></i></div>';
+}
+function wkRow(color, ico, name, meta, btnLabel, onclick, href, quiet){
+  const act = href
+    ? '<a class="dlink" target="_blank" rel="noopener" href="'+esc(href)+'" style="background:#fff;color:var(--navy);border:1px solid var(--border);text-align:center">'+btnLabel+'</a>'
+    : '<button class="dbtn" style="max-width:180px;line-height:1.3;white-space:normal'+(color==='ok'?';background:#1A7A40':(color==='bad'?';background:#C0392B':''))+'" onclick="'+onclick+'">'+btnLabel+'</button>';
+  return '<div class="drow" style="border-left:4px solid '+(color==='ok'?'var(--low)':color==='bad'?'var(--crit)':color==='run'?'var(--med)':'var(--navy-light)')+(quiet?';opacity:.62':'')+'">'
+    +'<span class="dstat">'+ico+'</span>'
+    +'<span class="dnm">'+esc(name)+'<small style="display:block;color:var(--text-muted);font-weight:500;margin-top:2px">'+meta+'</small></span>'
+    +act+'</div>';
+}
+async function loadWork(){
+  const el=document.getElementById('ac-work');
+  if(!el)return;
+  el.innerHTML='⏳ กำลังโหลด...';
+  try{
+    await loadPRs();          // เติม AP_PRS + p._ci (apOpen ใช้ index ของ array นี้)
+    loadQueue();              // คิวธงเรนเดอร์ที่ #ac-queue เหมือนเดิม
+    const files=await gh('/repos/'+GH_REPO+'/contents/data/drafts').catch(()=>[]);
+    const drafts=(files||[]).filter(f=>f.name.endsWith('.json'));
+
+    const ready=[],busy=[],bad=[];
+    (AP_PRS||[]).forEach((p,i)=>{
+      const t=(p.title||'').replace(/^🤖\s*/,'').replace(/^(Draft|ร่างรอตรวจ):\s*/,'').trim()||'(ไม่ระบุชื่อหัวข้อ)';
+      // ใบร่าง (🤖) ≠ ใบงานที่ตรวจแล้ว — merge ใบร่างคือ "รับเข้าคลังพัก" ยังไม่ได้ขึ้นเว็บ
+      // ถ้าใช้คำว่า "อนุมัติขึ้นเว็บ" กับใบร่างจะหลอกผู้ใช้ว่าจบแล้ว ทั้งที่ยังต้องตรวจลิงก์อีกขั้น
+      const it={i:i,p:p,t:t,isDraft:/^🤖/.test(p.title||'')};
+      if(p._ci==='✅')ready.push(it); else if(p._ci==='❌')bad.push(it); else busy.push(it);
+    });
+
+    let h='';
+    h+=wkGroup('ถึงคิวคุณตัดสินใจ',ready.length);
+    h+=ready.length?ready.map(x=>x.isDraft
+      ? wkRow('draft','📥',x.t,
+          'ใบร่าง #'+x.p.number+' · รับเข้าคลังพักก่อน แล้วค่อยสั่งเปิดอ่านลิงก์อ้างอิง — <b>ยังไม่ขึ้นเว็บ</b>',
+          'รับร่าง<br>เข้าคลังพัก','apOpen('+x.i+')')
+      : wkRow('ok','✅',x.t,
+          'ใบงาน #'+x.p.number+' · ตรวจครบ 9 ด่านแล้ว · ลิงก์อ้างอิงเปิดอ่านได้จริง',
+          'อ่านสรุป<br>แล้วอนุมัติขึ้นเว็บ','apOpen('+x.i+')')).join('')
+      :'<div class="ac-msg">ไม่มีงานรอคุณตัดสินใจ</div>';
+
+    if(bad.length){
+      h+=wkGroup('ต้องแก้ก่อนถึงจะอนุมัติได้',bad.length);
+      h+=bad.map(x=>wkRow('bad','❌',x.t,
+        'ใบงาน #'+x.p.number+' · งานที่ทำไปแล้วยังอยู่ครบ — ติดด่านคุณภาพ','ดูว่าติดตรงไหน','apOpen('+x.i+')')).join('');
+    }
+
+    h+=wkGroup('รอคุณสั่งเริ่ม',drafts.length);
+    if(drafts.length){
+      const rows=await Promise.all(drafts.map(async f=>{
+        let nm=f.name;
+        try{const dj=await readRepoJson('data/drafts/'+f.name);if(dj.name_th)nm=dj.name_th}catch(e){}
+        return wkRow('draft','📄',nm,
+          'ร่างเสร็จแล้ว แต่ยังไม่ได้เปิดอ่านลิงก์อ้างอิง — ยังขึ้นเว็บไม่ได้',
+          'เปิดอ่านลิงก์อ้างอิง<br>ทีละรายการ',"verifyDraft('"+esc(f.name)+"')");
+      }));
+      h+=rows.join('');
+    }else h+='<div class="ac-msg">ไม่มีร่างค้างรอสั่ง</div>';
+
+    h+=wkGroup('ระบบกำลังทำให้ — ยังไม่ต้องทำอะไร',busy.length,true);
+    h+=busy.length?busy.map(x=>wkRow('run','🟡',x.t,
+        'ใบงาน #'+x.p.number+' · กำลังตรวจอยู่ · จะแจ้งเตือนเมื่อเสร็จ',
+        'ดูว่าทำถึงขั้นไหน',null,x.p.html_url,true)).join('')
+      :'<div class="ac-msg" style="opacity:.62">ไม่มีงานที่ระบบกำลังทำอยู่</div>';
+
+    el.innerHTML=h;
+  }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
+}
 async function verifyDraft(fname){
   let token=getAdminKey();
   const msg=document.getElementById('ac-t2-msg');
@@ -1030,7 +1121,7 @@ async function verifyDraft(fname){
     if(r.status===404){msg.innerHTML='⏸️ verify-pipeline ยังไม่ติดตั้งบน main (กำลังมาใน PR ถัดไป) — ระหว่างนี้สั่ง verify ผ่าน Cowork ได้';return}
     if(!r.ok)throw new Error('สั่งไม่สำเร็จ ('+r.status+') — เช็คสิทธิ์รหัส');
     setAdminKey(token);token='';
-    msg.innerHTML='✅ ส่งคำสั่งแล้ว — ตามผลได้ที่ <a target="_blank" rel="noopener" href="https://github.com/'+GH_REPO+'/actions">แท็บ Actions</a> เสร็จแล้ว PR "✅ Verify:" จะโผล่ในแท็บรออนุมัติ';
+    msg.innerHTML='✅ ส่งคำสั่งแล้ว — ตามผลได้ที่ <a target="_blank" rel="noopener" href="https://github.com/'+GH_REPO+'/actions">แท็บ Actions</a> เสร็จแล้วงานนี้จะเลื่อนขึ้นไปอยู่กลุ่ม “ถึงคิวคุณตัดสินใจ” ในหน้านี้เอง';
   }catch(e){msg.textContent='❌ '+e.message}
 }
 /* ── แท็บ 3: ห้องอนุมัติบนเว็บ — รีวิว+ติ๊กรับทราบ+merge จริงผ่าน API ── */
@@ -1123,7 +1214,7 @@ async function apMerge(){
     const d=await r.json().catch(()=>({}));
     if(r.ok){
       msg.innerHTML='<span style="color:var(--low);font-weight:700">🎉 อนุมัติสำเร็จ — ความรู้เข้าคลังแล้ว</span> การอนุมัติผูกกับบัญชีเจ้าของรหัส (ตรวจย้อนได้) · หน้าเว็บกำลังโหลดหัวข้อใหม่...';
-      setTimeout(()=>{boot();loadPRs()},2500);
+      setTimeout(()=>{boot();loadWork()},2500);
     }else if(r.status===405){msg.textContent='⛔ GitHub ปฏิเสธ: เกตยังไม่ผ่าน/ติดกฎ branch protection — '+(d.message||'')}
     else if(r.status===403){msg.textContent='⛔ รหัสนี้ไม่มีสิทธิ์อนุมัติบน repo นี้ (ต้องเป็นรหัสของ collaborator สิทธิ์ Contents+Pull requests RW)'}
     else if(r.status===409){msg.textContent='⛔ ใบงานขัดแย้งกับความรู้ปัจจุบัน (conflict) — เปิดดูบน GitHub'}
@@ -1228,9 +1319,9 @@ function flForm(x,i){
 }
 function flRender(el){
   el=el||document.getElementById('ac-queue');
-  el.innerHTML='<div class="ac-msg"><b>'+FLQ.length+' ธงเปิดอยู่</b>'+(flSnoozed?' · พักไว้ '+flSnoozed+' (snooze)':'')+' — กด "จัดการ" รายธง ทุกทางจบเป็นใบงานให้คุณอนุมัติ · Boy Scout: ปิดธงเก่า ≥2/batch</div>'
+  el.innerHTML='<div class="ac-msg"><b>'+FLQ.length+' รายการค้าง</b>'+(flSnoozed?' · พักไว้ '+flSnoozed+' (snooze)':'')+' — ไม่บล็อกการอนุมัติหัวข้อใหม่ · กด “เลือกวิธีปิด” รายรายการ ทุกทางจบเป็นใบงานให้คุณอนุมัติ</div>'
    +FLQ.slice(0,40).map((x,i)=>'<div class="qrow" style="flex-wrap:wrap"><span class="qs qs-'+x.s+'">'+x.s+'</span><span class="qr">'+esc(x.r)+' <small style="color:var(--text-muted)">→ '+esc(x.t)+'</small></span><span class="qa">'+(x.a==null?'—':'ค้าง '+x.a+' วัน')+'</span>'
-     +(x.kind==='parked'?'':'<button class="dbtn" data-fa="tgl" data-fi="'+i+'">จัดการ '+(flOpen===i?'▴':'▾')+'</button>')
+     +(x.kind==='parked'?'':'<button class="dbtn" data-fa="tgl" data-fi="'+i+'">เลือกวิธีปิด '+(flOpen===i?'▴':'▾')+'</button>')
      +(flOpen===i?'<div style="flex-basis:100%">'+flForm(x,i)+'</div>':'')
      +'</div>').join('')
    +(FLQ.length>40?'<div class="ac-msg">... และอีก '+(FLQ.length-40)+' รายการ</div>':'')
@@ -1280,7 +1371,7 @@ async function flAct(a,i){
       const pr=x.kind==='registry'
         ?await flPR('data/standards_registry.json',j=>{const e=flEd(j,x);if(!e)throw new Error('ไม่พบ edition');e.verified=true;e.last_verified=today;e.evidence_url=u;e.evidence_excerpt=xx;e.excerpt_verbatim=xx.slice(0,120);e.link_status={state:'READ_VERIFIED',checked_at:today,method:'human-web'}},'ปิดธง: '+x.r+' (หลักฐานจากผู้ตรวจ)','## ✍️ หลักฐานจากผู้ตรวจ\n- URL: '+u+'\n- ข้อความที่อ่านเจอ: "'+xx+'"\n- วันที่อ่าน: '+today+'\n\nreadproof-watchdog จะพิสูจน์ซ้ำอัตโนมัติตามรอบ')
         :await flPR('data/source_universe.json',j=>{const c=flClaim(j,x);if(!c)throw new Error('ไม่พบ publisher');c.state='VERIFIED';c.last_checked=today;c.evidence={url:u,excerpt:xx}},'ปิดธง: '+x.r+' (หลักฐานจากผู้ตรวจ)','## ✍️ หลักฐาน\n- URL: '+u+'\n- ข้อความ: "'+xx+'"');
-      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — ไปกดอนุมัติในคิว "รออนุมัติขึ้นเว็บ" ด้านบน';loadPRs();return}
+      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — งานนี้อยู่ในกลุ่ม “ถึงคิวคุณตัดสินใจ” ด้านบนแล้ว';loadWork();return}
     if(a==='ssave'){
       msg().textContent='⏳ เปิดใบงาน...';
       const d=flG('d'),r0=flG('r').trim();
@@ -1294,7 +1385,7 @@ async function flAct(a,i){
       const pr=x.kind==='registry'
         ?await flPR('data/standards_registry.json',j=>{const e=flEd(j,x);if(!e)throw new Error('ไม่พบ edition');e.status='RETIRED';e.retired_reason=r0;if(sup)e.superseded_by=sup},'เลิกติดตาม: '+x.r,'## 🚫 เลิกติดตาม (RETIRED)\n- เหตุผล: '+r0+(sup?'\n- ถูกแทนที่โดย: '+sup:'')+'\n- ตรวจแล้ว: ไม่มีหัวข้อใดอ้างรายการนี้')
         :await flPR('data/source_universe.json',j=>{const c=flClaim(j,x);if(!c)throw new Error('ไม่พบ publisher');c.state='RETIRED';c.retired_reason=r0},'เลิกติดตาม: '+x.r,'## 🚫 เลิกติดตาม\n- เหตุผล: '+r0);
-      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — merge แล้วธงหายถาวร';loadPRs();return}
+      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — merge แล้วธงหายถาวร';loadWork();return}
   }catch(e){if(msg())msg().textContent='⛔ '+e.message}
 }
 /* ── ตัวบอกความคืบหน้า: นาฬิกาเดินจริง + แถบคาดการณ์ + คำแนะนำว่าปิดหน้าได้ ── */
@@ -1413,7 +1504,7 @@ async function acRun(){
           res.innerHTML='<div class="prov">'+esc((draftPr.body||'').slice(0,3000))+'</div>'
             +(isVerify
               ?'<div class="ac-msg">🎉 ร่าง+ตรวจพิสูจน์เสร็จรวดเดียว — เหลือขั้นเดียว: ไปแท็บ <b>คิวงาน</b> ติ๊กยืนยันแล้วกดอนุมัติ</div><a class="ac-prlink" href="javascript:void(0)" onclick="acTab(2)">✔ ไปที่คิวงานเลย</a>'
-              :'<div class="ac-msg">ขั้นต่อไป: กด merge ใบส่งงานร่างนี้ (รับเข้าคลังพัก) แล้วกลับมาแท็บ <b>ร่างรอตรวจ</b> เพื่อกด 🔬 สั่งตรวจพิสูจน์</div><a class="ac-prlink" target="_blank" rel="noopener" href="'+esc(draftPr.html_url)+'">📄 เปิดใบส่งงานร่าง #'+draftPr.number+'</a>');
+              :'<div class="ac-msg">ขั้นต่อไป: อนุมัติใบส่งงานร่างนี้ก่อน แล้วงานจะไปอยู่กลุ่ม “รอคุณสั่งเริ่ม” ในคิวงาน กดปุ่มเปิดอ่านลิงก์อ้างอิงต่อได้เลย</div><a class="ac-prlink" target="_blank" rel="noopener" href="'+esc(draftPr.html_url)+'">📄 เปิดใบส่งงานร่าง #'+draftPr.number+'</a>');
         }else{
           states.pr='fail';
           res.innerHTML='<div class="ac-warn">'+(ok

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>คิวงาน — ก่อน / หลัง + คำสั่งใหม่</title>
+<style>
+:root{
+  --navy:#1B3A6B;--navy-deep:#0D2444;--navy-light:#2552A3;
+  --gold:#E8B84B;--gold-dark:#C9A03A;--gold-light:#FFF3CC;
+  --crit:#C0392B;--crit-bg:#FDECEA;--crit-bd:#F5C6C2;
+  --high:#C0550A;--high-bg:#FEF0E7;--high-bd:#F8D0B8;
+  --med:#B7770D;--med-bg:#FEF9E7;--med-bd:#F5E0A0;
+  --low:#1A7A40;--low-bg:#EAFAF1;--low-bd:#A8E6C2;
+  --white:#FFFFFF;--bg:#EEF1F8;--card:#FFFFFF;
+  --border:#DDE2EC;--border-light:#EEF1F8;
+  --text:#1A2332;--text-muted:#6B7A8D;--text-light:#9AABBD;
+  --shadow-sm:0 1px 4px rgba(27,58,107,.07);
+  --radius:12px;--radius-sm:8px;--radius-xs:5px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:-apple-system,"Segoe UI","Sarabun",sans-serif;color:var(--text);padding:20px}
+.wrap{max-width:1240px;margin:0 auto}
+h1{font-size:19px;color:var(--navy-deep);margin:0 0 4px}
+h2{font-size:15px;color:var(--navy-deep);margin:26px 0 10px;padding-top:18px;border-top:2px solid var(--border)}
+.sub{font-size:13px;color:var(--text-muted);margin:0 0 18px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:980px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm)}
+.ph{padding:11px 14px;font-size:12.5px;font-weight:800;color:#fff}
+.ph.b{background:#8A93A3}.ph.a{background:var(--navy-deep)}
+.ph small{display:block;font-weight:500;opacity:.85;font-size:11px;margin-top:2px}
+.pb{padding:14px}
+.ac-msg{font-size:12px;color:var(--text-muted);margin:8px 0;line-height:1.6}
+.sec{font-size:13px;font-weight:700;color:var(--navy);margin:14px 0 6px}
+.sec:first-child{margin-top:0}
+.drow{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;font-size:12.5px;background:#fff}
+.drow .dnm{flex:1;font-weight:600;word-break:break-word}
+.drow .dbtn{font-family:inherit;font-size:12px;font-weight:700;padding:7px 13px;border-radius:8px;border:none;background:var(--navy-deep);color:#fff;cursor:pointer;flex-shrink:0}
+.drow .dlink{font-size:12px;font-weight:700;padding:7px 13px;border-radius:8px;background:var(--gold);color:var(--navy);text-decoration:none;flex-shrink:0;cursor:pointer}
+.dstat{font-size:14px;flex-shrink:0}
+.dup{outline:2px dashed var(--crit);outline-offset:2px;position:relative}
+.dup::after{content:"ซ้ำ";position:absolute;top:-9px;right:8px;background:var(--crit);color:#fff;font-size:9px;font-weight:800;padding:1px 6px;border-radius:99px}
+.jump{background:var(--crit-bg);border:1px solid var(--crit-bd);color:var(--crit);font-size:11.5px;padding:7px 10px;border-radius:var(--radius-xs);margin:8px 0;font-weight:600}
+.vague{background:var(--crit);color:#fff;font-size:9.5px;font-weight:800;padding:1px 5px;border-radius:99px;margin-left:5px;vertical-align:middle}
+
+.stage{display:flex;align-items:center;gap:9px;padding:11px 12px;border:1px solid var(--border);border-left-width:4px;border-radius:var(--radius-sm);margin-bottom:8px;background:#fff}
+.stage .ico{font-size:15px;flex-shrink:0;width:18px;text-align:center}
+.stage .mid{flex:1;min-width:0}
+.stage .nm{font-weight:700;font-size:12.5px;line-height:1.35}
+.stage .mt{font-size:11px;color:var(--text-muted);margin-top:2px;line-height:1.5}
+.stage .act{font-family:inherit;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:7px;border:none;cursor:pointer;flex-shrink:0;max-width:190px;line-height:1.3}
+.s-ready{border-left-color:var(--low)}   .s-ready .act{background:var(--low);color:#fff}
+.s-run  {border-left-color:var(--med)}   .s-run   .act{background:#fff;color:var(--med);border:1px solid var(--med-bd)}
+.s-fail {border-left-color:var(--crit)}  .s-fail  .act{background:var(--crit);color:#fff}
+.s-draft{border-left-color:var(--navy-light)} .s-draft .act{background:var(--navy-deep);color:#fff}
+.s-flag {border-left-color:var(--text-light)} .s-flag  .act{background:#fff;color:var(--navy);border:1px solid var(--border)}
+.grp{font-size:11px;font-weight:800;color:var(--text-muted);letter-spacing:.4px;margin:14px 0 7px;display:flex;align-items:center;gap:7px}
+.grp:first-child{margin-top:0}
+.grp span{background:var(--border-light);color:var(--navy);border-radius:99px;padding:1px 8px;font-size:10.5px}
+.grp::after{content:"";flex:1;height:1px;background:var(--border-light)}
+.quiet{opacity:.62}
+.note{background:var(--low-bg);border:1px solid var(--low-bd);color:var(--low);font-size:11.5px;padding:7px 10px;border-radius:var(--radius-xs);margin:10px 0 0;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--navy-deep);color:#fff;text-align:left;padding:9px 11px;font-size:11.5px}
+td{padding:10px 11px;border-top:1px solid var(--border-light);vertical-align:top;line-height:1.55}
+.old{color:var(--crit);font-weight:700;white-space:nowrap}
+.new{color:var(--low);font-weight:800}
+code{background:var(--border-light);padding:1px 5px;border-radius:4px;font-size:11px}
+</style></head><body><div class="wrap">
+
+<h1>คิวงานผู้ดูแล — ก่อน / หลัง</h1>
+<p class="sub">ข้อมูลและฟังก์ชันหลังบ้านเหมือนเดิมทุกบรรทัด เปลี่ยนเฉพาะ <b>การจัดกลุ่ม</b> และ <b>ถ้อยคำบนปุ่ม</b></p>
+
+<div class="cols">
+
+  <!-- ══════════ BEFORE ══════════ -->
+  <div class="panel">
+    <div class="ph b">ก่อน<small>3 หัวข้อ · งานเดียวโผล่ 2 ที่ · ปุ่มไม่บอกว่าจะเกิดอะไร</small></div>
+    <div class="pb">
+      <div class="ac-msg">คิวงานทั้งหมดในหน้าเดียว — รออนุมัติ · กำลังจัดทำ/ร่าง · รายการติดตาม <b>↻ รีเฟรช</b></div>
+
+      <div class="sec">✅ รออนุมัติขึ้นเว็บ</div>
+      <div class="drow dup"><span class="dstat">✅</span><span class="dnm">#97 🤖 Draft:</span><span class="dlink" style="background:var(--border-light);color:var(--navy)">รีวิว →<span class="vague">คลุมเครือ</span></span></div>
+      <div class="ac-msg">✅=เกตผ่านพร้อมอนุมัติ · 🟡=กำลังตรวจ · ❌=เกตไม่ผ่าน</div>
+
+      <div class="sec">📋 ร่างรอตรวจ</div>
+      <div class="drow"><span class="dstat">📄</span><span class="dnm">ความยั่งยืนและพลังงานสะอาด <small style="color:var(--text-muted)">(ในคลังพัก รอตรวจพิสูจน์)</small></span><button class="dbtn">🔬 สั่งตรวจพิสูจน์<span class="vague">?</span></button><span class="dlink">ดูไฟล์</span></div>
+      <div class="drow dup"><span class="dstat">🤖</span><span class="dnm">🤖 Draft: <small style="color:var(--text-muted)">(PR #97 ยังไม่ merge)</small></span><span class="dlink">เปิด PR</span></div>
+
+      <div class="sec">🏳️ รายการติดตาม</div>
+      <div class="drow"><span class="dstat">PARKED</span><span class="dnm">มาตรฐาน/ระเบียบภายในองค์กร (กฟผ./กฟน./กฟภ.)</span><span class="dlink" style="background:#fff;border:1px solid var(--border)">จัดการ<span class="vague">?</span></span></div>
+
+      <div class="jump">↩︎ ระบบเขียนเองว่า “กลับมาแท็บ ร่างรอตรวจ” และ “ไปกดอนุมัติในคิวด้านบน”</div>
+    </div>
+  </div>
+
+  <!-- ══════════ AFTER ══════════ -->
+  <div class="panel">
+    <div class="ph a">หลัง<small>1 รายการ · ไม่ซ้ำ · ปุ่มบอกผลลัพธ์ที่จะเกิดขึ้น</small></div>
+    <div class="pb">
+      <div class="ac-msg">งานทั้งหมด <b>3 รายการ</b> — เรียงตามสิ่งที่ต้องลงมือก่อน <b>↻ รีเฟรช</b></div>
+
+      <div class="grp">ถึงคิวคุณตัดสินใจ <span>1</span></div>
+      <div class="stage s-ready">
+        <span class="ico">✅</span>
+        <div class="mid"><div class="nm">ความยั่งยืนและพลังงานสะอาด</div>
+          <div class="mt">ใบงาน #97 · ตรวจครบ 9 ด่านแล้ว · แหล่งอ้างอิงเปิดอ่านได้จริงทั้ง 12 รายการ</div></div>
+        <button class="act">อ่านสรุป<br>แล้วอนุมัติขึ้นเว็บ</button>
+      </div>
+
+      <div class="grp">รอคุณสั่งเริ่ม <span>1</span></div>
+      <div class="stage s-draft">
+        <span class="ico">📄</span>
+        <div class="mid"><div class="nm">ความยั่งยืนและพลังงานสะอาด</div>
+          <div class="mt">ร่างเสร็จแล้ว แต่ยังไม่ได้เปิดอ่านลิงก์อ้างอิง — ยังขึ้นเว็บไม่ได้</div></div>
+        <button class="act">เปิดอ่านลิงก์อ้างอิง<br>ทีละรายการ</button>
+      </div>
+
+      <div class="grp quiet">ระบบกำลังทำให้ — ยังไม่ต้องทำอะไร <span>0</span></div>
+      <div class="stage s-run quiet">
+        <span class="ico">🟡</span>
+        <div class="mid"><div class="nm">(ตัวอย่าง) การบริหารจัดการเชื้อเพลิง</div>
+          <div class="mt">กำลังเปิดอ่านลิงก์ · เหลืออีกราว 4 นาที · จะเด้งแจ้งเตือนเมื่อเสร็จ</div></div>
+        <button class="act">ดูว่าทำถึงขั้นไหน</button>
+      </div>
+
+      <div class="grp quiet">ค้างเพราะยังหาหลักฐานไม่ได้ <span>1</span></div>
+      <div class="stage s-flag quiet">
+        <span class="ico">🏳️</span>
+        <div class="mid"><div class="nm">มาตรฐาน/ระเบียบภายในองค์กร (กฟผ./กฟน./กฟภ.)</div>
+          <div class="mt">พักไว้โดยเจตนา · อ้างอิงในหัวข้อใหม่ยังไม่ได้ · พักไว้อีก 3 รายการ</div></div>
+        <button class="act">เลือกวิธีปิดรายการนี้</button>
+      </div>
+
+      <div class="note">✔ ทุกปุ่มตอบได้ว่า “กดแล้วจะเกิดอะไร” · งานเดียว = แถวเดียว · ไม่มีคำว่า “กลับไปแท็บ…”</div>
+    </div>
+  </div>
+</div>
+
+<h2>คำสั่งใหม่ — อิงจากสิ่งที่หลังบ้านทำจริง</h2>
+<table>
+  <tr><th style="width:150px">คำเดิม</th><th style="width:34%">หลังบ้านทำอะไรจริง</th><th style="width:22%">คำใหม่ที่เสนอ</th><th>ทำไม</th></tr>
+
+  <tr><td class="old">🔬 สั่งตรวจพิสูจน์</td>
+      <td><code>verify-pipeline.yml</code> → เปิด URL อ้างอิงทุกลิงก์ · พิสูจน์ว่าข้อความที่ยกมามีอยู่ในหน้านั้นจริง · รันเกต 9 ด่าน · เปิดใบงานให้อนุมัติ</td>
+      <td class="new">เปิดอ่านลิงก์อ้างอิงทีละรายการ</td>
+      <td>“พิสูจน์” เป็นศัพท์ระบบ ไม่บอกว่าจะเกิดอะไร · คำใหม่บอกการกระทำจริงที่ระบบทำแทนคุณ</td></tr>
+
+  <tr><td class="old">รีวิว →</td>
+      <td><code>apOpen()</code> → แสดงสรุปหัวข้อ + จำนวนความเสี่ยง + รายการต้องรับทราบ → ติ๊กครบแล้วปุ่ม merge ปลดล็อก</td>
+      <td class="new">อ่านสรุป แล้วอนุมัติขึ้นเว็บ</td>
+      <td>“รีวิว” ไม่บอกว่าจบที่ไหน · คำใหม่บอกครบทั้ง 2 จังหวะ (อ่าน → อนุมัติ) และบอกผลลัพธ์ว่า “ขึ้นเว็บ”</td></tr>
+
+  <tr><td class="old">ดูความคืบหน้า</td>
+      <td>เปิดแท็บ Actions บน GitHub — เห็นว่าตอนนี้รันถึงขั้นตอนไหนของ pipeline</td>
+      <td class="new">ดูว่าทำถึงขั้นไหน</td>
+      <td>“ความคืบหน้า” กว้างเกินไป (ของงานไหน?) · คำใหม่ชี้ชัดว่าดูขั้นตอนที่ระบบกำลังรัน</td></tr>
+
+  <tr><td class="old">จัดการ</td>
+      <td><code>flForm()</code> → เปิด 5 ทางเลือก: ให้ระบบตรวจให้ · ตรวจเองแล้วบันทึกหลักฐาน · ส่งเป็นงานให้ทีม · เลื่อนไปก่อน · เลิกติดตาม</td>
+      <td class="new">เลือกวิธีปิดรายการนี้</td>
+      <td>“จัดการ” ไม่บอกว่ามีตัวเลือก · คำใหม่บอกว่ากดแล้วเจอเมนูให้เลือก และเป้าหมายคือ “ปิด”</td></tr>
+
+  <tr><td class="old">ในคลังพัก<br>รอตรวจพิสูจน์</td>
+      <td>ไฟล์อยู่ใน <code>data/drafts/</code> ยังไม่ผ่าน readproof จึงยังอ้างอิงไม่ได้</td>
+      <td class="new">ร่างเสร็จแล้ว แต่ยังไม่ได้เปิดอ่านลิงก์อ้างอิง — ยังขึ้นเว็บไม่ได้</td>
+      <td>“คลังพัก” เป็นศัพท์ภายใน · คำใหม่บอกสถานะ + เหตุผล + ข้อจำกัด ในประโยคเดียว</td></tr>
+
+  <tr><td class="old">🏳️ รายการติดตาม</td>
+      <td>ธงที่เปิดค้าง = มาตรฐานที่ยังไม่มีหลักฐานยืนยัน จึงถูกล็อกไม่ให้อ้างในหัวข้อใหม่</td>
+      <td class="new">ค้างเพราะยังหาหลักฐานไม่ได้</td>
+      <td>“ติดตาม” ฟังเหมือนแค่เฝ้าดู · ความจริงคือมันบล็อกการใช้งานอยู่ ต้องสื่อให้ตรง</td></tr>
+
+  <tr><td class="old">✅ รออนุมัติขึ้นเว็บ<br>📋 ร่างรอตรวจ</td>
+      <td>แบ่งตามแหล่งข้อมูล (PR / ไฟล์ร่าง / ธง) ซึ่งเป็นโครงหลังบ้าน</td>
+      <td class="new">ถึงคิวคุณตัดสินใจ / รอคุณสั่งเริ่ม / ระบบกำลังทำให้ / ค้างเพราะยังหาหลักฐานไม่ได้</td>
+      <td>แบ่งตาม “ใครต้องขยับ” — ผู้ใช้กวาดตาครั้งเดียวรู้ว่าอันไหนเป็นงานตัวเอง</td></tr>
+</table>
+
+<h2>เกณฑ์ที่ใช้ตั้งชื่อ</h2>
+<table>
+  <tr><th style="width:210px">กฎ</th><th>ตัวอย่าง</th></tr>
+  <tr><td>ปุ่มต้องตอบได้ว่า <b>“กดแล้วจะเกิดอะไร”</b></td><td>“เปิดอ่านลิงก์อ้างอิงทีละรายการ” ✅ · “สั่งตรวจพิสูจน์” ❌</td></tr>
+  <tr><td>ห้ามใช้ศัพท์ระบบที่ผู้ใช้ไม่ได้ตั้งเอง</td><td>เลี่ยง: พิสูจน์ · เกต · merge · PR · readproof · คลังพัก</td></tr>
+  <tr><td>สถานะต้องบอก <b>เหตุผล + ข้อจำกัด</b> ไม่ใช่แค่ชื่อสถานะ</td><td>“ยังไม่ได้เปิดอ่านลิงก์ — ยังขึ้นเว็บไม่ได้” ✅ · “PENDING” ❌</td></tr>
+  <tr><td>หัวข้อกลุ่มบอกว่า <b>ใครต้องขยับ</b></td><td>“ถึงคิวคุณตัดสินใจ” / “ระบบกำลังทำให้” ✅ · “รออนุมัติขึ้นเว็บ” ❌</td></tr>
+</table>
+
+<p class="ac-msg" style="margin-top:16px">หลักการที่ยึด: <b>ไม่ลบโค้ดเดิม</b> — ของเดิมคอมเมนต์ไว้พร้อมมาร์กเกอร์วันที่เพื่อกู้คืนได้ · เงื่อนไขอนุมัติ (เกตเขียว + ติ๊กครบ + มีรหัส) และฟังก์ชันดึงข้อมูลไม่เปลี่ยนแม้แต่บรรทัดเดียว</p>
+
+</div></body></html>

@@ -1,0 +1,139 @@
+<div class="pv-wrap">
+  <div class="pv-bar">
+    <div class="pv-brand">ต้นแบบ (Prototype) — ยังไม่ใช่ของจริง</div>
+    <div class="pv-sw">
+      <button class="pv-t on" data-v="u">หน้าผู้ใช้ทั่วไป</button>
+      <button class="pv-t" data-v="a">หน้าผู้ดูแลระบบ</button>
+    </div>
+  </div>
+  <div id="pv-app"></div>
+</div>
+
+<script>
+(function(){
+  var TOPICS=[
+    {id:'T005',n:'การบริหารสัญญาซื้อขายไฟฟ้า (PPA)',r:6},
+    {id:'T012',n:'ความมั่นคงปลอดภัยไซเบอร์ระบบควบคุม OT/SCADA',r:7},
+    {id:'T019',n:'การบริหารข้อร้องเรียนและการคุ้มครองผู้ใช้บริการ',r:6},
+    {id:'T022',n:'ความเสี่ยงด้านเทคโนโลยีและปัญญาประดิษฐ์ (AI) ในระบบไฟฟ้า',r:7}
+  ];
+  var view='u', logged=false, mode='new', topicText='', target='T005', focus='', sent=false, uq='';
+  var Q=[
+    {t:'ความมั่นคงปลอดภัยไซเบอร์ระบบควบคุม OT/SCADA',s:'appr',d:'พร้อมให้อนุมัติ · 7 ความเสี่ยง · 21 จุดควบคุม'},
+    {t:'ความเสี่ยงด้านเทคโนโลยีและ AI ในระบบไฟฟ้า',s:'flag',d:'โปรดตรวจสอบฉบับมาตรฐาน 2 รายการก่อนยืนยัน'},
+    {t:'ความเสี่ยงการจัดซื้อจัดจ้างพัสดุ',s:'req',d:'คำขอจากผู้ใช้ · คุณสมชาย'}
+  ];
+  var LB={req:['คำขอใหม่','var(--navy-light)','#E8EEF9'],run:['กำลังจัดทำ','var(--med)','var(--med-bg)'],
+          appr:['รออนุมัติ','var(--low)','var(--low-bg)'],flag:['ต้องทบทวน','var(--crit)','var(--crit-bg)'],
+          done:['ขึ้นเว็บแล้ว','var(--navy)','#E8EEF9']};
+  function esc(x){return String(x||'').replace(/</g,'&lt;')}
+  function chip(s){var l=LB[s];return '<span class="pv-chip" style="color:'+l[1]+';background:'+l[2]+'">'+l[0]+'</span>'}
+
+  function userView(){
+    if(sent) return '<div class="pv-card pv-center">'
+      +'<div class="pv-ok">✓</div>'
+      +'<h3>ส่งคำขอเรียบร้อย</h3>'
+      +'<p class="pv-sub">ทีมดูแลรับเรื่องแล้ว — หัวข้อจะขึ้นเว็บให้อัตโนมัติเมื่อจัดทำเสร็จ</p>'
+      +'<button class="ac-go pv-w" id="again">ขอเรื่องอื่นอีก</button></div>';
+    return '<div class="pv-card">'
+      +'<h3>อยากได้แนวทางตรวจสอบเรื่องอะไร</h3>'
+      +'<p class="pv-sub">พิมพ์เรื่องที่ต้องการ ทีมดูแลจะจัดทำและขึ้นเว็บให้ — ไม่ต้องใช้รหัสใดๆ</p>'
+      +'<label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>'
+      +'<input class="ac-input" id="uq" value="'+esc(uq)+'" placeholder="เช่น การบริหารพัสดุคงคลัง">'
+      +'<button class="ac-go pv-w" id="usend">ส่งคำขอ</button>'
+      +'<div class="ac-hint">คำขอจะถูกส่งให้ทีมดูแลพิจารณา — ผู้ใช้ไม่ต้องยุ่งกับขั้นตอนภายใน</div>'
+      +'</div>';
+  }
+
+  function loginView(){
+    return '<div class="pv-card pv-center pv-narrow">'
+      +'<div class="pv-lock">🔒</div>'
+      +'<h3>เข้าสู่ระบบผู้ดูแล</h3>'
+      +'<p class="pv-sub">ใส่รหัสประจำตัว <b>ครั้งเดียว</b> ใช้ได้ตลอดการทำงานครั้งนี้<br>(สั่งจัดทำ · อนุมัติ · ส่งกลับ — ไม่ต้องใส่ซ้ำ)</p>'
+      +'<input class="ac-input" type="password" placeholder="รหัสประจำตัวผู้ดูแล">'
+      +'<button class="ac-go pv-w" id="lg">เข้าสู่ระบบ</button>'
+      +'<div class="ac-hint">ปิดหรือรีเฟรชหน้า = ออกจากระบบอัตโนมัติ ระบบไม่เก็บรหัสไว้ที่ใด</div></div>';
+  }
+
+  function adminView(){
+    var isAdd = mode==='add';
+    var tg = TOPICS.filter(function(x){return x.id===target})[0] || TOPICS[0];
+    var h = '<div class="pv-adminbar"><span>ผู้ดูแลระบบ · เข้าสู่ระบบแล้ว</span><button class="pv-out" id="out">ออกจากระบบ</button></div>';
+
+    h += '<div class="pv-card">'
+      +'<h3>สั่งจัดทำแนวทางตรวจสอบ</h3>'
+      +'<label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>'
+      +'<input class="ac-input" id="tt" value="'+esc(topicText)+'" placeholder="เช่น การบริหารพัสดุคงคลัง"'+(isAdd?' disabled':'')+'>'
+      +'<label class="ac-lbl pv-mt">ต้องการแบบไหน</label>'
+      +'<label class="pv-opt'+(!isAdd?' sel':'')+'"><input type="radio" name="md" id="m1"'+(!isAdd?' checked':'')+'>'
+        +'<span><b>หัวข้อใหม่</b><em>สร้างหัวข้อใหม่พร้อมความเสี่ยง วิธีตรวจ และหลักฐาน</em></span></label>'
+      +'<label class="pv-opt'+(isAdd?' sel':'')+'"><input type="radio" name="md" id="m2"'+(isAdd?' checked':'')+'>'
+        +'<span><b>เพิ่มเติมความเสี่ยงจากหัวข้อที่มีอยู่แล้ว</b><em>ระบบหาประเด็นที่ยังขาด แล้วเพิ่มต่อเข้าหัวข้อเดิม</em></span></label>';
+
+    if(isAdd){
+      h += '<div class="pv-addbox">'
+        +'<label class="ac-lbl" style="margin-top:0">เลือกหัวข้อที่ต้องการเพิ่มความเสี่ยง</label>'
+        +'<select class="ac-input" id="sel">'+TOPICS.map(function(x){
+            return '<option value="'+x.id+'"'+(x.id===target?' selected':'')+'>'+esc(x.n)+' — มี '+x.r+' ความเสี่ยง</option>'}).join('')+'</select>'
+        +'<label class="ac-lbl">ประเด็นที่อยากเน้น (ไม่ใส่ก็ได้)</label>'
+        +'<input class="ac-input" id="fc" value="'+esc(focus)+'" placeholder="เว้นว่าง = ระบบหาประเด็นที่ยังขาดให้เอง">'
+        +'<div class="pv-note">ผลลัพธ์: เพิ่มความเสี่ยงใหม่ต่อท้าย <b>'+esc(tg.id)+'</b> (เริ่มที่ R00'+(tg.r+1)+') · เวอร์ชัน 1.0.0 → 1.1.0 · ไม่สร้างหัวข้อซ้ำ</div>'
+        +'</div>';
+    }
+    h += '<button class="ac-go pv-w" id="run">เริ่มจัดทำ</button>'
+      +'<div class="ac-hint">ไม่ต้องใส่รหัสอีก — ใช้รหัสที่เข้าสู่ระบบไว้แล้ว</div></div>';
+
+    h += '<div class="pv-card"><h3>คิวงาน <span class="pv-count">'+Q.length+' รายการ</span></h3>';
+    h += Q.map(function(r,i){
+      return '<div class="pv-row"><div class="pv-rowtop"><div><div class="pv-rt">'+esc(r.t)+'</div>'
+        +'<div class="pv-rd">'+esc(r.d)+'</div></div>'+chip(r.s)+'</div>'
+        +'<div class="pv-acts">'
+        +(r.s==='req'?'<button class="pv-b" data-act="start" data-i="'+i+'">เริ่มจัดทำ</button><button class="pv-b">ตีกลับ</button>':'')
+        +(r.s==='appr'?'<button class="pv-b pv-primary" data-act="ok" data-i="'+i+'">ตรวจและอนุมัติขึ้นเว็บ</button><button class="pv-b">ส่งกลับให้แก้</button>':'')
+        +(r.s==='flag'?'<button class="pv-b">ดูสิ่งที่ต้องตรวจ</button>':'')
+        +(r.s==='run'?'<span class="pv-rd">ระบบกำลังทำ ~8 นาที</span>':'')
+        +(r.s==='done'?'<span class="pv-rd">เผยแพร่แล้วบนเว็บ</span>':'')
+        +'</div></div>';
+    }).join('');
+    h += '</div>';
+    return h;
+  }
+
+  function render(){
+    var el=document.getElementById('pv-app');
+    el.innerHTML = view==='u' ? userView() : (logged?adminView():loginView());
+    var b;
+    if(b=document.getElementById('usend')) b.onclick=function(){sent=true;render()};
+    if(b=document.getElementById('again')) b.onclick=function(){sent=false;uq='';render()};
+    if(b=document.getElementById('uq')) b.oninput=function(){uq=this.value};
+    if(b=document.getElementById('lg')) b.onclick=function(){logged=true;render()};
+    if(b=document.getElementById('out')) b.onclick=function(){logged=false;render()};
+    if(b=document.getElementById('m1')) b.onchange=function(){mode='new';render()};
+    if(b=document.getElementById('m2')) b.onchange=function(){mode='add';render()};
+    if(b=document.getElementById('tt')) b.oninput=function(){topicText=this.value};
+    if(b=document.getElementById('sel')) b.onchange=function(){target=this.value;render()};
+    if(b=document.getElementById('fc')) b.oninput=function(){focus=this.value};
+    if(b=document.getElementById('run')) b.onclick=function(){
+      var tg=TOPICS.filter(function(x){return x.id===target})[0];
+      Q.unshift(mode==='add'
+        ? {t:'เพิ่มความเสี่ยงใน '+tg.n,s:'run',d:'ต่อเข้า '+tg.id+' · เวอร์ชันจะเป็น 1.1.0'}
+        : {t:(topicText||'หัวข้อใหม่'),s:'run',d:'สร้างหัวข้อใหม่พร้อมความเสี่ยงและวิธีตรวจ'});
+      render();
+    };
+    [].slice.call(document.querySelectorAll('[data-act]')).forEach(function(x){
+      x.onclick=function(){
+        var i=+x.dataset.i;
+        if(x.dataset.act==='ok'){Q[i].s='done';Q[i].d='เผยแพร่บนเว็บเรียบร้อย'}
+        if(x.dataset.act==='start'){Q[i].s='run';Q[i].d='ระบบกำลังจัดทำ'}
+        render();
+      };
+    });
+  }
+  [].slice.call(document.querySelectorAll('.pv-t')).forEach(function(t){
+    t.onclick=function(){view=t.dataset.v;
+      document.querySelectorAll('.pv-t').forEach(function(x){x.classList.remove('on')});
+      t.classList.add('on');render();};
+  });
+  render();
+})();
+</script>
