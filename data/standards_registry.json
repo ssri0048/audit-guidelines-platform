@@ -168,10 +168,16 @@
           "version": "2023",
           "status": "CURRENT",
           "notes": "ต้อง verify stage จาก iso.org",
-          "evidence_url": "https://www.iso.org/standard/42001",
-          "evidence_excerpt": "",
-          "verified": false,
-          "last_verified": "2026-07-13"
+          "evidence_url": "https://www.iso.org/home/insights-news/resources/iso-42001-explained-what-it-is.html",
+          "evidence_excerpt": "ISO/IEC 42001 คือมาตรฐานสากลสำหรับระบบการจัดการปัญญาประดิษฐ์ (AI)  มาตรฐานนี้  กำหนดข้อกำหนดและแนวทาง  สำหรับองค์กรที่พัฒนา จัดหา หรือใช้งานระบบปัญญาประดิษฐ์ (AI ) โดยช่วยให้องค์กร สามารถบริหารจัดการความเสี่ยงที่เกี่ยวข้องกับ AI พร้อมทั้งสนับสนุนนวัตกรรม ความไว้วางใจ และความรับผิดชอบ  ISO/IEC 42001 เป็นมาตรฐานสากลฉบับแรกที่กำหนดวิธีการจัดตั้ง ดำเนินการ บำรุงรักษา และปรับปรุงระบบการจัดการปัญญาประดิษฐ์อย่างต่อเนื่อง",
+          "verified": true,
+          "last_verified": "2026-07-21",
+          "excerpt_verbatim": "ISO/IEC 42001 คือมาตรฐานสากลสำหรับระบบการจัดการปัญญาประดิษฐ์ (AI)  มาตรฐานนี้  กำหนดข้อกำหนดและแนวทาง  สำหรับองค์กรที่พั",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web"
+          }
         }
       ]
     },
@@ -734,7 +740,11 @@
           "evidence_url": "https://www.pea.co.th/sites/default/files/documents/พรบ.%20กฎระเบียบข้อบังคับ/ด้านทรัพยากรบุคคล/พรบ%20แรงงานรัฐวิสาหกิจสัมพันธ์%20พ.ศ.%202543.pdf",
           "evidence_excerpt": "ประกาศ 7 เม.ย. 2543 ยกเลิก พ.ร.บ.พนักงานรัฐวิสาหกิจสัมพันธ์ 2534 (สำเนาทางการบนเว็บ กฟภ./สนง.สลากฯ/กกท.)",
           "excerpt_verbatim": "แรงงานรัฐวิสาหกิจสัมพันธ์",
-          "link_status": { "state": "UNCHECKED", "checked_at": null, "note": "กู้ URL เต็มจาก knowledge_store (SRC-T010-01) 2026-07-15 — เดิม evidence_url ถูกตัดเหลือ /documents/ (404); รอ readproof-watchdog ยืนยัน live+อ่านจริง" },
+          "link_status": {
+            "state": "UNCHECKED",
+            "checked_at": null,
+            "note": "กู้ URL เต็มจาก knowledge_store (SRC-T010-01) 2026-07-15 — เดิม evidence_url ถูกตัดเหลือ /documents/ (404); รอ readproof-watchdog ยืนยัน live+อ่านจริง"
+          },
           "notes": "org-scope: SOE ใช้ฉบับนี้ ไม่ใช่ พ.ร.บ.แรงงานสัมพันธ์ 2518 (เอกชน); มี \"และที่แก้ไขเพิ่มเติม\" — รายละเอียดฉบับแก้ไขติดธงตรวจ",
           "exception_code": "EX-AMENDED"
         }
