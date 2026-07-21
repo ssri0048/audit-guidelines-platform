@@ -546,13 +546,19 @@
         {
           "version": "2015",
           "status": "CURRENT",
-          "verified": false,
-          "last_verified": "2026-07-13",
+          "verified": true,
+          "last_verified": "2026-07-21",
           "evidence_url": "https://www.iso.org/standard/60857.html",
           "evidence_excerpt": "",
           "exception_code": "EX-JS-PAGE",
           "open_question": "ตรวจ lifecycle บน iso.org — คาดมี Amd 1:2024 (climate action) แบบเดียวกับ 27001",
-          "sla_deadline": "2026-09-11"
+          "sla_deadline": "2026-09-11",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "http": 200,
+            "checked_at": "2026-07-21",
+            "method": "flag-resolver(readproof)"
+          }
         }
       ]
     },
