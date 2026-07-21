@@ -1006,31 +1006,155 @@ async function apSendBack(){
     if(r.ok)document.getElementById('ac-backtxt').value='';
   }catch(e){key='';msg.textContent='⛔ '+e.message}
 }
-/* ── แท็บ 4: Verification Queue (logic ย่อจาก validate.js — ข้อมูลชุดเดียวกัน) ── */
+/* ── คิวธง + จัดการรายธงจากเว็บ (ทุกทางจบเป็น PR/issue — ไม่มีปุ่มลบธงเฉยๆ) ── */
+let FLQ=[],flOpen=-1,flMode='',flVals={},flSnoozed=0;
+function flG(k){return flVals[k]||''}
+function flS(k,v){flVals[k]=v}
+function flUrlOk(u){u=(u||'').trim();return /^https:\/\/\S{6,}/.test(u)&&!/\s/.test(u)&&!/\/(documents|files|uploads)\/$/i.test(u)}
+function flRefs(fam){let n=0;for(const t of TOPICS){let hit=false;const test=s=>{try{return new RegExp(fam.match,'i').test(s)}catch(e){return false}};
+  if([...(t.applicable_standards||[]),...(t.thai_law_refs||[])].some(test))hit=true;
+  if(!hit)outer:for(const r of t.risks||[])for(const cf of r.control_failures||[])for(const ap of cf.audit_procedures||[])for(const sr of ap.std_refs||[])if(sr&&sr.std&&test(sr.std)){hit=true;break outer}
+  if(hit)n++}return n}
 async function loadQueue(){
   const el=document.getElementById('ac-queue');
   try{
-    const v='?v='+Date.now();
+    const v='?v='+Date.now();const now=Date.now();
     const [uni,glo]=await Promise.all([
       fetch('../data/source_universe.json'+v).then(r=>r.json()).catch(()=>null),
       fetch('../data/glossary.json'+v).then(r=>r.json()).catch(()=>null)
     ]);
-    const q=[];const now=Date.now();
     const age=d=>d?Math.round((now-Date.parse(d))/86400000):null;
+    const snz=o=>o&&o.snooze_until&&now<Date.parse(o.snooze_until);
+    FLQ=[];flSnoozed=0;
     (REGISTRY&&REGISTRY.families||[]).forEach(f=>{
-      if(f.visibility==='INTERNAL'){q.push({s:'PARKED',r:f.display,a:null,t:'พักรอเปิดใช้ internal_doc'});return}
+      if(f.visibility==='INTERNAL'){FLQ.push({kind:'parked',s:'PARKED',r:f.display,a:null,t:'พักรอเปิดใช้ internal_doc'});return}
       (f.editions||[]).forEach(ed=>{
-        if(ed.verified===false)q.push({s:'UNVERIFIED',r:f.display+' v'+ed.version,a:age(ed.last_verified),t:ed.open_question||'ตรวจจากผู้ออก'});
-        else if(age(ed.last_verified)>183)q.push({s:'STALE',r:f.display+' v'+ed.version,a:age(ed.last_verified),t:'ตรวจซ้ำตามรอบ'});
+        if(ed.status==='RETIRED')return;
+        if(snz(ed)){flSnoozed++;return}
+        if(ed.verified===false)FLQ.push({kind:'registry',famId:f.family_id,ver:ed.version,fam:f,s:'UNVERIFIED',r:f.display+' v'+ed.version,a:age(ed.last_verified),t:ed.open_question||ed.notes||'ตรวจจากผู้ออก'});
+        else if(age(ed.last_verified)>183)FLQ.push({kind:'registry',famId:f.family_id,ver:ed.version,fam:f,s:'STALE',r:f.display+' v'+ed.version,a:age(ed.last_verified),t:'ตรวจซ้ำตามรอบ'});
       });
     });
-    ((uni&&uni.publishers)||[]).forEach(p=>{const c=p._claim||{};if(c.state==='UNVERIFIED'||c.state==='UNRESOLVED')q.push({s:c.state,r:p.name,a:age(c.last_checked),t:c.open_question||'harvest เอกสารหลัก'})});
-    ((glo&&glo.terms)||[]).forEach(t=>{const c=t._claim||{};if(c.state==='UNVERIFIED'||c.state==='UNRESOLVED')q.push({s:c.state,r:'ศัพท์ "'+t.en+'"',a:age(c.last_checked),t:c.open_question||'ยืนยันที่มาศัพท์'})});
-    q.sort((a,b)=>(b.a||0)-(a.a||0));
-    el.innerHTML='<div class="ac-msg"><b>'+q.length+' ธงเปิดอยู่</b> (SLA 60 วันสำหรับ UNVERIFIED/UNRESOLVED — เกินแล้ว CI จะ block) · กติกา Boy Scout: batch ใหม่ปิดธงเก่า ≥2</div>'
-      +q.slice(0,40).map(x=>'<div class="qrow"><span class="qs qs-'+x.s+'">'+x.s+'</span><span class="qr">'+esc(x.r)+' <small style="color:var(--text-muted)">→ '+esc(x.t)+'</small></span><span class="qa">'+(x.a==null?'—':'ค้าง '+x.a+' วัน')+'</span></div>').join('')
-      +(q.length>40?'<div class="ac-msg">... และอีก '+(q.length-40)+' รายการ</div>':'');
+    ((uni&&uni.publishers)||[]).forEach(p=>{const c=p._claim||{};if(c.state==='RETIRED')return;if(snz(c)){flSnoozed++;return}
+      if(c.state==='UNVERIFIED'||c.state==='UNRESOLVED')FLQ.push({kind:'universe',pubId:p.publisher_id,s:c.state,r:p.name,a:age(c.last_checked),t:c.open_question||'harvest เอกสารหลัก'})});
+    ((glo&&glo.terms)||[]).forEach(t=>{const c=t._claim||{};if(c.state==='RETIRED')return;if(snz(c)){flSnoozed++;return}
+      if(c.state==='UNVERIFIED'||c.state==='UNRESOLVED')FLQ.push({kind:'glossary',s:c.state,r:'ศัพท์ "'+t.en+'"',a:age(c.last_checked),t:c.open_question||'ยืนยันที่มาศัพท์'})});
+    FLQ.sort((a,b)=>(b.a||0)-(a.a||0));
+    flRender(el);
   }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
+}
+function flForm(x,i){
+  const m=flMode;
+  if(m==='manual'){const u=flG('u'),xx=flG('x'),ok=flUrlOk(u)&&xx.trim().length>=15;
+    return '<div style="margin-top:8px;padding:11px 13px;background:var(--border-light);border-radius:8px">'
+    +'<div class="ac-lbl" style="margin-top:0">1) ลิงก์หน้า/ไฟล์ official ที่คุณอ่าน</div>'
+    +'<input class="ac-input" data-fk="u" value="'+esc(u)+'" placeholder="เช่น https://fidic.org/books/... (หน้าผู้ออกโดยตรง ไม่ใช่ข่าว/บล็อก)">'
+    +'<div style="font-size:11.5px;margin-top:3px;color:'+(u?(flUrlOk(u)?'var(--low)':'var(--med)'):'var(--text-muted)')+'">'+(u?(flUrlOk(u)?'✓ โครงลิงก์ถูกต้อง':'✗ ต้อง https:// ไม่มีช่องว่าง ไม่ลงท้ายโฟลเดอร์ว่าง'):'')+'</div>'
+    +'<div class="ac-lbl">2) ข้อความที่อ่านเจอ — คัดคำต่อคำ ห้ามสรุปเอง (ระบบใช้พิสูจน์ซ้ำอัตโนมัติ)</div>'
+    +'<input class="ac-input" data-fk="x" value="'+esc(xx)+'" placeholder="เช่น FIDIC 2017 Suite, second edition — reprinted 2022 with amendments">'
+    +'<div style="font-size:11.5px;margin-top:3px;color:'+(xx?(xx.trim().length>=15?'var(--low)':'var(--med)'):'var(--text-muted)')+'">'+(xx?(xx.trim().length>=15?'✓ ยาวพอสำหรับพิสูจน์ซ้ำ':'✗ คัดมาอย่างน้อย 15 ตัวอักษร'):'')+'</div>'
+    +'<button class="ac-go" data-fa="msave" data-fi="'+i+'" '+(ok?'':'disabled style="opacity:.55" ')+'style="width:100%;margin-top:9px">บันทึกหลักฐาน + เปิดใบงานปิดธง</button>'
+    +(ok?'':'<div class="ac-hint">ปุ่มกดได้เมื่อ: ลิงก์ถูกต้อง ✓ + ข้อความ ≥15 ตัวอักษร ✓</div>')+'</div>';}
+  if(m==='snooze'){const d=flG('d'),r=flG('r'),ok=d&&new Date(d)>new Date()&&r.trim().length>=10;
+    return '<div style="margin-top:8px;padding:11px 13px;background:var(--border-light);border-radius:8px">'
+    +'<div class="ac-lbl" style="margin-top:0">1) เลื่อนถึงวันไหน (ธงกลับมาเตือนเองเมื่อถึงวัน)</div>'
+    +'<input class="ac-input" type="date" data-fk="d" value="'+esc(d)+'">'
+    +'<div class="ac-lbl">2) เหตุผล (บันทึกในทะเบียน ตรวจย้อนได้)</div>'
+    +'<input class="ac-input" data-fk="r" value="'+esc(r)+'" placeholder="เช่น ผู้ออกประกาศเผยแพร่ไตรมาส 4/2569 — รอของจริงก่อนตรวจ">'
+    +'<div class="ac-hint">การเลื่อน<b>ไม่ปลดล็อกการอ้างอิง</b> — มาตรฐานนี้ยังอ้างในหัวข้อใหม่ไม่ได้จนกว่าจะตรวจจริง</div>'
+    +'<button class="ac-go" data-fa="ssave" data-fi="'+i+'" '+(ok?'':'disabled style="opacity:.55" ')+'style="width:100%;margin-top:9px">บันทึกการเลื่อน (เปิดใบงาน)</button>'
+    +(ok?'':'<div class="ac-hint">ปุ่มกดได้เมื่อ: วันที่เป็นอนาคต ✓ + เหตุผล ≥10 ตัวอักษร ✓</div>')+'</div>';}
+  if(m==='retire'){
+    if(x.kind==='registry'){const n=flRefs(x.fam);
+      if(n>0)return '<div style="margin-top:8px;padding:10px 12px;background:var(--crit-bg);border:1px solid var(--crit-bd);border-radius:8px;font-size:12.5px;color:var(--crit)">⛔ เลิกติดตามไม่ได้ — มี <b>'+n+' หัวข้อ</b>ในคลังอ้างมาตรฐานนี้อยู่ (กันความรู้ที่ใช้อยู่ขาดหลักฐาน) → ใช้ <b>🔬 ให้ระบบตรวจให้</b> หรือ <b>✍️ ตรวจเอง</b> แทน</div>';}
+    const r=flG('r'),ok=r.trim().length>=10;
+    return '<div style="margin-top:8px;padding:11px 13px;background:var(--border-light);border-radius:8px">'
+    +'<div style="font-size:11.5px;color:var(--low);background:var(--low-bg);padding:6px 10px;border-radius:6px">✓ ตรวจแล้ว: ไม่มีหัวข้อใดอ้างรายการนี้ — เลิกติดตามได้</div>'
+    +'<div class="ac-lbl">1) เหตุผลที่เลิกติดตาม</div>'
+    +'<input class="ac-input" data-fk="r" value="'+esc(r)+'" placeholder="เช่น ถูกแทนที่โดย ISO 55000/55001 และไม่มีหัวข้อใดอ้างอิงแล้ว">'
+    +'<div class="ac-lbl">2) ถูกแทนที่โดย (ไม่บังคับ)</div>'
+    +'<input class="ac-input" data-fk="s" value="'+esc(flG('s'))+'" placeholder="เช่น ISO 55001:2024 — ช่วยให้ระบบสลับให้อัตโนมัติในอนาคต">'
+    +'<button class="ac-go" data-fa="rsave" data-fi="'+i+'" '+(ok?'':'disabled style="opacity:.55" ')+'style="width:100%;margin-top:9px">ยืนยันเลิกติดตาม (เปิดใบงาน)</button></div>';}
+  // เมนูหลัก
+  const canAuto=x.kind==='registry';
+  return '<div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">'
+   +(canAuto?'<button class="ac-tab" data-fa="auto" data-fi="'+i+'" style="text-align:left;padding:9px 11px"><b>🔬 ให้ระบบตรวจให้</b> — เปิดอ่านหน้า official + พิสูจน์ข้อความ แล้วเปิดใบงานให้อัตโนมัติ</button>':'')
+   +(x.kind!=='glossary'?'<button class="ac-tab" data-fa="manual" data-fi="'+i+'" style="text-align:left;padding:9px 11px"><b>✍️ ตรวจเองแล้ว บันทึกหลักฐาน</b> — วางลิงก์ + ข้อความคำต่อคำ</button>':'')
+   +'<button class="ac-tab" data-fa="issue" data-fi="'+i+'" style="text-align:left;padding:9px 11px"><b>📨 ส่งเป็นงานให้ทีม</b> — สร้างใบงานพร้อมรายละเอียดธง</button>'
+   +(x.kind!=='glossary'?'<button class="ac-tab" data-fa="snooze" data-fi="'+i+'" style="text-align:left;padding:9px 11px"><b>⏸ เลื่อนกำหนด</b> — ระบุวัน+เหตุผล ธงกลับมาเตือนเอง</button>':'')
+   +(x.kind!=='glossary'?'<button class="ac-tab" data-fa="retire" data-fi="'+i+'" style="text-align:left;padding:9px 11px"><b>🚫 เลิกติดตาม</b> — ไม่ใช้แล้ว/ถูกแทนที่ พร้อมเหตุผล</button>':'')
+   +'</div>';
+}
+function flRender(el){
+  el=el||document.getElementById('ac-queue');
+  el.innerHTML='<div class="ac-msg"><b>'+FLQ.length+' ธงเปิดอยู่</b>'+(flSnoozed?' · พักไว้ '+flSnoozed+' (snooze)':'')+' — กด "จัดการ" รายธง ทุกทางจบเป็นใบงานให้คุณอนุมัติ · Boy Scout: ปิดธงเก่า ≥2/batch</div>'
+   +FLQ.slice(0,40).map((x,i)=>'<div class="qrow" style="flex-wrap:wrap"><span class="qs qs-'+x.s+'">'+x.s+'</span><span class="qr">'+esc(x.r)+' <small style="color:var(--text-muted)">→ '+esc(x.t)+'</small></span><span class="qa">'+(x.a==null?'—':'ค้าง '+x.a+' วัน')+'</span>'
+     +(x.kind==='parked'?'':'<button class="dbtn" data-fa="tgl" data-fi="'+i+'">จัดการ '+(flOpen===i?'▴':'▾')+'</button>')
+     +(flOpen===i?'<div style="flex-basis:100%">'+flForm(x,i)+'</div>':'')
+     +'</div>').join('')
+   +(FLQ.length>40?'<div class="ac-msg">... และอีก '+(FLQ.length-40)+' รายการ</div>':'')
+   +'<div class="ac-msg" id="fl-msg"></div>';
+  el.querySelectorAll('[data-fa]').forEach(b=>{b.onclick=()=>flAct(b.dataset.fa,+b.dataset.fi)});
+  el.querySelectorAll('input[data-fk]').forEach(inp=>{inp.oninput=()=>{const p=inp.selectionStart;flS(inp.dataset.fk,inp.value);flRender(el);
+    const n=el.querySelector('input[data-fk="'+inp.dataset.fk+'"]');if(n&&n.type!=='date'){n.focus();try{n.setSelectionRange(p,p)}catch(e){}}}});
+}
+function b64enc(str){const u=new TextEncoder().encode(str);let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)}
+async function flPR(pathStr,mutate,title,body){
+  const key=getAdminKey();if(!key)throw new Error('เข้าสู่ระบบก่อน');
+  const H={'Authorization':'Bearer '+key,'Accept':'application/vnd.github+json','Content-Type':'application/json'};
+  const API='https://api.github.com/repos/'+GH_REPO;
+  const ref=await (await fetch(API+'/git/ref/heads/main',{headers:H})).json();
+  const br='flag/'+Date.now();
+  await fetch(API+'/git/refs',{method:'POST',headers:H,body:JSON.stringify({ref:'refs/heads/'+br,sha:ref.object.sha})});
+  const f=await (await fetch(API+'/contents/'+pathStr+'?ref='+br,{headers:H})).json();
+  const bin=atob((f.content||'').replace(/\n/g,''));const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  const json=JSON.parse(new TextDecoder('utf-8').decode(bytes));
+  mutate(json);
+  await fetch(API+'/contents/'+pathStr,{method:'PUT',headers:H,body:JSON.stringify({message:title,content:b64enc(JSON.stringify(json,null,2)),sha:f.sha,branch:br})});
+  const pr=await (await fetch(API+'/pulls',{method:'POST',headers:H,body:JSON.stringify({title,head:br,base:'main',body})})).json();
+  if(!pr.number)throw new Error(pr.message||'เปิดใบงานไม่สำเร็จ');
+  return pr;
+}
+function flEd(json,x){const fam=(json.families||[]).find(f=>f.family_id===x.famId);return fam?(fam.editions||[]).find(e=>String(e.version)===String(x.ver)):null}
+function flClaim(json,x){const p=(json.publishers||[]).find(p=>p.publisher_id===x.pubId);if(p){p._claim=p._claim||{};return p._claim}return null}
+async function flAct(a,i){
+  const x=FLQ[i],msg=()=>document.getElementById('fl-msg'),today=new Date().toISOString().slice(0,10);
+  if(a==='tgl'){flOpen=flOpen===i?-1:i;flMode='';flVals={};flRender();return}
+  if(['manual','snooze','retire'].includes(a)){flMode=a;flRender();return}
+  try{
+    if(a==='auto'){
+      const key=getAdminKey();if(!key){msg().textContent='เข้าสู่ระบบก่อน';return}
+      msg().textContent='⏳ ส่งคำสั่งตรวจอัตโนมัติ...';
+      const r=await fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/flag-resolver.yml/dispatches',{method:'POST',
+        headers:{'Authorization':'Bearer '+key,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+        body:JSON.stringify({ref:'main',inputs:{family_id:x.famId}})});
+      if(r.status===404){msg().textContent='⏸️ flag-resolver ยังไม่ติดตั้งบน main — merge PR ล่าสุดก่อน';return}
+      if(!r.ok)throw new Error('สั่งไม่สำเร็จ ('+r.status+')');
+      msg().innerHTML='✅ กำลังตรวจ (~1-2 นาที) — สำเร็จ = ใบงาน "ปิดธง" โผล่ในคิวรออนุมัติ · อ่านไม่ได้ = แจ้งใน <a target="_blank" rel="noopener" href="https://github.com/'+GH_REPO+'/issues">Issues</a> พร้อมคำแนะนำ';return}
+    if(a==='issue'){
+      window.open('https://github.com/'+GH_REPO+'/issues/new?title='+encodeURIComponent('🔎 ตรวจธง: '+x.r)+'&body='+encodeURIComponent('ธง: '+x.r+'\nสถานะ: '+x.s+' (ค้าง '+(x.a??'?')+' วัน)\nงาน: '+x.t+'\n\nปิดธงตาม deep-research-protocol แล้วบันทึกหลักฐานเข้าทะเบียน'),'_blank');return}
+    if(a==='msave'){
+      msg().textContent='⏳ เปิดใบงาน...';
+      const u=flG('u').trim(),xx=flG('x').trim();
+      const pr=x.kind==='registry'
+        ?await flPR('data/standards_registry.json',j=>{const e=flEd(j,x);if(!e)throw new Error('ไม่พบ edition');e.verified=true;e.last_verified=today;e.evidence_url=u;e.evidence_excerpt=xx;e.excerpt_verbatim=xx.slice(0,120);e.link_status={state:'READ_VERIFIED',checked_at:today,method:'human-web'}},'ปิดธง: '+x.r+' (หลักฐานจากผู้ตรวจ)','## ✍️ หลักฐานจากผู้ตรวจ\n- URL: '+u+'\n- ข้อความที่อ่านเจอ: "'+xx+'"\n- วันที่อ่าน: '+today+'\n\nreadproof-watchdog จะพิสูจน์ซ้ำอัตโนมัติตามรอบ')
+        :await flPR('data/source_universe.json',j=>{const c=flClaim(j,x);if(!c)throw new Error('ไม่พบ publisher');c.state='VERIFIED';c.last_checked=today;c.evidence={url:u,excerpt:xx}},'ปิดธง: '+x.r+' (หลักฐานจากผู้ตรวจ)','## ✍️ หลักฐาน\n- URL: '+u+'\n- ข้อความ: "'+xx+'"');
+      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — ไปกดอนุมัติในคิว "รออนุมัติขึ้นเว็บ" ด้านบน';loadPRs();return}
+    if(a==='ssave'){
+      msg().textContent='⏳ เปิดใบงาน...';
+      const d=flG('d'),r0=flG('r').trim();
+      const pr=x.kind==='registry'
+        ?await flPR('data/standards_registry.json',j=>{const e=flEd(j,x);if(!e)throw new Error('ไม่พบ edition');e.snooze_until=d;e.snooze_reason=r0},'พักธง: '+x.r+' ถึง '+d,'## ⏸ เลื่อนกำหนด\n- ถึง: '+d+'\n- เหตุผล: '+r0+'\n\nธงจะกลับเข้าคิวเองเมื่อถึงกำหนด · ไม่ปลดล็อกการอ้างอิง')
+        :await flPR('data/source_universe.json',j=>{const c=flClaim(j,x);if(!c)throw new Error('ไม่พบ publisher');c.snooze_until=d;c.snooze_reason=r0},'พักธง: '+x.r+' ถึง '+d,'## ⏸ เลื่อนกำหนด\n- ถึง: '+d+'\n- เหตุผล: '+r0);
+      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — merge แล้วธงจะพักถึง '+d;loadPRs();return}
+    if(a==='rsave'){
+      msg().textContent='⏳ เปิดใบงาน...';
+      const r0=flG('r').trim(),sup=flG('s').trim();
+      const pr=x.kind==='registry'
+        ?await flPR('data/standards_registry.json',j=>{const e=flEd(j,x);if(!e)throw new Error('ไม่พบ edition');e.status='RETIRED';e.retired_reason=r0;if(sup)e.superseded_by=sup},'เลิกติดตาม: '+x.r,'## 🚫 เลิกติดตาม (RETIRED)\n- เหตุผล: '+r0+(sup?'\n- ถูกแทนที่โดย: '+sup:'')+'\n- ตรวจแล้ว: ไม่มีหัวข้อใดอ้างรายการนี้')
+        :await flPR('data/source_universe.json',j=>{const c=flClaim(j,x);if(!c)throw new Error('ไม่พบ publisher');c.state='RETIRED';c.retired_reason=r0},'เลิกติดตาม: '+x.r,'## 🚫 เลิกติดตาม\n- เหตุผล: '+r0);
+      msg().innerHTML='✅ เปิดใบงาน <b>PR #'+pr.number+'</b> แล้ว — merge แล้วธงหายถาวร';loadPRs();return}
+  }catch(e){if(msg())msg().textContent='⛔ '+e.message}
 }
 function acRenderSteps(states){ // states: {key:'wait'|'run'|'ok'|'fail'}
   const el=document.getElementById('ac-steps');el.style.display='block';

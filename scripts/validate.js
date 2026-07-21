@@ -240,6 +240,9 @@ for (const t of store.topics) {
             warnings.push(`[G5_AMENDED] ${id}: "${std}" — มีเอกสารแก้ไขเพิ่มเติมที่ควรอ้างคู่กัน: ${(ed.amendments || []).join(', ')}`);
           break;
         }
+        case 'RETIRED':
+          report(isLegacy, id, 'G5_LIFECYCLE', `"${std}" — ถูกเลิกติดตามแล้ว (RETIRED${ed.retired_reason ? ': ' + String(ed.retired_reason).slice(0, 80) : ''}) — ควรลบการอ้างหรือเปลี่ยนไปฉบับแทน${ed.superseded_by ? ' (' + ed.superseded_by + ')' : ''}`);
+          break;
         case 'PARTIAL_REPEAL':
           warnings.push(`[G5_PARTIAL] ${id}: "${std}" — มีผลยกเลิก/ถูกยกเลิกบางส่วน: ${(ed.notes || '').slice(0, 120)}...`);
           break;
@@ -284,7 +287,9 @@ for (const t of store.topics) {
 // ทุก claim ที่ไม่อยู่สถานะจบ ต้องโผล่ในคิวนี้ + มี SLA (UNVERIFIED/UNRESOLVED เกิน 60 วัน = block)
 const SLA_DAYS = 60;
 const queue = [];
+let snoozedCount = 0; // ธงที่ถูกเลื่อนกำหนด (snooze_until ยังไม่ถึง) — พักจากคิว/SLA แต่ไม่ปลดล็อกการอ้างอิง
 function ageDays(d) { return d ? Math.round((NOW_MS - Date.parse(d)) / 86400000) : null; }
+function isSnoozed(o) { return o && o.snooze_until && NOW_MS < Date.parse(o.snooze_until); }
 
 // แหล่งที่ 0: coverage gaps — มาตรฐานที่ความรู้อ้างแต่ทะเบียนไม่รู้จัก (เกต G5_COVERAGE + ratchet)
 for (const [std, g] of coverageGaps) {
@@ -306,6 +311,8 @@ for (const fam of REGISTRY.families) {
     continue;
   }
   for (const ed of fam.editions || []) {
+    if (ed.status === 'RETIRED') continue; // เลิกติดตามแล้ว (มี retired_reason ใน PR ที่ปิด) — ไม่เข้าคิว
+    if (isSnoozed(ed)) { snoozedCount++; continue; } // เลื่อนกำหนดไว้ — เลยวันแล้วจะกลับเข้าคิวเองอัตโนมัติ
     const age = ageDays(ed.last_verified);
     if (ed.verified === false) {
       queue.push({ type: 'registry', ref: `${fam.display} v${ed.version}`, state: 'UNVERIFIED', age,
@@ -336,6 +343,8 @@ function loadClaimFile(fname, listKey, refFn, todoFn) {
   catch (e) { errors.push(`[FILE] ${fname} parse ไม่ได้: ${e.message}`); return null; }
   for (const item of data[listKey] || []) {
     const c = item._claim || {};
+    if (c.state === 'RETIRED') continue;
+    if (isSnoozed(c)) { snoozedCount++; continue; }
     if (c.state === 'UNVERIFIED' || c.state === 'UNRESOLVED') {
       const age = ageDays(c.last_checked);
       queue.push({ type: fname.replace('.json',''), ref: refFn(item), state: c.state, age, todo: todoFn(item) });
@@ -403,7 +412,7 @@ console.log(` ⚠️  Warnings: ${warnings.length}`);
 if (errors.length) { console.log('\n── ERRORS (block merge) ──'); errors.forEach(e => console.log('  ❌ ' + e)); }
 if (warnings.length) { console.log('\n── WARNINGS (ต้องเคลียร์ตอน re-verify) ──'); warnings.slice(0, 40).forEach(w => console.log('  ⚠️  ' + w)); if (warnings.length > 40) console.log(`  ... และอีก ${warnings.length - 40} รายการ`); }
 if (queue.length) {
-  console.log(`\n── VERIFICATION QUEUE (${queue.length} claims เปิดอยู่ | SLA ${SLA_DAYS} วันสำหรับ UNVERIFIED) ──`);
+  console.log(`\n── VERIFICATION QUEUE (${queue.length} claims เปิดอยู่${snoozedCount ? ' | พักไว้ ' + snoozedCount + ' (snooze — กลับมาเองเมื่อถึงกำหนด)' : ''} | SLA ${SLA_DAYS} วันสำหรับ UNVERIFIED) ──`);
   queue.sort((a, b) => (b.age || 0) - (a.age || 0)).slice(0, 25).forEach(q =>
     console.log(`  🏳️  [${q.state}] ${q.ref} (ค้าง ${q.age ?? '?'} วัน) → ${q.todo}`));
   if (queue.length > 25) console.log(`  ... และอีก ${queue.length - 25} รายการ`);
