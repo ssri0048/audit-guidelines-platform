@@ -97,6 +97,39 @@ fs.writeFileSync(path.join(root, 'data', 'drafts', 'draft_bad.json'), JSON.strin
 try { require('child_process').execFileSync('node', [path.join(REAL, 'scripts', 'verify_draft.js'), 'draft_bad.json', root], { stdio: 'pipe' }); ok('escalate (ควร exit 2)', false); }
 catch (e) { ok('escalate exit 2 พร้อมเหตุผล', e.status === 2 && String(e.stderr).includes('ESCALATE')); }
 
+console.log('── ชุด 3.5: โหมดเพิ่มความเสี่ยง (append) เข้าหัวข้อเดิม ──');
+{
+  const st0 = JSON.parse(fs.readFileSync(path.join(root, 'data', 'knowledge_store.json'), 'utf8'));
+  const parentBefore = st0.topics.find(x => x.id === res.tid); // ใช้ T ที่เพิ่งสร้างในชุด 2
+  const nBefore = parentBefore.risks.length, vBefore = parentBefore.version;
+  const ap = {
+    mode: 'append', target: res.tid, name_th: parentBefore.name_th,
+    risks: [1, 2].map(i => ({
+      id: 'R00' + i, name_th: 'ความเสี่ยงเสริม ' + i, name_en: 'Extra ' + i, level: 'MEDIUM', likelihood: 'ปานกลาง', impact: 'สูง',
+      control_failures: [{ id: 'CFx', name_th: 'จุดบกพร่องเสริม ' + i, audit_procedures: [{ id: 'APx', name_th: 'ตรวจเสริม ' + i, method: 'Interview', std_refs: [{ std: 'COBIT 2019', clause: '-', title: '-' }], evidence_types: ['ก', 'ข', 'ค', 'ง'], derivation: 'PROFESSIONAL_SYNTHESIS' }] }]
+    }))
+  };
+  fs.writeFileSync(path.join(root, 'data', 'drafts', 'draft_append.json'), JSON.stringify(ap));
+  const resA = main('draft_append.json', root);
+  const stA = JSON.parse(fs.readFileSync(path.join(root, 'data', 'knowledge_store.json'), 'utf8'));
+  const pa = stA.topics.find(x => x.id === res.tid);
+  ok('append: จำนวน risks เพิ่มจาก ' + nBefore + ' → ' + (nBefore + 2), pa.risks.length === nBefore + 2 && resA.appended === 2);
+  const ids = pa.risks.map(r => r.id);
+  ok('append: id ไล่ต่อเนื่องไม่ซ้ำ (unique ทั้งหมด)', new Set(ids).size === ids.length && ids.includes('R00' + (nBefore + 1)));
+  const cfIds = []; pa.risks.forEach(r => (r.control_failures || []).forEach(c => cfIds.push(c.id)));
+  ok('append: CF id ไม่ซ้ำ', new Set(cfIds).size === cfIds.length);
+  ok('append: เวอร์ชัน bump minor (' + vBefore + ' → ' + pa.version + ')', pa.version !== vBefore && pa.version.split('.')[1] === String(parseInt(vBefore.split('.')[1], 10) + 1));
+  ok('append: union มาตรฐานใหม่ (COBIT 2019 เข้า applicable_standards)', pa.applicable_standards.some(s => /COBIT/.test(s)));
+  ok('append: changelog บันทึกการเพิ่ม', pa.changelog.some(c => /เพิ่มความเสี่ยงใหม่ 2/.test(c.change)));
+  ok('append: draft ถูกลบหลังเกตผ่าน', !fs.existsSync(path.join(root, 'data', 'drafts', 'draft_append.json')));
+  ok('append: ไม่สร้างหัวข้อใหม่ (จำนวน topics คงเดิม)', stA.topics.length === st0.topics.length);
+
+  // target ไม่มีจริง → escalate exit 2
+  fs.writeFileSync(path.join(root, 'data', 'drafts', 'draft_badtarget.json'), JSON.stringify(Object.assign({}, ap, { target: 'T999' })));
+  try { require('child_process').execFileSync('node', [path.join(REAL, 'scripts', 'verify_draft.js'), 'draft_badtarget.json', root], { stdio: 'pipe', env: Object.assign({}, process.env) }); ok('append: target ไม่มีจริงควร escalate', false); }
+  catch (e) { ok('append: target ไม่มีจริง → escalate exit 2 + บอกชัด', e.status === 2 && String(e.stderr).includes('ไม่พบหัวข้อ')); }
+}
+
 console.log('── ชุด 4: หัวข้อที่ 2 ตกเกต — ต้องลงจอดนุ่ม (ไฟล์ไม่หาย + error จริง + report) ──');
 const gd = JSON.parse(JSON.stringify(draft));
 gd.name_th = 'หัวข้อตกเกต schema (จำลอง LLM ผิด)';

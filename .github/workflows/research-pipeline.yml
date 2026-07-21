@@ -13,8 +13,16 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'หัวข้อตรวจสอบที่ต้องการร่าง (ภาษาไทย)'
-        required: true
+        description: 'หัวข้อตรวจสอบที่ต้องการร่าง (ภาษาไทย) — เว้นว่างได้ถ้าใช้โหมดเพิ่มความเสี่ยง'
+        required: false
+        type: string
+      target_topic:
+        description: 'โหมดเพิ่มความเสี่ยง: รหัสหัวข้อเดิม เช่น T005 (เว้นว่าง = สร้างหัวข้อใหม่)'
+        required: false
+        type: string
+      focus:
+        description: 'โหมดเพิ่มความเสี่ยง: ประเด็นที่อยากเน้น (เว้นว่าง = ระบบหาประเด็นที่ยังขาดให้)'
+        required: false
         type: string
       chain:
         description: 'ตรวจพิสูจน์ต่อทันทีหลังร่างเสร็จ (วิ่งยาวถึงประตูอนุมัติ — เหลือ human click เดียวคือ merge)'
@@ -55,6 +63,8 @@ jobs:
         id: run
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TARGET_TOPIC: ${{ inputs.target_topic }}
+          FOCUS: ${{ inputs.focus }}
         # pipefail สำคัญ: ไม่ใส่แล้ว `node | tee` จะกลืน exit code — step เขียวทั้งที่ script fail (บั๊กจริงที่เคยเจอ)
         run: |
           set -o pipefail

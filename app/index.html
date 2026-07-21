@@ -361,10 +361,8 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
     </div>
     <div class="ac-body">
       <div class="ac-tabs">
-        <button class="ac-tab on" id="ac-tabbtn-1" onclick="acTab(1)">📝 สั่งสร้างหัวข้อ</button>
-        <button class="ac-tab" id="ac-tabbtn-2" onclick="acTab(2)">📋 ร่างรอตรวจ</button>
-        <button class="ac-tab" id="ac-tabbtn-3" onclick="acTab(3)">✅ รออนุมัติขึ้นเว็บ</button>
-        <button class="ac-tab" id="ac-tabbtn-4" onclick="acTab(4)">🏳️ รายการติดตาม</button>
+        <button class="ac-tab on" id="ac-tabbtn-1" onclick="acTab(1)">📝 สั่งจัดทำ</button>
+        <button class="ac-tab" id="ac-tabbtn-2" onclick="acTab(2)">📥 คิวงาน</button>
       </div>
 
       <div id="ac-t1">
@@ -379,21 +377,34 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
           <div class="ac-hint">คำขอจะถูกส่งให้ทีมดูแลพิจารณา — เมื่อหัวข้อพร้อมใช้จะปรากฏบนเว็บนี้อัตโนมัติ (ไม่ต้องมีรหัสใดๆ)</div>
         </div>
         <div id="ac-pane-s" style="display:none">
-          <label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>
-          <input class="ac-input" id="ac-topic" placeholder="เช่น การบริหารจัดการเชื้อเพลิงและสัญญาซื้อขายไฟฟ้า (PPA)" autocomplete="off">
-          <label style="display:flex;align-items:center;gap:8px;margin-top:11px;font-size:13px;cursor:pointer"><input type="checkbox" id="ac-chain" checked style="width:16px;height:16px"> ตรวจพิสูจน์ต่อทันทีหลังร่างเสร็จ <span style="color:var(--text-muted);font-size:11.5px">(วิ่งยาวถึงหน้าประตูอนุมัติ — เหลือกดครั้งเดียว)</span></label>
-          <button class="ac-go" id="ac-go" onclick="acRun()">🚀 เริ่มสร้างร่าง</button>
+          <label class="ac-lbl" style="margin-top:0">ต้องการทำอะไร</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+            <button class="ac-tab" id="ac-md-new" onclick="acReqSet('new')" style="text-align:left;padding:11px 13px"><b>หัวข้อใหม่</b><div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400">สร้างเรื่องใหม่ทั้งชุด พร้อมความเสี่ยงและวิธีตรวจ</div></button>
+            <button class="ac-tab" id="ac-md-add" onclick="acReqSet('add')" style="text-align:left;padding:11px 13px"><b>เพิ่มความเสี่ยงในเรื่องที่มีอยู่</b><div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400">เสริมประเด็นใหม่เข้าเรื่องเดิม ไม่สร้างซ้ำ</div></button>
+          </div>
+          <div id="ac-blk-hint" class="ac-hint" style="margin-top:10px">เลือกอย่างใดอย่างหนึ่งด้านบนก่อน แล้วช่องกรอกจะปรากฏ</div>
+          <div id="ac-blk-new" style="display:none">
+            <label class="ac-lbl">หัวข้อตรวจสอบที่ต้องการ</label>
+            <input class="ac-input" id="ac-topic" placeholder="เช่น การบริหารจัดการเชื้อเพลิงและสัญญาซื้อขายไฟฟ้า (PPA)" autocomplete="off">
+          </div>
+          <div id="ac-blk-add" style="display:none">
+            <label class="ac-lbl">เลือกหัวข้อที่ต้องการเพิ่มความเสี่ยง</label>
+            <select class="ac-input" id="ac-target" style="appearance:auto"></select>
+            <label class="ac-lbl">ประเด็นที่อยากเน้น (ไม่ใส่ก็ได้)</label>
+            <input class="ac-input" id="ac-focus" placeholder="เว้นว่าง = ระบบหาประเด็นที่ยังขาดให้เอง" autocomplete="off">
+            <div class="ac-hint" id="ac-add-note"></div>
+          </div>
+          <div id="ac-blk-go" style="display:none">
+            <label style="display:flex;align-items:center;gap:8px;margin-top:11px;font-size:13px;cursor:pointer"><input type="checkbox" id="ac-chain" checked style="width:16px;height:16px"> ตรวจพิสูจน์ต่อทันทีหลังร่างเสร็จ <span style="color:var(--text-muted);font-size:11.5px">(วิ่งยาวถึงหน้าประตูอนุมัติ — เหลือกดครั้งเดียว)</span></label>
+            <button class="ac-go" id="ac-go" onclick="acRun()">🚀 เริ่มจัดทำ</button>
+          </div>
         </div>
       </div>
 
       <div id="ac-t2" style="display:none">
-        <div class="ac-msg">ร่าง (L3) ที่รับเข้าคลังพักแล้ว — กด <b>🔬 สั่งตรวจพิสูจน์</b> ให้ระบบยกเป็นความรู้จริง (ใช้รหัสเจ้าหน้าที่ด้านล่าง) <button onclick="loadDrafts()" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:2px 9px;cursor:pointer;font-size:11px">↻ รีเฟรช</button></div>
-        <div id="ac-drafts">⏳ กำลังโหลด...</div>
-        <div class="ac-msg" id="ac-t2-msg"></div>
-      </div>
+        <div class="ac-msg">คิวงานทั้งหมดในหน้าเดียว — รออนุมัติ · กำลังจัดทำ/ร่าง · รายการติดตาม <button onclick="loadPRs();loadDrafts();loadQueue()" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:2px 9px;cursor:pointer;font-size:11px">↻ รีเฟรช</button></div>
 
-      <div id="ac-t3" style="display:none">
-        <div class="ac-msg">ใบงานที่รอการอนุมัติ — กดเลือกเพื่อรีวิวและอนุมัติจบในหน้านี้ <button onclick="loadPRs()" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:2px 9px;cursor:pointer;font-size:11px">↻ รีเฟรช</button></div>
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:12px 0 6px">✅ รออนุมัติขึ้นเว็บ</div>
         <div id="ac-prs">⏳ กำลังโหลด...</div>
         <div id="ac-review" style="display:none;margin-top:10px;border:1.5px solid var(--border);border-radius:10px;overflow:hidden">
           <div style="padding:10px 14px;background:#FBFCFE;border-bottom:1px solid var(--border)">
@@ -403,8 +414,8 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
           <div id="ac-rv-items" style="padding:4px 14px"></div>
           <div style="padding:10px 14px 14px">
             <div id="ac-rv-tag" style="font-size:11.5px;color:var(--med);margin-bottom:7px"></div>
-            <label class="ac-lbl" style="margin-top:0">🔑 รหัสผู้อนุมัติ (Approver key — สิทธิ์: Contents + Pull requests แบบ Read/Write · ใช้ครั้งเดียวแล้วลืมทันที)</label>
-            <input class="ac-input" id="ac-akey" type="password" placeholder="วางรหัสผู้อนุมัติ (github_pat_...)" autocomplete="off" oninput="apCheck()">
+            <label class="ac-lbl" style="margin-top:0">🔑 รหัสผู้อนุมัติ — เข้าสู่ระบบแล้วไม่ต้องใส่ซ้ำ (วางเฉพาะถ้าต้องการใช้รหัสอื่น)</label>
+            <input class="ac-input" id="ac-akey" type="password" placeholder="ใช้รหัสที่เข้าสู่ระบบไว้อัตโนมัติ" autocomplete="off" oninput="apCheck()">
             <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
               <button id="ac-apbtn" class="ac-go" style="flex:1;margin-top:0;background:#1A7A40;opacity:.45" disabled onclick="apMerge()">✔ อนุมัติเข้าเว็บ</button>
               <button class="ac-go" style="margin-top:0;width:auto;background:#fff;color:var(--navy);border:1.5px solid var(--border)" onclick="acTgl('ac-back')">↩ ส่งกลับพร้อมคำสั่งแก้</button>
@@ -417,21 +428,26 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
             <div id="ac-rv-msg" class="ac-msg" style="margin-top:8px"></div>
           </div>
         </div>
-      </div>
 
-      <div id="ac-t4" style="display:none">
-        <div class="ac-msg">ธงที่ระบบเปิดไว้ (ความไม่แน่ใจที่ประกาศ + เส้นตาย) — ข้อมูลชุดเดียวกับที่ CI ใช้ <button onclick="loadQueue()" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:2px 9px;cursor:pointer;font-size:11px">↻ รีเฟรช</button></div>
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:16px 0 6px">📋 ร่างรอตรวจ</div>
+        <div id="ac-drafts">⏳ กำลังโหลด...</div>
+        <div class="ac-msg" id="ac-t2-msg"></div>
+
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin:16px 0 6px">🏳️ รายการติดตาม</div>
         <div id="ac-queue">⏳ กำลังโหลด...</div>
       </div>
 
       <div id="ac-keyblock">
+      <div id="ac-sess" style="display:none;align-items:center;gap:8px;margin-top:6px;padding:9px 12px;background:var(--low-bg);border:1px solid var(--low-bd);border-radius:8px;font-size:12.5px;color:var(--low)">✓ เข้าสู่ระบบแล้ว — ทุกปุ่มใช้รหัสนี้อัตโนมัติ ไม่ต้องใส่ซ้ำ<button onclick="acLogout()" style="margin-left:auto;border:1px solid var(--low-bd);background:#fff;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:11.5px;color:var(--low)">ออกจากระบบ</button></div>
+      <div id="ac-keyinner">
       <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-        <label class="ac-lbl" style="margin:0">🔑 รหัสเจ้าหน้าที่ (Staff key)</label>
+        <label class="ac-lbl" style="margin:0">🔑 รหัสประจำตัวผู้ดูแล (ใส่ครั้งเดียว ใช้ได้ทั้งหน้า)</label>
         <button onclick="acTgl('ac-help')" title="วิธีสร้างรหัส" style="width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:var(--border-light);cursor:pointer;font-size:11px;color:var(--text-muted);line-height:1">?</button>
       </div>
       <input class="ac-input" id="ac-token" type="password" placeholder="วางรหัสของคุณที่นี่ (ขึ้นต้น github_pat_...)" autocomplete="off">
-      <div class="ac-hint">เหมือนรหัสผ่านยืนยันตัวตนก่อนสั่งงาน — ใช้ครั้งเดียวแล้วระบบลืมทันที ไม่บันทึกที่ไหน · รหัสของคนนอกทีมจะถูกปฏิเสธอัตโนมัติ</div>
-      <div id="ac-help" style="display:none;margin-top:7px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7"><b>ยังไม่มีรหัส? สร้างได้ใน 1 นาที</b><br>1. GitHub → Settings → Developer settings → Fine-grained tokens<br>2. เลือกเฉพาะ repo นี้ · สิทธิ์เดียว: <b>Actions: Read and write</b><br>3. คัดลอกมาวางช่องบน — รหัสนี้สั่งเครื่องทำงานได้อย่างเดียว แก้ความรู้/อนุมัติแทนใครไม่ได้</div>
+      <div class="ac-hint">ระบบจำรหัสไว้ในหน้านี้จนกว่าจะปิด/รีเฟรช หรือกดออกจากระบบ — ไม่บันทึกลงเครื่อง · รหัสของคนนอกทีมถูกปฏิเสธอัตโนมัติ</div>
+      <div id="ac-help" style="display:none;margin-top:7px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7"><b>ยังไม่มีรหัส? สร้างได้ใน 1 นาที</b><br>1. GitHub → Settings → Developer settings → Fine-grained tokens<br>2. เลือกเฉพาะ repo นี้ · สิทธิ์: <b>Actions + Contents + Pull requests = Read and write</b><br>3. คัดลอกมาวางช่องบน — รหัสเดียวใช้ได้ทั้งสั่งจัดทำและอนุมัติ</div>
+      </div>
       </div>
       <div style="display:flex;align-items:baseline;gap:6px;margin-top:10px;font-size:11.5px;color:var(--text-muted)"><span>🛡️</span><span>ปลอดภัยเสมอ: ระบบแค่ "เสนอ" ความรู้ — ต้องผ่านด่านตรวจอัตโนมัติ 9 ด่าน และหัวหน้างานกดอนุมัติ ก่อนขึ้นเว็บจริง</span><a href="javascript:void(0)" onclick="acTgl('ac-gov')" style="color:var(--navy-light);white-space:nowrap">รายละเอียด ▾</a></div>
       <div id="ac-gov" style="display:none;margin-top:6px;padding:9px 12px;background:#FBFCFE;border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--text-muted);line-height:1.7">ระบบทำ Reading Manifest (อ้างได้เฉพาะมาตรฐานที่มีทะเบียนตรวจแล้ว — กติกา ratchet) → ร่างชั้น L3 → ตรวจพิสูจน์: แก้เวอร์ชันที่ถูกยกเลิก/พ่วงฉบับแก้ไข/ผูกแหล่งที่อ่านจริง → รันเกตอัตโนมัติ 9 ด่าน → เปิดใบขออนุมัติ — เว็บนี้ไม่มีอำนาจเขียนความรู้เอง การอนุมัติผูกกับบัญชีผู้กดเสมอ ตรวจย้อนได้</div>
@@ -547,7 +563,7 @@ function render(){
   grid.innerHTML=items.map(({t,risksVisible})=>{
     const tOrg=t.org_applicability||['UNIVERSAL'];
     const orgB=isUni(tOrg)?'<span class="badge b-uni">ทุกองค์กร</span>':tOrg.map(x=>'<span class="badge b-org">'+orgTh(x)+'</span>').join('');
-    const st=t.approval_status==='PENDING_REVIEW'?'<span class="badge b-pending">รอยืนยันขั้นสุดท้าย</span>':(t.approval_status==='APPROVED'?'<span class="badge b-approved">อนุมัติแล้ว</span>':'');
+    const st=(t.approval_status==='APPROVED'||t.approval_status==='PENDING_REVIEW')?'<span class="badge b-approved">อนุมัติแล้ว</span>':'';
     return '<div class="tcard" onclick="openTopic(\''+t.id+'\')">'
       +'<div class="tcard-top"><div class="tcard-ico" style="background:'+(t.color||'#1B3A6B')+'22">'+(t.icon||'📌')+'</div>'
       +'<div><h3>'+esc(t.name_th)+'</h3><div class="tcard-en">'+esc(t.name_en||'')+'</div></div></div>'
@@ -615,7 +631,7 @@ function renderDetail(){
    +'<div class="dhead"><div class="dhead-top"><div class="tcard-ico" style="width:46px;height:46px;font-size:23px;background:'+(t.color||'#1B3A6B')+'22">'+(t.icon||'📌')+'</div>'
    +'<div><h2>'+esc(t.name_th)+'</h2><div class="dhead-en">'+esc(t.name_en||'')+'</div></div></div>'
    +'<div class="dmeta"><span class="badge b-layer" title="'+(LAYER_TIP[t.knowledge_layer]||'')+'">'+(t.knowledge_layer||'?')+' · v'+(t.version||'?')+'</span>'
-   +(t.approval_status==='APPROVED'?'<span class="badge b-approved">อนุมัติแล้ว</span>':'<span class="badge b-pending">รอยืนยันขั้นสุดท้าย</span>')
+   +((t.approval_status==='APPROVED'||t.approval_status==='PENDING_REVIEW')?'<span class="badge b-approved">อนุมัติแล้ว</span>':'<span class="badge b-pending">รอยืนยันขั้นสุดท้าย</span>')
    +(isUni(tOrg)?'<span class="badge b-uni">ใช้ได้ทุกองค์กร</span>':tOrg.map(x=>'<span class="badge b-org">'+orgTh(x)+'</span>').join(''))
    +'<span class="badge b-cat">อัพเดท '+esc((t.updated_at||'').slice(0,10))+'</span>'
    +'<span class="badge b-cat" title="'+esc(t.hash_signature||'')+'">hash '+esc((t.hash_signature||'').slice(7,17))+'…</span></div>'
@@ -739,6 +755,41 @@ const AC_STEPS_CHAIN=[
 let AC_STEPS=AC_STEPS_BASE.concat([AC_STEP_DRAFTPR]);
 let acPoll=null,acStartTime=null;
 
+/* ── รหัสเดียวคลุมทั้ง session (in-memory เท่านั้น — ปิด/รีเฟรชหน้า = หาย) ── */
+let SESSION_KEY='';
+function getAdminKey(){const el=document.getElementById('ac-token');const v=el?el.value.trim():'';return v||SESSION_KEY}
+function setAdminKey(k){if(k)SESSION_KEY=k;const el=document.getElementById('ac-token');if(el)el.value='';const a=document.getElementById('ac-akey');if(a)a.value='';acSessBadge()}
+function acLogout(){SESSION_KEY='';acSessBadge()}
+function acSessBadge(){const b=document.getElementById('ac-sess');if(b)b.style.display=SESSION_KEY?'flex':'none';const kb=document.getElementById('ac-keyinner');if(kb)kb.style.display=SESSION_KEY?'none':'block'}
+
+/* ── ฟอร์มสั่งจัดทำ: เลือกก่อน (new/add) แล้วช่องที่เกี่ยวค่อยโผล่ ── */
+let acReqMode='';
+function acReqSet(m){
+  acReqMode=m;
+  document.getElementById('ac-md-new').classList.toggle('on',m==='new');
+  document.getElementById('ac-md-add').classList.toggle('on',m==='add');
+  document.getElementById('ac-blk-hint').style.display='none';
+  document.getElementById('ac-blk-new').style.display=m==='new'?'block':'none';
+  document.getElementById('ac-blk-add').style.display=m==='add'?'block':'none';
+  document.getElementById('ac-blk-go').style.display='block';
+  if(m==='add')acFillTargets();
+}
+function acFillTargets(){
+  const sel=document.getElementById('ac-target');
+  if(!sel||sel.options.length)return updateAddNote();
+  TOPICS.slice().sort((a,b)=>a.id<b.id?-1:1).forEach(t=>{
+    const o=document.createElement('option');o.value=t.id;
+    o.textContent=t.name_th+' — มี '+(t.risks||[]).length+' ความเสี่ยง';sel.appendChild(o);
+  });
+  sel.onchange=updateAddNote;updateAddNote();
+}
+function updateAddNote(){
+  const sel=document.getElementById('ac-target'),n=document.getElementById('ac-add-note');
+  if(!sel||!n||!sel.value)return;
+  const t=TOPICS.find(x=>x.id===sel.value);if(!t)return;
+  n.textContent='ผลลัพธ์: เพิ่มความเสี่ยงต่อท้าย '+t.id+' (เริ่มที่ R'+String((t.risks||[]).length+1).padStart(3,'0')+') · เวอร์ชันขยับเป็นรุ่นถัดไป · ไม่สร้างหัวข้อซ้ำ';
+}
+
 function acOpen(){document.getElementById('ac').classList.add('open');acMode(acModeCur)}
 function acClose(){document.getElementById('ac').classList.remove('open');if(acPoll){clearInterval(acPoll);acPoll=null}}
 function acTgl(id){const e=document.getElementById(id);e.style.display=e.style.display==='none'?'block':'none'}
@@ -757,12 +808,13 @@ function gReq(){
   window.open('https://github.com/'+GH_REPO+'/issues/new?title='+encodeURIComponent('[ขอเพิ่มหัวข้อ] '+t)+'&body='+encodeURIComponent('เรื่องที่ต้องการ: '+t+'\nเหตุผล/บริบท:\nประเภทองค์กร:'),'_blank');
 }
 function acTab(n){
-  for(let i=1;i<=4;i++){
+  for(let i=1;i<=2;i++){
     document.getElementById('ac-t'+i).style.display=i===n?'block':'none';
     document.getElementById('ac-tabbtn-'+i).classList.toggle('on',i===n);
   }
   document.getElementById('ac-keyblock').style.display=((n===1&&acModeCur==='s')||n===2)?'block':'none';
-  if(n===2)loadDrafts();if(n===3)loadPRs();if(n===4)loadQueue();
+  acSessBadge();
+  if(n===2){loadPRs();loadDrafts();loadQueue()}
 }
 async function readRepoJson(pathStr){
   const meta=await gh('/repos/'+GH_REPO+'/contents/'+pathStr);
@@ -799,9 +851,9 @@ async function loadDrafts(){
   }catch(e){el.innerHTML='<div class="ac-msg">โหลดไม่ได้: '+esc(e.message)+'</div>'}
 }
 async function verifyDraft(fname){
-  let token=document.getElementById('ac-token').value.trim();
+  let token=getAdminKey();
   const msg=document.getElementById('ac-t2-msg');
-  if(!token){msg.textContent='⚠️ กรอก token ด้านล่างก่อนกดสั่ง';return}
+  if(!token){msg.textContent='⚠️ ใส่รหัสประจำตัวผู้ดูแลด้านล่างก่อน (ใส่ครั้งเดียวใช้ได้ทั้งหน้า)';return}
   msg.textContent='⏳ กำลังส่งคำสั่ง verify: '+fname;
   try{
     const r=await fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/verify-pipeline.yml/dispatches',{
@@ -809,9 +861,9 @@ async function verifyDraft(fname){
       headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
       body:JSON.stringify({ref:'main',inputs:{draft_file:fname}})
     });
-    token='';document.getElementById('ac-token').value='';
     if(r.status===404){msg.innerHTML='⏸️ verify-pipeline ยังไม่ติดตั้งบน main (กำลังมาใน PR ถัดไป) — ระหว่างนี้สั่ง verify ผ่าน Cowork ได้';return}
-    if(!r.ok)throw new Error('สั่งไม่สำเร็จ ('+r.status+') — เช็คสิทธิ์ token');
+    if(!r.ok)throw new Error('สั่งไม่สำเร็จ ('+r.status+') — เช็คสิทธิ์รหัส');
+    setAdminKey(token);token='';
     msg.innerHTML='✅ ส่งคำสั่งแล้ว — ตามผลได้ที่ <a target="_blank" rel="noopener" href="https://github.com/'+GH_REPO+'/actions">แท็บ Actions</a> เสร็จแล้ว PR "✅ Verify:" จะโผล่ในแท็บรออนุมัติ';
   }catch(e){msg.textContent='❌ '+e.message}
 }
@@ -882,7 +934,7 @@ async function apOpen(i){
 function apCheck(){
   const boxes=[...document.querySelectorAll('.ac-ack')];
   const n=boxes.filter(b=>b.checked).length;
-  const key=document.getElementById('ac-akey').value.trim();
+  const key=document.getElementById('ac-akey').value.trim()||SESSION_KEY;
   const ciOk=AP_CUR&&AP_CUR._ci==='✅';
   const ready=boxes.length>0&&n===boxes.length&&key.length>10&&ciOk;
   const tag=document.getElementById('ac-rv-tag');
@@ -891,7 +943,7 @@ function apCheck(){
   const b=document.getElementById('ac-apbtn');b.disabled=!ready;b.style.opacity=ready?1:.45;
 }
 async function apMerge(){
-  let key=document.getElementById('ac-akey').value.trim();
+  let key=document.getElementById('ac-akey').value.trim()||SESSION_KEY;
   document.getElementById('ac-akey').value='';
   const msg=document.getElementById('ac-rv-msg');msg.textContent='⏳ กำลังส่งคำสั่งอนุมัติ...';
   try{
@@ -912,11 +964,11 @@ async function apMerge(){
   }catch(e){key='';msg.textContent='⛔ '+e.message}
 }
 async function apSendBack(){
-  let key=document.getElementById('ac-akey').value.trim();
+  let key=document.getElementById('ac-akey').value.trim()||SESSION_KEY;
   const txt=document.getElementById('ac-backtxt').value.trim();
   const msg=document.getElementById('ac-rv-msg');
   if(!txt){msg.textContent='พิมพ์คำสั่งแก้ก่อน';return}
-  if(!key){msg.textContent='ใส่รหัสผู้อนุมัติก่อน (ใช้ยืนยันตัวตนผู้ให้ความเห็น)';return}
+  if(!key){msg.textContent='ใส่รหัสประจำตัวผู้ดูแลก่อน (ใช้ยืนยันตัวตนผู้ให้ความเห็น)';return}
   try{
     const r=await fetch('https://api.github.com/repos/'+GH_REPO+'/issues/'+AP_CUR.number+'/comments',{
       method:'POST',
@@ -968,29 +1020,35 @@ async function gh(pathname,opts){ // public repo: อ่านได้ไม่
   return r.status===204?null:r.json();
 }
 async function acRun(){
-  const topic=document.getElementById('ac-topic').value.trim();
-  let token=document.getElementById('ac-token').value.trim();
+  const mode=acReqMode;
+  if(!mode){alert('เลือกก่อนว่าต้องการ "หัวข้อใหม่" หรือ "เพิ่มความเสี่ยงในเรื่องที่มีอยู่"');return}
+  const topic=mode==='new'?document.getElementById('ac-topic').value.trim():'';
+  const target=mode==='add'?document.getElementById('ac-target').value:'';
+  const focus=mode==='add'?document.getElementById('ac-focus').value.trim():'';
+  let token=getAdminKey();
   const chain=document.getElementById('ac-chain').checked;
   AC_STEPS=chain?AC_STEPS_BASE.concat(AC_STEPS_CHAIN):AC_STEPS_BASE.concat([AC_STEP_DRAFTPR]);
   const res=document.getElementById('ac-result');res.style.display='none';res.innerHTML='';
-  if(!topic){alert('กรอกหัวข้อก่อน');return}
-  if(!token){alert('กรอกรหัสเจ้าหน้าที่ก่อน (ปุ่ม ? ข้างช่องมีวิธีสร้าง)');return}
+  if(mode==='new'&&!topic){alert('กรอกหัวข้อก่อน');return}
+  if(mode==='add'&&!target){alert('เลือกหัวข้อที่ต้องการเพิ่มความเสี่ยงก่อน');return}
+  if(!token){alert('ใส่รหัสประจำตัวผู้ดูแลก่อน (ปุ่ม ? ข้างช่องมีวิธีสร้าง)');return}
   const btn=document.getElementById('ac-go');btn.disabled=true;
   const states={dispatch:'run'};acRenderSteps(states);
   acStartTime=Date.now();
+  const inputs={topic,chain:String(chain)};
+  if(mode==='add'){inputs.target_topic=target;inputs.focus=focus}
   try{
-    // 1) สั่งงาน — จุดเดียวที่ใช้รหัส แล้วทิ้งทันที
     await fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/'+GH_WF+'/dispatches',{
       method:'POST',
       headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
-      body:JSON.stringify({ref:'main',inputs:{topic,chain:String(chain)}})
+      body:JSON.stringify({ref:'main',inputs})
     }).then(r=>{if(!r.ok)throw new Error('สั่งงานไม่สำเร็จ ('+r.status+') — เช็คว่ารหัสมีสิทธิ์ Actions: Read and write บน repo นี้')});
   }catch(e){
     states.dispatch='fail';acRenderSteps(states);
     res.style.display='block';res.innerHTML='<div class="ac-warn">❌ '+esc(e.message)+'</div>';
-    btn.disabled=false;token='';document.getElementById('ac-token').value='';return;
+    btn.disabled=false;document.getElementById('ac-token').value='';return;
   }
-  token='';document.getElementById('ac-token').value=''; // ทิ้งรหัสทันทีหลังใช้
+  setAdminKey(token);token=''; // จำไว้ใช้ทั้ง session (in-memory) — ช่องกรอกถูกล้าง
   states.dispatch='ok';states.queue='run';acRenderSteps(states);
   // 2) poll สถานะแบบไม่ใช้ token (repo public) ทุก 10 วิ
   acPoll=setInterval(async()=>{
@@ -1025,7 +1083,7 @@ async function acRun(){
           const isVerify=draftPr.title.startsWith('✅');
           res.innerHTML='<div class="prov">'+esc((draftPr.body||'').slice(0,3000))+'</div>'
             +(isVerify
-              ?'<div class="ac-msg">🎉 ร่าง+ตรวจพิสูจน์เสร็จรวดเดียว — เหลือขั้นเดียว: ไปแท็บ <b>รออนุมัติขึ้นเว็บ</b> ติ๊กรับทราบแล้วกดอนุมัติ</div><a class="ac-prlink" href="javascript:void(0)" onclick="acTab(3)">✔ ไปหน้าอนุมัติเลย</a>'
+              ?'<div class="ac-msg">🎉 ร่าง+ตรวจพิสูจน์เสร็จรวดเดียว — เหลือขั้นเดียว: ไปแท็บ <b>คิวงาน</b> ติ๊กยืนยันแล้วกดอนุมัติ</div><a class="ac-prlink" href="javascript:void(0)" onclick="acTab(2)">✔ ไปที่คิวงานเลย</a>'
               :'<div class="ac-msg">ขั้นต่อไป: กด merge ใบส่งงานร่างนี้ (รับเข้าคลังพัก) แล้วกลับมาแท็บ <b>ร่างรอตรวจ</b> เพื่อกด 🔬 สั่งตรวจพิสูจน์</div><a class="ac-prlink" target="_blank" rel="noopener" href="'+esc(draftPr.html_url)+'">📄 เปิดใบส่งงานร่าง #'+draftPr.number+'</a>');
         }else{
           states.pr='fail';
