@@ -86,6 +86,7 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .b-uni{background:#EAF7F0;color:#117A47;border:1px solid #BFE8D2}
 .b-risk{background:var(--crit-bg);color:var(--crit);border:1px solid var(--crit-bd)}
 .b-cat{background:var(--border-light);color:var(--text-muted);border:1px solid var(--border)}
+.b-upd{background:#E8F0FE;color:#1B4C9C;border:1px solid #C4D7F5;font-size:11px;padding:4px 12px;border-radius:12px;letter-spacing:.2px}
 .tcard-foot{margin-top:10px;font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between}
 .empty{text-align:center;padding:50px 20px;color:var(--text-muted)}
 .loading{text-align:center;padding:70px 20px;color:var(--text-muted);font-size:14px}
@@ -319,9 +320,13 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
   <div class="search-row">
     <input class="search-input" id="q" placeholder="ค้นหา เช่น  ความเสี่ยงจัดซื้อจัดจ้างของรัฐวิสาหกิจ / ไซเบอร์ SCADA / สวัสดิการพนักงาน..." autocomplete="off">
   </div>
+  <!-- [ปิดการแสดงผลชั่วคราว 2026-07-21 — แถบเลือกประเภทองค์กร] logic กรองยังอยู่ครบใน JS (ORG_TAGS/orgMatch)
+       เปิดคืน: ลบ comment ครอบบล็อกนี้ + เปิด buildOrgChips และส่วนตีความคำค้นใน parseQuery
   <div class="org-row" id="org-row">
     <span class="org-lbl">ประเภทองค์กร:</span>
   </div>
+  -->
+  <div id="org-row" style="display:none"></div>
   <div class="parse-note" id="parse-note"></div>
 </div></div>
 
@@ -530,15 +535,20 @@ function stats(){
 
 /* ============ ORG FILTER ============ */
 function buildOrgChips(){
+  /* [ปิดการแสดงผลชั่วคราว 2026-07-21 — ชิปประเภทองค์กร] เว็บแสดงรวมหน้าเดียว activeOrg=null ตลอด
+     เปิดคืน: ลบ comment ครอบบล็อกนี้
   const row=document.getElementById('org-row');
   ORG_TAGS.forEach(o=>{
     const b=document.createElement('button');b.className='org-chip';b.textContent=o.th;b.dataset.tag=o.tag;
     b.onclick=()=>{activeOrg=activeOrg===o.tag?null:o.tag;syncChips();render()};
     row.appendChild(b);
   });
+  */
 }
 function syncChips(){document.querySelectorAll('.org-chip').forEach(b=>b.classList.toggle('on',b.dataset.tag===activeOrg))}
 function parseQuery(raw){
+  /* [ปิดการแสดงผลชั่วคราว 2026-07-21 — ตีความคำค้นสลับประเภทองค์กร] คำค้นยังค้นหาแบบข้อความได้เต็ม
+     แค่ไม่สลับหน้าจอเป็นรายประเภทแล้ว — เปิดคืน: ลบ comment ครอบบล็อกนี้ แล้วคืน return text.trim() เดิม
   let text=raw.toLowerCase();let found=null;
   for(const o of ORG_TAGS){for(const k of o.kw){if(text.includes(k.toLowerCase())){found=o;text=text.replace(new RegExp(k,'gi'),' ');break}}if(found)break}
   const note=document.getElementById('parse-note');
@@ -548,6 +558,8 @@ function parseQuery(raw){
     note.textContent='🎯 ตีความคำค้น: กรองเฉพาะบริบท "'+found.th+'" (ความเสี่ยงสากลแสดงร่วมด้วยเสมอ) — กดชิปประเภทองค์กรซ้ำเพื่อยกเลิก';
   }else{note.style.display='none'}
   return text.trim();
+  */
+  return raw.toLowerCase().trim(); // ค้นหาข้อความตรงๆ ทุกคำ รวมคำอย่าง "รัฐวิสาหกิจ" ด้วย
 }
 function orgMatch(tags){
   if(!activeOrg)return true;
@@ -555,6 +567,8 @@ function orgMatch(tags){
   return tags.includes(activeOrg);
 }
 function riskOrg(t,r){return r.org_applicability||t.org_applicability||['UNIVERSAL']}
+/* toggle แหล่งอ้างอิง (เริ่มต้นหุบ — เนื้อหาครบ แค่ show/hide) */
+function provTgl(a){const b=document.getElementById('prov-body');if(!b)return;const open=b.style.display!=='none';b.style.display=open?'none':'block';a.textContent=open?'อ่านเพิ่มเติม ▾':'ย่อ ▴'}
 function isUni(tags){return !tags||!tags.length||tags.includes('UNIVERSAL')}
 
 /* ============ SEARCH + LIST ============ */
@@ -584,8 +598,11 @@ function render(){
     return '<div class="tcard" onclick="openTopic(\''+t.id+'\')">'
       +'<div class="tcard-top"><div class="tcard-ico" style="background:'+(t.color||'#1B3A6B')+'22">'+(t.icon||'📌')+'</div>'
       +'<div><h3>'+esc(t.name_th)+'</h3><div class="tcard-en">'+esc(t.name_en||'')+'</div></div></div>'
+      /* [ปิดการแสดงผลชั่วคราว 2026-07-21 — ป้ายการ์ด: ชั้นความรู้/สถานะ/องค์กร/หมวด] เหลือป้ายอัพเดทล่าสุดเดียว
+         เปิดคืน: ลบ comment สองบรรทัดล่าง แล้วลบบรรทัด b-upd
       +'<div class="tcard-meta"><span class="badge b-layer" title="'+(LAYER_TIP[t.knowledge_layer]||'')+'">'+(t.knowledge_layer||'L?')+' · v'+(t.version||'?')+'</span>'+st+orgB
-      +'<span class="badge b-cat">'+esc(t.category_th||t.category||'')+'</span></div>'
+      +'<span class="badge b-cat">'+esc(t.category_th||t.category||'')+'</span></div>' */
+      +'<div class="tcard-meta"><span class="badge b-upd">🕓 อัพเดทล่าสุด '+esc((t.updated_at||'').slice(0,10)||'—')+'</span></div>'
       +'<div class="tcard-foot"><span>⚠️ '+risksVisible.length+' ความเสี่ยง'+(activeOrg&&risksVisible.length<(t.risks||[]).length?' (กรองแล้ว)':'')+'</span><span>'+(t.source_chain||[]).length+' แหล่งอ้างอิง</span></div></div>';
   }).join('');
   empty.style.display=items.length?'none':'block';
@@ -647,14 +664,18 @@ function renderDetail(){
   dv.innerHTML='<button class="back-btn" onclick="showList()">← กลับหน้ารวม</button>'
    +'<div class="dhead"><div class="dhead-top"><div class="tcard-ico" style="width:46px;height:46px;font-size:23px;background:'+(t.color||'#1B3A6B')+'22">'+(t.icon||'📌')+'</div>'
    +'<div><h2>'+esc(t.name_th)+'</h2><div class="dhead-en">'+esc(t.name_en||'')+'</div></div></div>'
+   /* [ปิดการแสดงผลชั่วคราว 2026-07-21 — ป้ายหน้ารายละเอียด: ชั้นความรู้/สถานะ/องค์กร/hash] เหลือป้ายอัพเดทล่าสุดเดียว
+      เปิดคืน: ลบ comment บล็อกนี้ แล้วลบบรรทัด b-upd ด้านล่าง
    +'<div class="dmeta"><span class="badge b-layer" title="'+(LAYER_TIP[t.knowledge_layer]||'')+'">'+(t.knowledge_layer||'?')+' · v'+(t.version||'?')+'</span>'
    +((t.approval_status==='APPROVED'||t.approval_status==='PENDING_REVIEW')?'<span class="badge b-approved">อนุมัติแล้ว</span>':'<span class="badge b-pending">รอยืนยันขั้นสุดท้าย</span>')
    +(isUni(tOrg)?'<span class="badge b-uni">ใช้ได้ทุกองค์กร</span>':tOrg.map(x=>'<span class="badge b-org">'+orgTh(x)+'</span>').join(''))
    +'<span class="badge b-cat">อัพเดท '+esc((t.updated_at||'').slice(0,10))+'</span>'
-   +'<span class="badge b-cat" title="'+esc(t.hash_signature||'')+'">hash '+esc((t.hash_signature||'').slice(7,17))+'…</span></div>'
+   +'<span class="badge b-cat" title="'+esc(t.hash_signature||'')+'">hash '+esc((t.hash_signature||'').slice(7,17))+'…</span></div>' */
+   +'<div class="dmeta"><span class="badge b-upd">🕓 อัพเดทล่าสุด '+esc((t.updated_at||'').slice(0,10)||'—')+'</span></div>'
    +'<div class="dsec"><div class="dsec-t">📐 มาตรฐาน/กฎหมายที่ใช้ (สถานะเวอร์ชันจากทะเบียนติดตาม)</div><div class="stdchips">'+(t.applicable_standards||[]).map(stdChip).join('')+'</div></div>'
    +(t.thai_law_refs&&t.thai_law_refs.length?'<div class="dsec"><div class="dsec-t">🇹🇭 บริบทกฎหมายไทย</div><div style="font-size:12.5px;color:var(--text-muted)">'+t.thai_law_refs.map(esc).join(' · ')+'</div></div>':'')
-   +'<div class="dsec"><div class="dsec-t">🔗 แหล่งอ้างอิงพร้อมหลักฐานที่อ่านจริง ('+(t.source_chain||[]).length+')</div><div class="prov">'
+   /* [ปรับการแสดงผล 2026-07-21 — แหล่งอ้างอิงเริ่มต้นหุบ กด "อ่านเพิ่มเติม" เพื่อกาง] เนื้อหาเดิมครบ แค่ show/hide */
+   +'<div class="dsec"><div class="dsec-t">🔗 แหล่งอ้างอิงพร้อมหลักฐานที่อ่านจริง ('+(t.source_chain||[]).length+') <a href="javascript:void(0)" onclick="provTgl(this)" style="font-size:12px;font-weight:400;color:var(--navy-light);margin-left:6px">อ่านเพิ่มเติม ▾</a></div><div class="prov" id="prov-body" style="display:none">'
    +(t.source_chain||[]).map(s=>'<div class="prov-item"><div class="prov-t"><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title)+'</a> — '+esc(s.publisher)+'</div>'
      +(s.excerpt?'<div class="prov-x">“'+esc(s.excerpt)+'”</div>':'')
      +'<div class="prov-m">ความน่าเชื่อถือ '+ (s.credibility_score||'—')+'/100 · เก็บเมื่อ '+esc(s.retrieved_at||'')+'</div></div>').join('')
@@ -706,7 +727,9 @@ function buildGuideTable(t,vis){
     if(row.riskSpan>0){
       const tags=riskOrg(t,row.r);
       h+='<td class="gt-risk" rowspan="'+row.riskSpan+'" data-l="ความเสี่ยง"><span class="rlv rlv-'+(row.r.level||'MEDIUM')+'">'+(LV_TH[row.r.level]||row.r.level||'?')+'</span><div class="rnm">'+esc(row.r.name_th)+'</div>'
-        +(isUni(tags)?'':'<div style="margin-top:6px"><span class="badge b-org">เฉพาะ'+tags.map(orgTh).map(esc).join('/')+'</span></div>')+'</td>';
+        /* [ปิดการแสดงผลชั่วคราว 2026-07-21 — ป้ายองค์กรรายความเสี่ยงในตาราง] เปิดคืน: สลับ comment สองบรรทัดนี้
+        +(isUni(tags)?'':'<div style="margin-top:6px"><span class="badge b-org">เฉพาะ'+tags.map(orgTh).map(esc).join('/')+'</span></div>')+'</td>'; */
+        +'</td>';
     }
     if(row.cfSpan>0){
       h+='<td class="gt-cf" rowspan="'+row.cfSpan+'" data-l="ความบกพร่องการควบคุม">'+esc(row.cf.name_th)+'</td>';
