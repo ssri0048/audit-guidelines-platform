@@ -588,7 +588,12 @@
           "last_verified": "2026-07-21",
           "evidence_url": "https://www.iso.org/standard/60857.html",
           "evidence_excerpt": "New version available: ISO 14001:2026 — Revised by: Published ISO 14001:2026 (iso.org life cycle)",
-          "excerpt_verbatim": "New version available: ISO 14001:2026"
+          "excerpt_verbatim": "New version available: ISO 14001:2026",
+          "link_status": {
+            "state": "READ_VERIFIED",
+            "checked_at": "2026-07-21",
+            "method": "human-web(fetch) — จากหน้า life cycle ของฉบับ 2015"
+          }
         }
       ]
     },
@@ -1061,11 +1066,11 @@
           "verified": true,
           "last_verified": "2026-07-21",
           "evidence_url": "https://www.eppo.go.th/epposite/index.php/th/ct-menu-item-1?option=com_k2&view=item&id=20632:news-200667-01",
-          "evidence_excerpt": "PDP2018 Rev.1 ยังเป็นแผนที่ใช้อยู่ — ร่าง PDP 2024 (กำลังผลิตใหม่ 60,208 MW, พลังงานหมุนเวียน 51% ภายในปี 2580) ผ่านประชาพิจารณ์ มิ.ย. 2567 แต่ยังไม่ผ่าน ครม. และมีแนวโน้มเปลี่ยนเป็น PDP 2025 | สนพ. (EPPO)",
+          "evidence_excerpt": "PDP 2024 — ร่างแผนพัฒนากำลังผลิตไฟฟ้าของประเทศ (กำลังผลิตใหม่ 60,208 MW · พลังงานหมุนเวียน 51% ภายในปี 2580) ผ่านประชาพิจารณ์ มิ.ย. 2567 แต่ยังไม่ผ่าน ครม. → PDP2018 Rev.1 ยังเป็นแผนที่บังคับใช้อยู่ | สนพ. (EPPO)",
           "exception_code": "EX-TRANSITION",
           "open_question": "ร่าง PDP2024 ผ่าน กพช./ครม. แล้วหรือยัง — ตรวจประกาศ สนพ./กพช. ฉบับล่าสุด",
           "sla_deadline": "2026-09-11",
-          "excerpt_verbatim": "แผนพัฒนากำลังผลิตไฟฟ้าของประเทศ",
+          "excerpt_verbatim": "PDP 2024",
           "link_status": {
             "state": "READ_VERIFIED",
             "checked_at": "2026-07-21",
@@ -1674,7 +1679,7 @@
           "exception_code": "EX-PAYWALL",
           "open_question": "ชุดมาตรฐานหลาย parts (ISA/IEC ร่วม) — ระบุ part ที่องค์กรใช้ (เช่น 62443-2-1, 62443-3-3) และตรวจ edition จาก IEC webstore",
           "sla_deadline": "2026-09-12",
-          "excerpt_verbatim": "Industrial Automation and Control Systems",
+          "excerpt_verbatim": "IEC 62443",
           "link_status": {
             "state": "READ_VERIFIED",
             "checked_at": "2026-07-21",
@@ -1702,7 +1707,7 @@
           "exception_code": "EX-PAYWALL",
           "open_question": "ชุดหลาย parts (security ของ 61850/CIM protocols) — ตรวจ part+edition จาก IEC webstore",
           "sla_deadline": "2026-09-12",
-          "excerpt_verbatim": "Power Systems Communication Security",
+          "excerpt_verbatim": "IEC 62351",
           "link_status": {
             "state": "READ_VERIFIED",
             "checked_at": "2026-07-21",
