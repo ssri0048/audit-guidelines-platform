@@ -65,8 +65,10 @@ body{font-family:'Sarabun','IBM Plex Sans Thai',system-ui,sans-serif;font-size:1
 .search-box .search-input{border-radius:22px}
 .search-row{flex-wrap:wrap}
 .search-box{flex:none;width:320px;max-width:100%}
-.search-row .cat-row{margin-top:0;flex:1;align-items:center}
-.search-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px}
+/* [ปรับ 2026-07-21 — pills ไม่ยืดเต็ม ให้กว้างตามเนื้อหา] เดิม: flex:1 */
+.search-row .cat-row{margin-top:0;flex:none;align-items:center}
+/* [ปรับ 2026-07-21 — เอาความโค้งออกให้เป็นแถบเหลี่ยมชนขอบ] เดิม: border-radius:var(--radius) */
+.search-card{background:var(--card);box-shadow:var(--shadow);padding:16px 18px}
 .search-row{display:flex;gap:10px;align-items:center}
 .search-input{flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14.5px;outline:none;transition:border var(--transition)}
 .search-input:focus{border-color:var(--navy-light)}
