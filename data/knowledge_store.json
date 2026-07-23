@@ -11876,7 +11876,7 @@
         "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
         "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
         "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
-        "International Professional Practices Framework IPPF IIA GIAS 2024",
+        "IIA Global Internal Audit Standards 2024",
         "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
         "COSO ERM – Integrating with Strategy and Performance 2017"
       ],
@@ -12013,7 +12013,7 @@
                   "method": "ตรวจสอบว่าระบบ e-GP หรือระบบภายในมีการกำหนดและใช้งาน red flag indicators สำหรับการฮั้วประมูล",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2120",
                       "title": "Risk Management"
                     },
@@ -12091,7 +12091,7 @@
                   "method": "สุ่มตัวอย่างแฟ้มร้องเรียนที่เกี่ยวกับการจัดซื้อจัดจ้างเพื่อตรวจสอบความครบถ้วนของกระบวนการสอบสวนและบทลงโทษ",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 1220",
                       "title": "ความระมัดระวังรอบคอบเยี่ยงผู้ประกอบวิชาชีพ"
                     },
@@ -12136,7 +12136,7 @@
                       "title": "การเลือกและพัฒนากิจกรรมควบคุมรวมถึงการแบ่งแยกหน้าที่"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2130",
                       "title": "การควบคุม (Control)"
                     }
@@ -12317,7 +12317,7 @@
                   "method": "Inquiry และ Walkthrough กระบวนการอนุมัติ",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2120",
                       "title": "Risk Management"
                     },
@@ -12406,7 +12406,7 @@
                       "title": "Selects and Develops Control Activities"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2201",
                       "title": "Planning Considerations"
                     }
@@ -12553,7 +12553,7 @@
                       "title": "Recusal from Decisions Involving Conflicts of Interest"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2130",
                       "title": "Governance: Promoting Ethics and Values"
                     }
@@ -12602,7 +12602,7 @@
                   "method": "ทดสอบการทำงานของระบบ Whistleblowing และการวิเคราะห์ข้อมูลเพื่อค้นหาสัญญาณผิดปกติที่เกี่ยวข้องกับ COI",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2060",
                       "title": "Reporting to Senior Management and the Board"
                     },
@@ -12706,7 +12706,7 @@
                       "title": "กิจกรรมควบคุมและการแบ่งแยกหน้าที่"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2120",
                       "title": "การประเมินประสิทธิผลการบริหารความเสี่ยง"
                     }
@@ -12779,7 +12779,7 @@
                   "method": "สุ่มตรวจสอบแฟ้มคดีร้องเรียนและติดตามผลการดำเนินการ",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2060",
                       "title": "การรายงานผลต่อผู้บริหารระดับสูงและคณะกรรมการ"
                     },
@@ -12838,7 +12838,7 @@
                       "title": "การติดตามและทบทวน (Monitoring and Review)"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 1210",
                       "title": "ความเชี่ยวชาญของผู้ตรวจสอบภายในด้านการทุจริต"
                     }
@@ -12897,7 +12897,7 @@
                   "method": "สอบทานเอกสารนโยบายและทดสอบการปฏิบัติจริงเทียบกับ Authority Matrix ที่กำหนด",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2120",
                       "title": "Risk Management"
                     },
@@ -13005,7 +13005,7 @@
                   "method": "สุ่มตรวจสอบสำนวนร้องเรียนย้อนหลังและติดตามกระบวนการสอบสวน",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 1110",
                       "title": "Organizational Independence"
                     },
@@ -13059,7 +13059,7 @@
                   "method": "สอบทานกฎบัตรคณะกรรมการตรวจสอบและรายงานการประชุมที่เกี่ยวข้องกับการกำกับดูแลผู้บริหาร",
                   "std_refs": [
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2060",
                       "title": "Reporting to Senior Management and the Board"
                     },
@@ -13104,7 +13104,7 @@
                       "title": "การควบคุมทั่วไปด้านเทคโนโลยีสารสนเทศ"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2110",
                       "title": "Governance"
                     }
@@ -13182,7 +13182,7 @@
                       "title": "กิจกรรมการติดตามและตรวจสอบเพื่อป้องกันการทุจริต"
                     },
                     {
-                      "std": "International Professional Practices Framework IPPF IIA GIAS 2024",
+                      "std": "IIA Global Internal Audit Standards 2024",
                       "clause": "Standard 2120",
                       "title": "Risk Management"
                     }
