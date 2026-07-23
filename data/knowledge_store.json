@@ -19,7 +19,7 @@
       "พรบ.คอมพิวเตอร์ พ.ศ.2560",
       "มาตรฐาน สตง."
     ],
-    "last_updated": "2026-07-21",
+    "last_updated": "2026-07-23",
     "migration_date": "2026-06-16",
     "migration_from": "2.0.0",
     "migration_approved_by": "system:auto-migration",
@@ -137,7 +137,7 @@
     ],
     "migration_note": "v3 canonical store — all 16 legacy topics marked LEGACY_UNVERIFIED (L3). Each must pass re-verification pipeline + human approval (PR merge) before promotion to L1.",
     "write_policy": "READ_ONLY for web clients. All writes via Pull Request + human approval only.",
-    "last_topic_id": "T028"
+    "last_topic_id": "T029"
   },
   "topics": [
     {
@@ -12281,6 +12281,1463 @@
         }
       ],
       "hash_signature": "sha256:9807c307f802d8f91f830bc743b8ef7173a4b57a0250c156781b8413fe8aa210"
+    },
+    {
+      "id": "T029",
+      "name_th": "การป้องกันและบริหารความเสี่ยงการทุจริต",
+      "name_en": "Fraud Risk Management",
+      "category": "Governance, Risk & Compliance",
+      "category_th": "การกำกับดูแลกิจการ ความเสี่ยง และการปฏิบัติตามกฎระเบียบ",
+      "icon": "🧩",
+      "color": "#1F618D",
+      "priority": "CRITICAL",
+      "org_applicability": [
+        "UNIVERSAL"
+      ],
+      "applicable_standards": [
+        "COSO Fraud Risk Management Guide 2013",
+        "COSO Internal Control – Integrated Framework 2013",
+        "ISO 31000:2018 Risk Management",
+        "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+        "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+        "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+        "IIA Global Internal Audit Standards 2024",
+        "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "COSO ERM – Integrating with Strategy and Performance 2017"
+      ],
+      "thailand_applicable": true,
+      "thai_law_refs": [
+        "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+        "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+        "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA"
+      ],
+      "risks": [
+        {
+          "id": "R001",
+          "name_th": "การสมยอมราคาหรือฮั้วประมูลในกระบวนการจัดซื้อจัดจ้าง",
+          "name_en": "Bid Rigging and Collusion in Procurement",
+          "level": "CRITICAL",
+          "likelihood": "สูง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF001",
+              "name_th": "การกำหนด TOR และคุณสมบัติผู้เสนอราคาขาดการสอบทานความเป็นกลาง เอื้อประโยชน์ผู้ประกอบการเฉพาะราย",
+              "audit_procedures": [
+                {
+                  "id": "CF001-1",
+                  "name_th": "สอบทานความสมเหตุสมผลของ TOR เทียบราคากลางและมาตรฐานตลาด",
+                  "method": "สุ่มตรวจเอกสาร TOR และเปรียบเทียบกับราคากลาง มาตรฐานอุตสาหกรรม และประวัติผู้ชนะประมูลย้อนหลัง 3 ปี",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "มาตรา 9",
+                      "title": "การกำหนดรายละเอียดคุณลักษณะเฉพาะของพัสดุ"
+                    },
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 10",
+                      "title": "กิจกรรมควบคุมเพื่อลดความเสี่ยงสู่ระดับที่ยอมรับได้"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสาร TOR/ร่างขอบเขตงาน",
+                    "รายงานราคากลางและที่มาของราคา",
+                    "ประวัติผู้ชนะประมูลย้อนหลัง",
+                    "บันทึกการอนุมัติ TOR"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF001-2",
+                  "name_th": "วิเคราะห์ความขัดแย้งทางผลประโยชน์ของผู้กำหนดขอบเขตงานและคณะกรรมการ",
+                  "method": "ตรวจสอบแบบแสดงความขัดแย้งทางผลประโยชน์และสัมภาษณ์ผู้เกี่ยวข้องกับการกำหนด TOR",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "มาตรา 128",
+                      "title": "การขัดกันแห่งผลประโยชน์ของเจ้าหน้าที่รัฐ"
+                    },
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 1",
+                      "title": "Fraud Risk Governance"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แบบแสดงความขัดแย้งทางผลประโยชน์",
+                    "คำสั่งแต่งตั้งคณะกรรมการ",
+                    "บันทึกการประชุมคณะกรรมการ",
+                    "ผลการตรวจสอบประวัติผู้เกี่ยวข้อง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF002",
+              "name_th": "ขาดกลไกตรวจสอบความเชื่อมโยงระหว่างผู้เสนอราคาที่เข้าประมูลพร้อมกัน",
+              "audit_procedures": [
+                {
+                  "id": "CF002-1",
+                  "name_th": "วิเคราะห์ข้อมูลทะเบียนผู้ถือหุ้นและกรรมการของผู้เสนอราคาเพื่อหาความเชื่อมโยง",
+                  "method": "ตรวจสอบข้อมูลทะเบียนนิติบุคคล ผู้ถือหุ้น และกรรมการของผู้เสนอราคาทุกรายในสัญญาเดียวกัน",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 3",
+                      "title": "Fraud Control Activities - Detection"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.4",
+                      "title": "Risk Assessment"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนผู้ถือหุ้นบริษัท",
+                    "รายชื่อกรรมการบริษัทผู้เสนอราคา",
+                    "เอกสารเสนอราคาทุกราย",
+                    "รายงานวิเคราะห์ความเชื่อมโยง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF002-2",
+                  "name_th": "เปรียบเทียบรูปแบบราคาเสนอทางสถิติเพื่อหาสัญญาณการฮั้วประมูล",
+                  "method": "ทดสอบเชิงวิเคราะห์เปรียบเทียบส่วนต่างราคาเสนอของผู้เข้าประมูลกับราคากลางและรูปแบบการเสนอราคาย้อนหลัง",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Principle 15",
+                      "title": "การระบุความเสี่ยงที่ส่งผลต่อกลยุทธ์"
+                    },
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "Procurement Integrity",
+                      "title": "การรักษาความสุจริตในกระบวนการจัดซื้อจัดจ้าง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ตารางเปรียบเทียบราคาเสนอ",
+                    "รายงานวิเคราะห์สถิติราคา",
+                    "บันทึกเหตุผลการคัดเลือกผู้ชนะ",
+                    "ข้อมูลราคากลางของงานเปรียบเทียบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF003",
+              "name_th": "ระบบสารสนเทศจัดซื้อจัดจ้างขาดกลไกวิเคราะห์ข้อมูลเชิงลึกเพื่อตรวจจับสัญญาณการฮั้วประมูล",
+              "audit_procedures": [
+                {
+                  "id": "CF003-1",
+                  "name_th": "ทดสอบการมีอยู่และประสิทธิผลของตัวชี้วัดสัญญาณผิดปกติในระบบจัดซื้อจัดจ้าง",
+                  "method": "ตรวจสอบว่าระบบ e-GP หรือระบบภายในมีการกำหนดและใช้งาน red flag indicators สำหรับการฮั้วประมูล",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2120",
+                      "title": "Risk Management"
+                    },
+                    {
+                      "std": "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+                      "clause": "ด้านการเปิดเผยข้อมูล",
+                      "title": "การเปิดเผยข้อมูลการจัดซื้อจัดจ้าง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน red flag จากระบบจัดซื้อจัดจ้าง",
+                    "คู่มือตัวชี้วัดความเสี่ยงทุจริต",
+                    "บันทึก log การตรวจสอบระบบ",
+                    "รายงานสรุปผลการวิเคราะห์ข้อมูล"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF003-2",
+                  "name_th": "สอบทานกระบวนการรายงานผลวิเคราะห์ความเสี่ยงต่อผู้บริหารและการติดตามแก้ไข",
+                  "method": "Walkthrough ขั้นตอนตั้งแต่การตรวจพบสัญญาณผิดปกติจนถึงการรายงานและติดตามผลแก้ไข",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 16",
+                      "title": "Monitoring Activities"
+                    },
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 5",
+                      "title": "Fraud Monitoring Activities"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานการประชุมผู้บริหารเรื่องความเสี่ยงทุจริต",
+                    "บันทึกการติดตามแก้ไขข้อบกพร่อง",
+                    "แผนปฏิบัติการแก้ไข",
+                    "หลักฐานการรายงานผลต่อผู้มีอำนาจ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF004",
+              "name_th": "กลไกรับเรื่องร้องเรียนและคุ้มครองผู้แจ้งเบาะแสเกี่ยวกับการฮั้วประมูลไม่มีประสิทธิภาพ",
+              "audit_procedures": [
+                {
+                  "id": "CF004-1",
+                  "name_th": "สอบทานนโยบายช่องทางรับแจ้งเบาะแสและมาตรการคุ้มครองผู้แจ้ง",
+                  "method": "ตรวจสอบเอกสารนโยบาย Whistleblower ช่องทางการรับเรื่อง และกลไกคุ้มครองผู้แจ้งเบาะแส",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "มาตรา 131",
+                      "title": "การคุ้มครองผู้แจ้งเบาะแสการทุจริต"
+                    },
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 4",
+                      "title": "Fraud Investigation and Corrective Action"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบาย Whistleblower",
+                    "ช่องทางรับเรื่องร้องเรียน",
+                    "ทะเบียนเรื่องร้องเรียนการฮั้วประมูล",
+                    "รายงานผลการคุ้มครองผู้แจ้งเบาะแส"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF004-2",
+                  "name_th": "สุ่มตรวจกรณีร้องเรียนในอดีตเพื่อประเมินความครบถ้วนของการสอบสวนและติดตามผล",
+                  "method": "สุ่มตัวอย่างแฟ้มร้องเรียนที่เกี่ยวกับการจัดซื้อจัดจ้างเพื่อตรวจสอบความครบถ้วนของกระบวนการสอบสวนและบทลงโทษ",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 1220",
+                      "title": "ความระมัดระวังรอบคอบเยี่ยงผู้ประกอบวิชาชีพ"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.6",
+                      "title": "Monitoring and Review"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แฟ้มสอบสวนกรณีร้องเรียน",
+                    "รายงานผลการสอบสวน",
+                    "บันทึกการติดตามผลการดำเนินการ",
+                    "หลักฐานมาตรการลงโทษที่เกี่ยวข้อง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "name_th": "การยักยอกทรัพย์สินหรือเงินสดขององค์กร",
+          "name_en": "Asset Misappropriation and Cash Theft",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF002-1",
+              "name_th": "การแบ่งแยกหน้าที่ไม่เพียงพอในกระบวนการรับ-จ่ายและบันทึกเงินสด",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF002-1-1",
+                  "name_th": "สอบทานผังโครงสร้างหน้าที่และสังเกตการณ์การปฏิบัติงานจริงเทียบกับนโยบายแบ่งแยกหน้าที่ผู้รับเงิน ผู้บันทึกบัญชี และผู้อนุมัติ",
+                  "method": "Walkthrough + Observation",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Control Activities - Principle 10",
+                      "title": "การเลือกและพัฒนากิจกรรมควบคุมรวมถึงการแบ่งแยกหน้าที่"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2130",
+                      "title": "การควบคุม (Control)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผังโครงสร้างหน้าที่งานการเงิน",
+                    "บันทึกการสังเกตการณ์การปฏิบัติงาน",
+                    "คู่มือ/นโยบายแบ่งแยกหน้าที่",
+                    "รายชื่อผู้มีอำนาจอนุมัติแต่ละขั้นตอน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF002-1-2",
+                  "name_th": "สุ่มตรวจเอกสารการรับ-จ่ายเงินสดว่าผู้บันทึก ผู้เก็บรักษา และผู้อนุมัติเป็นคนละบุคคลกันจริง",
+                  "method": "Sampling Test of Documents",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 4 - Fraud Prevention",
+                      "title": "การออกแบบและปฏิบัติกิจกรรมป้องกันการทุจริต"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "หมวด 2 มาตรการป้องกันการทุจริต",
+                      "title": "มาตรการป้องกันและควบคุมความเสี่ยงการทุจริตในหน่วยงาน"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ใบสำคัญรับ-จ่ายเงินสด",
+                    "ลายมือชื่อผู้บันทึก/ผู้เก็บรักษา/ผู้อนุมัติ",
+                    "รายงานการสุ่มตรวจเอกสาร",
+                    "ทะเบียนควบคุมเงินสดย่อย"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF002-2",
+              "name_th": "ขาดการกระทบยอดเงินสดและบัญชีธนาคารโดยผู้ที่เป็นอิสระอย่างสม่ำเสมอ",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF002-2-1",
+                  "name_th": "ตรวจสอบเอกสารกระทบยอดเงินสด/ธนาคารย้อนหลังและลายมือชื่อผู้สอบทานอิสระ",
+                  "method": "Document Review",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Control Activities - Principle 11",
+                      "title": "การควบคุมทั่วไปด้านเทคโนโลยีและกระบวนการกระทบยอด"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "6.5 Monitoring and Review",
+                      "title": "การติดตามและทบทวนประสิทธิผลของมาตรการควบคุมความเสี่ยง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ใบกระทบยอดเงินสด/ธนาคารรายเดือน",
+                    "ลายมือชื่อผู้จัดทำและผู้สอบทาน",
+                    "รายงานข้อผิดพลาดที่พบจากการกระทบยอด",
+                    "ปฏิทินกำหนดการกระทบยอดประจำเดือน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF002-2-2",
+                  "name_th": "สัมภาษณ์เจ้าหน้าที่การเงินและสังเกตกระบวนการกระทบยอดเงินสดจริงในสถานที่ปฏิบัติงาน",
+                  "method": "Interview + Direct Observation",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component: Review and Revision",
+                      "title": "การทบทวนประสิทธิผลของการควบคุมความเสี่ยงด้านการเงิน"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกการสัมภาษณ์เจ้าหน้าที่การเงิน",
+                    "รายงานผลการสังเกตการณ์กระบวนการกระทบยอด",
+                    "ตารางเปรียบเทียบยอดบัญชีกับใบแจ้งยอดธนาคาร",
+                    "หลักฐานการแก้ไขรายการผิดพลาด"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF002-3",
+              "name_th": "การควบคุมการเข้าถึงและจัดเก็บเงินสด/ทรัพย์สินทางกายภาพไม่รัดกุม",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF002-3-1",
+                  "name_th": "สังเกตการณ์สถานที่จัดเก็บเงินสดและตรวจสอบทะเบียนผู้ถือกุญแจหรือรหัสเข้าถึงตู้นิรภัย",
+                  "method": "Physical Inspection",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 4 - Physical Controls",
+                      "title": "การควบคุมทางกายภาพเพื่อป้องกันการยักยอกทรัพย์สิน"
+                    },
+                    {
+                      "std": "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+                      "clause": "ตัวชี้วัดการเปิดเผยข้อมูลและการป้องกันการทุจริต",
+                      "title": "มาตรการควบคุมภายในเพื่อความโปร่งใสในการจัดเก็บทรัพย์สิน"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนผู้ถือกุญแจ/รหัสตู้นิรภัย",
+                    "ภาพถ่ายสถานที่จัดเก็บเงินสด",
+                    "รายงานการตรวจสอบระบบรักษาความปลอดภัย",
+                    "บันทึกการเข้า-ออกพื้นที่จัดเก็บทรัพย์สิน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF002-3-2",
+                  "name_th": "สุ่มตรวจนับเงินสดคงเหลือแบบไม่แจ้งล่วงหน้าเทียบกับยอดบัญชี",
+                  "method": "Surprise Cash Count",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Control Activities - Principle 10",
+                      "title": "การควบคุมทางกายภาพต่อทรัพย์สินขององค์กร"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการตรวจนับเงินสด",
+                    "ยอดบัญชีเงินสด ณ วันตรวจนับ",
+                    "หนังสือแต่งตั้งคณะผู้ตรวจนับ",
+                    "หลักฐานส่วนต่างที่พบและการชี้แจง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "name_th": "การตกแต่งงบการเงินหรือรายงานทางการเงินเท็จ",
+          "name_en": "Fraudulent Financial Reporting",
+          "level": "CRITICAL",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF003-1",
+              "name_th": "ขาดกลไกสอบทานอิสระต่อรายการปรับปรุงบัญชี (Journal Entry) ที่เสี่ยงต่อการถูกผู้บริหารสั่งการเปลี่ยนแปลง (Management Override of Controls)",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF003-1-1",
+                  "name_th": "สุ่มตรวจและวิเคราะห์รายการปรับปรุงบัญชีที่บันทึกนอกเวลาทำการปกติหรือใกล้วันปิดงวดบัญชีด้วยเทคนิค Data Analytics",
+                  "method": "Substantive Testing ร่วมกับ CAATs เพื่อคัดกรองรายการผิดปกติ",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 2",
+                      "title": "Fraud Risk Assessment"
+                    },
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 8",
+                      "title": "Assesses Fraud Risk"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงาน JE Listing จากระบบบัญชี",
+                    "ผลการวิเคราะห์ข้อมูลด้วย CAATs",
+                    "เอกสารอนุมัติรายการปรับปรุงบัญชี",
+                    "บันทึกการประชุมทบทวนรายการผิดปกติ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF003-1-2",
+                  "name_th": "สอบทานกระบวนการอนุมัติและสายการบังคับบัญชาของรายการปรับปรุงบัญชีที่มีนัยสำคัญ",
+                  "method": "Inquiry และ Walkthrough กระบวนการอนุมัติ",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2120",
+                      "title": "Risk Management"
+                    },
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component 5",
+                      "title": "Review and Revision"
+                    }
+                  ],
+                  "evidence_types": [
+                    "Organization chart และ Delegation of Authority",
+                    "แบบฟอร์มขออนุมัติรายการปรับปรุงบัญชี",
+                    "Log การเข้าถึงระบบบัญชี",
+                    "บันทึกผลสัมภาษณ์เจ้าหน้าที่บัญชีและผู้บริหาร"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF003-2",
+              "name_th": "ขาดกระบวนการทวนสอบความสมเหตุสมผลของประมาณการทางบัญชีและดุลยพินิจที่มีนัยสำคัญโดยผู้ทรงคุณวุฒิอิสระ",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF003-2-1",
+                  "name_th": "ทดสอบความสมเหตุสมผลของสมมติฐานและวิธีการคำนวณประมาณการทางบัญชีที่มีนัยสำคัญ",
+                  "method": "Substantive Analytical Procedures และ Recalculation",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 3",
+                      "title": "Fraud Control Activities"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.4",
+                      "title": "Risk Assessment"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารสมมติฐานและวิธีคำนวณประมาณการ",
+                    "รายงานเปรียบเทียบประมาณการย้อนหลังกับผลจริง",
+                    "ความเห็นผู้เชี่ยวชาญหรือผู้ประเมินอิสระ",
+                    "กระดาษทำการ Recalculation โดยผู้ตรวจสอบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF003-2-2",
+                  "name_th": "ตรวจสอบหลักฐานการพิจารณาอนุมัติประมาณการทางบัญชีโดยคณะกรรมการตรวจสอบหรือผู้บริหารที่มิใช่ผู้จัดทำ",
+                  "method": "Document Inspection และ Corroborative Inquiry",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 17",
+                      "title": "Evaluates and Communicates Deficiencies"
+                    },
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "Chapter VI",
+                      "title": "Disclosure and Transparency"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานการประชุมคณะกรรมการตรวจสอบ",
+                    "เอกสารอนุมัติประมาณการทางบัญชี",
+                    "นโยบายการประมาณการทางบัญชีขององค์กร",
+                    "หลักฐานการทบทวนโดยผู้บริหารอิสระจากผู้จัดทำ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF003-3",
+              "name_th": "ขาดการแบ่งแยกหน้าที่ระหว่างผู้บันทึกบัญชี ผู้อนุมัติ และผู้จัดทำรายงานทางการเงินในกระบวนการปิดบัญชี",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF003-3-1",
+                  "name_th": "จัดทำ Walkthrough กระบวนการปิดบัญชีเพื่อระบุจุดที่ขาดการแบ่งแยกหน้าที่ตามหลัก Segregation of Duties",
+                  "method": "Process Walkthrough และ Control Matrix Review",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 10",
+                      "title": "Selects and Develops Control Activities"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2201",
+                      "title": "Planning Considerations"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผังกระบวนการปิดบัญชี (Flowchart)",
+                    "ตาราง Segregation of Duties Matrix",
+                    "เอกสารมอบหมายหน้าที่ความรับผิดชอบ",
+                    "บันทึกผลการทำ Walkthrough"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF003-3-2",
+                  "name_th": "ทดสอบสิทธิ์การเข้าถึงระบบบัญชีเพื่อยืนยันว่าผู้บันทึกและผู้อนุมัติมิใช่บุคคลเดียวกัน",
+                  "method": "IT General Controls Testing - Access Rights Review",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component 4",
+                      "title": "Review and Revision"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "หมวดมาตรการป้องกันการทุจริตในหน่วยงานของรัฐ",
+                      "title": "มาตรการป้องกันการทุจริต"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานสิทธิ์การเข้าถึงระบบบัญชี (Access List)",
+                    "Log การใช้งานระบบบัญชี",
+                    "นโยบายการบริหารสิทธิ์การเข้าถึงระบบ (User Access Policy)",
+                    "ผลการทดสอบ User Access Review"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "name_th": "ผลประโยชน์ทับซ้อนของผู้บริหารและพนักงานที่มีอำนาจตัดสินใจ",
+          "name_en": "Conflict of Interest among Management and Key Personnel",
+          "level": "HIGH",
+          "likelihood": "สูง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF004-1",
+              "name_th": "ขาดระบบเปิดเผยและปรับปรุงข้อมูลผลประโยชน์ทับซ้อนของผู้บริหารและพนักงานที่มีอำนาจตัดสินใจอย่างเป็นระบบและต่อเนื่อง",
+              "audit_procedures": [
+                {
+                  "id": "CF004-1-AP1",
+                  "name_th": "สอบทานความครบถ้วนและความเป็นปัจจุบันของแบบแสดงผลประโยชน์ทับซ้อนของผู้มีอำนาจตัดสินใจ",
+                  "method": "สุ่มตรวจแบบฟอร์มเปิดเผย COI เทียบกับทะเบียนผู้มีอำนาจอนุมัติและตรวจสอบรอบการปรับปรุงข้อมูลประจำปี",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 3",
+                      "title": "Conflict of Interest Disclosure and Management"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "หมวดการขัดกันแห่งผลประโยชน์",
+                      "title": "การยื่นบัญชีทรัพย์สินและแจ้งผลประโยชน์ทับซ้อน"
+                    },
+                    {
+                      "std": "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+                      "clause": "ตัวชี้วัดการเปิดเผยข้อมูล",
+                      "title": "การเปิดเผยข้อมูลผลประโยชน์ทับซ้อนต่อสาธารณะ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แบบฟอร์มเปิดเผยผลประโยชน์ทับซ้อนที่ลงนามแล้ว",
+                    "ทะเบียนผู้มีอำนาจอนุมัติที่เชื่อมโยงกับข้อมูล COI",
+                    "รายงานผลการสอบทานประจำปี",
+                    "หลักฐานการสื่อสารและอบรมนโยบาย COI"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF004-1-AP2",
+                  "name_th": "ทดสอบกระบวนการปรับปรุงข้อมูล COI เมื่อมีการเปลี่ยนแปลงสถานะของผู้บริหารหรือพนักงาน",
+                  "method": "สัมภาษณ์ฝ่ายกำกับดูแลและตรวจสอบบันทึกการปรับปรุงข้อมูลในระบบเมื่อมีเหตุการณ์เปลี่ยนแปลง เช่น เปลี่ยนตำแหน่งหรือมีธุรกิจใหม่",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component: Review and Revision",
+                      "title": "การทบทวนความเสี่ยงเมื่อมีการเปลี่ยนแปลงบริบท"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.5",
+                      "title": "Monitoring and Review"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกการเปลี่ยนแปลงสถานะผู้บริหาร/พนักงาน",
+                    "Log การปรับปรุงข้อมูล COI ในระบบ",
+                    "บันทึกการสัมภาษณ์ฝ่ายกำกับดูแล",
+                    "รายงานความคลาดเคลื่อนของข้อมูล COI"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF004-2",
+              "name_th": "ขาดการแยกอำนาจอนุมัติและกลไกสอบทานอิสระในกระบวนการตัดสินใจที่มีความเสี่ยงผลประโยชน์ทับซ้อนสูง เช่น การจัดซื้อจัดจ้างและการคัดเลือกคู่ค้า",
+              "audit_procedures": [
+                {
+                  "id": "CF004-2-AP1",
+                  "name_th": "ทดสอบการแยกหน้าที่ระหว่างผู้เสนอ ผู้อนุมัติ และผู้ตรวจรับในกระบวนการจัดซื้อจัดจ้าง",
+                  "method": "สุ่มตัวอย่างเอกสารจัดซื้อจัดจ้างเพื่อตรวจสอบว่าบุคคลที่มีอำนาจตัดสินใจไม่ได้ทำหน้าที่ซ้ำซ้อนในขั้นตอนที่ขัดกัน",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "หมวดกระบวนการจัดซื้อจัดจ้าง",
+                      "title": "การแบ่งแยกหน้าที่ในกระบวนการจัดซื้อจัดจ้าง"
+                    },
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 10",
+                      "title": "Control Activities: Segregation of Duties"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารขออนุมัติจัดซื้อจัดจ้างพร้อมลายเซ็นผู้เกี่ยวข้อง",
+                    "ผังโครงสร้างอำนาจอนุมัติ",
+                    "รายงานผลการตรวจสอบการแยกหน้าที่",
+                    "บันทึกกรณีข้อยกเว้นของการแยกหน้าที่"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF004-2-AP2",
+                  "name_th": "สอบทานกรณีตัวอย่างที่มีความเสี่ยง COI สูงว่ามีการถอนตัวจากกระบวนการตัดสินใจตามนโยบายหรือไม่",
+                  "method": "เลือกตัวอย่างการตัดสินใจที่เกี่ยวข้องกับคู่ค้าหรือบุคคลที่มีความสัมพันธ์กับผู้มีอำนาจ ตรวจสอบบันทึกการแจ้งและถอนตัว",
+                  "std_refs": [
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "Chapter on Disclosure and Transparency",
+                      "title": "Recusal from Decisions Involving Conflicts of Interest"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2130",
+                      "title": "Governance: Promoting Ethics and Values"
+                    }
+                  ],
+                  "evidence_types": [
+                    "บันทึกการแจ้งและถอนตัวจากการตัดสินใจ",
+                    "รายงานการประชุมคณะกรรมการที่เกี่ยวข้อง",
+                    "หลักฐานการตรวจสอบความสัมพันธ์กับคู่ค้า",
+                    "รายงานผลการสอบทานกรณีตัวอย่าง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF004-3",
+              "name_th": "ขาดกลไกติดตาม ตรวจจับ และบังคับใช้บทลงโทษอย่างจริงจังเมื่อพบการฝ่าฝืนนโยบายผลประโยชน์ทับซ้อน",
+              "audit_procedures": [
+                {
+                  "id": "CF004-3-AP1",
+                  "name_th": "สอบทานกรณีร้องเรียนหรือตรวจพบ COI ย้อนหลังว่ามีการสอบสวนและลงโทษตามระเบียบครบถ้วนหรือไม่",
+                  "method": "ตรวจสอบทะเบียนเรื่องร้องเรียนและผลการสอบสวน เทียบกับระเบียบวินัยและบทลงโทษที่กำหนด",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "หมวดบทกำหนดโทษ",
+                      "title": "มาตรการทางวินัยและโทษกรณีขัดกันแห่งผลประโยชน์"
+                    },
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 5",
+                      "title": "Investigation and Corrective Action"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ทะเบียนเรื่องร้องเรียนผลประโยชน์ทับซ้อน",
+                    "รายงานผลการสอบสวนกรณีฝ่าฝืน",
+                    "บันทึกการลงโทษทางวินัย",
+                    "ระเบียบว่าด้วยบทลงโทษที่เกี่ยวข้อง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF004-3-AP2",
+                  "name_th": "ประเมินประสิทธิผลของระบบติดตามและช่องทางแจ้งเบาะแสในการตรวจจับผลประโยชน์ทับซ้อน",
+                  "method": "ทดสอบการทำงานของระบบ Whistleblowing และการวิเคราะห์ข้อมูลเพื่อค้นหาสัญญาณผิดปกติที่เกี่ยวข้องกับ COI",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2060",
+                      "title": "Reporting to Senior Management and the Board"
+                    },
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component: Performance",
+                      "title": "การติดตามความเสี่ยงทุจริตอย่างต่อเนื่อง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานสถิติการแจ้งเบาะแสผ่านช่องทาง Whistleblowing",
+                    "ผลการวิเคราะห์ข้อมูลเพื่อค้นหาความผิดปกติ",
+                    "รายงานสรุปต่อผู้บริหารระดับสูง",
+                    "หลักฐานการปรับปรุงระบบติดตามหลังพบข้อบกพร่อง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "name_th": "การรับสินบนหรือผลประโยชน์ตอบแทนจากคู่ค้าและผู้รับเหมา",
+          "name_en": "Bribery and Kickbacks from Vendors and Contractors",
+          "level": "CRITICAL",
+          "likelihood": "ปานกลาง",
+          "impact": "สูงมาก",
+          "control_failures": [
+            {
+              "id": "CF005-1",
+              "name_th": "ขาดกระบวนการประเมินและติดตามผลประโยชน์ทับซ้อนของเจ้าหน้าที่ที่เกี่ยวข้องกับการจัดซื้อจัดจ้าง",
+              "audit_procedures": [
+                {
+                  "id": "CF005-1-P1",
+                  "name_th": "สอบทานความครบถ้วนของนโยบายและแบบฟอร์มเปิดเผยผลประโยชน์ทับซ้อนของเจ้าหน้าที่จัดซื้อและผู้บริหารที่เกี่ยวข้อง",
+                  "method": "สุ่มตรวจเอกสารการเปิดเผยรายปีและสัมภาษณ์เจ้าหน้าที่จัดซื้อ",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 1",
+                      "title": "Fraud Risk Governance"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "หมวดผลประโยชน์ทับซ้อน",
+                      "title": "การเปิดเผยผลประโยชน์ทับซ้อนของเจ้าหน้าที่รัฐ"
+                    },
+                    {
+                      "std": "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+                      "clause": "ตัวชี้วัดที่ 9",
+                      "title": "การเปิดเผยข้อมูลผลประโยชน์ทับซ้อน"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แบบฟอร์มเปิดเผยผลประโยชน์ทับซ้อนที่ลงนามแล้ว",
+                    "บันทึกการสัมภาษณ์เจ้าหน้าที่จัดซื้อ",
+                    "ทะเบียนรายชื่อผู้มีส่วนได้เสียที่ปรับปรุงล่าสุด",
+                    "รายงานผลการทบทวนนโยบายผลประโยชน์ทับซ้อน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-1-P2",
+                  "name_th": "ทดสอบการกระทบยอดรายชื่อคู่ค้ากับฐานข้อมูลเจ้าหน้าที่และเครือญาติเพื่อค้นหาความสัมพันธ์ที่ไม่เปิดเผย",
+                  "method": "วิเคราะห์ข้อมูลเปรียบเทียบ (Cross-matching) ระหว่างทะเบียนคู่ค้ากับข้อมูลบุคลากร",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 8",
+                      "title": "การประเมินความเสี่ยงจากการทุจริต"
+                    },
+                    {
+                      "std": "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "มาตรา 12",
+                      "title": "คุณสมบัติและการตรวจสอบผู้เสนอราคา"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการกระทบยอดข้อมูลคู่ค้ากับบุคลากร",
+                    "ทะเบียนคู่ค้าที่ได้รับอนุมัติ",
+                    "รายชื่อกรณีที่พบความสัมพันธ์ต้องสงสัย",
+                    "หลักฐานการดำเนินการแก้ไขกรณีพบความขัดแย้งทางผลประโยชน์"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF005-2",
+              "name_th": "ขาดการแบ่งแยกหน้าที่ที่เพียงพอในกระบวนการคัดเลือกและอนุมัติคู่ค้าหรือผู้รับเหมา",
+              "audit_procedures": [
+                {
+                  "id": "CF005-2-P1",
+                  "name_th": "สอบทานผังอำนาจอนุมัติและโครงสร้างการแบ่งแยกหน้าที่ในขั้นตอนจัดซื้อจัดจ้างตั้งแต่เสนอราคาถึงอนุมัติจ่ายเงิน",
+                  "method": "ตรวจสอบเอกสารนโยบายและผังอำนาจอนุมัติเทียบกับแนวปฏิบัติจริง",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 10",
+                      "title": "กิจกรรมควบคุมและการแบ่งแยกหน้าที่"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2120",
+                      "title": "การประเมินประสิทธิผลการบริหารความเสี่ยง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผังอำนาจอนุมัติที่เป็นปัจจุบัน",
+                    "คู่มือกระบวนการจัดซื้อจัดจ้าง",
+                    "รายชื่อผู้มีอำนาจลงนามในแต่ละขั้นตอน",
+                    "รายงานผลการตรวจสอบสิทธิ์การเข้าถึงระบบจัดซื้อ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-2-P2",
+                  "name_th": "ทดสอบเดินรายการธุรกรรมจัดซื้อตัวอย่างเพื่อยืนยันการปฏิบัติจริงตามการแบ่งแยกหน้าที่ที่กำหนดไว้",
+                  "method": "Walkthrough test ธุรกรรมจัดซื้อที่มีมูลค่าสูงและมีความเสี่ยง",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "มาตรา 25",
+                      "title": "คณะกรรมการจัดซื้อจัดจ้างและการถ่วงดุลอำนาจ"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.4",
+                      "title": "การจัดการความเสี่ยง (Risk Treatment)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารธุรกรรมจัดซื้อตัวอย่างที่ทดสอบ",
+                    "รายงานผล Walkthrough test",
+                    "หลักฐานลายเซ็นผู้อนุมัติในแต่ละขั้นตอน",
+                    "บันทึกข้อยกเว้นหรือการอนุมัติข้ามขั้นตอน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF005-3",
+              "name_th": "ขาดช่องทางรับเรื่องร้องเรียนและกลไกคุ้มครองผู้แจ้งเบาะแสที่มีประสิทธิภาพเพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "CF005-3-P1",
+                  "name_th": "ประเมินความเพียงพอของช่องทางรับแจ้งเบาะแสและมาตรการคุ้มครองผู้แจ้งเบาะแสตามนโยบายองค์กร",
+                  "method": "สอบทานนโยบายและทดสอบการเข้าถึงช่องทางร้องเรียนจริง",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 3",
+                      "title": "กิจกรรมควบคุมการป้องกันและตรวจจับการทุจริต"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "หมวดการคุ้มครองผู้แจ้งเบาะแส",
+                      "title": "มาตรการคุ้มครองผู้ให้ข้อมูล"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายและคู่มือช่องทางรับเรื่องร้องเรียน",
+                    "ผลการทดสอบการเข้าถึงช่องทางแจ้งเบาะแส",
+                    "บันทึกกรณีร้องเรียนย้อนหลัง",
+                    "หลักฐานมาตรการคุ้มครองผู้แจ้งเบาะแสที่บังคับใช้จริง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-3-P2",
+                  "name_th": "สุ่มทดสอบกรณีร้องเรียนที่เกิดขึ้นจริงเพื่อประเมินความรวดเร็วและความเป็นอิสระของกระบวนการสอบสวน",
+                  "method": "สุ่มตรวจสอบแฟ้มคดีร้องเรียนและติดตามผลการดำเนินการ",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2060",
+                      "title": "การรายงานผลต่อผู้บริหารระดับสูงและคณะกรรมการ"
+                    },
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "บทว่าด้วยความโปร่งใสและการเปิดเผยข้อมูล",
+                      "title": "กลไกการรายงานและคุ้มครองผู้แจ้งเบาะแส"
+                    }
+                  ],
+                  "evidence_types": [
+                    "แฟ้มบันทึกกรณีร้องเรียนที่สุ่มตรวจ",
+                    "รายงานผลการสอบสวนและระยะเวลาดำเนินการ",
+                    "หลักฐานการรายงานต่อคณะกรรมการตรวจสอบ",
+                    "บันทึกการติดตามผลการลงโทษหรือแก้ไข"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF005-4",
+              "name_th": "ขาดการวิเคราะห์ข้อมูลเชิงลึกเพื่อตรวจจับธุรกรรมผิดปกติที่เกี่ยวข้องกับการจ่ายเงินให้คู่ค้าและผู้รับเหมา",
+              "audit_procedures": [
+                {
+                  "id": "CF005-4-P1",
+                  "name_th": "สอบทานการนำเทคนิค Data Analytics มาใช้ตรวจจับสัญญาณผิดปกติ (Red Flags) ในธุรกรรมจัดซื้อและการจ่ายเงิน",
+                  "method": "ตรวจสอบเครื่องมือและรายงานผลการวิเคราะห์ข้อมูลย้อนหลัง",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 5",
+                      "title": "การเฝ้าระวังและติดตามความเสี่ยงการทุจริต"
+                    },
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component 5",
+                      "title": "การทบทวนและปรับปรุงประสิทธิภาพ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานผลการวิเคราะห์ข้อมูล Red Flags",
+                    "รายชื่อธุรกรรมที่ถูกคัดกรองเป็นความเสี่ยงสูง",
+                    "เอกสารเกณฑ์การตั้งค่าระบบเฝ้าระวัง",
+                    "บันทึกการติดตามผลกรณีตรวจพบความผิดปกติ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF005-4-P2",
+                  "name_th": "ทดสอบตัวอย่างธุรกรรมความเสี่ยงสูงกับคู่ค้าเพื่อยืนยันประสิทธิผลของระบบเฝ้าระวังที่มีอยู่",
+                  "method": "สุ่มตรวจธุรกรรมที่มีมูลค่าผิดปกติหรือความถี่สูงผิดปกติ",
+                  "std_refs": [
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.6",
+                      "title": "การติดตามและทบทวน (Monitoring and Review)"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 1210",
+                      "title": "ความเชี่ยวชาญของผู้ตรวจสอบภายในด้านการทุจริต"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายการธุรกรรมตัวอย่างที่ถูกสุ่มตรวจ",
+                    "หลักฐานเอกสารประกอบธุรกรรมที่ตรวจสอบ",
+                    "รายงานผลการทดสอบประสิทธิผลระบบเฝ้าระวัง",
+                    "บันทึกข้อเสนอแนะเพื่อปรับปรุงเกณฑ์การเฝ้าระวัง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R006",
+          "name_th": "การใช้อำนาจผู้บริหารข้ามผ่านระบบควบคุมภายใน (Management Override)",
+          "name_en": "Management Override of Internal Controls",
+          "level": "HIGH",
+          "likelihood": "ปานกลาง",
+          "impact": "สูง",
+          "control_failures": [
+            {
+              "id": "CF006-1",
+              "name_th": "ขาดกลไกควบคุมและสอบทานการอนุมัติรายการที่ผู้บริหารระดับสูงใช้อำนาจข้ามผ่านขั้นตอนควบคุมภายในปกติ (Management Override of Controls)",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF006-1-1",
+                  "name_th": "สุ่มตรวจสอบรายการบันทึกบัญชีและรายการปรับปรุงพิเศษที่ผู้บริหารสั่งการนอกขั้นตอนอนุมัติปกติ",
+                  "method": "ตรวจสอบเอกสาร สุ่มตัวอย่างรายการ Journal Entry/Manual Override และสัมภาษณ์เจ้าหน้าที่บัญชี",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 4",
+                      "title": "Fraud Prevention and Detection - Selecting, Developing, and Deploying Preventive and Detective Fraud Control Activities"
+                    },
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 8",
+                      "title": "Assess Fraud Risk (Risk Assessment Component)"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานรายการ Journal Entry ที่มีการปรับปรุงนอกขั้นตอนปกติ",
+                    "เอกสารอนุมัติพิเศษของผู้บริหาร",
+                    "บันทึกการสัมภาษณ์เจ้าหน้าที่บัญชี",
+                    "Log การเข้าถึงระบบบัญชีของผู้บริหาร"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF006-1-2",
+                  "name_th": "ประเมินการออกแบบและการบังคับใช้ตารางอำนาจอนุมัติ (Authority Matrix) เทียบกับแนวปฏิบัติจริงของผู้บริหาร",
+                  "method": "สอบทานเอกสารนโยบายและทดสอบการปฏิบัติจริงเทียบกับ Authority Matrix ที่กำหนด",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2120",
+                      "title": "Risk Management"
+                    },
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "Chapter VI",
+                      "title": "Responsibilities of the Board of SOEs"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารตารางอำนาจอนุมัติ (Authority Matrix)",
+                    "รายงานผลการทดสอบการปฏิบัติตามอำนาจอนุมัติ",
+                    "รายงานการประชุมคณะกรรมการที่เกี่ยวข้องกับการทบทวนอำนาจอนุมัติ",
+                    "หลักฐานการอนุมัติรายการที่เกินอำนาจที่กำหนด"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF006-2",
+              "name_th": "ขาดการแบ่งแยกหน้าที่ที่เพียงพอในระดับผู้บริหาร ทำให้สามารถอนุมัติและดำเนินการธุรกรรมได้เองโดยไม่มีการถ่วงดุล",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF006-2-1",
+                  "name_th": "ทดสอบการแบ่งแยกหน้าที่ระหว่างผู้อนุมัติ ผู้บันทึกรายการ และผู้ดูแลทรัพย์สินในธุรกรรมที่มีนัยสำคัญ",
+                  "method": "จัดทำผังกระบวนงานและทดสอบ Walkthrough ธุรกรรมสำคัญที่ผู้บริหารมีส่วนเกี่ยวข้อง",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 10",
+                      "title": "Selects and Develops Control Activities - Segregation of Duties"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.4",
+                      "title": "Risk Assessment"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ผังกระบวนงาน (Flowchart) ที่แสดงการแบ่งแยกหน้าที่",
+                    "ผลการทดสอบ Walkthrough ธุรกรรมสำคัญ",
+                    "เอกสารมอบหมายหน้าที่ความรับผิดชอบ",
+                    "รายงานข้อบกพร่องด้านการแบ่งแยกหน้าที่ที่เคยพบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF006-2-2",
+                  "name_th": "สอบทานกรณีธุรกรรมจัดซื้อจัดจ้างที่ผู้บริหารมีอำนาจครบวงจรตั้งแต่การริเริ่มจนถึงอนุมัติ",
+                  "method": "สุ่มตรวจสอบสำนวนจัดซื้อจัดจ้างที่มีความเสี่ยงสูงและวิเคราะห์ผู้มีอำนาจในแต่ละขั้นตอน",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560",
+                      "clause": "มาตรา 100",
+                      "title": "การตรวจสอบกระบวนการจัดซื้อจัดจ้าง"
+                    },
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 3",
+                      "title": "Fraud Risk Assessment"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สำนวนจัดซื้อจัดจ้างที่มีความเสี่ยงสูง",
+                    "รายชื่อผู้มีอำนาจอนุมัติในแต่ละขั้นตอนจัดซื้อ",
+                    "รายงานผลการตรวจสอบภายในกรณีจัดซื้อจัดจ้าง",
+                    "หลักฐานการกระจุกตัวของอำนาจในบุคคลเดียว"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF006-3",
+              "name_th": "ขาดช่องทางแจ้งเบาะแสที่เป็นอิสระและเข้าถึงคณะกรรมการตรวจสอบได้โดยตรงโดยไม่ผ่านสายบังคับบัญชาของผู้บริหาร",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF006-3-1",
+                  "name_th": "ประเมินความเป็นอิสระและประสิทธิผลของระบบรับเรื่องร้องเรียนและแจ้งเบาะแสการกระทำผิดของผู้บริหาร",
+                  "method": "สอบทานนโยบาย ทดสอบเส้นทางการรายงาน และสัมภาษณ์ผู้รับผิดชอบช่องทางแจ้งเบาะแส",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 3",
+                      "title": "Fraud Reporting Mechanism"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "มาตรา 128",
+                      "title": "การแจ้งเบาะแสและการคุ้มครองผู้แจ้ง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายและคู่มือช่องทางการแจ้งเบาะแส",
+                    "สถิติเรื่องร้องเรียนที่เกี่ยวข้องกับผู้บริหาร",
+                    "บันทึกการสัมภาษณ์ผู้ดูแลระบบรับเรื่องร้องเรียน",
+                    "หลักฐานการรายงานตรงต่อคณะกรรมการตรวจสอบ"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF006-3-2",
+                  "name_th": "สอบทานผลการดำเนินการต่อกรณีร้องเรียนที่เกี่ยวข้องกับผู้บริหารว่าได้รับการจัดการอย่างเป็นอิสระ",
+                  "method": "สุ่มตรวจสอบสำนวนร้องเรียนย้อนหลังและติดตามกระบวนการสอบสวน",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 1110",
+                      "title": "Organizational Independence"
+                    },
+                    {
+                      "std": "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+                      "clause": "ตัวชี้วัดที่ 9",
+                      "title": "การป้องกันการทุจริต"
+                    }
+                  ],
+                  "evidence_types": [
+                    "สำนวนการร้องเรียนที่เกี่ยวข้องกับผู้บริหาร",
+                    "รายงานผลการสอบสวนและบทลงโทษ",
+                    "หลักฐานความเป็นอิสระของคณะกรรมการสอบสวน",
+                    "แบบประเมิน ITA ในหัวข้อการป้องกันการทุจริต"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF006-4",
+              "name_th": "ขาดการสอบทานธุรกรรมที่มีนัยสำคัญและรายการที่เกี่ยวโยงกันโดยคณะกรรมการตรวจสอบหรือหน่วยงานอิสระอย่างเพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "AP-CF006-4-1",
+                  "name_th": "สอบทานรายการที่เกี่ยวโยงกัน (Related Party Transactions) และธุรกรรมผิดปกตินัยสำคัญที่ผู้บริหารอนุมัติ",
+                  "method": "วิเคราะห์ข้อมูลธุรกรรมด้วย Data Analytics และตรวจสอบเอกสารประกอบรายการที่มีมูลค่าสูงผิดปกติ",
+                  "std_refs": [
+                    {
+                      "std": "COSO ERM – Integrating with Strategy and Performance 2017",
+                      "clause": "Component: Review and Revision",
+                      "title": "การสอบทานความเสี่ยงและผลการดำเนินงาน"
+                    },
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "Chapter V",
+                      "title": "Disclosure and Transparency"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานวิเคราะห์รายการที่เกี่ยวโยงกัน",
+                    "เอกสารประกอบธุรกรรมมูลค่าสูงผิดปกติ",
+                    "รายงานผล Data Analytics ธุรกรรมความเสี่ยงสูง",
+                    "มติอนุมัติของผู้บริหารในรายการที่เกี่ยวโยงกัน"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "AP-CF006-4-2",
+                  "name_th": "ประเมินบทบาทและความเป็นอิสระของคณะกรรมการตรวจสอบในการกำกับดูแลความเสี่ยงจากการใช้อำนาจข้ามผ่านของผู้บริหาร",
+                  "method": "สอบทานกฎบัตรคณะกรรมการตรวจสอบและรายงานการประชุมที่เกี่ยวข้องกับการกำกับดูแลผู้บริหาร",
+                  "std_refs": [
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2060",
+                      "title": "Reporting to Senior Management and the Board"
+                    },
+                    {
+                      "std": "OECD Guidelines on Corporate Governance of State-Owned Enterprises",
+                      "clause": "Chapter VI",
+                      "title": "Responsibilities of the Board of SOEs"
+                    }
+                  ],
+                  "evidence_types": [
+                    "กฎบัตรคณะกรรมการตรวจสอบ",
+                    "รายงานการประชุมคณะกรรมการตรวจสอบ",
+                    "รายงานผลการกำกับดูแลความเสี่ยงจากผู้บริหาร",
+                    "หลักฐานความเป็นอิสระของกรรมการตรวจสอบจากฝ่ายบริหาร"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R007",
+          "name_th": "การทุจริตผ่านระบบเทคโนโลยีสารสนเทศและการปลอมแปลงข้อมูลดิจิทัล",
+          "name_en": "IT-Enabled Fraud and Digital Data Manipulation",
+          "level": "MEDIUM",
+          "likelihood": "ปานกลาง",
+          "impact": "ปานกลาง",
+          "control_failures": [
+            {
+              "id": "CF007-1",
+              "name_th": "การควบคุมสิทธิ์การเข้าถึงระบบสารสนเทศและการบริหารบัญชีผู้ใช้งานไม่รัดกุม",
+              "audit_procedures": [
+                {
+                  "id": "CF007-1-P1",
+                  "name_th": "สอบทานนโยบายและกระบวนการบริหารจัดการสิทธิ์การเข้าถึงระบบสารสนเทศ",
+                  "method": "Walkthrough และ Inspection เอกสารนโยบาย/ขั้นตอนปฏิบัติด้าน Access Management",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 11",
+                      "title": "การควบคุมทั่วไปด้านเทคโนโลยีสารสนเทศ"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2110",
+                      "title": "Governance"
+                    }
+                  ],
+                  "evidence_types": [
+                    "นโยบายการบริหารสิทธิ์การเข้าถึงระบบ",
+                    "แบบฟอร์มขออนุมัติสิทธิ์การเข้าถึง",
+                    "รายงานการทบทวนสิทธิ์การเข้าถึงประจำปี",
+                    "บันทึกการประชุมคณะกรรมการด้าน IT Governance"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF007-1-P2",
+                  "name_th": "ทดสอบสุ่มตรวจสอบสิทธิ์การเข้าถึงจริงเทียบกับการแบ่งแยกหน้าที่ที่ได้รับอนุมัติ",
+                  "method": "Sampling Test และ Substantive Testing สิทธิ์การเข้าถึงระบบ",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 4",
+                      "title": "กิจกรรมควบคุมป้องกันและตรวจจับการทุจริต"
+                    },
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "มาตรา 128",
+                      "title": "มาตรการป้องกันการทุจริตในหน่วยงานของรัฐ"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายชื่อผู้ใช้งานและสิทธิ์การเข้าถึงระบบ ณ ปัจจุบัน",
+                    "ผังโครงสร้างการแบ่งแยกหน้าที่ (SoD Matrix)",
+                    "รายงานผลการสุ่มตรวจสอบสิทธิ์การเข้าถึง",
+                    "หลักฐานการอนุมัติสิทธิ์ย้อนหลัง"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF007-2",
+              "name_th": "ขาดกลไกติดตามตรวจสอบบันทึกเหตุการณ์ระบบ (Audit Trail/Log) ที่มีประสิทธิภาพเพียงพอในการตรวจจับความผิดปกติ",
+              "audit_procedures": [
+                {
+                  "id": "CF007-2-P1",
+                  "name_th": "สอบทานการตั้งค่าระบบบันทึกเหตุการณ์และกลไกแจ้งเตือนความผิดปกติของธุรกรรม",
+                  "method": "Inspection การตั้งค่าระบบและทดสอบ Configuration ด้าน Logging",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 11",
+                      "title": "การควบคุมทั่วไปด้านเทคโนโลยีสารสนเทศ"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.5",
+                      "title": "การติดตามและทบทวน"
+                    }
+                  ],
+                  "evidence_types": [
+                    "รายงานการตั้งค่าระบบ Logging",
+                    "นโยบายการเก็บรักษาบันทึกเหตุการณ์ (Log Retention Policy)",
+                    "รายงานการแจ้งเตือนความผิดปกติ (Alert Reports)",
+                    "ผลการทดสอบระบบ Anomaly Detection"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF007-2-P2",
+                  "name_th": "ทดสอบการตรวจสอบย้อนกลับธุรกรรมสำคัญผ่านบันทึกระบบเพื่อยืนยันความสมบูรณ์ของข้อมูล",
+                  "method": "Trace Testing ธุรกรรมตัวอย่างจากระบบไปยังเอกสารต้นทาง",
+                  "std_refs": [
+                    {
+                      "std": "COSO Fraud Risk Management Guide 2013",
+                      "clause": "Principle 5",
+                      "title": "กิจกรรมการติดตามและตรวจสอบเพื่อป้องกันการทุจริต"
+                    },
+                    {
+                      "std": "IIA Global Internal Audit Standards 2024",
+                      "clause": "Standard 2120",
+                      "title": "Risk Management"
+                    }
+                  ],
+                  "evidence_types": [
+                    "Log ธุรกรรมตัวอย่างที่สุ่มตรวจสอบ",
+                    "รายงานผลการ Trace ธุรกรรม",
+                    "เอกสารประกอบธุรกรรมต้นทาง",
+                    "บันทึกข้อบกพร่องที่ตรวจพบและการแก้ไข"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            },
+            {
+              "id": "CF007-3",
+              "name_th": "การควบคุมความถูกต้องและป้องกันการปลอมแปลงข้อมูลดิจิทัลไม่เพียงพอ",
+              "audit_procedures": [
+                {
+                  "id": "CF007-3-P1",
+                  "name_th": "สอบทานมาตรการควบคุมความสมบูรณ์ของข้อมูลดิจิทัล เช่น Hash Validation และ Digital Signature",
+                  "method": "Inspection เอกสารทางเทคนิคและทดสอบระบบควบคุมความสมบูรณ์ของข้อมูล",
+                  "std_refs": [
+                    {
+                      "std": "COSO Internal Control – Integrated Framework 2013",
+                      "clause": "Principle 11",
+                      "title": "การควบคุมทั่วไปด้านเทคโนโลยีสารสนเทศ"
+                    },
+                    {
+                      "std": "ISO 31000:2018 Risk Management",
+                      "clause": "ข้อ 6.4",
+                      "title": "การจัดการความเสี่ยง"
+                    }
+                  ],
+                  "evidence_types": [
+                    "เอกสารมาตรฐานทางเทคนิคด้าน Data Integrity",
+                    "รายงานผลการตรวจสอบ Digital Signature",
+                    "Log การเปลี่ยนแปลงข้อมูล (Change Log)",
+                    "ผลการทดสอบระบบ Hash Validation"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                },
+                {
+                  "id": "CF007-3-P2",
+                  "name_th": "ทดสอบกระบวนการตรวจสอบเอกสารดิจิทัลเทียบกับต้นฉบับเพื่อยืนยันไม่มีการปลอมแปลง",
+                  "method": "Substantive Testing เปรียบเทียบเอกสารดิจิทัลกับต้นฉบับ",
+                  "std_refs": [
+                    {
+                      "std": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+                      "clause": "มาตรา 128",
+                      "title": "มาตรการป้องกันการทุจริตในหน่วยงานของรัฐ"
+                    },
+                    {
+                      "std": "แนวทางการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ ITA",
+                      "clause": "ตัวชี้วัดที่ 9",
+                      "title": "การป้องกันการทุจริตในหน่วยงาน"
+                    }
+                  ],
+                  "evidence_types": [
+                    "ตัวอย่างเอกสารดิจิทัลที่สุ่มตรวจสอบ",
+                    "เอกสารต้นฉบับสำหรับเปรียบเทียบ",
+                    "รายงานผลการเปรียบเทียบความสอดคล้อง",
+                    "หลักฐานการรับรองความถูกต้องของเอกสาร"
+                  ],
+                  "derivation": "PROFESSIONAL_SYNTHESIS"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "knowledge_id": "KN-T029",
+      "version": "1.0.0",
+      "confidence_score": 80,
+      "quality_gate_status": "PASS",
+      "approval_status": "PENDING_REVIEW",
+      "knowledge_layer": "L1",
+      "approved_by": null,
+      "created_at": "2026-07-23T03:18:14Z",
+      "updated_at": "2026-07-23T03:18:14Z",
+      "last_used_at": null,
+      "usage_count": 0,
+      "related_topics": [],
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-07-23",
+          "change": "DRAFT จาก research-pipeline (draft_topic.json — โหมดตรวจต่อทันที)",
+          "approved_by": "draft เท่านั้น"
+        },
+        {
+          "version": "1.0.0",
+          "date": "2026-07-23",
+          "change": "AUTO-VERIFY โดย verify-pipeline: \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | \"COSO Fraud Risk Management Guide 2016\" อ้างฉบับ 2016 ที่ไม่ตรงทะเบียน → ปรับเป็นฉบับปัจจุบัน 2013 อัตโนมัติ | \"International Professional Practices Framework IPPF 2017\" อ้างฉบับถูกถอน (2017) → สลับเป็น IIA GIAS 2024 | \"พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561\" มีฉบับแก้ไข → พ่วง (ฉบับที่ 2) พ.ศ. 2561 | source_chain ผูกจากทะเบียนที่อ่านแล้วจริง 3 แหล่ง | หมายเหตุ: โหมดเครื่องไม่อ่านหน้าใหม่ — ดุลยพินิจสุดท้ายอยู่ที่ผู้ merge",
+          "approved_by": "pending PR merge"
+        }
+      ],
+      "source_chain": [
+        {
+          "source_id": "SRC-AUTO-coso-ic",
+          "source_type": "registry_verified_source",
+          "publisher": "COSO Internal Control — Integrated Framework",
+          "title": "COSO Fraud Risk Management Guide 2013",
+          "url": "https://www.coso.org/guidance-on-ic",
+          "retrieved_at": "2026-07-13",
+          "credibility_score": 92,
+          "excerpt": "\"originally issued in 1992 and refreshed in 2013 (ICIF-2013)... On December 15, 2014 this framework [1992] was superseded by the 2013 Internal Control—Integrated Framework\" + 2023 ออก ICSR supplement (มีฉบับแปลไทย) [อ่านจริงและบันทึกในทะเบียนเมื่อ 2026-07-13 — auto-verify ผูกให้]"
+        },
+        {
+          "source_id": "SRC-AUTO-iso-31000",
+          "source_type": "registry_verified_source",
+          "publisher": "ISO 31000 (Risk Management)",
+          "title": "ISO 31000:2018 Risk Management",
+          "url": "https://www.iso.org/standard/65694.html",
+          "retrieved_at": "2026-07-14",
+          "credibility_score": 92,
+          "excerpt": "อ่านหน้า iso.org จริง: Published (Edition 2, 2018-02) | \"This publication was last reviewed and confirmed in 2023. Therefore this version remains current.\" แต่ Stage ปัจจุบัน = 90.92 International Standard to be revised (2024-10-11) | Will be replaced by: ISO/CD 31000 (under development) [อ่านจริงและบันทึกในทะเบียนเมื่อ 2026-07-14 — auto-verify ผูกให้]"
+        },
+        {
+          "source_id": "SRC-AUTO-th-nacc-act-2561",
+          "source_type": "registry_verified_source",
+          "publisher": "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561",
+          "title": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2561",
+          "url": "https://www.ratchakitcha.soc.go.th/DATA/PDF/2561/A/052/1.PDF",
+          "retrieved_at": "2026-07-21",
+          "credibility_score": 95,
+          "excerpt": "พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริต พ.ศ. 2561 — ราชกิจจานุเบกษา เล่ม 135 ตอนที่ 52 ก | มีฉบับแก้ไข (ฉบับที่ 2) พ.ศ. 2561 (ทะเบียน ป.ป.ช.) [อ่านจริงและบันทึกในทะเบียนเมื่อ 2026-07-21 — auto-verify ผูกให้]"
+        }
+      ],
+      "hash_signature": "sha256:dce54afcfb711ffea233ec593d796c4398d4a5af0cfbd2e7fc337b1ce09b1528"
     }
   ],
   "skills_registry": {
